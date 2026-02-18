@@ -1,7 +1,7 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name              LinkSwift
 // @namespace         github.com/hmjz100
-// @version           1.1.3
+// @version           1.1.3.1
 // @author            Hmjz100、油小猴
 // @icon              data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRHcmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkY1OUQ7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRDcwMDtzdG9wLW9wYWNpdHk6MSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZCQzAyRDtzdG9wLW9wYWNpdHk6MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuNCwgLTIpIHNjYWxlKDAuOSkiPjxwYXRoIGQ9Ik0xMDMuNiAxMDcuNGMzLjUtMi4yIDguOS02LjEgMTMuOC0xMi41czcuMy0xMi41IDguNS0xNi41Yy41LTEuNyAyLjItNy41IDIuMi0xNC43IDAtMTAuMS0zLjMtMjUuMS0xNS40LTM2LjgtMTQuNS0xNC0zMi4xLTE0LjMtMzUuNy0xNC4zLTggMC0xNS43IDEuOS0yMi42IDUuMkM0NCAyMyAzNS43IDMxLjQgMzAuOCA0MS43Yy0xLjMgMi44LTQgNC43LTcuMSA1LTQgLjMtNy41IDQuNC04LjkgOS42LS41IDEuOS0xLjYgMy41LTMuMSA0LjdDNC40IDY2LjggMCA3NS43IDAgODVjMCA2LjggMi4zIDEzLjEgNi4xIDE4LjIgNS41IDcuNCAxNC4yIDEyLjIgMjQgMTIuMmg0Ny4xYzQuNCAwIDExLS41IDE4LjMtMy41IDMuMi0xLjQgNS45LTMgOC4xLTQuNXoiIGZpbGw9IiNBMDk5RjAiLz48cGF0aCBkPSJNMTE5LjggNjQuM2MuMS0xNy4xLTEwLjQtMjgtMTIuNS0zMC4xQzk1IDIyLjEgNzkuOSAyMS44IDc2LjkgMjEuOGMtMTcuNiAwLTMzLjMgMTAuNS0zOS45IDI2LjctLjYgMS4zLTEuOCAyLjMtMy40IDIuM2gtLjRjLTUuOCAwLTEwLjYgNC44LTEwLjYgMTAuN3YuNWMwIDEuNC0uOCAyLjYtMS45IDMuM0MxMy40IDY5IDguOCA3Ni44IDguOCA4NWMwIDEyLjIgOS45IDIyLjMgMjIuMiAyMi4zaDQ1LjJjMy42LS4xIDE3LjYtLjkgMjkuNi0xMiAyLjktMi44IDEzLjktMTMuNyAxNC0zMXoiIGZpbGw9IiM1NzRBQjgiLz48cGF0aCBkPSJNMTEwLjggNTcuNGwuMiAzLjNjMCAxLjMtMS4xIDIuNC0yLjMgMi40LTEuMyAwLTIuMy0xLjEtMi4zLTIuNGwtLjEtMi44di0uM2MwLTEuMi45LTIuMiAyLjEtMi4zaC4zYy43IDAgMS4zLjMgMS43LjctLjIuMS4zLjUuNCAxLjR6bS0zLjMtMTAuM2MwIDEuMi0xIDIuMy0yLjIgMi4zaC0uMWMtLjggMC0xLjYtLjUtMi0xLjItNC42LTguMy0xMy4zLTEzLjUtMjIuOC0xMy41LTEuMiAwLTIuMy0xLTIuMy0yLjJ2LS4xYzAtMS4yIDEtMi4zIDIuMi0yLjNoLjFhMzAuMzcgMzAuMzcgMCAwIDEgMTUuOCA0LjRjNC42IDIuOCA4LjQgNi44IDExLjEgMTEuNS4xLjMuMi43LjIgMS4xek04OC4zIDczLjhMNzMuNSA5My4yYy0xLjUgMS45LTMuNSAzLjEtNS43IDMuNWgtLjJjLS40LjEtLjguMS0xLjIuMS0uNiAwLTEuMS0uMS0xLjYtLjItMi4yLS40LTQuMi0xLjctNS42LTMuNUw0NC4zIDczLjljLTItMi42LTIuNS01LjQtMS40LTcuNy4xLS4xLjEtLjIuMi0uMiAxLjItMiAzLjUtMy4yIDYuNC0zLjJoNi42di01LjdjMC02LjggNC43LTEyIDEwLjktMTIgNC44IDAgOC41IDIuNiAxMC4zIDcuMi41IDEuMy0uMiAyLjctMS41IDMuMnMtMi44LS4xLTMuMy0xLjRjLTEuMS0yLjctMi45LTQtNS41LTQtMy41IDAtNiAzLTYgN3Y4LjFjMCAuNS0uMiAxLS42IDEuNC0uNi43LTEuNyAxLjEtMi42IDEuMWgtOC40Yy0xLjMgMC0yIC40LTIuMS43LS4yLjQgMCAxLjMuOSAyLjRMNjMuMSA5MGMuOSAxLjIgMi4xIDEuOCAzLjMgMS44czIuMy0uNiAzLjEtMS43bDE0LjgtMTkuM2MuOS0xLjEgMS4xLTIgLjktMi40LS4yLS4zLS45LS43LTIuMS0uN2gtNy42Yy0uOSAwLTEuNy0uNS0yLjEtMS4yLS4zLS40LS40LS44LS40LTEuMyAwLTEuNCAxLjEtMi41IDIuNS0yLjVoNy42YzMuMSAwIDUuNSAxLjMgNi42IDMuNWwuMy43Yy43IDIuMS4xIDQuNi0xLjcgNi45eiIgZmlsbD0iI2ZmZiIvPjwvZz48Zz48cGF0aCBkPSJNMCAxMDAgUTY0IDExNSAxMjggMTAwIEwxMjggMTI4IEwwIDEyOCBaIiBmaWxsPSIjRDMyRjJGIi8+PHBhdGggZD0iTTAgMTAwIFE2NCAxMTUgMTI4IDEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGRHcmFkaWVudCkiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjY0IiB5PSIxMjEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9InVybCgjZ29sZEdyYWRpZW50KSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgc3R5bGU9InRleHQtc2hhZG93OiAwcHggMXB4IDJweCByZ2JhKDAsMCwwLDAuMyk7Ij7liIYg5LiNIOi1t+OAgOe6ryDpnaAg54ixPC90ZXh0PjwvZz48L3N2Zz4=
 // @description       (｡>ᴗ•)✧《也许同类型中最好用？》系列 - 一个基于 JavaScript 的网盘文件下载地址获取工具✨，基于【网盘直链下载助手】修改 | 支持 百度网盘 / 阿里云盘 / 中国移动云盘 / 天翼云盘 / 迅雷云盘 / 夸克网盘 / UC网盘 / 123云盘 八大网盘 | 开源・自用・去广 | 改界面・添功能・修Bug | 既超越原版，亦是同类中最好用版本！👋
@@ -21,7 +21,6 @@
 // @resource SwalLigt https://unpkg.com/sweetalert2@11.4.8/dist/sweetalert2.min.css
 // @resource SwalDark https://unpkg.com/@sweetalert2/theme-dark@5.0.26/dark.min.css
 // @require           https://unpkg.com/js-md5@0.7.3/build/md5.min.js
-// @require           https://unpkg.com/js-sha256@0.11.1/src/sha256.js
 // @run-at            document-start
 // @early-start
 // @match             *://pan.baidu.com/disk/home*
@@ -109,7 +108,7 @@
  * @author hmjz100
  * @namespace github.com/hmjz100
  * @description  一个基于 JavaScript 盘的文件下载地址获取工具  支持 百度网盘/阿里云盘/中国移动云盘/天翼云盘/迅雷云盘/夸克网盘/UC网盘/123云盘 八大网盘  代码改自 “网盘直链下载助手”，作者油小猴
- * @version 1.1.3
+ * @version 1.1.3.1
  * @license AGPL-3.0-or-later
  * @see {@link https://github.com/hmjz100/LinkSwift/ Github 仓库}
  */
@@ -126,7 +125,7 @@
 	let info = {
 		author: GM_info.script?.author,
 		name: GM_info.script?.name,
-		version: (GM_info.script?.version || "1.1.3"),
+		version: (GM_info.script?.version || "1.1.3.1"),
 		icon: (GM_info.script?.icon || "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRHcmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkY1OUQ7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRDcwMDtzdG9wLW9wYWNpdHk6MSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZCQzAyRDtzdG9wLW9wYWNpdHk6MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuNCwgLTIpIHNjYWxlKDAuOSkiPjxwYXRoIGQ9Ik0xMDMuNiAxMDcuNGMzLjUtMi4yIDguOS02LjEgMTMuOC0xMi41czcuMy0xMi41IDguNS0xNi41Yy41LTEuNyAyLjItNy41IDIuMi0xNC43IDAtMTAuMS0zLjMtMjUuMS0xNS40LTM2LjgtMTQuNS0xNC0zMi4xLTE0LjMtMzUuNy0xNC4zLTggMC0xNS43IDEuOS0yMi42IDUuMkM0NCAyMyAzNS43IDMxLjQgMzAuOCA0MS43Yy0xLjMgMi44LTQgNC43LTcuMSA1LTQgLjMtNy41IDQuNC04LjkgOS42LS41IDEuOS0xLjYgMy41LTMuMSA0LjdDNC40IDY2LjggMCA3NS43IDAgODVjMCA2LjggMi4zIDEzLjEgNi4xIDE4LjIgNS41IDcuNCAxNC4yIDEyLjIgMjQgMTIuMmg0Ny4xYzQuNCAwIDExLS41IDE4LjMtMy41IDMuMi0xLjQgNS45LTMgOC4xLTQuNXoiIGZpbGw9IiNBMDk5RjAiLz48cGF0aCBkPSJNMTE5LjggNjQuM2MuMS0xNy4xLTEwLjQtMjgtMTIuNS0zMC4xQzk1IDIyLjEgNzkuOSAyMS44IDc2LjkgMjEuOGMtMTcuNiAwLTMzLjMgMTAuNS0zOS45IDI2LjctLjYgMS4zLTEuOCAyLjMtMy40IDIuM2gtLjRjLTUuOCAwLTEwLjYgNC44LTEwLjYgMTAuN3YuNWMwIDEuNC0uOCAyLjYtMS45IDMuM0MxMy40IDY5IDguOCA3Ni44IDguOCA4NWMwIDEyLjIgOS45IDIyLjMgMjIuMiAyMi4zaDQ1LjJjMy42LS4xIDE3LjYtLjkgMjkuNi0xMiAyLjktMi44IDEzLjktMTMuNyAxNC0zMXoiIGZpbGw9IiM1NzRBQjgiLz48cGF0aCBkPSJNMTEwLjggNTcuNGwuMiAzLjNjMCAxLjMtMS4xIDIuNC0yLjMgMi40LTEuMyAwLTIuMy0xLjEtMi4zLTIuNGwtLjEtMi44di0uM2MwLTEuMi45LTIuMiAyLjEtMi4zaC4zYy43IDAgMS4zLjMgMS43LjctLjIuMS4zLjUuNCAxLjR6bS0zLjMtMTAuM2MwIDEuMi0xIDIuMy0yLjIgMi4zaC0uMWMtLjggMC0xLjYtLjUtMi0xLjItNC42LTguMy0xMy4zLTEzLjUtMjIuOC0xMy41LTEuMiAwLTIuMy0xLTIuMy0yLjJ2LS4xYzAtMS4yIDEtMi4zIDIuMi0yLjNoLjFhMzAuMzcgMzAuMzcgMCAwIDEgMTUuOCA0LjRjNC42IDIuOCA4LjQgNi44IDExLjEgMTEuNS4xLjMuMi43LjIgMS4xek04OC4zIDczLjhMNzMuNSA5My4yYy0xLjUgMS45LTMuNSAzLjEtNS43IDMuNWgtLjJjLS40LjEtLjguMS0xLjIuMS0uNiAwLTEuMS0uMS0xLjYtLjItMi4yLS40LTQuMi0xLjctNS42LTMuNUw0NC4zIDczLjljLTItMi42LTIuNS01LjQtMS40LTcuNy4xLS4xLjEtLjIuMi0uMiAxLjItMiAzLjUtMy4yIDYuNC0zLjJoNi42di01LjdjMC02LjggNC43LTEyIDEwLjktMTIgNC44IDAgOC41IDIuNiAxMC4zIDcuMi41IDEuMy0uMiAyLjctMS41IDMuMnMtMi44LS4xLTMuMy0xLjRjLTEuMS0yLjctMi45LTQtNS41LTQtMy41IDAtNiAzLTYgN3Y4LjFjMCAuNS0uMiAxLS42IDEuNC0uNi43LTEuNyAxLjEtMi42IDEuMWgtOC40Yy0xLjMgMC0yIC40LTIuMS43LS4yLjQgMCAxLjMuOSAyLjRMNjMuMSA5MGMuOSAxLjIgMi4xIDEuOCAzLjMgMS44czIuMy0uNiAzLjEtMS43bDE0LjgtMTkuM2MuOS0xLjEgMS4xLTIgLjktMi40LS4yLS4zLS45LS43LTIuMS0uN2gtNy42Yy0uOSAwLTEuNy0uNS0yLjEtMS4yLS4zLS40LS40LS44LS40LTEuMyAwLTEuNCAxLjEtMi41IDIuNS0yLjVoNy42YzMuMSAwIDUuNSAxLjMgNi42IDMuNWwuMy43Yy43IDIuMS4xIDQuNi0xLjcgNi45eiIgZmlsbD0iI2ZmZiIvPjwvZz48Zz48cGF0aCBkPSJNMCAxMDAgUTY0IDExNSAxMjggMTAwIEwxMjggMTI4IEwwIDEyOCBaIiBmaWxsPSIjRDMyRjJGIi8+PHBhdGggZD0iTTAgMTAwIFE2NCAxMTUgMTI4IDEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGRHcmFkaWVudCkiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjY0IiB5PSIxMjEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9InVybCgjZ29sZEdyYWRpZW50KSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgc3R5bGU9InRleHQtc2hhZG93OiAwcHggMXB4IDJweCByZ2JhKDAsMCwwLDAuMyk7Ij7liIYg5LiNIOi1t+OAgOe6ryDpnaAg54ixPC90ZXh0PjwvZz48L3N2Zz4="),
 		mhandler: GM_info.scriptHandler,
 		mversion: GM_info.version,
@@ -283,9 +282,8 @@
 				getLink: "https://pan.baidu.com/rest/2.0/xpan/multimedia?method=filemetas&dlink=1",
 				getFiles: "https://pan.baidu.com/rest/2.0/xpan/file?method=list&showempty=1",
 				getShareLink: "https://pan.baidu.com/api/sharedownload?channel=chunlei&clienttype=0&web=1&app_id=250528",
-				getShareSign: "https://pan.baidu.com/share/tplconfig?fields=sign,timestamp&channel=chunlei&web=1&app_id=250528&clienttype=0&view_mode=1",
-				getShareVerify: "https://pan.baidu.com/share/verify?channel=chunlei&clienttype=0&web=1&app_id=250528",
-				getShareFiles: "https://pan.baidu.com/rest/2.0/xpan/share?method=list&showempty=1"
+				getShareSign: "https://pan.baidu.com/share/tplconfig?fields=sign,timestamp&channel=chunlei&web=1&app_id=250528&clienttype=0&view_mode=1"
+				// getShareFiles: "https://pan.baidu.com/rest/2.0/xpan/share?method=list&showempty=1"
 			},
 			mount: {
 				home: ".frame-main>div>div>div>div:has(.g-dropdown-button.g-new-create)",
@@ -1915,17 +1913,20 @@
 		 * @description 完全复制某个东西
 		 */
 		clone(value) {
-			if (this.isType(structuredClone) === "function") return structuredClone(value);
-			if (value === null || value === undefined) return value;
-			if (typeof value !== 'object') return value;
-			if (value instanceof Date) return new Date(value);
-			if (value instanceof RegExp) return new RegExp(value);
-			if (Array.isArray(value)) return value.map(item => base.clone(item));
-			const result = {};
-			for (const key in value) {
-				if (Object.prototype.hasOwnProperty.call(value, key)) result[key] = base.clone(value[key]);
+			try {
+				if (this.isType(structuredClone) === "function") return structuredClone(value);
+			} catch {
+				if (value === null || value === undefined) return value;
+				if (typeof value !== 'object') return value;
+				if (value instanceof Date) return new Date(value);
+				if (value instanceof RegExp) return new RegExp(value);
+				if (Array.isArray(value)) return value.map(item => base.clone(item));
+				const result = {};
+				for (const key in value) {
+					if (Object.prototype.hasOwnProperty.call(value, key)) result[key] = base.clone(value[key]);
+				}
+				return result;
 			}
-			return result;
 		},
 
 		/**
@@ -2208,7 +2209,7 @@
 					if (event && $(event.currentTarget).data("back-to-downloads")) element.find(".aria2, .bitcomet, .abdm, .other").hide();
 				},
 				willClose: () => {
-					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 				},
 			});
 		},
@@ -2277,7 +2278,7 @@
 				},
 				willClose: () => {
 					if (event && $(event.currentTarget).data("back-to-setting")) base.showSetting();
-					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 				},
 			});
 		},
@@ -2351,7 +2352,7 @@
 				},
 				willClose: () => {
 					if (event && $(event.currentTarget).data("back-to-setting")) base.showSetting();
-					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 				},
 			});
 		},
@@ -2427,7 +2428,7 @@
 				},
 				willClose: () => {
 					if (event && $(event.currentTarget).data("back-to-setting")) base.showSetting();
-					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 				},
 			});
 		},
@@ -2492,7 +2493,7 @@
 				},
 				willClose: () => {
 					if (event && $(event.currentTarget).data("back-to-setting")) base.showSetting();
-					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+					if (event && $(event.currentTarget).data("back-to-downloads")) base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 				},
 			});
 		},
@@ -2541,7 +2542,7 @@
 				<style>
 					.pl-color{display:grid!important;grid-template-columns:repeat(5, var(--pl-color-width));gap:10px;--pl-color-width:55px}
 					.pl-color > div{background-color:var(--color);width:var(--pl-color-width);height:var(--pl-color-width);box-sizing:border-box;cursor:pointer}
-					.pl-color .mask{width:calc(var(--pl-color-width) - 2px);height:calc(var(--pl-color-width) - 2px);opacity:0;transition:opacity.2s;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+					.pl-color .mask{width:calc(var(--pl-color-width) - 2px);height:calc(var(--pl-color-width) - 2px);opacity:0;transition:opacity.2s;color:#EBE6E3;font-size:13px;display:flex;align-items:center;justify-content:center;flex-direction:column}
 					.pl-color > div:hover .mask{opacity:1}
 					.pl-checkboxies{display:grid!important;grid-template-columns:repeat(2, 98px);gap:10px}
 					.pl-input[type=checkbox]{height:20px;width:20px;padding:0!important;background-image:none!important}
@@ -2658,7 +2659,7 @@
 				<div class="block">
 					<name>V1.1.1.6</name>
 					<div>
-					<div>1、<span style="color:#fff;background:${temp.color}">废弃 - 百度网盘 BDUSS Cookie 相关代码，转向使用更安全的 AccessToken</span>；</div>
+					<div>1、<span style="color:#EBE6E3;background:${temp.color}">废弃 - 百度网盘 BDUSS Cookie 相关代码，转向使用更安全的 AccessToken</span>；</div>
 					<div>2、废弃 - 百度网盘分享页面下载相关代码；</div>
 					<div>3、优化 - 下载窗口可在设置改变后动态修改界面。</div>
 					</div>
@@ -2698,9 +2699,9 @@
 				<div class="block">
 					<name>V1.1.1</name>
 					<div>
-					<div>1、配置文件格式更新，<span style="color:#fff;background:${temp.color}">支持添加、删除、切换多个服务配置</span>；</div>
-					<div>2、支持比特彗星推送下载，<span style="color:#fff;background:${temp.color}">原 RPC 已并入 Aria2 下载</span>；</div>
-					<div>3、界面<span style="color:#fff;background:${temp.color}">增加 Font Awesome 图标！</span>更好看啦；</div>
+					<div>1、配置文件格式更新，<span style="color:#EBE6E3;background:${temp.color}">支持添加、删除、切换多个服务配置</span>；</div>
+					<div>2、支持比特彗星推送下载，<span style="color:#EBE6E3;background:${temp.color}">原 RPC 已并入 Aria2 下载</span>；</div>
+					<div>3、界面<span style="color:#EBE6E3;background:${temp.color}">增加 Font Awesome 图标！</span>更好看啦；</div>
 					<div>4、优化脚本代码、界面，运行更轻快；</div>
 					<div>5、修复上个版本遗存的问题。</div>
 					</div>
@@ -3262,7 +3263,9 @@
 		 * @returns {String} 生成的 HTML 内容
 		 * @description 详见代码
 		 */
-		generateDom(configs) {
+		generateDOM(configs) {
+
+
 			if (base.isType(configs) !== "array" && configs.length !== 2) return message.error("提示：<br/>配置解析失败~");
 			let list = (Array.isArray(configs[0]) ? configs[0] : []);
 			if (!list.length) return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -3345,7 +3348,7 @@
 				}
 			});
 			allLink = (allLink ? allLink.join("\r\n") : "")
-			if (temp.mode === "api" && list.length >= 2) {
+			if (temp.mode === "api") {
 				let rpc = base.getValue("setting_idm_rpc").find(i => i.default);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary api listener-download-all enhance listener-tip" data-title="通过脚本跨域请求下载文件，已支持多线程、智能多分片，显示预估剩余时间、下载速度；<br/>具体线程取决于浏览器的限制，所以非<b>必要情况（例如系统环境无法安装程序）</b>下，不建议使用此功能!"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>全部增强下载 (Beta)</button>
 				<button class="pl-btn-primary pl-btn-default idm listener-send-rpc listener-tip" data-type="idm" data-title="通过 IDM 扩展的捕获协议，将链接推送至 IDM，理论上仅适用于版本较新的 IDM。<br/>使用前请确保您的 IDM 的 “设置” > “文件类型” > “接管下载文件扩展名” 里有上述文件的扩展名，若无请添加。"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-up"/></svg>全部推送至 IDM (Beta)</button>`);
@@ -3726,19 +3729,20 @@
 			base.addStyle("swal-pub-style", "style", `@media (prefers-color-scheme:light){${GM_getResourceText("SwalLigt")}}`);
 			base.addStyle("swal-pub-dark-style", "style", `@media (prefers-color-scheme:dark){${GM_getResourceText("SwalDark").replace(/#19191a/, "#222226")}}`);
 			base.addStyle("swal-pub-custom-style", "style", `
+html:has(.swal2-container), html.swal2-shown {font-size: unset!important}
 .swal2-container *{vertical-align:baseline}
 .swal2-styled{transition:all.2s}
 .swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:${temp.color} transparent }
 .swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;grid-column:auto;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}
 .swal2-timer-progress-bar{width:100%;height:.25em;background:${temp.color}33 }
-.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:${temp.color};color:#fff;line-height:2em;text-align:center}
+.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:${temp.color};color:#EBE6E3;line-height:2em;text-align:center}
 .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:${temp.color} }
 .swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:${temp.color}}
 .swal2-html-container{padding:1em 1.6em 0.3em;margin:0}
 .swal2-close,div:where(.swal2-container) button:where(.swal2-close){position:absolute;border-radius:10px;top:0;right:0;transition:all.2s}
 .swal2-close:hover,div:where(.swal2-container) button:where(.swal2-close):hover{color:${temp.color};background-color:${temp.color}30;font-size:60px}
 .swal2-styled{display:flex;justify-content:center;align-items:center;gap:5px}
-.swal2-styled.swal2-confirm,div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm){background-color:${temp.color};color:#fff}
+.swal2-styled.swal2-confirm,div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm){background-color:${temp.color};color:#EBE6E3}
 .swal2-styled.swal2-confirm:focus,div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm):focus{box-shadow:0 0 0 3px ${temp.color}80}
 .swal2-styled.swal2-deny:focus,.swal2-close:focus,div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-deny):focus{box-shadow:0 0 0 3px #dc374180}
 .swal2-styled.swal2-cancel:focus,div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel):focus{box-shadow:0 0 0 3px #6e788180}
@@ -3779,119 +3783,878 @@ div:where(.swal2-container) textarea:where(.swal2-textarea):focus-visible
 div:where(.swal2-container) input:where(.swal2-input), div:where(.swal2-container) input:where(.swal2-file), div:where(.swal2-container) textarea:where(.swal2-textarea), div:where(.swal2-container) select:where(.swal2-select), div:where(.swal2-container) div:where(.swal2-radio), div:where(.swal2-container) label:where(.swal2-checkbox)
 {margin:1em 2em}`);
 			base.addStyle(`${mount}-main-style`, "style", `
-body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar{width:.6em;height:.6em}
-body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar-track{border-radius:10px;background:#fff}
-body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar-thumb{border-radius:10px!important}
-body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar-thumb{background-color:${temp.color}90!important;transition:background-color.2s;will-change:background-color}
-body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar-thumb:hover{background-color:${temp.color}D0!important}
-body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar-track{background:#fff!important}
-@media (prefers-color-scheme:dark){ body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) ::-webkit-scrollbar-track{background:#606266!important} }
-.pl-popup{font-size:12px;min-width:70%;max-width:95%}
-.pl-header{padding:0;align-items:flex-start;border-bottom:1px solid #eee;margin:0 0 10px;padding:0 0 5px}
-.pl-title{font-size:18px;white-space:nowrap;text-overflow:ellipsis}
-.pl-content{padding:0;font-size:12px}
-.pl-footer{font-size:15px;text-align:center;display:block}
-.pl-icon{width:15px;height:15px;vertical-align:-0.15em;fill:currentColor;overflow:hidden;font-size:18px}
-.pl-main{background:${temp.color}15;border-radius:10px;display:flex;flex-direction:column;gap:8px;max-height:calc(${document.documentElement.clientHeight}px - 300px);overflow:auto;padding:8px 6px}
-.pl-a{position:relative;vertical-align:baseline;color:${temp.color};border-bottom:2px solid ${temp.color};text-decoration:none!important;transition:color.3s,opacity.3s;will-change:color,opacity;overflow:hidden}
-.pl-a::before{content:"";position:absolute;left:0;bottom:0;width:100%;height:100%;background-color:${temp.color};transform:scaleY(0);transform-origin:bottom center;transition:transform.15s,opacity.3s;will-change:transform;z-index:-1}
-.pl-a:hover,.pl-a:focus{color:#fff}
-.pl-a:hover::before,.pl-a:focus::before{transform:scaleY(1)}
-.pl-a:active{color:#fff;opacity:0.8}
-.pl-a .pl-icon{vertical-align:-0.06em}
-.pl-item{display:flex;align-items:center;background:${temp.color}30;border-radius:8px;padding:5px;gap:10px}
-.pl-item-name{width:15%;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:default}
-.pl-item-name>*{text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.pl-item-link{flex:1;cursor:pointer}
-a.pl-item-link{color:${temp.color};text-align:left;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;transition:color.15s;will-change:color}
-a.pl-item-link:hover{color:#fff}
-.pl-item-message{display:flex;justify-content:space-between;flex:1}
-.pl-item-downing{flex:1;display:flex;align-items:center;gap:10px}
-.pl-progress{position:relative; display:flex; flex:1; height:33px; overflow:hidden; border-radius:50px; background-color:#ebebeb}
-.pl-progress .progress{display:flex; align-items:center; justify-content:space-around; position:absolute; left:0; top:0; height:100%; width:var(--width,0); transition:width .4s linear; will-change:width}
-.pl-progress .progress.head{z-index:2; border-radius:50px; color:#fff; background-color:${temp.color}; overflow:hidden}
-.pl-progress .progress.foot{z-index:1; color:#333}
-.pl-progress .progress .text{line-height:1; font-size:12px; font-weight:500; white-space:nowrap; padding:0 13px}
-.pl-ext{display:inline-block;width:44px;background:#999;color:#fff;height:16px;line-height:16px;font-size:12px;border-radius:3px}
-.pl-retry{padding:3px 10px;background:#cc3235;color:#fff;border-radius:3px;cursor:pointer}
-.pl-extra{display:flex;justify-content:center;background-color:${temp.color}15;border-radius:10px;gap:10px}
-.pl-extra:has(>*){margin-top:1.25em;padding:8px 6px}
-.pl-extra>.api.listener-download-all,.pl-extra>.curl.listener-copy,.pl-extra>.aria2.listener-send-rpc,.pl-extra>.bitcomet.listener-copy,.pl-extra>.abdm{flex:1}
-.pl-extra:not(:has(>.api.listener-download-all,>.curl.listener-copy,>.aria2.listener-send-rpc,>.bitcomet.listener-copy,>.abdm))>*{flex:1}
-.pl-btn-primary{color:#ffffff!important;background:${temp.color};border:0;border-radius:50px;cursor:pointer;font-size:12px;outline:none;word-break:keep-all;display:flex;align-items:center;justify-content:center;gap:5px;padding:0.625em 1.1em;transition:opacity.2s,box-shadow.2s;will-change:opacity,box-shadow}
-.pl-btn-primary:hover{opacity:0.8!important}
-.pl-btn-primary:focus{box-shadow:0 0 0 3px ${temp.color}80}
-.pl-btn-success{background:#55af28}
-.pl-btn-success:focus{box-shadow:0 0 0 3px #55af2880}
-.pl-btn-info{background:#606266}
-.pl-btn-info:focus{box-shadow:0 0 0 3px #60626680}
-.pl-btn-warning{background:#da9328}
-.pl-btn-warning:focus{box-shadow:0 0 0 3px #da932880}
-.pl-btn-danger{background:#cc3235}
-.pl-btn-danger:focus{box-shadow:0 0 0 3px #cc323580}
-.pl-btn-opacity{animation:easeOpacity 1.2s 2;animation-fill-mode:forwards;will-change:opacity}
-@keyframes easeOpacity{ from{opacity:1} 50%{opacity:0.35} to{opacity:1} }
-.pl-button-mini{padding:5px 10px}
-.pl-button,.pl-dropdown-menu{transition:all.2s}
-.pl-button{position:relative}
-.pl-button .pl-dropdown-menu{opacity:0;pointer-events:none;will-change:opacity}
-.pl-button:hover .pl-dropdown-menu{opacity:1;pointer-events:auto}
-.pl-button-init{opacity:0.5;animation:easeInitOpacity 1.2s 5;animation-fill-mode:forwards}
-@keyframes easeInitOpacity{ from{opacity:0.5} 50%{opacity:1} to{opacity:0.5} }
-.pl-dropdown-menu{position:absolute;padding:5px 0;color:${temp.color};background:#fff;z-index:999;min-width:110px;border-radius:5px;box-shadow:0 1px 6px ${temp.color}33;-webkit-box-shadow:0 1px 6px ${temp.color}33;text-align:center;border:none}
-@media (prefers-color-scheme:dark){ .pl-dropdown-menu{color:#fff;background:#222226} }
-.pl-button-mode{color:${temp.color}!important;height:30px;padding:0 10px!important;display:flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap;transition:background-color.2s;will-change:background-color}
-@media (prefers-color-scheme:dark){ .pl-dropdown-menu .pl-button-mode{color:#fff!important} }
-.pl-button-mode:hover{background-color:${temp.color}33!important}
-@media (prefers-color-scheme:dark){ .pl-button-mode:hover{color:#fff!important;background:${temp.color}!important} }
-header[style="display:none;"]~.pl-button{display:inline-block;position:fixed;top:0.6em;left:65%;z-index:99999}
-.color-button{background:${temp.color}!important;border-color:${temp.color}!important;border:1px solid ${temp.color}!important;display:inline-flex;transition:background.2s,border-color.2s;will-change:background,border-color}
-.color-button:hover{background:${temp.color}b0!important;border-color:${temp.color}!important}
-.ali-button{background:${temp.color};border:0 solid transparent;font-size:14px;margin-left:20px;padding:8px 16px;position:relative;height:32px;border-radius:100px;display:flex;align-items:center;justify-content:center;color:var(--basic_white);cursor:pointer;transition:background.2s;will-change:background}
-.ali-button:hover{background:${temp.color}D0}
-.ali-btn-icon{vertical-align:-0.2em}
-.mcloud-button{float:left;position:relative;margin:20px 24px 20px 0;width:110px;height:36px;background:${temp.color};border-radius:2px;font-size:14px;color:#fff;line-height:39px;text-align:center;cursor:pointer;will-change:background}
-.mcloud-button:hover{background:${temp.color}b0}
-.mcloud-share-button{display:inline-block;position:relative;font-size:14px;line-height:36px;height:36px;text-align:center;color:#fff;border:1px solid ${temp.color};border-radius:2px;padding:0 24px;background:${temp.color};will-change:background}
-.mcloud-share-button:hover{background:${temp.color}b0}
-.mcloud-btn{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAGNQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////mkUNoAAAACF0Uk5TAAbHPP9AMRtr9PwrV8zqXfmNgDODHTLD4iJxhGJJ8Z269m0aDgAAAMZJREFUeJzd0ssOgyAQBVDUK74rWq0PFP3/ryxqTMdGqJtuvGHD5CTDTGDs3nFc17kEPcC7BH3At/Tjvk5AYbBU+NcrwghL4uQDk3gtRSF1KWCCQEpghkd+3jp/ICNQoDANU0AQCJQmWAJ3h8+q3mFdvSywQdttsGvRWGAPLReoHXrbG6WWAzBoJ+3DaCnWI39NLbcvszvLeuTB2fYoqbNBNo7sGjzk31BhMsEJitxmiKk8zSQwE8gFjBGcNuCzOmdqPrib5A2JRQ7qK9g+hQAAAABJRU5ErkJggg==");height:20px;line-height:20px;display:inline-block;background-repeat:no-repeat;background-size:20px 20px;text-indent:25px}
-.tcloud-button{color:#fff;border:1px solid ${temp.color};background:${temp.color};position:relative;height:30px;padding:0 12px;margin-right:12px;font-size:12px;line-height:28px;cursor:pointer;will-change:background,border-color}
-.tcloud-button:hover{border-color:${temp.color}b0;background:${temp.color}b0}
-.xunlei-button{display:inline-flex;align-items:center;justify-content:center;border:0 solid transparent;border-radius:5px;box-shadow:0 0 0 0 transparent;width:fit-content;white-space:nowrap;flex-shrink:0;font-size:14px;line-height:1.5;outline:0;touch-action:manipulation;transition:background.2s,color.2s,border.2s,box-shadow.2s;color:#fff;background:${temp.color};margin-left:12px;padding:0px 12px;position:relative;cursor:pointer;height:36px;will-change:background}
-.xunlei-button:hover{background:${temp.color}b0}
-.quark-button,.uc-button{padding:0 14px;background:${temp.color}!important;background-color:${temp.color}!important;will-change:background,background-color}
-.uc-btn-icon{width:20px;height:20px;vertical-align:-0.3em}
-.uc-button{padding:10px 20px!important}
-.pl-setting-item{display:flex;align-items:center;justify-content:space-between;margin-top:1em}
-.pl-setting-item > *:nth-child(2){max-width:80%;display:flex;justify-content:space-between;align-items:center}
-.pl-setting-item .pl-setting-item{margin:0;gap:5px}
-.pl-input{padding:8px 10px!important;border:1px solid #c2c2c2;border-radius:5px;font-size:14px!important;margin:0;appearance:auto!important}
-.pl-setting-item > .pl-input:not([type="checkbox"]){width:80%}
-.center-input{text-align:center;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;font-weight:300}
-.pl-tooltip{position:absolute;z-index:110000;display:none;align-items:center;color:#ffffff;background:#333;font-size:12px;line-height:1.3;max-width:600px;border-radius:5px;word-break:break-all;will-change:display,top,left}
-.pl-tooltip>*{padding:5px 10px}
-.pl-tooltip>*:first-child{border:1px solid;border-top-left-radius:5px;border-bottom-left-radius:5px;border-top-color:#333;border-bottom-color:#333;border-left-color:#333;border-right-color:transparent}
-.pl-tooltip>*:last-child{border:1px solid;border-top-right-radius:5px;border-bottom-right-radius:5px;border-top-color:#333;border-bottom-color:#333;border-left-color:transparent;border-right-color:#333}
-.pl-loading-box>div>div{position:absolute;border-radius:50%}
-.pl-loading-box>div>div:nth-child(1){top:9px;left:9px;width:82px;height:82px;background:#ffffff}
-@keyframes load{ 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
-.pl-loading-box>div>div:nth-child(2){top:14px;left:38px;width:25px;height:25px;background:${temp.color};animation:load 1s linear infinite;transform-origin:12px 36px}
-.pl-loading{width:16px;height:16px;display:inline-block;overflow:hidden;background:none}
-.pl-loading-box{width:100%;height:100%;position:relative;transform:translateZ(0) scale(0.16);backface-visibility:hidden;transform-origin:0 0}
-.pl-loading-box div{box-sizing:content-box}
-.pl-button-save{background-color:${temp.color}!important;color:#fff!important}
-.pl-button-save:hover{background-color:${temp.color}D0!important;color:#fff!important}
-.swal2-container{z-index:100000}
-body.swal2-height-auto{height:inherit}
-[class^="swal2-"],[class*="pl-btn"]{transition:all.2s}
+:root {
+	--pl-c: ${temp.color};
+	--pl-c-15: ${temp.color}15;
+	--pl-c-30: ${temp.color}30;
+	--pl-c-33: ${temp.color}33;
+	--pl-c-80: ${temp.color}80;
+	--pl-c-90: ${temp.color}90;
+	--pl-c-b0: ${temp.color}b0;
+	--pl-c-d0: ${temp.color}d0;
+}
+
+body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar {
+	width: .6em;
+	height: .6em
+}
+
+body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar-track {
+	background: #EBE6E3 !important;
+	border-radius: 10px
+}
+
+body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar-thumb {
+	background-color: var(--pl-c-90) !important;
+	border-radius: 10px !important;
+	transition: background-color .2s;
+	will-change: background-color
+}
+
+body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar-thumb:hover {
+	background-color: var(--pl-c-d0) !important
+}
+
+@media (prefers-color-scheme:dark) {
+	body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar-track {
+		background: #606266 !important
+	}
+}
+
+.pl-popup {
+	min-width: 70%;
+	max-width: 95%;
+	font-size: 12px
+}
+
+.pl-header {
+	display: flex;
+	align-items: flex-start;
+	margin: 0 0 10px;
+	padding: 0 0 5px;
+	border-bottom: 1px solid #eee
+}
+
+.pl-title {
+	font-size: 18px;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.pl-content {
+	padding: 0;
+	font-size: 12px
+}
+
+.pl-footer {
+	display: block;
+	text-align: center;
+	font-size: 15px
+}
+
+.pl-icon {
+	width: 15px;
+	height: 15px;
+	font-size: 18px;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden
+}
+
+.pl-main {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	min-height: 50px;
+	max-height: calc(100vh - 300px);
+	padding: 8px 6px;
+	overflow: auto;
+	background: var(--pl-c-15);
+	border-radius: 10px
+}
+
+.pl-a {
+	position: relative;
+	overflow: hidden;
+	vertical-align: baseline;
+	border-bottom: 2px solid var(--pl-c);
+	color: var(--pl-c);
+	text-decoration: none !important;
+	transition: color .3s, opacity .3s;
+	will-change: color, opacity
+}
+
+.pl-a::before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--pl-c);
+	transform: scaleY(0);
+	transform-origin: bottom center;
+	transition: transform .15s, opacity .3s;
+	will-change: transform
+}
+
+.pl-a:hover,
+.pl-a:focus {
+	color: #EBE6E3
+}
+
+.pl-a:hover::before,
+.pl-a:focus::before {
+	transform: scaleY(1)
+}
+
+.pl-a:active {
+	opacity: 0.8;
+	color: #EBE6E3
+}
+
+.pl-a .pl-icon {
+	vertical-align: -0.06em
+}
+
+.pl-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 5px;
+	background: var(--pl-c-30);
+	border-radius: 8px
+}
+
+.pl-item-name {
+	width: 15%;
+	overflow: hidden;
+	text-align: left;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	cursor: default
+}
+
+.pl-item-name>* {
+	overflow: hidden;
+	text-align: left;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.pl-item-link {
+	flex: 1;
+	cursor: pointer
+}
+
+a.pl-item-link {
+	overflow: hidden;
+	text-align: left;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: var(--pl-c);
+	transition: color .15s;
+	will-change: color
+}
+
+a.pl-item-link:hover {
+	color: #EBE6E3
+}
+
+.pl-item-message {
+	display: flex;
+	flex: 1;
+	justify-content: space-between
+}
+
+.pl-item-downing {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	gap: 10px
+}
+
+.pl-progress {
+	display: flex;
+	flex: 1;
+	position: relative;
+	height: 33px;
+	overflow: hidden;
+	border-radius: 50px;
+	background-color: #ebebeb;
+	color: #333
+}
+@media (prefers-color-scheme:dark) {
+	.pl-progress {
+		background-color: #808080;
+		color: #EBE6E3
+	}
+}
+
+.pl-progress .progress {
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	align-items: center;
+	justify-content: space-around;
+	width: var(--width, 0);
+	height: 100%;
+	transition: width .4s linear;
+	will-change: width
+}
+
+.pl-progress .progress.head {
+	z-index: 2;
+	overflow: hidden;
+	background-color: var(--pl-c);
+	background-size: 1rem 1rem;
+	border-radius: 50px;
+	color: #EBE6E3
+}
+
+.pl-progress .progress.head {
+	background-image: linear-gradient(45deg,hsla(0,0%,100%,.15) 25%,transparent 0,transparent 50%,hsla(0,0%,100%,.15) 0,hsla(0,0%,100%,.15) 75%,transparent 0,transparent);
+	background-size: 3vh 3vh;
+	-webkit-animation: 1s linear reverse infinite progress-bar-stripes;
+    animation: 1s linear reverse infinite progress-bar-stripes;
+}
+@-webkit-keyframes progress-bar-stripes {
+	from {
+		background-position: 3vh 0
+	}
+	to {
+		background-position: 0 0
+	}
+}
+@keyframes progress-bar-stripes {
+	from {
+		background-position: 3vh 0
+	}
+	to {
+		background-position: 0 0
+	}
+}
+/*
+.pl-progress .progress.head {
+	background-image: linear-gradient(45deg, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+	background-size: 40px 40px;
+	animation: barberpole 2s linear infinite;
+}
+@keyframes barberpole {
+	from {
+		background-position: 0 0
+	}
+	to {
+		background-position: 40px 0
+	}
+}
+*/
+
+.pl-progress .progress.foot {
+	z-index: 1;
+}
+
+.pl-progress .progress .text {
+	padding: 0 13px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1;
+	white-space: nowrap
+}
+
+.pl-ext {
+	display: inline-block;
+	width: 44px;
+	height: 16px;
+	background: #999;
+	border-radius: 3px;
+	color: #EBE6E3;
+	font-size: 12px;
+	line-height: 16px
+}
+
+.pl-retry {
+	padding: 3px 10px;
+	background: #cc3235;
+	border-radius: 3px;
+	color: #EBE6E3;
+	cursor: pointer
+}
+
+.pl-extra {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	overflow: auto;
+	background-color: var(--pl-c-15);
+	border-radius: 10px
+}
+
+.pl-extra:has(>*) {
+	margin-top: 1.25em;
+	padding: 8px 6px
+}
+
+.pl-extra>.api.listener-download-all,
+.pl-extra>.curl.listener-copy,
+.pl-extra>.aria2.listener-send-rpc,
+.pl-extra>.bitcomet.listener-copy,
+.pl-extra>.abdm {
+	flex: 1
+}
+
+.pl-extra:not(:has(>.api.listener-download-all, >.curl.listener-copy, >.idm.listener-send-rpc, >.aria2.listener-send-rpc, >.bitcomet.listener-copy, >.abdm))>* {
+	flex: 1
+}
+
+.pl-btn-primary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	padding: 0.625em 1.1em;
+	border: 0;
+	border-radius: 50px;
+	outline: none;
+	background: var(--pl-c);
+	color: #EBE6E3 !important;
+	font-size: 12px;
+	white-space: nowrap;
+	word-break: keep-all;
+	cursor: pointer;
+	transition: opacity .2s, box-shadow .2s;
+	will-change: opacity, box-shadow
+}
+
+.pl-btn-primary:hover {
+	opacity: 0.8 !important
+}
+
+.pl-btn-primary:focus {
+	box-shadow: 0 0 0 3px var(--pl-c-80)
+}
+
+.pl-btn-success {
+	background: #55af28
+}
+
+.pl-btn-success:focus {
+	box-shadow: 0 0 0 3px #55af2880
+}
+
+.pl-btn-info {
+	background: #606266
+}
+
+.pl-btn-info:focus {
+	box-shadow: 0 0 0 3px #60626680
+}
+
+.pl-btn-warning {
+	background: #da9328
+}
+
+.pl-btn-warning:focus {
+	box-shadow: 0 0 0 3px #da932880
+}
+
+.pl-btn-danger {
+	background: #cc3235
+}
+
+.pl-btn-danger:focus {
+	box-shadow: 0 0 0 3px #cc323580
+}
+
+.pl-btn-opacity {
+	animation: easeOpacity 1.2s 2;
+	animation-fill-mode: forwards;
+	will-change: opacity
+}
+
+@keyframes easeOpacity {
+	from {
+		opacity: 1
+	}
+
+	50% {
+		opacity: 0.35
+	}
+
+	to {
+		opacity: 1
+	}
+}
+
+.pl-button-mini {
+	padding: 5px 10px
+}
+
+.pl-button,
+.pl-dropdown-menu {
+	transition: all .2s
+}
+
+.pl-button {
+	position: relative
+}
+
+.pl-button .pl-dropdown-menu {
+	opacity: 0;
+	pointer-events: none;
+	will-change: opacity
+}
+
+.pl-button:hover .pl-dropdown-menu {
+	opacity: 1;
+	pointer-events: auto
+}
+
+.pl-button-init {
+	opacity: 0.5;
+	animation: easeInitOpacity 1.2s 5;
+	animation-fill-mode: forwards
+}
+
+@keyframes easeInitOpacity {
+	from {
+		opacity: 0.5
+	}
+
+	50% {
+		opacity: 1
+	}
+
+	to {
+		opacity: 0.5
+	}
+}
+
+.pl-dropdown-menu {
+	position: absolute;
+	z-index: 999;
+	min-width: 110px;
+	padding: 5px 0;
+	border: none;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0 1px 6px var(--pl-c-33);
+	-webkit-box-shadow: 0 1px 6px var(--pl-c-33);
+	color: var(--pl-c);
+	text-align: center
+}
+
+@media (prefers-color-scheme:dark) {
+	.pl-dropdown-menu {
+		background: #222226;
+		color: #EBE6E3
+	}
+}
+
+.pl-button-mode {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	height: 30px;
+	padding: 0 10px !important;
+	background-color: transparent;
+	color: var(--pl-c) !important;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: background-color .2s;
+	will-change: background-color
+}
+
+@media (prefers-color-scheme:dark) {
+	.pl-dropdown-menu .pl-button-mode {
+		color: #EBE6E3 !important
+	}
+}
+
+.pl-button-mode:hover {
+	background-color: var(--pl-c-33) !important
+}
+
+@media (prefers-color-scheme:dark) {
+	.pl-button-mode:hover {
+		background: var(--pl-c) !important;
+		color: #EBE6E3 !important
+	}
+}
+
+header[style="display:none;"]~.pl-button {
+	display: inline-block;
+	position: fixed;
+	z-index: 99999;
+	top: 0.6em;
+	left: 65%
+}
+
+.color-button {
+	display: inline-flex;
+	border: 1px solid var(--pl-c) !important;
+	border-color: var(--pl-c) !important;
+	background: var(--pl-c) !important;
+	transition: background .2s, border-color .2s;
+	will-change: background, border-color
+}
+
+.color-button:hover {
+	border-color: var(--pl-c) !important;
+	background: var(--pl-c-b0) !important
+}
+
+.ali-button {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	height: 32px;
+	margin-left: 20px;
+	padding: 8px 16px;
+	border: 0 solid transparent;
+	border-radius: 100px;
+	background: var(--pl-c);
+	color: var(--basic_white);
+	font-size: 14px;
+	cursor: pointer;
+	transition: background .2s;
+	will-change: background
+}
+
+.ali-button:hover {
+	background: var(--pl-c-d0)
+}
+
+.ali-btn-icon {
+	vertical-align: -0.2em
+}
+
+.mcloud-button {
+	float: left;
+	position: relative;
+	margin: 20px 24px 20px 0;
+	width: 110px;
+	height: 36px;
+	background: var(--pl-c);
+	border-radius: 2px;
+	color: #EBE6E3;
+	font-size: 14px;
+	line-height: 39px;
+	text-align: center;
+	cursor: pointer;
+	will-change: background
+}
+
+.mcloud-button:hover {
+	background: var(--pl-c-b0)
+}
+
+.mcloud-share-button {
+	display: inline-block;
+	position: relative;
+	height: 36px;
+	padding: 0 24px;
+	border: 1px solid var(--pl-c);
+	border-radius: 2px;
+	background: var(--pl-c);
+	color: #EBE6E3;
+	font-size: 14px;
+	line-height: 36px;
+	text-align: center;
+	will-change: background
+}
+
+.mcloud-share-button:hover {
+	background: var(--pl-c-b0)
+}
+
+.mcloud-btn {
+	display: inline-block;
+	height: 20px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAGNQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////mkUNoAAAACF0Uk5TAAbHPP9AMRtr9PwrV8zqXfmNgDODHTLD4iJxhGJJ8Z269m0aDgAAAMZJREFUeJzd0ssOgyAQBVDUK74rWq0PFP3/ryxqTMdGqJtuvGHD5CTDTGDs3nFc17kEPcC7BH3At/Tjvk5AYbBU+NcrwghL4uQDk3gtRSF1KWCCQEpghkd+3jp/ICNQoDANU0AQCJQmWAJ3h8+q3mFdvSywQdttsGvRWGAPLReoHXrbG6WWAzBoJ+3DaCnWI39NLbcvszvLeuTB2fYoqbNBNo7sGjzk31BhMsEJitxmiKk8zSQwE8gFjBGcNuCzOmdqPrib5A2JRQ7qK9g+hQAAAABJRU5ErkJggg==") no-repeat;
+	background-size: 20px 20px;
+	text-indent: 25px;
+	line-height: 20px
+}
+
+.tcloud-button {
+	position: relative;
+	height: 30px;
+	margin-right: 12px;
+	padding: 0 12px;
+	border: 1px solid var(--pl-c);
+	background: var(--pl-c);
+	color: #EBE6E3;
+	font-size: 12px;
+	line-height: 28px;
+	cursor: pointer;
+	will-change: background, border-color
+}
+
+.tcloud-button:hover {
+	border-color: var(--pl-c-b0);
+	background: var(--pl-c-b0)
+}
+
+.xunlei-button {
+	display: inline-flex;
+	position: relative;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	height: 36px;
+	margin-left: 12px;
+	padding: 0px 12px;
+	border: 0 solid transparent;
+	border-radius: 5px;
+	background: var(--pl-c);
+	box-shadow: 0 0 0 0 transparent;
+	color: #EBE6E3;
+	font-size: 14px;
+	line-height: 1.5;
+	white-space: nowrap;
+	outline: 0;
+	cursor: pointer;
+	touch-action: manipulation;
+	transition: background .2s, color .2s, border .2s, box-shadow .2s;
+	will-change: background
+}
+
+.xunlei-button:hover {
+	background: var(--pl-c-b0)
+}
+
+.quark-button,
+.uc-button {
+	padding: 0 14px;
+	background: var(--pl-c) !important;
+	background-color: var(--pl-c) !important;
+	will-change: background, background-color
+}
+
+.uc-btn-icon {
+	width: 20px;
+	height: 20px;
+	vertical-align: -0.3em
+}
+
+.uc-button {
+	padding: 10px 20px !important
+}
+
+.pl-setting-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 1em
+}
+
+.pl-setting-item>*:nth-child(2) {
+	display: flex;
+	max-width: 80%;
+	align-items: center;
+	justify-content: space-between
+}
+
+.pl-setting-item .pl-setting-item {
+	margin: 0;
+	gap: 5px
+}
+
+.pl-input {
+	margin: 0;
+	padding: 8px 10px !important;
+	border: 1px solid #c2c2c2;
+	border-radius: 5px;
+	appearance: auto !important;
+	font-size: 14px !important
+}
+
+.pl-setting-item>.pl-input:not([type="checkbox"]) {
+	width: 80%
+}
+
+.center-input {
+	text-align: center;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+	font-weight: 300
+}
+
+.pl-tooltip {
+	display: none;
+	position: absolute;
+	z-index: 110000;
+	align-items: center;
+	max-width: 600px;
+	border-radius: 5px;
+	background: #333;
+	color: #EBE6E3;
+	font-size: 12px;
+	line-height: 1.3;
+	word-break: break-all;
+	will-change: display, top, left
+}
+
+.pl-tooltip>* {
+	padding: 5px 10px
+}
+
+.pl-tooltip>*:first-child {
+	border: 1px solid;
+	border-color: #333 transparent #333 #333;
+	border-radius: 5px 0 0 5px
+}
+
+.pl-tooltip>*:last-child {
+	border: 1px solid;
+	border-color: #333 #333 #333 transparent;
+	border-radius: 0 5px 5px 0
+}
+
+.pl-loading-box>div>div {
+	position: absolute;
+	border-radius: 50%
+}
+
+.pl-loading-box>div>div:nth-child(1) {
+	top: 9px;
+	left: 9px;
+	width: 82px;
+	height: 82px;
+	background: #EBE6E3
+}
+
+@keyframes load {
+	0% {
+		transform: rotate(0deg)
+	}
+
+	100% {
+		transform: rotate(360deg)
+	}
+}
+
+.pl-loading-box>div>div:nth-child(2) {
+	top: 14px;
+	left: 38px;
+	width: 25px;
+	height: 25px;
+	background: var(--pl-c);
+	transform-origin: 12px 36px;
+	animation: load 1s linear infinite
+}
+
+.pl-loading {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+	background: none
+}
+
+.pl-loading-box {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transform: translateZ(0) scale(0.16);
+	transform-origin: 0 0;
+	backface-visibility: hidden
+}
+
+.pl-loading-box div {
+	box-sizing: content-box
+}
+
+.pl-button-save {
+	background-color: var(--pl-c) !important;
+	color: #EBE6E3 !important
+}
+
+.pl-button-save:hover {
+	background-color: var(--pl-c-d0) !important;
+	color: #EBE6E3 !important
+}
+
+.swal2-container {
+	z-index: 100000
+}
+
+body.swal2-height-auto {
+	height: inherit
+}
+
+[class^="swal2-"],
+[class*="pl-btn"] {
+	transition: all .2s
+}
+
+::-webkit-selection {
+    background-color: var(--pl-c);
+    color: #EBE6E3
+}
+
+::-moz-selection {
+    background-color: var(--pl-c);
+    color: #EBE6E3
+}
+
+::selection {
+    background-color: var(--pl-c);
+    color: #EBE6E3
+}
+
+input::-webkit-selection,textarea::-webkit-selection {
+    background-color: rgba(100,100,100,.4);
+    color: rgba(0,0,0,.87)
+}
+
+input::-moz-selection,textarea::-moz-selection {
+    background-color: rgba(100,100,100,.4);
+    color: rgba(0,0,0,.87)
+}
+
+input::-moz-selection,textarea::-moz-selection {
+    background-color: rgba(100,100,100,.4);
+    color: rgba(0,0,0,.87)
+}
+
+input::selection,textarea::selection {
+    background-color: rgba(100,100,100,.4);
+    color: rgba(0,0,0,.87)
+}
+
 /* 适配（改）百度网盘会员青春版 */
-a.downloadSubtitle, button.downloadSubtitle{transition:all.2s;background-color:${temp.color}}
-a.downloadSubtitle:hover, button.downloadSubtitle:hover{background-color:${temp.color}D0}
-a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:${temp.color}D0}
+a.downloadSubtitle,
+button.downloadSubtitle {
+	background-color: var(--pl-c);
+	transition: all .2s
+}
+
+a.downloadSubtitle:hover,
+button.downloadSubtitle:hover {
+	background-color: var(--pl-c-d0)
+}
+
+a.downloadSubtitle:disabled,
+button.downloadSubtitle:disabled {
+	background-color: var(--pl-c-d0)
+}
+
 /* 哪里都没用到的 RGB! */
-@keyframes RGB{ 0%{filter:hue-rotate()} to{filter:hue-rotate(-360deg)} }
-/* Webkit, Opera, IE9, Chrome*/
-::selection, ::-webkit-selection, ::-moz-selection, ::-ms-selection{background-color:${temp.color}!important;background:${temp.color}!important;color:white!important}
+@keyframes RGB {
+	0% {
+		filter: hue-rotate()
+	}
+
+	to {
+		filter: hue-rotate(-360deg)
+	}
+}
 `);
 		},
 
@@ -4065,8 +4828,8 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				let foundActive = false;
 				elements.each((i, el) => {
 					var jEl = $(el);
-					var isProcessed = jEl.data(controlKey);
-					if (isProcessed) return true; // 跳过已处理元素
+					var isproc = jEl.data(controlKey);
+					if (isproc) return true; // 跳过已处理元素
 					var cancelAction = actionFunction(jEl);
 					if (cancelAction) {
 						foundActive = true;
@@ -4661,9 +5424,9 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				.module-topToolBar,
 				.module-timeline-view .timeline-title-curday
 				{background:transparent!important;border-bottom:0}
-				.MdLxwM{background :#fff!important}
+				.MdLxwM{background :#EBE6E3!important}
 				.aside-absolute-container{position:absolute!important}
-				.aside-absolute-container .QGOvsxb .remainingSpaceUi_span{background:#8af248!important;border-radius:10px 0 0 10px;border-right:#fff 1px solid;border-bottom:#fff 1px solid}
+				.aside-absolute-container .QGOvsxb .remainingSpaceUi_span{background:#8af248!important;border-radius:10px 0 0 10px;border-right:#EBE6E3 1px solid;border-bottom:#EBE6E3 1px solid}
 				.xtJbHcb .CDaavKb .KQcHyA{background:rgb(244,207,0)!important;padding:8px 15px}
 				.xtJbHcb .web-header-nav-new-version-inner{background:${temp.color}!important;padding:8px 15px;line-height:15px;width:auto;height:auto}
 				a{transition:all.2s!important}
@@ -4766,7 +5529,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
 				let $button = $(`<div class="g-dropdown-button pl-button">
-					<div class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#fff;"></em><span class="text" style="width:60px;">下载助手</span></span></div>
+					<div class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#EBE6E3;"></em><span class="text" style="width:60px;">下载助手</span></span></div>
 					<div class="menu" style="color:${temp.color};border-color:${temp.color};width:auto;z-index:41;">
 						<div class="g-button-menu pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg> API 下载</div>
 						<div class="g-button-menu pl-button-mode" data-mode="curl"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-plug"/></svg> cURL 下载</div>
@@ -4848,7 +5611,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			base.waitForKeyElements(config.$baidu.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="g-dropdown-button pl-button-init" style="opacity:0.5"><div style="color:#fff;" class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#fff;"></em><span class="text" style="width:60px;">点我点亮</span></span></div></div>`);
+				let $button = $(`<div class="g-dropdown-button pl-button-init" style="opacity:0.5"><div style="color:#EBE6E3;" class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#EBE6E3;"></em><span class="text" style="width:60px;">点我点亮</span></span></div></div>`);
 				$button.click(base.showInitDialog);
 				element.prepend($button);
 			})
@@ -4871,7 +5634,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
 				let $button = $(`<a class="g-button tools-share-V20-btn save_btn pl-button-init color-button" href="javascript:;">
 					<span class="g-button-right">
-						<em class="icon icon-download" style="color:#fff;line-height:27px"></em>
+						<em class="icon icon-download" style="color:#EBE6E3;line-height:27px"></em>
 						<span class="text" style="width:auto;">点我点亮</span>
 					</span>
 				</a>`)
@@ -4879,121 +5642,136 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				element.after($button);
 			})
 		},
-		async getFilesUrl(items, accessToken) {
+		async getFilesUrl(items, token) {
 			if (base.isType(items) !== "array") return [];
-			let size = 50;
-			let processed = 0;
-			let now = Date.now();
-			let outdate = [];
+			items = items.filter(item => !item.isdir);
 
-			items.forEach(item => {
-				let cacheIndex = temp.glinks.findIndex(c => c.id == item.fs_id);
-				if (cacheIndex !== -1) {
-					let cached = temp.glinks[cacheIndex];
-					if (cached.expires > now) {
-						Object.assign(item, cached.data);
-						processed++;
-						return;
-					} else {
-						temp.glinks.splice(cacheIndex, 1);
-					}
+			const size = 50;
+			let proc = 0;
+
+			const pending = items.filter(item => {
+				const idx = temp.glinks.findIndex(c => c.id == item.fs_id);
+				if (idx === -1) return true;
+
+				const cached = temp.glinks[idx];
+				if (cached.expires > Date.now()) {
+					Object.assign(item, cached.data);
+					proc++;
+					return false;
 				}
-				outdate.push(item);
+
+				temp.glinks.splice(idx, 1); // 过期删除
+				return true;
 			});
 
-			for (let i = 0; i < outdate.length; i += size) {
-				let url = `${config.$baidu.api.getLink}&fsids=${encodeURIComponent(JSON.stringify(outdate.map(i => i.fs_id).slice(i, i + size)))}&access_token=${accessToken}`;
-				let res = await base.get(url, { "User-Agent": config.$baidu.api.ua.downloadLink });
+			for (let i = 0; i < pending.length; i += size) {
+				// 当前批次
+				const batch = pending.slice(i, i + size);
+				const fsids = JSON.stringify(batch.map(item => item.fs_id));
 
-				if (res.list && res.list.length !== 0 && res.errno === 0) {
-					outdate.slice(i, i + size).forEach(item => {
-						let infos = res.list.find(i => i.fs_id == item.fs_id);
-						if (infos) {
-							Object.assign(item, infos);
-							temp.glinks.push({ "id": item.fs_id, "expires": (Date.now() + 4 * 60 * 60 * 1000), "data": infos });
-						};
-					})
-					processed += res.list.length;
-					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${items.length} 个链接~</div>`);
+				const url = new URL(config.$baidu.api.getLink);
+				url.searchParams.set("fsids", fsids);
+				url.searchParams.set("access_token", token);
 
-				} else {
-					if (res.errno) {
-						if (res.errno === 112) return message.error("提示：<br/>页面过期了，刷新重试下吧~<br/>代码：" + res.errno);
-						if (res.errno === 9019) {
-							base.delValue("baidu_access_token");
-							return message.error("提示：<br/>访问令牌已过期，刷新网页后再获取一次吧~<br/>代码：" + res.errno);
-						}
+				const res = await base.get(url, { "User-Agent": config.$baidu.api.ua.downloadLink });
 
-						items.slice(i, i + size).forEach(i => {
-							i.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`
-						})
+				if (!res || res.errno !== 0 || !res.list) {
+					if (res.errno === 112) return message.error("提示：<br/>页面已过期，请刷新后重试~<br/>代码：" + res.errno);
+					if (res.errno === 9019) {
+						base.delValue("baidu_access_token");
+						return message.error("提示：<br/>访问令牌已过期，再获取一次吧~<br/>代码：" + res.errno);
 					}
-					return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
-				}
-				await base.sleep(1000);
-			}
-			return items;
-		},
-		async getShareFileUrl(items, data) {
-			if (base.isType(items) !== "array") return [];
-			let processed = 0;
-			let now = Date.now();
-
-			for (const item of items) {
-				let cacheIndex = temp.glinks.findIndex(c => c.id == item.fs_id);
-				if (cacheIndex !== -1) {
-					let cached = temp.glinks[cacheIndex];
-					if (cached.expires > now) {
-						Object.assign(item, cached.data);
-						processed++;
-						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${items.length} 个链接~</div>`);
-						continue;
+					if (res.errno || res?.errmsg) {
+						batch.forEach(item => item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`);
 					} else {
-						temp.glinks.splice(cacheIndex, 1); // 删除过期
+						return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
 					}
 				}
 
-				let url = new URL(config.$baidu.api.getShareLink);
-				url.searchParams.set("sign", data?.sign);
-				url.searchParams.set("timestamp", data?.timestamp);
-				url.searchParams.set("bdstoken", data.baidu.token);
-				url.searchParams.set("logid", base.encodeBase(data.baidu.id));
-				url.searchParams.set("jsToken", data.jsToken);
-				let _data = new URLSearchParams({ "encrypt": 0, "product": "share", "uk": data.share.uk, "primaryid": data.share.id, "fid_list": JSON.stringify([item.fs_id]) });
-				if (data.sekey) _data.set("extra", JSON.stringify({ "sekey": data.sekey }));
-
-				let res = await base.post(url, _data, { "User-Agent": "netdisk;" });
-				processed++
-				$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${items.length} 个链接~</div>`);
-
-				if (res.list && base.isType(res.list) === "array" && res.list.length !== 0 && res.errno === 0) {
-					Object.assign(item, res.list[0]);
-					temp.glinks.push({ "id": item.fs_id, "expires": (Date.now() + 4 * 60 * 60 * 1000), "data": res.list[0] });
-
-				} else {
-					if (res.errno === 0 && base.isType(res.list) === "string") {
-						item.dlink = `<span>获取下载地址失败，服务器说：此文件过大，需要<b>保存到网盘</b>后于网盘中下载。</span>`
-						temp.glinks.push({ "id": item.fs_id, "expires": (Date.now() + 4 * 60 * 60 * 1000), "data": item });
-						continue;
-
-					} else if (res.errno) {
-						if (res.errno === 112) return message.error("提示：<br/>页面过期了，刷新重试下吧~<br/>代码：" + res.errno);
-						if (res.errno === 9019) {
-							// base.delValue("baidu_access_token");
-							return message.error("提示：<br/>访问令牌已过期，刷新网页后再获取一次吧~<br/>代码：" + res.errno);
-						}
-						item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`
-						continue;
+				batch.forEach(_item => {
+					const item = res.list.find(li => li.fs_id == _item.fs_id);
+					if (item) {
+						Object.assign(_item, item);
+						temp.glinks.push({ id: _item.fs_id, expires: (Date.now() + 4 * 60 * 60 * 1000), data: item });
 					}
-					return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
-				}
-				await base.sleep(100);
+				});
+
+				proc += res.list.length;
+				$doc.find(".swal2-html-container").html(`已获取 ${proc} / ${items.length} 个链接`);
+
+				// 批次间休息
+				if (i + size < pending.length) await base.sleep(1000);
 			}
-			return items;
+			return base.clone(items);
 		},
-		async getFilesList(dirs, accessToken, processed = 0) {
+		async getShareFilesUrl(items, sData) {
+			if (base.isType(items) !== "array") return [];
+			items = items.filter(item => !item.isdir);
+
+			let proc = 0;
+
+			const pending = items.filter(item => {
+				const idx = temp.glinks.findIndex(c => c.id == item.fs_id);
+				if (idx === -1) return true;
+
+				const cached = temp.glinks[idx];
+				if (cached.expires > Date.now()) {
+					Object.assign(item, cached.data);
+					proc++;
+					return false;
+				}
+
+				temp.glinks.splice(idx, 1); // 过期删除
+				return true;
+			});
+
+			for (const item of pending) {
+				const url = new URL(config.$baidu.api.getShareLink);
+				url.searchParams.set("sign", sData?.sign);
+				url.searchParams.set("timestamp", sData?.timestamp);
+				url.searchParams.set("bdstoken", sData.baidu.token);
+				url.searchParams.set("logid", base.encodeBase(sData.baidu.id));
+				url.searchParams.set("jsToken", sData.jsToken);
+
+				let data = new URLSearchParams({
+					"encrypt": 0,
+					"product": "share",
+					"uk": sData.share.uk,
+					"primaryid": sData.share.id,
+					"fid_list": JSON.stringify([item.fs_id])
+				});
+				if (sData.sekey) data.set("extra", JSON.stringify({ "sekey": sData.sekey }));
+
+				const res = await base.post(url, data);
+
+				if (!res || res.errno !== 0 || !res.list) {
+					if (res.errno === 112) return message.error("提示：<br/>页面已过期，请刷新后重试~<br/>代码：" + res.errno);
+					if (res.errno === 9019) {
+						base.delValue("baidu_access_token");
+						return message.error("提示：<br/>访问令牌已过期，再获取一次吧~<br/>代码：" + res.errno);
+					}
+					if (res.errno || res?.errmsg) {
+						batch.forEach(item => item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`);
+					} else {
+						return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
+					}
+				}
+
+				if (base.isType(res.list) === "array") Object.assign(item, res.list[0]);
+				if (base.isType(res.list) === "string") item.dlink = `<span>获取下载地址失败，服务器说：此文件大小超过可获取限制，需要<b>保存到网盘</b>后于网盘中下载。</span>`;
+				temp.glinks.push({ "id": item.fs_id, "expires": (Date.now() + 4 * 60 * 60 * 1000), "data": res.list[0] });
+
+				proc++
+				$doc.find(".swal2-html-container").html(`已获取 ${proc} / ${items.length} 个链接`);
+
+				// 批次间休息
+				if (proc < pending.length) await base.sleep(1000);
+			}
+			return base.clone(items);
+		},
+		async getFilesList(dirs, accessToken, proc = 0) {
 			let cnt = 0;
-			const fetch = async (targets) => {
+			async function get(targets) {
 				let files = [];
 				for (let dir of targets) {
 					$doc.find(".loading-popup .loading-title").html(`文件获取中`);
@@ -5002,31 +5780,29 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					cnt++;
 					if (res?.list?.length && (res.errno === 0 || res.errmsg === "succ")) {
 						let subFiles = res.list.filter(f => !f.isdir);
-						processed += subFiles.length;
-						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} 个文件~</div><div>${dir.path}</div>`);
+						proc += subFiles.length;
+						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} 个文件~</div><div>${dir.path}</div>`);
 						files = files.concat(subFiles);
 						let subDirs = res.list.filter(f => f.isdir);
 						if (subDirs.length > 0) {
-							files = files.concat(await fetch(subDirs));
+							files = files.concat(await get(subDirs));
 						}
 					}
 					if (cnt >= 50) {
-						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} 个文件~</div><div>休息 3 秒...</div>`);
+						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} 个文件~</div><div>休息 3 秒...</div>`);
 						await base.sleep(3000);
 						cnt = 0;
 					}
 				}
 				return files;
 			};
-			return await fetch(dirs);
+			return await get(dirs);
 		},
 		async getLink() {
-			// 获取选择的文件列表
-			let selectList = this.getSelectedList();
-			let accessToken = (base.getValue("baidu_access_token") || await temp.main.getToken());
+			let token = (base.getValue("baidu_access_token") || await temp.main.getToken());
 
 			// 回退授权
-			if (!accessToken) {
+			if (!token) {
 				message.info("提示：<br/>稍后请在新标签页中授权助手哦~");
 				base.delValue("baidu_access_token");
 				await base.sleep(3300);
@@ -5035,7 +5811,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				let interval = setInterval(() => {
 					if (!!base.getValue("baidu_access_token")) {
 						clearInterval(interval);
-						accessToken = base.getValue("baidu_access_token")
+						token = base.getValue("baidu_access_token")
 					}
 					attempts++;
 					if (attempts > 120) {
@@ -5046,82 +5822,54 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				return;
 			}
 
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			// 获取选择的文件列表
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 
+			$doc.find(".loading-popup .loading-title").html(`链接获取中`);
+			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
+
+			let files = selects.filter(f => !f.isdir), dirs = selects.filter(f => f.isdir);
 			if (temp.page === "home" || temp.page === "main") {
-				let files = selectList.filter(f => !f.isdir);
-				let dirs = selectList.filter(f => f.isdir);
-				if (dirs.length > 0) files = files.concat(await this.getFilesList(dirs, accessToken, files.length));
+				if (dirs.length > 0) files = files.concat(await this.getFilesList(dirs, token, files.length));
 				if (!files.length) return message.error("提示：<br/>文件夹是空的哦~");
+
 				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 
-				files = await this.getFilesUrl(files, accessToken);
-
-				if (base.isType(files) === "array" && files.length) {
-					temp.links = [files, {
-						isFolder: v => v.isdir === 1,
-						getFileName: v => (v.server_filename || v.filename),
-						getFileSize: v => v.size,
-						getFileLink: v => {
-							if (!v.dlink || !v.dlink.startsWith("http")) return v.dlink;
-							let url = new URL(v.dlink);
-							url.searchParams.set("access_token", accessToken);
-							return url.href;
-						},
-						convert: {
-							aria2: `--header "User-Agent:${config.$baidu.api.ua.downloadLink}"`,
-							curl: `-A "${config.$baidu.api.ua.downloadLink}"`,
-							bitcomet: `user_agent=${encodeURIComponent(config.$baidu.api.ua.downloadLink)}`
-						},
-						tooltip: config.$baidu.dom
-					}];
-					base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
-				} else {
-					return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
-				}
+				files = await this.getFilesUrl(files, token);
 			} else if (temp.page === "share") {
-				let files = selectList.filter(f => !f.isdir);
-				let data = await this.getShareData();
+				let shareData = await this.getShareData();
 
-				//if (data.share.url) {
-				//	let res = await base.post(`${config.$baidu.api.getShareVerify}&surl=${data.share.url}&t=${Date.now()}$bdstoken=${data.baidu.token}&logid=${base.encodeBase(data.baidu.id)}`, new URLSearchParams({ "pwd": data?.share?.pwd ? data.share.pwd : "" }));
-				//	data.sekey = res?.randsk;
-				//}
-
-				let sign = await base.get(`${config.$baidu.api.getShareSign}&surl=1${data.share.url}$bdstoken=${data.baidu.token}&logid=${base.encodeBase(data.baidu.id)}`);
+				let sign = await base.get(`${config.$baidu.api.getShareSign}&surl=1${shareData.share.url}$bdstoken=${shareData.baidu.token}&logid=${base.encodeBase(shareData.baidu.id)}`);
 				if (sign?.data?.sign && sign?.data?.timestamp) {
-					data.sign = sign.data.sign;
-					data.timestamp = sign.data.timestamp;
+					shareData.sign = sign.data.sign;
+					shareData.timestamp = sign.data.timestamp;
 				}
 
-				files = await this.getShareFileUrl(files, data, accessToken);
-
-				if (base.isType(files) === "array" && files.length) {
-					temp.links = [files, {
-						isFolder: v => v.isdir === 1,
-						getFileName: v => (v.server_filename || v.filename),
-						getFileSize: v => v.size,
-						getFileLink: v => {
-							if (!v.dlink || !v.dlink.startsWith("http")) return v.dlink;
-							let url = new URL(v.dlink);
-							url.searchParams.set("access_token", accessToken);
-							return url.href;
-						},
-						convert: {
-							aria2: `--header "User-Agent:${config.$baidu.api.ua.downloadLink}"`,
-							curl: `-A "${config.$baidu.api.ua.downloadLink}"`,
-							bitcomet: `user_agent=${encodeURIComponent(config.$baidu.api.ua.downloadLink)}`
-						},
-						tooltip: config.$baidu.dom
-					}];
-					base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
-				} else {
-					return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
-				}
+				files = await this.getShareFilesUrl(files, shareData, token);
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}
+
+			temp.links = [files, {
+				isFolder: v => v.isdir === 1,
+				getFileName: v => (v.server_filename || v.filename),
+				getFileSize: v => v.size,
+				getFileLink: v => {
+					if (!v.dlink || !v.dlink.startsWith("http")) return v.dlink;
+					let url = new URL(v.dlink);
+					url.searchParams.set("access_token", token);
+					return url.href;
+				},
+				convert: {
+					aria2: `--header "User-Agent:${config.$baidu.api.ua.downloadLink}"`,
+					curl: `-A "${config.$baidu.api.ua.downloadLink}"`,
+					bitcomet: `user_agent=${encodeURIComponent(config.$baidu.api.ua.downloadLink)}`
+				},
+				tooltip: config.$baidu.dom
+			}];
+			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 		},
 		getSelectedList() {
 			try {
@@ -5513,7 +6261,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				["138, 157, 255", base.hexToRgba(`${temp.color}D0`)],
 			]);
 		},
-		svg: `<svg class="ali-btn-icon" style="margin-right:3px;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M853.333 938.667H170.667a85.333 85.333 0 0 1-85.334-85.334v-384A85.333 85.333 0 0 1 170.667 384H288a32 32 0 0 1 0 64H170.667a21.333 21.333 0 0 0-21.334 21.333v384a21.333 21.333 0 0 0 21.334 21.334h682.666a21.333 21.333 0 0 0 21.334-21.334v-384A21.333 21.333 0 0 0 853.333 448H736a32 32 0 0 1 0-64h117.333a85.333 85.333 0 0 1 85.334 85.333v384a85.333 85.333 0 0 1-85.334 85.334z" fill="#FFFFFF"></path><path d="M715.03 543.552a32.81 32.81 0 0 0-46.251 0L554.005 657.813v-540.48a32 32 0 0 0-64 0v539.734L375.893 543.488a32.79 32.79 0 0 0-46.229 0 32.427 32.427 0 0 0 0 46.037l169.557 168.811a32.81 32.81 0 0 0 46.251 0l169.557-168.81a32.47 32.47 0 0 0 0-45.974z" fill="#FFFFFF"></path></svg>`,
+		svg: `<svg class="ali-btn-icon" style="margin-right:3px;" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M853.333 938.667H170.667a85.333 85.333 0 0 1-85.334-85.334v-384A85.333 85.333 0 0 1 170.667 384H288a32 32 0 0 1 0 64H170.667a21.333 21.333 0 0 0-21.334 21.333v384a21.333 21.333 0 0 0 21.334 21.334h682.666a21.333 21.333 0 0 0 21.334-21.334v-384A21.333 21.333 0 0 0 853.333 448H736a32 32 0 0 1 0-64h117.333a85.333 85.333 0 0 1 85.334 85.333v384a85.333 85.333 0 0 1-85.334 85.334z" fill="#EBE6E3"></path><path d="M715.03 543.552a32.81 32.81 0 0 0-46.251 0L554.005 657.813v-540.48a32 32 0 0 0-64 0v539.734L375.893 543.488a32.79 32.79 0 0 0-46.229 0 32.427 32.427 0 0 0 0 46.037l169.557 168.811a32.81 32.81 0 0 0 46.251 0l169.557-168.81a32.47 32.47 0 0 0 0-45.974z" fill="#EBE6E3"></path></svg>`,
 		addButton() {
 			base.waitForKeyElements(config.$aliyun.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
@@ -5585,47 +6333,22 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				return false;
 			}
 
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => item.type !== "file")) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			// 获取选择的文件列表
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => item.type !== "file")) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+
+			$doc.find(".loading-popup .loading-title").html(`链接获取中`);
+			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
+
 			if (temp.page === "home") {
-				selectList = selectList.filter(item => item.type === "file")
-				let batchSize = 15;
-				let processed = 0;
-				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
-				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
-				for (let i = 0; i < selectList.length; i += batchSize) {
-					// 当前批次文件
-					let batch = selectList.slice(i, i + batchSize);
-					// 过滤掉已有 URL 的文件
-					let noUrlSelectList = batch.filter(v => !Boolean(v.url));
-					let hasUrlSelectList = batch.filter(v => Boolean(v.url));
-					let queue = [];
-					// 为没有 URL 的文件生成请求队列
-					noUrlSelectList.forEach((item) => {
-						queue.push(this.getFileUrl(item.driveId, item.fileId)
-							.then(val => {
-								processed++;
-								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
-								return val;
-							}));
-					});
-					hasUrlSelectList.forEach((item) => {
-						processed++;
-						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
-					});
-					// 等待本批次的请求结果
-					let res = await Promise.all(queue);
-					res.forEach((val, index) => {
-						noUrlSelectList[index].url = val;
-					});
-					// 每次处理完一个批次后，等待 1 秒
-					await base.sleep(1000);
-				}
+				selects = selects.filter(item => item.type === "file");
+				selects = await this.getFilesUrl(selects, `${base.getStorage("token").token_type} ${base.getStorage("token").access_token}`);
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}
-			temp.links = [selectList, {
+
+			temp.links = [selects, {
 				isFolder: v => v.type === "folder",
 				getFileName: v => v.name,
 				getFileSize: v => v.size,
@@ -5637,21 +6360,64 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				},
 				tooltip: config.$aliyun.dom
 			}];
-			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 		},
-		async getFileUrl(d, f) {
-			let res = await base.post(config.$aliyun.api.getLink, { drive_id: d, file_id: f }, { "Content-Type": "application/json", "Authorization": `${base.getStorage("token").token_type} ${base.getStorage("token").access_token}`, "X-Canary": "client=windows,app=adrive,version=v6.0.0" });
-			if (res.code == "AccessTokenInvalid") {
-				return message.error("提示：<br/>访问令牌过期了，请刷新网页后再试");
+		async getFilesUrl(items, token) {
+			if (base.isType(items) !== "array") return [];
+			items = items.filter(item => item.type === "file");
+
+			const size = 3;
+			let proc = 0;
+
+			const pending = items.filter(item => {
+				const idx = temp.glinks.findIndex(c => c.id == item.fileId);
+				if (idx === -1) return true;
+
+				const cached = temp.glinks[idx];
+				if (cached.expires > Date.now()) {
+					Object.assign(item, cached.data);
+					proc++;
+					return false;
+				}
+
+				temp.glinks.splice(idx, 1); // 过期删除
+				return true;
+			});
+
+			for (let i = 0; i < pending.length; i += size) {
+				// 当前批次
+				const batch = pending.slice(i, i + size);
+
+				await Promise.all(batch.map(async (item) => {
+					const res = await base.post(config.$aliyun.api.getLink, { drive_id: item.driveId, file_id: item.fileId }, { "Authorization": token, "X-Canary": "client=windows,app=adrive,version=v6.0.0" });
+
+					if (!res || !res?.url || res?.code) {
+						if (res?.code == "AccessTokenInvalid") return message.error("提示：<br/>访问令牌过期了，请刷新后重试~<br/>代码：" + res.code);
+						if (res?.code) {
+							batch.forEach(item => item.dlink = `获取下载地址失败，服务器说：${res.code}，刷新后再试试吧~`);
+						} else {
+							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
+						}
+					};
+
+					batch.forEach(_item => {
+						Object.assign(_item, res);
+						temp.glinks.push({ id: _item.file_id, expires: (Date.now() + 5 * 60 * 1000), data: res });
+					});
+
+					proc++;
+					$doc.find(".swal2-html-container").html(`已获取 ${proc} / ${pending.length} 个链接`);
+				}));
+
+				// 批次间休息
+				if (i + size < pending.length) await base.sleep(1000);
 			}
-			if (res.url) {
-				return res.url;
-			}
-			return "";
+
+			return base.clone(items);
 		},
 		getSelectedList() {
 			try {
-				let selectedList = [];
+				let list = [];
 				let reactDom = document.querySelector(config.$aliyun.mount.list);
 				let reactObj = base.findReact(reactDom, 1);
 				let props = reactObj.pendingProps;
@@ -5660,12 +6426,13 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					let selectedKeys = props.selectedKeys.split(",");
 					fileList.forEach(function (val) {
 						if (selectedKeys.includes(val.fileId)) {
-							selectedList.push(val);
+							list.push(val);
 						}
 					});
 				}
-				return selectedList;
+				return base.clone(list);
 			} catch (e) {
+				console.error(e);
 				return [];
 			}
 		},
@@ -6068,49 +6835,52 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				};
 			}
 		},
+		async getFilesUrl(items, token) {
+
+		},
 		async getLink() {
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => !item.contentID && !item.contentName)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => !item.contentID && !item.contentName)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
-				selectList = selectList.filter(item => item.contentID && item.contentName && item.contentSuffix);
+				selects = selects.filter(item => item.contentID && item.contentName && item.contentSuffix);
 				let batchSize = 15;
-				let processed = 0;
+				let proc = 0;
 				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
-				for (let i = 0; i < selectList.length; i += batchSize) {
-					let batch = selectList.slice(i, i + batchSize);
+				for (let i = 0; i < selects.length; i += batchSize) {
+					let batch = selects.slice(i, i + batchSize);
 					let queue = [];
 					batch.forEach((item, localIndex) => {
 						let globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex)
 							.then(val => {
-								processed++;
-								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+								proc++;
+								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 								return val;
 							}));
 					});
 					let res = await Promise.all(queue);
 					res.forEach(val => {
-						selectList[val.index].downloadUrl = val.downloadUrl;
+						selects[val.index].downloadUrl = val.downloadUrl;
 					});
 					await base.sleep(1000);
 				}
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}
-			temp.links = [selectList, {
+			temp.links = [selects, {
 				isFolder: v => (v.dirEtag || v.caName),
 				getFileName: v => (v.contentName || v.coName),
 				getFileSize: v => (v.contentSize || v.coSize),
 				getFileLink: v => v.downloadUrl,
 				tooltip: config.$mcloud.dom
 			}];
-			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 		},
 		getSelectedList() {
 			try {
-				return document.querySelector(".main_file_list").__vue__.selectList.map(val => val.item);
+				return document.querySelector(".main_file_list").__vue__.selects.map(val => val.item);
 			} catch (e) {
 				let vueDom = document.querySelector(".home-page").__vue__;
 				let fileList = vueDom._computedWatchers.fileList.value;
@@ -6431,10 +7201,10 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			}
 		},
 		async getLink() {
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => item.isFolder)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
-			selectList = selectList.filter(item => !item.isFolder)
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => item.isFolder)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			selects = selects.filter(item => !item.isFolder)
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取状态~</div>`);
 			let token = base.getStorage("accessToken") || await this.getToken();
@@ -6444,35 +7214,35 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>获取缓存成功~</div>`);
 			let batchSize = 15;
-			let processed = 0;
+			let proc = 0;
 			$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
-			for (let i = 0; i < selectList.length; i += batchSize) {
-				let batch = selectList.slice(i, i + batchSize);
+			for (let i = 0; i < selects.length; i += batchSize) {
+				let batch = selects.slice(i, i + batchSize);
 				let queue = [];
 				batch.forEach((item, localIndex) => {
 					let globalIndex = i + localIndex;
 					queue.push(this.getFileUrl(item, globalIndex, token)
 						.then(val => {
-							processed++;
-							$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+							proc++;
+							$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 							return val;
 						}));
 				});
 				let res = await Promise.all(queue);
 				res.forEach(val => {
-					selectList[val.index].downloadUrl = val.downloadUrl;
+					selects[val.index].downloadUrl = val.downloadUrl;
 				});
 				await base.sleep(1000);
 			}
-			temp.links = [selectList, {
+			temp.links = [selects, {
 				isFolder: v => v.isFolder,
 				getFileName: v => v.fileName,
 				getFileSize: v => v.size,
 				getFileLink: v => v.downloadUrl,
 				tooltip: config.$mcloud.dom
 			}];
-			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 		},
 		getSelectedList() {
 			try {
@@ -6779,37 +7549,37 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			}
 		},
 		async getLink() {
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => item.kind !== "drive#file")) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => item.kind !== "drive#file")) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
 				let token = this.getToken();
 				let batchSize = 15;
-				let processed = 0;
+				let proc = 0;
 				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
-				for (let i = 0; i < selectList.length; i += batchSize) {
-					let batch = selectList.slice(i, i + batchSize);
+				for (let i = 0; i < selects.length; i += batchSize) {
+					let batch = selects.slice(i, i + batchSize);
 					let queue = [];
 					batch.forEach((item, localIndex) => {
 						let globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex, token)
 							.then(val => {
-								processed++;
-								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+								proc++;
+								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 								return val;
 							}));
 					});
 					let res = await Promise.all(queue);
 					res.forEach(val => {
-						selectList[val.index].downloadUrl = val.downloadUrl;
+						selects[val.index].downloadUrl = val.downloadUrl;
 					});
 					await base.sleep(1000);
 				}
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}
-			temp.links = [selectList, {
+			temp.links = [selects, {
 				isFolder: v => v.kind === "drive#folder",
 				getFileName: v => v.name,
 				getFileSize: v => v.size,
@@ -6817,7 +7587,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 				getFileMirror: v => base.getMirrorList(v, config.$xunlei.api.mirror),
 				tooltip: config.$xunlei.dom
 			}];
-			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 		},
 		getSelectedList() {
 			try {
@@ -7145,17 +7915,17 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			})
 		},
 		async getLink() {
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => !item.file)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => !item.file)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
 				let data = [];
 				let batchSize = 15;
-				let processed = 0;
-				selectList = selectList.filter(item => item.file === true)
-				for (let i = 0; i < selectList.length; i += batchSize) {
+				let proc = 0;
+				selects = selects.filter(item => item.file === true)
+				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selectList.slice(i, i + batchSize);
+					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
 					let res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "User-Agent": config.$quark.api.ua.downloadLink });
@@ -7174,10 +7944,10 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 						data.push(...res.data);
 					}
 					// 更新处理进度
-					processed += batch.length;
+					proc += batch.length;
 					// 更新UI显示
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
-					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 					// 请求间隔节流
 					await base.sleep(1000);
 				}
@@ -7193,7 +7963,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					},
 					tooltip: config.$quark.dom
 				}];
-				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else if (temp.page === "share") {
 				let pwd_id = unsafeWindow.factStat?.ut?.baseParams?.pwd_id || // fast
 					unsafeWindow.factStat?.wa?.customStatParams?.pwd_id || // drive
@@ -7202,11 +7972,11 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 
 				let data = [];
 				let batchSize = 15;
-				let processed = 0;
-				selectList = selectList.filter(item => item.file === true)
-				for (let i = 0; i < selectList.length; i += batchSize) {
+				let proc = 0;
+				selects = selects.filter(item => item.file === true)
+				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selectList.slice(i, i + batchSize);
+					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					let fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
@@ -7224,10 +7994,10 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 						data.push(...res.data);
 					}
 					// 更新处理进度
-					processed += batch.length;
+					proc += batch.length;
 					// 更新UI显示
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
-					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 					// 请求间隔节流
 					await base.sleep(1000);
 				}
@@ -7243,7 +8013,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					},
 					tooltip: config.$quark.dom
 				}];
-				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}
@@ -7543,17 +8313,17 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			})
 		},
 		async getLink() {
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => !item.file)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => !item.file)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
 				let data = [];
 				let batchSize = 15;
-				let processed = 0;
-				selectList = selectList.filter(item => item.file === true)
-				for (let i = 0; i < selectList.length; i += batchSize) {
+				let proc = 0;
+				selects = selects.filter(item => item.file === true)
+				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selectList.slice(i, i + batchSize);
+					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
 					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "User-Agent": config.$uc.api.ua.downloadLink });
@@ -7572,10 +8342,10 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 						data.push(...res.data);
 					}
 					// 更新处理进度
-					processed += batch.length;
+					proc += batch.length;
 					// 更新UI显示
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
-					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 					// 请求间隔节流
 					await base.sleep(1000);
 				}
@@ -7591,7 +8361,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					},
 					tooltip: config.$uc.dom
 				}];
-				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else if (temp.page === "share") {
 				let pwd_id = unsafeWindow.factStat?.ut?.baseParams?.pwd_id || // fast
 					unsafeWindow.factStat?.wa?.customStatParams?.pwd_id || // drive
@@ -7600,11 +8370,11 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 
 				let data = [];
 				let batchSize = 15;
-				let processed = 0;
-				selectList = selectList.filter(item => item.file === true)
-				for (let i = 0; i < selectList.length; i += batchSize) {
+				let proc = 0;
+				selects = selects.filter(item => item.file === true)
+				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selectList.slice(i, i + batchSize);
+					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					let fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
@@ -7622,10 +8392,10 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 						data.push(...res.data);
 					}
 					// 更新处理进度
-					processed += batch.length;
+					proc += batch.length;
 					// 更新UI显示
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
-					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+					$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 					// 请求间隔节流
 					await base.sleep(1000);
 				}
@@ -7641,7 +8411,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					},
 					tooltip: config.$uc.dom
 				}];
-				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}
@@ -8002,16 +8772,16 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			return token;
 		},
 		async getLink() {
-			let selectList = this.getSelectedList();
-			if (selectList.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
-			if (selectList.every(item => item.Type !== 0)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			let selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => item.Type !== 0)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
 				let token = this.getToken();
 				let batchSize = 15;
-				let processed = 0;
-				selectList = selectList.filter(item => item.Type === 0);
-				for (let i = 0; i < selectList.length; i += batchSize) {
-					let batch = selectList.slice(i, i + batchSize);
+				let proc = 0;
+				selects = selects.filter(item => item.Type === 0);
+				for (let i = 0; i < selects.length; i += batchSize) {
+					let batch = selects.slice(i, i + batchSize);
 					let queue = [];
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
@@ -8019,34 +8789,34 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 						let globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex, token)
 							.then(val => {
-								processed++;
-								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+								proc++;
+								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 								return val;
 							}));
 					});
 					let res = await Promise.all(queue);
 					res.forEach(val => {
-						selectList[val.index].DownloadUrl = val.downloadUrl;
+						selects[val.index].DownloadUrl = val.downloadUrl;
 					});
 					await base.sleep(1000);
 				}
-				temp.links = [selectList, {
+				temp.links = [selects, {
 					isFolder: v => v.Type !== 0,
 					getFileName: v => v.FileName,
 					getFileSize: v => v.Size,
 					getFileLink: v => v.DownloadUrl || v.DownloadURL,
 					tooltip: config.$123pan.dom
 				}]
-				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else if (temp.page === "share") {
 				let token = this.getToken();
 				let batchSize = 15;
-				let processed = 0;
-				selectList = selectList.filter(item => item.Type === 0);
+				let proc = 0;
+				selects = selects.filter(item => item.Type === 0);
 				let pathSplit = location.pathname.split("/").filter(Boolean);
 				let ShareKey = pathSplit[1];
-				for (let i = 0; i < selectList.length; i += batchSize) {
-					let batch = selectList.slice(i, i + batchSize);
+				for (let i = 0; i < selects.length; i += batchSize) {
+					let batch = selects.slice(i, i + batchSize);
 					let queue = [];
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
@@ -8054,25 +8824,25 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 						let globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex, token, ShareKey)
 							.then(val => {
-								processed++;
-								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${processed} / ${selectList.length} 个链接~</div>`);
+								proc++;
+								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
 								return val;
 							}));
 					});
 					let res = await Promise.all(queue);
 					res.forEach(val => {
-						selectList[val.index].DownloadUrl = val.downloadUrl;
+						selects[val.index].DownloadUrl = val.downloadUrl;
 					});
 					await base.sleep(1000);
 				}
-				temp.links = [selectList, {
+				temp.links = [selects, {
 					isFolder: v => v.Type !== 0,
 					getFileName: v => v.FileName,
 					getFileSize: v => v.Size,
 					getFileLink: v => v.DownloadUrl || v.DownloadURL,
 					tooltip: config.$123pan.dom
 				}]
-				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDom(temp.links), config.base.dom.button[temp.mode].footer);
+				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else {
 				return message.error("提示：<br/>页面错误~");
 			}

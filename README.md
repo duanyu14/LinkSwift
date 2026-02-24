@@ -46,7 +46,7 @@
 此版本可能不稳定，但有着最新的功能、修复等。
 
 - Github 国际: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://github.com/hmjz100/LinkSwift/raw/dev/（改）网盘直链下载助手.user.js)
-
+- Gitee 国内: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://gitee.com/hmjz100/LinkSwift/raw/dev/（改）网盘直链下载助手.user.js)
 
 ## 说明
 
@@ -78,7 +78,7 @@
 #### 卑微的小标题
 
 ~~这个脚本只有一个人在修改\~~~ 如果喜欢的话还请留个 Star 哦\~   
-- 如有 bug 等问题请在这发[议题反馈](https://github.com/hmjz100/LinkSwift/issues)
+- 为确保高效处理反馈，如有 Bug 等问题请在此平台[发布议题反馈](https://github.com/hmjz100/LinkSwift/issues)，其余平台的反馈将不会被受理。
 
 ## 贡献者
 

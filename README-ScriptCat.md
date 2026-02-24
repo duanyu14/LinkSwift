@@ -1,38 +1,64 @@
 <details>
 <summary>【置顶】【Q&A】为啥本脚本不能破解百度网盘限速？其他脚本又能？</summary>
-<p>你在本站内可能见过一些脚本，标着 “不限制下载” “不限速解析” “无视黑号” ，实则安装后又需要完成特定【任务】才给【加速下载链接】的脚本。<br/>它们是怎么做到的？为什么我这脚本却做不到？</p>
-<p>主流网盘对非会员用户的限速是由客户端与服务端共同控制的。<br/>所以，即使有通过 CE 修改客户端速度的 “歪门邪道” 绕过客户端限速，那么也会被服务端检测到直接黑号。<br/>这样，我们就得出了【仅靠前端脚本无法绕过限速机制】这一结论。</p>
-<p>那些脚本的工作原理大致如下：</p>
-<ol>
-<li>首先，脚本会先调用官方 API 接口，无感 “帮” 你生成文件的分享链接；</li>
-<li>然后，脚本将生成的分享链接发到作者的服务器；</li>
-<li>之后，服务器返回权限不足或者别的啥的提示，脚本显示公众号或小程序的二维码；</li>
-<li>此时，脚本在完成任务前会不停向服务器确认任务是否完成；</li>
-<li>扫码关注公众号或看广告后，服务器检测到完成了，然后会从作者购买的会员号 Cookie 池中选一个账号；（类似 ChatGPT 共享账号）</li>
-<li>然后服务器调用官方 API 接口，用选出的账号转存你的文件，并调用官方 API 接口获取直链；</li>
-<li>最后，把会员账号的不限速下载链接返回给脚本，脚本一般会将下载链接发送到指定的下载器中。（这样能够方便很多不会操作的用户）</li>
+<p><br/>在本站，您可能见过某些宣称 “无限制下载” “不限速解析” “无视黑号” 的脚本，安装后，却又要求完成特定【任务】才能获取【加速下载链接】。</p>
+<p>这些脚本究竟是如何实现的？为何本脚本无法做到？</p>
+<p>主流网盘对非会员用户的限速机制，<strong>是由客户端与服务端协同控制实现的</strong>。</p>
+<p>因此，在以前，即便有用 Cheat Engine 修改客户端倍速等 “邪修” 方法，绕过了本地限速。那么也会被服务端检测到，导致直接 “黑号”。</p>
+<p>由此，我们可得结论：<strong>仅靠前端脚本是无法突破网盘的限速机制的</strong>。</p>
+
+<p>
+既然纯前端无法突破限速，那那些脚本又是如何 “做到” 的？<br/>
+——答案其实很简单：<strong>它们并非真正 “破解” 了限速，而是通过后端服务器 “借用” 了他人会员权限</strong>。<br/>
+无论是脚本，还是一些 “解析站”，底层逻辑如出一辙，<strong>本质上都是 “换汤不换药”</strong>。
+</p>
+
+<p>它们的工作原理总结如下：</p>
+	<ol>
+	<li>
+		<strong>上传</strong>
+		<ol>
+			<li>（你勾选了某个文件，并选择了获取下载链接）</li>
+			<li>然后，脚本会调用网盘的 API，无感 “帮” 你生成文件的分享链接</li>
+			<li>在解析站中，这一步一般是由你自行完成。</li>
+		</ol>
+	</li>
+	<li>
+		<strong>中转</strong>
+		<ol>
+			<li>脚本将分享链接发送至作者的第三方服务器</li>
+			<li>服务器判定权限不足，要求扫码关注公众号进小程序看广告完成任务<br/>（除了公众号外，还可能是要求安装某视频平台 APP 完成任务）</li>
+			<li>历尽千辛万苦，完成了任务后，服务器会从作者自建的会员账号 Cookie 池中选取一个可用的账号<br/>（类似于 ChatGPT 共享账号）</li>
+		</ol>
+	</li>
+	<li>
+		<strong>下载</strong>
+		<ol>
+			<li>服务器用选中的会员账号，调用网盘的 API，转存你的文件，获取文件的不限速直链</li>
+			<li>直链被返回给脚本，进行后续的下载操作<br/>（在此步中，返回的链接一般会被脚本直接发送到下载器）</li>
+		</ol>
+	</li>
 </ol>
-<p>也就是说，这些工具其实是【借用的】别人的会员权限来实现不限速。</p>
+
+<p>简言之，这类工具本质上是<strong>借用他人会员权限</strong>来实现的不限速。</p>
 <p>但使用这类服务时，你也可能面临以下风险：</p>
-<ul>
-<li>账号 - 由于依赖分享链接实现功能，如果你分享的文件曾被举报过，可能会导致对方账号和你的账号一同被封禁。</li>
-<li>隐私 - 如果分享的是私密资源，第三方也有可能看到你的文件内容（懂的都懂，比如 “冠希哥” 事件）。</li>
-<li>依赖 - 一旦这些工具背后的会员账号被平台批量封禁（业内俗称 “烧号”），而作者停止维护，工具就彻底失效。</li>
-</ul>
-<p>而这脚本，不会访问任何第三方服务器，<br/>只会通过调用网盘的官方接口来获取对应文件的下载直链，并且允许您选择您喜欢的下载器用于下载直链。</p>
-<p>所以，您通过直链能获得的下载速度，完全取决于您自己账号的权限。<br/>如果你不是会员，下载依然会被限速。</p>
-<p>如果你希望获得更快的下载速度，也可以尝试安装网盘官方客户端，把你的机子变成 PCDN，用上传换下载速度，为他们省点存储经费。</p>
+<ol>
+	<li><strong>账号被封</strong><br/>由于依赖分享链接实现功能，如果你分享的文件曾被举报过，可能会导致对方账号和你的账号一同被封禁。</li>
+	<li><strong>隐私泄露</strong><br/>如果分享的是私密资源，第三方也有可能看到你的文件内容。（懂的都懂，比如 “冠希哥” 事件）</li>
+	<li><strong>服务失效</strong><br/>一旦这些工具背后的会员账号被平台批量封禁（业内俗称 “烧号”），而作者停止维护了，这些工具就会彻底失效。</li>
+</ol>
+
+<p>而本脚本与它们的区别在于：</p>
+<ol>
+	<li><strong>无第三方</strong><br/>不会访问也没有任何第三方服务器，杜绝隐私泄露与中间环节</li>
+	<li><strong>直连官方</strong><br/>仅调用网盘服务 API 接口获取直链，支持自由选择下载器</li>
+	<li><strong>权限可控</strong><br/>下载速度完全取决于您自身账号的权限（<strong>非会员仍会被限速</strong>）</li>
+</ol>
+
+<p>若您希望获得更快的下载速度，建议安装网盘官方客户端，通过贡献上行带宽换取下载加速，这在一定程度上能够帮助平台降低存储分发成本。</p>
 </details>
 <center>
 	<p>“出淤泥而不染，濯清涟而不妖”</p>
 	<hr>
-	<p>
-		搭配使用，效果更佳！👋扩展脚本
-		<br/>
-		<a href="https://scriptcat.org/script-show-page/2385" target="_blank">123 云盘会员青春版</a> | <a href="https://scriptcat.org/script-show-page/2236" target="_blank">百度网盘会员青春版</a> | <a href="https://scriptcat.org/script-show-page/2470" target="_blank">阿里云盘会员青春版</a>
-		<br/>
-		↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓
-	</p>
 	<p>
 		<img alt="Github Stargazers" src="https://img.shields.io/github/stars/hmjz100/LinkSwift?label=星标&logo=github&logoColor=white&labelColor=black&color=gold&style=for-the-badge&cacheSeconds=10">
 		<img alt="Github Forks" src="https://img.shields.io/github/forks/hmjz100/LinkSwift?label=复刻&logo=github&logoColor=white&labelColor=black&color=grey&style=for-the-badge&cacheSeconds=10">
@@ -66,11 +92,11 @@
 <img src="https://starchart.cc/hmjz100/LinkSwift.svg?variant=adaptive&amp;line=%23574ab8" alt="Starchart"><br/>Github 星标历史
 </center>
 
-#### 卑微的小标题
+#### 反馈
 
-这个脚本只有一个人在修改\~如果喜欢的话还请留个 [好评](https://scriptcat.org/zh-CN/script-show-page/1604/comment) 和 [星标](https://github.com/hmjz100/LinkSwift) 哦\~或者随便给脚本评个分也行的(>\_<)，还可以来[看看我的其他脚本!](https://scriptcat.org/users/114812)
+如果喜欢的话还请留个 [好评](https://scriptcat.org/zh-CN/script-show-page/1604/comment) 和 [星标](https://github.com/hmjz100/LinkSwift) 哦\~或者随便给脚本评个分也行的(>\_<)，还可以来[看看我的其他脚本!](https://scriptcat.org/users/114812)
 
-* 如有 bug 等问题请前往 Github 发 [issues 反馈](https://github.com/hmjz100/LinkSwift/issues)
+* 为确保高效处理反馈，如有 Bug 等问题请[前往 Github 发议题反馈](https://github.com/hmjz100/LinkSwift/issues)，于本平台提交的反馈将不会被受理。
 
 ***
 

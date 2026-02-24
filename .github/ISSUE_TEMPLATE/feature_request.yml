@@ -5,6 +5,33 @@ labels: ["enhancement/新功能"]
 assignees:
   - hmjz100
 body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您花时间填写此报告。
+
+  - type: checkboxes
+    attributes:
+      label: 确认
+      description: 您必须确认、同意并勾选以下事项。
+      options:
+        - label: |
+            我已确认阅读并同意 [AGPL-3.0 第 15 条](https://www.gnu.org/licenses/agpl-3.0.txt#:~:text=15.%20Disclaimer%20of%20Warranty.) 。
+            本项目不提供任何明示或暗示的担保，使用风险由您自行承担。
+          required: true
+        - label: |
+            我已确认阅读并同意 [AGPL-3.0 第 16 条](https://www.gnu.org/licenses/agpl-3.0.txt#:~:text=16.%20Limitation%20of%20Liability.) 。
+            无论何种情况，版权持有人或其他分发者均不对使用本程序所造成的任何损失承担责任。
+          required: true
+        - label: 我已确认此脚本不存在此功能，而不是因其他原因（例如网络、脚本依赖或操作）造成的无功能。
+          required: true
+        - label: 我已安装金丝雀版，并且确认金丝雀版未实现此功能。
+          required: true
+        - label: 我已查找过其他议题，确认没有重复的功能请求。
+          required: true
+        - label: 我已修改上方的 “请修改我为您的问题” 为自己的问题。
+          required: true
+
   - type: textarea
     id: issue-today
     attributes:

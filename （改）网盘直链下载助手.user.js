@@ -953,8 +953,8 @@
 		 * @returns {Promise<"success"|"fail">} 发送态结果
 		 */
 		async sendLinkToABDM(link, filename, headers) {
-			if (!this.sendLinkToBitcomet.lock) this.sendLinkToBitcomet.lock = Promise.resolve();
-			return this.sendLinkToBitcomet.lock = this.sendLinkToBitcomet.lock.then(async () => {
+			if (!this.sendLinkToABDM.lock) this.sendLinkToABDM.lock = Promise.resolve();
+			return this.sendLinkToABDM.lock = this.sendLinkToABDM.lock.then(async () => {
 				let newHeaders = {};
 				for (let key in headers) {
 					newHeaders[key.toLowerCase().split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join("-")] = headers[key];

@@ -39,14 +39,12 @@
 #### 正式版
 - Github 国际: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://github.com/hmjz100/LinkSwift/raw/main/（改）网盘直链下载助手.user.js)
 - OpenUserJS 国际（更新不及时）: [hmjz100/LinkSwift.user.js](https://openuserjs.org/install/hmjz100/LinkSwift.user.js)
-- Gitee 国内: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://gitee.com/hmjz100/LinkSwift/raw/main/（改）网盘直链下载助手.user.js)
 - 脚本猫 国内: [hmjz100/1604/LinkSwift.user.js](https://scriptcat.org/scripts/code/1604/LinkSwift.user.js)
 
 #### 金丝雀版
 此版本可能不稳定，但有着最新的功能、修复等。
 
 - Github 国际: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://github.com/hmjz100/LinkSwift/raw/dev/（改）网盘直链下载助手.user.js)
-- Gitee 国内: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://gitee.com/hmjz100/LinkSwift/raw/dev/（改）网盘直链下载助手.user.js)
 
 ## 说明
 

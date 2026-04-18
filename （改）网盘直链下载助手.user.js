@@ -7997,15 +7997,23 @@ button.downloadSubtitle:disabled {
 					let fids = batch.map(item => item.fid);
 					let fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
-					let res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "User-Agent": config.$quark.api.ua.downloadLink });
-					if (res?.code == 31001) {
-						return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-					} else if (res?.code == 23018) {
-						let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-						let item = batch.find(item => item.fid === fid);
-						return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+					let res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Referer": "", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
+
+					if (!res || res.code !== 0 || !res.data) {
+						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res?.code == 23018) {
+							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							let item = batch.find(item => item.fid === fid);
+							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+						}
+
+						if (res?.code || res?.message) {
+							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
+						} else {
+							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
+						}
 					}
-					if (res.code !== 0) return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
+
 					// 合并响应数据
 					if (res?.data) {
 						data.push(...res.data);
@@ -8343,7 +8351,7 @@ button.downloadSubtitle:disabled {
 					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
-					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "User-Agent": config.$uc.api.ua.downloadLink });
+					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Referer": "", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
@@ -8401,15 +8409,23 @@ button.downloadSubtitle:disabled {
 					let fids = batch.map(item => item.fid);
 					let fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
-					let res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "User-Agent": config.$uc.api.ua.downloadLink });
-					if (res?.code == 31001) {
-						return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-					} else if (res?.code == 23018) {
-						let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-						let item = batch.find(item => item.fid === fid);
-						return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+					let res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Referer": "", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
+
+					if (!res || res.code !== 0 || !res.data) {
+						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res?.code == 23018) {
+							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							let item = batch.find(item => item.fid === fid);
+							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+						}
+
+						if (res?.code || res?.message) {
+							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
+						} else {
+							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
+						}
 					}
-					if (res.code !== 0) return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
+
 					// 合并响应数据
 					if (res?.data) {
 						data.push(...res.data);

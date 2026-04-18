@@ -706,10 +706,11 @@
 		 * @author hmjz100
 		 * @description 标准化请求头、响应头的键，使用驼峰命名
 		 * @param {String|Object} headers - 请求头、响应头的字符串或对象
-		 * @param {Boolean} dontDeafult - 是否不添加默认头
+		 * @param {Boolean} withServer - 是否添加默认头字段
+		 * @param {Boolean} withOrigin - 是否添加来源头字段
 		 * @returns {Object} 标准化后的 Headers
 		 */
-		standHeaders(headers = {}, dontDeafult = false) {
+		standHeaders(headers = {}, withServer = true, withOrigin = true) {
 			if (!headers) return {};
 			if (typeof headers === 'string') {
 				const rawHeaders = {};
@@ -727,11 +728,12 @@
 				else value = String(headers[key]);
 				newHeaders[key.toLowerCase().split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join("-")] = value;
 			}
-			if (dontDeafult) return newHeaders;
+			if (!withServer) return newHeaders;
 			return {
 				"Accept": "*/*",
 				"User-Agent": navigator.userAgent,
-				"Referer": `${location.origin}/`,
+				"Origin": withOrigin ? location.origin : "",
+				"Referer": withOrigin ? `${location.origin}/` : "",
 				...newHeaders
 			};
 		},
@@ -797,7 +799,7 @@
 			let rpc = base.getValue("setting_idm_rpc").find(i => i.default);
 			if (!this.sendLinkToIDM.lock) this.sendLinkToIDM.lock = Promise.resolve();
 			return this.sendLinkToIDM.lock = this.sendLinkToIDM.lock.then(async () => {
-				headers = this.standHeaders(headers, true);
+				headers = this.standHeaders(headers, true, false);
 
 				if (!this.sendLinkToIDM.seq) this.sendLinkToIDM.seq = 1;
 				let seq = this.sendLinkToIDM.seq;
@@ -880,7 +882,7 @@
 					}]
 				};
 				try {
-					let res = await base.post(url, data, {}, "");
+					let res = await base.post(url, data, {}, "", false);
 					if (res.result) return "success";
 					return "fail";
 				} catch (e) {
@@ -929,7 +931,7 @@
 						"Cache-Control": "max-age=0",
 						"Origin": `${rpc.domain}:${rpc.port}`,
 						"Referer": `${rpc.domain}:${rpc.port}/panel/task_add_httpftp`,
-					}, "text");
+					}, "text", false);
 					if (res && res.includes("Add task failed!")) {
 						return "fail";
 					} else {
@@ -978,7 +980,7 @@
 				}
 				if (rpc.dir) data.folder = rpc.dir;
 				try {
-					let res = await base.post(url, data, { "Content-Type": "text/plain;charset=UTF-8" }, "text");
+					let res = await base.post(url, data, { "Content-Type": "text/plain;charset=UTF-8" }, "text", false);
 					if (res === "OK") return "success";
 					return "fail";
 				} catch (e) {
@@ -1029,16 +1031,17 @@
 		 * @param {Object|String} data - 请求数据
 		 * @param {Object} headers - 请求头配置
 		 * @param {String} [type="json"] - 响应类型（支持 `json`, `blob` 等）
+		 * @param {Boolean} [withOrigin=true] - 是否携带跨域信息
 		 * @returns {Promise} 包含响应数据的 `Promise` 对象
 		 */
-		async post(url, data, headers, type = "json") {
+		async post(url, data, headers, type = "json", withOrigin = true) {
 			let _data = data;
 			if (this.isType(data) === "object" || this.isType(data) === "array") {
 				data = JSON.stringify(data);
 			} else if (this.isType(data) === "urlsearchparams") {
 				_data = Object.fromEntries(data);
 			}
-			headers = this.standHeaders(headers);
+			headers = this.standHeaders(headers, true, withOrigin);
 			headers = { "Accept": "*/*,application/json;charset=utf-8", ...headers };
 			let request
 			let promise = new Promise((resolve, reject) => {
@@ -1051,7 +1054,7 @@
 					onload: (res) => {
 						// 转换 Headers 到 Object
 						const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
-						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
+						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
 						if (type === "blob") {
 							base.console.log("【LinkSwift】Post(load) Blob\n请求地址：" + url + "\n请求数据：", _data, "\n请求结果：", res);
@@ -1096,10 +1099,11 @@
 		 * @param {String} url - 请求地址
 		 * @param {Object} headers - 请求头配置
 		 * @param {String} [type="json"] - 响应类型
+		 * @param {Boolean} [withOrigin=true] - 是否携带跨域信息
 		 * @returns {Promise} 包含响应数据的 `Promise` 对象
 		 */
-		async get(url, headers, type = "json") {
-			headers = this.standHeaders(headers);
+		async get(url, headers, type = "json", withOrigin = true) {
+			headers = this.standHeaders(headers, true, withOrigin);
 			let request
 			let promise = new Promise((resolve, reject) => {
 				request = base.xmlHttpRequest({
@@ -1111,7 +1115,7 @@
 					onload: (res) => {
 						// 转换 Headers 到 Object
 						const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
-						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
+						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
 						if (type === "blob") {
 							base.console.log("【LinkSwift】Get(load) Blob\n请求地址：" + url, "\n请求结果：", res);
@@ -1169,7 +1173,7 @@
 						if (!_aborted) {
 							// 转换 Headers 到 Object
 							const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
-							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
+							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
 							base.console.log(`【LinkSwift】Head${usingGET ? " Get" : ""}(load)\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
 
@@ -1189,7 +1193,7 @@
 
 							// 转换 Headers 到 Object
 							const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
-							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
+							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
 							base.console.log(`【LinkSwift】Head${usingGET ? " Get" : ""}(load) RS2\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
 
@@ -4912,7 +4916,7 @@ button.downloadSubtitle:disabled {
 					$doc.find(".loading-popup .loading-title").html(`授权获取中`);
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取授权页面~</div>`);
 					// 没授权，先获取授权的页面
-					let html = await base.get(config.$baidu.api.getAccessToken, { Origin: "", Referer: "" }, "text");
+					let html = await base.get(config.$baidu.api.getAccessToken, {}, "text", false);
 					// 提取页面的发送确认授权的参数
 					let bdstoken = html.match(/name="bdstoken"\s+value="([^"]+)"/)?.[1];
 					let client_id = html.match(/name="client_id"\s+value="([^"]+)"/)?.[1];
@@ -7939,7 +7943,7 @@ button.downloadSubtitle:disabled {
 					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
-					let res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Referer": "", "User-Agent": config.$quark.api.ua.downloadLink });
+					let res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
@@ -7997,7 +8001,7 @@ button.downloadSubtitle:disabled {
 					let fids = batch.map(item => item.fid);
 					let fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
-					let res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Referer": "", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
+					let res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
@@ -8351,7 +8355,7 @@ button.downloadSubtitle:disabled {
 					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
-					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Referer": "", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
+					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
@@ -8409,7 +8413,7 @@ button.downloadSubtitle:disabled {
 					let fids = batch.map(item => item.fid);
 					let fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
-					let res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Referer": "", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
+					let res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);

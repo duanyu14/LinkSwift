@@ -1,0 +1,34 @@
+{
+	"name": "linkswift",
+	"version": "1.1.3.1",
+	"description": "一个基于 JavaScript 的网盘文件下载地址获取工具",
+	"main": "eslint.config.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"check": "npx eslint . --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hmjz100/LinkSwift.git"
+	},
+	"keywords": [
+		"linkswift",
+		"link",
+		"swift",
+		"download",
+		"file",
+		"address",
+		"get"
+	],
+	"author": "hmjz100",
+	"license": "AGPL-3.0",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/hmjz100/LinkSwift/issues"
+	},
+	"homepage": "https://github.com/hmjz100/LinkSwift#readme",
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"eslint": "^10.2.1"
+	}
+}

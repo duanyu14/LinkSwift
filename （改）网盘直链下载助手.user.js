@@ -108,7 +108,7 @@
  * @author hmjz100
  * @namespace github.com/hmjz100
  * @description  一个基于 JavaScript 盘的文件下载地址获取工具  支持 百度网盘/阿里云盘/中国移动云盘/天翼云盘/迅雷云盘/夸克网盘/UC网盘/123云盘 八大网盘  代码改自 “网盘直链下载助手”，作者油小猴
- * @version 1.1.3.1-Canary
+ * @version 1.1.3.1
  * @license AGPL-3.0-or-later
  * @see {@link https://github.com/hmjz100/LinkSwift/ Github 仓库}
  */
@@ -118,11 +118,11 @@
 	// unsafeWindow 检测，适用于 Via 这类无 unsafeWindow 的浏览器
 	if (typeof (unsafeWindow) === "undefined") window.unsafeWindow = window;
 	// 重复执行检测，适用于部分浏览器；出自 “Via 轻插件”，作者谷花泰
-	let key = encodeURIComponent("LinkSwift:主代码"); if (window[key]) return; window[key] = true;
+	const key = encodeURIComponent("LinkSwift:主代码"); if (window[key]) return; window[key] = true;
 
 	// 全局参数
-	let mount = idontknow("LinkSwift");
-	let info = {
+	const mount = idontknow("LinkSwift");
+	const info = {
 		author: GM_info.script?.author,
 		name: GM_info.script?.name,
 		version: (GM_info.script?.version || "1.1.3"),
@@ -130,8 +130,8 @@
 		mhandler: GM_info.scriptHandler,
 		mversion: GM_info.version,
 	};
-	let $doc = $(document);
-	let temp = {
+	const $doc = $(document);
+	const temp = {
 		mount: $(`.${mount}`),
 		main: {},
 		page: "",
@@ -166,7 +166,7 @@
 	 *
 	 * @type{Sweetalert2.Toast}
 	 */
-	let toast = Swal.mixin({
+	const toast = Swal.mixin({
 		toast: true,
 		position: "top-end",
 		showConfirmButton: false,
@@ -189,7 +189,7 @@
 	 * @description 提供统一的提示信息展示方法，基于 SweetAlert2 的 Toast 实现；
 	 * 包含 success / error / warning / info / question 等类型。
 	 */
-	let message = {
+	const message = {
 		success: function (text) {
 			toast.fire({ title: text, icon: "success" });
 		},
@@ -212,7 +212,7 @@
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let config = {
+	const config = {
 		base: {
 			num: "865746",
 			license: "AGPL3",
@@ -413,7 +413,7 @@
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let base = {
+	const base = {
 		/**
 		 * 注册 GreaseMonkey-Compatible-Manager 扩展菜单命令
 		 * @author 油小猴
@@ -470,11 +470,11 @@
 				GM_setValue(path, value);
 				return;
 			}
-			let key = path[0];
-			let obj = this.getValue(key) || {};
+			const key = path[0];
+			const obj = this.getValue(key) || {};
 			let current = obj;
 			for (let i = 1; i < path.length - 1; i++) {
-				let keyPart = path[i];
+				const keyPart = path[i];
 				if (!current[keyPart]) current[keyPart] = "";
 				current = current[keyPart];
 			}
@@ -501,7 +501,7 @@
 		getStorage(key) {
 			try {
 				return JSON.parse(localStorage.getItem(key));
-			} catch (e) {
+			} catch {
 				return localStorage.getItem(key);
 			}
 		},
@@ -589,9 +589,9 @@
 		 * @returns {String} 大写的文件扩展名（如 `TXT`）
 		 */
 		getExtension(name) {
-			let reg = /(?!\.)\w+$/;
+			const reg = /(?!\.)\w+$/;
 			if (reg.test(name)) {
-				let match = name.match(reg);
+				const match = name.match(reg);
 				return match[0].toUpperCase();
 			}
 			return "";
@@ -605,25 +605,25 @@
 		 * @returns {String} 可读格式的大小描述
 		 */
 		sizeFormat(value = 0) {
-			var sizeUnitBase = 1024
+			const sizeUnitBase = 1024
 			try { value = Number(value) } catch { }
 			if (typeof value === "number" && !isNaN(value) && value >= 0) {
-				var units = sizeUnitBase === 1024
+				const units = sizeUnitBase === 1024
 					? ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"]
 					: ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
-				var unitNames = ["字节", "千字节", "兆字节", "吉字节", "太字节", "拍字节", "艾字节", "泽字节", "尧字节"];
+				const unitNames = ["字节", "千字节", "兆字节", "吉字节", "太字节", "拍字节", "艾字节", "泽字节", "尧字节"];
 
 				if (value === 0) return "0B(字节)";
 
 				// 计算单位层级（取整数部分）
-				var index = Math.min(
+				const index = Math.min(
 					Math.floor(Math.log(value) / Math.log(sizeUnitBase)),
 					units.length - 1
 				);
 
-				var size = value / Math.pow(sizeUnitBase, index);
-				var formattedSize = size % 1 === 0 ? size.toFixed(0) : size.toFixed(2);
+				const size = value / Math.pow(sizeUnitBase, index);
+				const formattedSize = size % 1 === 0 ? size.toFixed(0) : size.toFixed(2);
 
 				return `${formattedSize}${unitNames[index]}(${units[index]})`;
 			}
@@ -652,12 +652,12 @@
 			if (!Number.isFinite(remainingTimeSeconds) || remainingTimeSeconds < 0) {
 				return "计算中...";
 			}
-			let remainingDays = Math.floor(remainingTimeSeconds / (60 * 60 * 24));
+			const remainingDays = Math.floor(remainingTimeSeconds / (60 * 60 * 24));
 			remainingTimeSeconds %= (60 * 60 * 24);
-			let remainingHours = Math.floor(remainingTimeSeconds / (60 * 60));
+			const remainingHours = Math.floor(remainingTimeSeconds / (60 * 60));
 			remainingTimeSeconds %= (60 * 60);
-			let remainingMinutes = Math.floor(remainingTimeSeconds / 60);
-			let remainingSeconds = Math.floor(remainingTimeSeconds % 60);
+			const remainingMinutes = Math.floor(remainingTimeSeconds / 60);
+			const remainingSeconds = Math.floor(remainingTimeSeconds % 60);
 			if (remainingDays > 0) {
 				return `${remainingDays}天 ${base.timeFormat(remainingHours)}时:${base.timeFormat(remainingMinutes)}分:${base.timeFormat(remainingSeconds)}秒`;
 			} else if (remainingHours > 0) {
@@ -682,8 +682,8 @@
 		sortByName(arr) {
 			arr.sort(() => {
 				return (a, b) => {
-					let p1 = a.filename ? a.filename : a.server_filename;
-					let p2 = b.filename ? b.filename : b.server_filename;
+					const p1 = a.filename ? a.filename : a.server_filename;
+					const p2 = b.filename ? b.filename : b.server_filename;
 					return p1.localeCompare(p2, "zh-CN");
 				};
 			});
@@ -697,7 +697,7 @@
 		 * @returns {String} 修正后的安全文件名
 		 */
 		fixFilename(name) {
-			let replace = /[!?&|`"'*\/:<>\\]/g
+			const replace = /[!?&|`"'*\/:<>\\]/g
 			return name.replace(replace, "_");
 		},
 
@@ -721,8 +721,8 @@
 				});
 				headers = rawHeaders;
 			}
-			let newHeaders = {};
-			for (let key in headers) {
+			const newHeaders = {};
+			for (const key in headers) {
 				let value
 				if (this.isType(headers[key]) === "object") value = JSON.stringify(headers[key]);
 				else value = String(headers[key]);
@@ -749,7 +749,7 @@
 		 * @returns {String} 编码后的 curl 命令字符串
 		 */
 		convertLinkToCurl(link, filename, headers) {
-			let terminal = base.getValue("setting_curl_terminal");
+			const terminal = base.getValue("setting_curl_terminal");
 			filename = base.fixFilename(filename);
 			return `${terminal !== "wp" ? "curl" : "curl.exe"} -L -C - "${link}" -o "${filename}"${headers ? (" " + headers) : ""}`;
 		},
@@ -781,7 +781,7 @@
 		 */
 		convertLinkToBitComet(link, filename, headers) {
 			filename = base.fixFilename(filename);
-			let bc = `AA/${encodeURIComponent(filename)}/?url=${encodeURIComponent(link)}${headers ? ("&" + headers) : ""}ZZ`;
+			const bc = `AA/${encodeURIComponent(filename)}/?url=${encodeURIComponent(link)}${headers ? ("&" + headers) : ""}ZZ`;
 			return `bc://http/${base.encodeBase(bc)}`;
 		},
 
@@ -796,27 +796,27 @@
 		 * @returns {Promise<"success"|"fail">} 发送态结果
 		 */
 		async sendLinkToIDM(link, filename, filesize, headers = {}) {
-			let rpc = base.getValue("setting_idm_rpc").find(i => i.default);
+			const rpc = base.getValue("setting_idm_rpc").find(i => i.default);
 			if (!this.sendLinkToIDM.lock) this.sendLinkToIDM.lock = Promise.resolve();
 			return this.sendLinkToIDM.lock = this.sendLinkToIDM.lock.then(async () => {
 				headers = this.standHeaders(headers, true, false);
 
 				if (!this.sendLinkToIDM.seq) this.sendLinkToIDM.seq = 1;
-				let seq = this.sendLinkToIDM.seq;
-				let time = Date.now();
-				let url = `http://127.0.0.1:1001/client/${rpc.id}?seq=${seq}`;
-				let ext = base.getExtension(filename);
+				const seq = this.sendLinkToIDM.seq;
+				const time = Date.now();
+				const url = `http://127.0.0.1:1001/client/${rpc.id}?seq=${seq}`;
+				const ext = base.getExtension(filename);
 
-				let headersText = Object.entries(headers).map(([key, value]) => `${key}: ${value}`).join("\n") + "\n"; // 坑1：IDM 对 Header 的解码比较死板，最后不加换行不肯解析
+				const headersText = Object.entries(headers).map(([key, value]) => `${key}: ${value}`).join("\n") + "\n"; // 坑1：IDM 对 Header 的解码比较死板，最后不加换行不肯解析
 
 				function format(key, val) {
 					if (val === undefined || val === null) return "";
-					var strVal = String(val);
-					var len = new Blob([strVal]).size; // 坑2：使用 blob.size，而不是 length
+					const strVal = String(val);
+					const len = new Blob([strVal]).size; // 坑2：使用 blob.size，而不是 length
 					return `${key}=${len}:${strVal}`;
 				};
 
-				let fields = [
+				const fields = [
 					format(4, ext), // 4: 文件类型
 					format(6, link), // 6: 链接
 					format(7, location.origin), // 7: 来源页面（“该文件来自网页”）
@@ -827,17 +827,17 @@
 
 				// 坑3：神秘的请求格式
 				// MSG# {请求指示} #13#1# {10241/20xx}(是/否 使用扩展提供的文件信息) : {?}(可能是距离扩展启动的时间?) :0: {当前时间戳} :0:1: {2/1}(是/否 优先弹窗，再获取文件信息) : {文件大小} :0,{表单}(格式如上);
-				let data = `MSG#${seq}#13#1#10241:${seq + 1000}:0:${time}:0:1:2:${filesize}:0,${fields.join(",")};`;
+				const data = `MSG#${seq}#13#1#10241:${seq + 1000}:0:${time}:0:1:2:${filesize}:0,${fields.join(",")};`;
 
-				let request = base.post(url, data, {}, "text").catch(() => false);
-				let timeout = new Promise((_, reject) => {
+				const request = base.post(url, data, {}, "text").catch(() => false);
+				const timeout = new Promise((_, reject) => {
 					setTimeout(() => {
 						if (request.abort) request.abort();
 						reject(new Error("timeout"));
 					}, 15 * 1000);
 				})
 
-				let res = await Promise.race([request, timeout]).catch(() => false);
+				const res = await Promise.race([request, timeout]).catch(() => false);
 
 				if (res && res.endsWith(`${seq}:3;`)) {
 					this.sendLinkToIDM.seq++;
@@ -860,18 +860,18 @@
 		async sendLinkToAria2(link, filename, headers) {
 			if (!this.sendLinkToAria2.lock) this.sendLinkToAria2.lock = Promise.resolve();
 			return this.sendLinkToAria2.lock = this.sendLinkToAria2.lock.then(async () => {
-				let list = base.getValue("setting_aria2_rpc");
-				let selected = list.find(i => i.default);
-				let rpc = {
+				const list = base.getValue("setting_aria2_rpc");
+				const selected = list.find(i => i.default);
+				const rpc = {
 					domain: selected.domain,
 					port: selected.port,
 					path: selected.path,
 					dir: selected.dir,
 					token: selected.token
 				};
-				let url = `${rpc.domain}:${rpc.port}${rpc.path}`;
-				let dir = (rpc.dir !== null && rpc.dir !== "") ? rpc.dir : undefined;
-				let data = {
+				const url = `${rpc.domain}:${rpc.port}${rpc.path}`;
+				const dir = (rpc.dir !== null && rpc.dir !== "") ? rpc.dir : undefined;
+				const data = {
 					id: new Date().getTime(),
 					jsonrpc: "2.0",
 					method: "aria2.addUri",
@@ -882,10 +882,10 @@
 					}]
 				};
 				try {
-					let res = await base.post(url, data, {}, "", false);
+					const res = await base.post(url, data, {}, "", false);
 					if (res.result) return "success";
 					return "fail";
-				} catch (e) {
+				} catch {
 					return "fail";
 				}
 			});
@@ -903,9 +903,9 @@
 		async sendLinkToBitcomet(link, filename, headers) {
 			if (!this.sendLinkToBitcomet.lock) this.sendLinkToBitcomet.lock = Promise.resolve();
 			return this.sendLinkToBitcomet.lock = this.sendLinkToBitcomet.lock.then(async () => {
-				let list = base.getValue("setting_bitcomet_rpc");
-				let selected = list.find(i => i.default);
-				let rpc = {
+				const list = base.getValue("setting_bitcomet_rpc");
+				const selected = list.find(i => i.default);
+				const rpc = {
 					domain: selected.domain,
 					port: selected.port,
 					path: selected.path,
@@ -913,19 +913,19 @@
 					authName: selected.authName,
 					authPass: selected.authPass,
 				};
-				let url = `${rpc.domain}:${rpc.port}${rpc.path}`;
-				let data = new URLSearchParams();
+				const url = `${rpc.domain}:${rpc.port}${rpc.path}`;
+				const data = new URLSearchParams();
 				data.append("url", link);
 				if (rpc.dir !== null && rpc.dir !== "") data.append("save_path", rpc.dir);
 				data.append("file_name", filename);
 				data.append("connection", 200);
 				if (headers && base.isType(headers) === "object") {
-					for (var [key, value] of Object.entries(headers)) {
+					for (const [key, value] of Object.entries(headers)) {
 						data.append(key, value);
 					}
 				}
 				try {
-					let res = await base.post(url, data, {
+					const res = await base.post(url, data, {
 						"Authorization": `Basic ${base.encodeBase(rpc.authName + ":" + rpc.authPass)}`,
 						"Content-Type": "application/x-www-form-urlencoded",
 						"Cache-Control": "max-age=0",
@@ -937,7 +937,7 @@
 					} else {
 						return "success";
 					}
-				} catch (e) {
+				} catch {
 					return "success";
 				}
 			});
@@ -955,20 +955,20 @@
 		async sendLinkToABDM(link, filename, headers) {
 			if (!this.sendLinkToABDM.lock) this.sendLinkToABDM.lock = Promise.resolve();
 			return this.sendLinkToABDM.lock = this.sendLinkToABDM.lock.then(async () => {
-				let newHeaders = {};
-				for (let key in headers) {
+				const newHeaders = {};
+				for (const key in headers) {
 					newHeaders[key.toLowerCase().split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join("-")] = headers[key];
 				}
 				headers = { "User-Agent": navigator.userAgent, "Origin": location.origin, "Referer": `${location.origin}/`, "DNT": "1", ...newHeaders };
-				let list = base.getValue("setting_abdm_rpc");
-				let selected = list.find(i => i.default);
-				let rpc = {
+				const list = base.getValue("setting_abdm_rpc");
+				const selected = list.find(i => i.default);
+				const rpc = {
 					domain: selected.domain,
 					port: selected.port,
 					dir: selected.dir
 				};
-				let url = `${rpc.domain}:${rpc.port}/start-headless-download`;
-				let data = {
+				const url = `${rpc.domain}:${rpc.port}/start-headless-download`;
+				const data = {
 					"downloadSource": {
 						"name": filename,
 						"description": "LinkSwift",
@@ -980,10 +980,10 @@
 				}
 				if (rpc.dir) data.folder = rpc.dir;
 				try {
-					let res = await base.post(url, data, { "Content-Type": "text/plain;charset=UTF-8" }, "text", false);
+					const res = await base.post(url, data, { "Content-Type": "text/plain;charset=UTF-8" }, "text", false);
 					if (res === "OK") return "success";
 					return "fail";
-				} catch (e) {
+				} catch {
 					return "fail";
 				}
 			});
@@ -998,8 +998,8 @@
 		 */
 		blobDownload(blob, filename) {
 			if (blob instanceof Blob) {
-				let url = URL.createObjectURL(blob);
-				let a = document.createElement("a");
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement("a");
 				a.href = url;
 				a.download = filename;
 				a.rel = "noopener"
@@ -1016,7 +1016,7 @@
 		 * @returns {XMLHttpRequest|Promise} 请求对象实例或 Promise
 		 */
 		xmlHttpRequest(option) {
-			let xmlHttpRequest = (typeof GM_xmlhttpRequest === "function") ? GM_xmlhttpRequest : (typeof GM?.xmlHttpRequest === "function") ? GM.xmlHttpRequest : null;
+			const xmlHttpRequest = (typeof GM_xmlhttpRequest === "function") ? GM_xmlhttpRequest : (typeof GM?.xmlHttpRequest === "function") ? GM.xmlHttpRequest : null;
 			if (!xmlHttpRequest || base.isType(xmlHttpRequest) !== "function") throw new Error("GreaseMonkey 兼容 XMLHttpRequest 不可用。");
 
 			return xmlHttpRequest({ withCredentials: true, ...option });;
@@ -1044,11 +1044,11 @@
 			headers = this.standHeaders(headers, true, withOrigin);
 			headers = { "Accept": "*/*,application/json;charset=utf-8", ...headers };
 			let request
-			let promise = new Promise((resolve, reject) => {
+			const promise = new Promise((resolve, reject) => {
 				request = base.xmlHttpRequest({
 					url, headers, data,
 					method: "POST", responseType: type,
-					onloadstart: (res) => {
+					onloadstart: () => {
 						base.console.log("【LinkSwift】Post(start)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers);
 					},
 					onload: (res) => {
@@ -1085,7 +1085,7 @@
 				});
 			})
 			if (request) {
-				var methods = Object.getOwnPropertyNames(request).filter(key => typeof request[key] === 'function' && !promise.hasOwnProperty(key) && !['then', 'catch', 'finally'].includes(key)); // 自动收集 request 上的函数属性进行绑定，并能智能排除 Promise 原生方法
+				const methods = Object.getOwnPropertyNames(request).filter(key => typeof request[key] === 'function' && !promise.hasOwnProperty(key) && !['then', 'catch', 'finally'].includes(key)); // 自动收集 request 上的函数属性进行绑定，并能智能排除 Promise 原生方法
 				methods.forEach(method => { promise[method] = (...args) => request[method](...args); }); // 动态绑定到 Promise
 			}
 			return promise;
@@ -1105,11 +1105,11 @@
 		async get(url, headers, type = "json", withOrigin = true) {
 			headers = this.standHeaders(headers, true, withOrigin);
 			let request
-			let promise = new Promise((resolve, reject) => {
+			const promise = new Promise((resolve, reject) => {
 				request = base.xmlHttpRequest({
 					url, headers,
 					method: "GET", responseType: type,
-					onloadstart: (res) => {
+					onloadstart: () => {
 						base.console.log("【LinkSwift】Get(start)\n请求地址：" + url + "\n请求头部：", headers);
 					},
 					onload: (res) => {
@@ -1143,7 +1143,7 @@
 				});
 			})
 			if (request) {
-				var methods = Object.getOwnPropertyNames(request).filter(key => typeof request[key] === 'function' && !promise.hasOwnProperty(key) && !['then', 'catch', 'finally'].includes(key)); // 自动收集 request 上的函数属性进行绑定，并能智能排除 Promise 原生方法
+				const methods = Object.getOwnPropertyNames(request).filter(key => typeof request[key] === 'function' && !promise.hasOwnProperty(key) && !['then', 'catch', 'finally'].includes(key)); // 自动收集 request 上的函数属性进行绑定，并能智能排除 Promise 原生方法
 				methods.forEach(method => { promise[method] = (...args) => request[method](...args); }); // 动态绑定到 Promise
 			}
 			return promise;
@@ -1160,9 +1160,9 @@
 		async head(url, headers, usingGET) {
 			headers = this.standHeaders(headers);
 			return new Promise((resolve, reject) => {
-				var method = usingGET ? "Get" : "Head";
+				const method = usingGET ? "Get" : "Head";
 				let _aborted = false;
-				let request = base.xmlHttpRequest({
+				const request = base.xmlHttpRequest({
 					method: method.toUpperCase(),
 					url,
 					headers,
@@ -1227,17 +1227,22 @@
 		 * @returns {Promise<String>} 最终 URL 地址
 		 */
 		getFinal(url, headers = {}, usingGET = false, returnURL = true) {
-			return new Promise(async (resolve, reject) => {
-				var res = await this.head(url, headers, usingGET).catch(reject);
-				if (!res?.finalUrl) return reject(res);
-				if (res?.status == 204 && res?.statusText === "IDM") return reject(res);
-				if (res?.status >= 300 && res?.status < 400) {
-					base.getFinal(res.finalUrl, headers, usingGET, returnURL).then(resolve).catch(reject);
-					return;
-				}
-				if (returnURL) return resolve(res.finalUrl);
-				else return resolve(res);
-			});
+			return this.head(url, headers, usingGET)
+				.then(res => {
+					if (!res?.finalUrl) throw res;
+					if (res?.status == 204 && res?.statusText === "IDM") throw res;
+
+					// 如果是重定向，递归调用
+					if (res?.status >= 300 && res?.status < 400) {
+						return this.getFinal(res.finalUrl, headers, usingGET, returnURL);
+					}
+
+					// 返回最终结果
+					return returnURL ? res.finalUrl : res;
+				})
+				.catch(err => {
+					throw err;
+				});
 		},
 
 		/**
@@ -1255,12 +1260,12 @@
 			// 初始化全局共享状态
 			this.download.active = this.download.active || 0; // 全局活跃线程数
 			this.download.taskCount = this.download.taskCount || 0; // 当前正在运行的 download 任务数
-			var global_maxThreads = 8; // 整个允许的最大并发数
+			const global_maxThreads = 8; // 整个允许的最大并发数
 
 			if (extra) base.console.log(`【LinkSwift】Download\n收到数据：`, extra);
 			if (!extra || !extra.index || !extra.name || !extra.size) throw new Error("extra 缺少内容。");
 
-			let status = {
+			const status = {
 				aborted: false,
 				requests: new Set(),
 				results: [],
@@ -1268,183 +1273,185 @@
 				maxSpeed: 0
 			};
 
-			let promise = new Promise(async (resolve, reject) => {
-				this.download.taskCount++; // 任务进入
+			const promise = new Promise((resolve, reject) => {
+				(async () => {
+					this.download.taskCount++; // 任务进入
 
-				try {
-					var finalHead = await base.getFinal(url, headers, false, false).catch(reject);
-					if (!finalHead) return;
-					url = finalHead.finalUrl;
+					try {
+						const finalHead = await base.getFinal(url, headers, false, false).catch(reject);
+						if (!finalHead) return;
+						url = finalHead.finalUrl;
 
-					var responseHeaders = finalHead.responseHeaders;
-					let size = parseInt(extra.size || responseHeaders?.["Content-Length"] || 0, 10);
-					if (responseHeaders?.["Content-Range"]) {
-						size = parseInt((responseHeaders["Content-Range"]?.match(/\/(\d+)$/)?.[1] || size), 10);
-					}
+						const responseHeaders = finalHead.responseHeaders;
+						let size = parseInt(extra.size || responseHeaders?.["Content-Length"] || 0, 10);
+						if (responseHeaders?.["Content-Range"]) {
+							size = parseInt((responseHeaders["Content-Range"]?.match(/\/(\d+)$/)?.[1] || size), 10);
+						}
 
-					if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(0, 0, size);
-					if (!(finalHead.status >= 200 && finalHead.status < 400)) return reject(finalHead);
-					if (finalHead.status == 204 && finalHead.statusText === "IDM") return reject(finalHead);
+						if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(0, 0, size);
+						if (!(finalHead.status >= 200 && finalHead.status < 400)) return reject(finalHead);
+						if (finalHead.status == 204 && finalHead.statusText === "IDM") return reject(finalHead);
 
-					var supportRange = finalHead.status == 206 && (responseHeaders?.["Accept-Ranges"]?.includes("bytes") || responseHeaders?.["Content-Range"]?.includes("bytes"));
+						const supportRange = finalHead.status == 206 && (responseHeaders?.["Accept-Ranges"]?.includes("bytes") || responseHeaders?.["Content-Range"]?.includes("bytes"));
 
-					if (!!supportRange || size > 0) {
-						base.console.log(`【LinkSwift】Download(Start)\n文件名称：${extra.name}\n断点续传：支持`);
+						if (!!supportRange || size > 0) {
+							base.console.log(`【LinkSwift】Download(Start)\n文件名称：${extra.name}\n断点续传：支持`);
 
-						var maxRetry = extra.retry || 10;
-						let index = 0;
-						let offset = 0;
-						let totalLoaded = 0;
+							const maxRetry = extra.retry || 10;
+							let index = 0;
+							let offset = 0;
+							let totalLoaded = 0;
 
-						var worker = async () => {
-							var minChunk = extra.minChunk || 50 * 1024; // 最小 50KB
-							var maxChunk = extra.maxChunk || 1 * 1024 * 1024; // 最大 1MB
-							let chunk = Math.floor(minChunk + (maxChunk - minChunk) * 0.37);
+							const worker = async () => {
+								const minChunk = extra.minChunk || 50 * 1024; // 最小 50KB
+								const maxChunk = extra.maxChunk || 1 * 1024 * 1024; // 最大 1MB
+								let chunk = Math.floor(minChunk + (maxChunk - minChunk) * 0.37);
 
-							while (offset < size && !status.aborted) {
-								// 如果全局线程满了，且当前任务已经抢到了 1 条以上的线程，则 “让路” 给后来的任务
-								let fairShare = Math.max(1, Math.floor(global_maxThreads / this.download.taskCount));
-								while (!status.aborted && this.download.active >= global_maxThreads && status.active >= fairShare) {
-									await new Promise(r => setTimeout(r, 200)); // 等待，直到其他任务释放或有空位
-								}
+								while (offset < size && !status.aborted) {
+									// 如果全局线程满了，且当前任务已经抢到了 1 条以上的线程，则 “让路” 给后来的任务
+									const fairShare = Math.max(1, Math.floor(global_maxThreads / this.download.taskCount));
+									while (!status.aborted && this.download.active >= global_maxThreads && status.active >= fairShare) {
+										await new Promise(r => setTimeout(r, 200)); // 等待，直到其他任务释放或有空位
+									}
 
-								if (status.aborted || offset >= size) break;
+									if (status.aborted || offset >= size) break;
 
-								var _index = index++;
-								var start = offset;
-								var end = Math.min(start + chunk - 1, size - 1);
-								var _size = end - start + 1;
-								offset += _size;
+									const _index = index++;
+									const start = offset;
+									const end = Math.min(start + chunk - 1, size - 1);
+									const _size = end - start + 1;
+									offset += _size;
 
-								let attempt = 0;
-								while (attempt <= maxRetry && !status.aborted) {
-									// 占用线程计数
-									status.active++;
-									this.download.active++;
+									let attempt = 0;
+									while (attempt <= maxRetry && !status.aborted) {
+										// 占用线程计数
+										status.active++;
+										this.download.active++;
 
-									try {
-										var startTime = Date.now();
-										let lastLoaded = 0;
+										try {
+											let startTime = Date.now();
+											let lastLoaded = 0;
 
-										var res = await new Promise((s, j) => {
-											var xhr = base.xmlHttpRequest({
-												url, method: "GET", responseType: "arraybuffer",
-												headers: { ...headers, "Range": `bytes=${start}-${end}` },
-												onloadstart() {
-													startTime = Date.now();
-												},
-												onprogress: (progress) => {
-													totalLoaded += (progress.loaded - lastLoaded);
-													lastLoaded = progress.loaded;
-													let prog = (totalLoaded * 100 / size);
-													if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(prog, totalLoaded, size);
-												},
-												onload: (load) => {
-													status.requests.delete(xhr);
-													if (load.status == 204 && load.statusText === "IDM") return j(load);
-													if (load.status >= 200 && load.status < 300) s(load.response);
-													else j(load);
-												},
-												onerror: (error) => {
-													status.requests.delete(xhr);
-													j(error);
-												}
+											let res = await new Promise((s, j) => {
+												const xhr = base.xmlHttpRequest({
+													url, method: "GET", responseType: "arraybuffer",
+													headers: { ...headers, "Range": `bytes=${start}-${end}` },
+													onloadstart() {
+														startTime = Date.now();
+													},
+													onprogress: (progress) => {
+														totalLoaded += (progress.loaded - lastLoaded);
+														lastLoaded = progress.loaded;
+														const prog = (totalLoaded * 100 / size);
+														if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(prog, totalLoaded, size);
+													},
+													onload: (load) => {
+														status.requests.delete(xhr);
+														if (load.status == 204 && load.statusText === "IDM") return j(load);
+														if (load.status >= 200 && load.status < 300) s(load.response);
+														else j(load);
+													},
+													onerror: (error) => {
+														status.requests.delete(xhr);
+														j(error);
+													}
+												});
+												status.requests.add(xhr);
 											});
-											status.requests.add(xhr);
-										});
 
-										// 智能分块调整
-										var _duration = extra.duration || 1.5; // 目标
-										var duration = (Date.now() - startTime) / 1000 || 0.1;
-										var speed = _size / duration;
+											// 智能分块调整
+											const _duration = extra.duration || 1.5; // 目标
+											const duration = (Date.now() - startTime) / 1000 || 0.1;
+											const speed = _size / duration;
 
-										let nextChunk;
-										if (speed > status.maxSpeed * 0.9) {
-											// 如果速度在提升或维持高位，说明大块是有效的，即便超时也要大胆增加
-											// 目标是找到能让 speed 最大化的 chunk 大小
-											nextChunk = chunk * 1.5;
-											status.maxSpeed = Math.max(status.maxSpeed, speed);
-										} else if (duration < _duration * 0.5) {
-											// 跑得太快了，可以尝试再加一点
-											nextChunk = chunk * 1.2;
-										} else if (duration > _duration * 2) {
-											// 只有当耗时严重超过目标（比如超过 2 倍）且速度下降时，才收缩
-											nextChunk = chunk * 0.8;
-										} else {
-											// 稳定期
-											nextChunk = chunk;
+											let nextChunk;
+											if (speed > status.maxSpeed * 0.9) {
+												// 如果速度在提升或维持高位，说明大块是有效的，即便超时也要大胆增加
+												// 目标是找到能让 speed 最大化的 chunk 大小
+												nextChunk = chunk * 1.5;
+												status.maxSpeed = Math.max(status.maxSpeed, speed);
+											} else if (duration < _duration * 0.5) {
+												// 跑得太快了，可以尝试再加一点
+												nextChunk = chunk * 1.2;
+											} else if (duration > _duration * 2) {
+												// 只有当耗时严重超过目标（比如超过 2 倍）且速度下降时，才收缩
+												nextChunk = chunk * 0.8;
+											} else {
+												// 稳定期
+												nextChunk = chunk;
+											}
+
+											chunk = Math.max(minChunk, Math.min(maxChunk, chunk * 0.7 + nextChunk * 0.3));
+											chunk = Math.floor(chunk);
+
+											status.results.push({ index: _index, data: res });
+											res = null;
+											break;
+										} catch (e) {
+											await new Promise(r => setTimeout(r, 1000 * attempt));
+											attempt++;
+											if (attempt > maxRetry) throw e;
+										} finally {
+											// 释放线程计数
+											status.active--;
+											this.download.active--;
 										}
-
-										chunk = Math.max(minChunk, Math.min(maxChunk, chunk * 0.7 + nextChunk * 0.3));
-										chunk = Math.floor(chunk);
-
-										status.results.push({ index: _index, data: res });
-										res = null;
-										break;
-									} catch (e) {
-										await new Promise(r => setTimeout(r, 1000 * attempt));
-										attempt++;
-										if (attempt > maxRetry) throw e;
-									} finally {
-										// 释放线程计数
-										status.active--;
-										this.download.active--;
 									}
 								}
-							}
-						};
+							};
 
-						// 启动当前任务的并发线程，单任务最高 3 个
-						var maxThreads = Math.min(extra.thread || 3, 3);
-						await Promise.all(Array(maxThreads).fill(0).map(worker));
+							// 启动当前任务的并发线程，单任务最高 3 个
+							const maxThreads = Math.min(extra.thread || 3, 3);
+							await Promise.all(Array(maxThreads).fill(0).map(worker));
 
-						if (status.aborted) return;
-						if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(100, size, size);
+							if (status.aborted) return;
+							if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(100, size, size);
 
-						await new Promise(resolve => setTimeout(resolve, 0));
-						status.results.sort((a, b) => a.index - b.index);
+							await new Promise(resolve => setTimeout(resolve, 0));
+							status.results.sort((a, b) => a.index - b.index);
 
-						// 分段提取数据
-						async function getBlobData(results) {
-							var dataList = [];
-							var batchSize = 100; // 每处理 100 个分块释放一次主线程
-							for (let i = 0; i < results.length; i++) {
-								dataList.push(results[i].data);
-								if (i % batchSize === 0) {
-									await new Promise(resolve => setTimeout(resolve, 0));
+							// 分段提取数据
+							async function getBlobData(results) {
+								const dataList = [];
+								const batchSize = 100; // 每处理 100 个分块释放一次主线程
+								for (let i = 0; i < results.length; i++) {
+									dataList.push(results[i].data);
+									if (i % batchSize === 0) {
+										await new Promise(resolve => setTimeout(resolve, 0));
+									}
 								}
-							}
-							return dataList;
-						};
+								return dataList;
+							};
 
-						var finalData = await getBlobData(status.results);
-						status.results = null; // 释放内存引用
+							const finalData = await getBlobData(status.results);
+							status.results = null; // 释放内存引用
 
-						resolve({
-							status: 200,
-							statusText: "Ok!",
-							readyState: 4,
-							response: new Blob(finalData),
-							finalUrl: url
-						});
-					} else {
-						// 不支持 Range，回退
-						var xhr = base.xmlHttpRequest({
-							url: url, headers, method: "GET", responseType: "blob",
-							onprogress: (progress) => {
-								if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress((progress.loaded * 100 / progress.total), progress.loaded, progress.total);
-							},
-							onload: (load) => resolve(load),
-							onerror: (error) => reject(error)
-						});
-						status.requests.add(xhr);
+							resolve({
+								status: 200,
+								statusText: "Ok!",
+								readyState: 4,
+								response: new Blob(finalData),
+								finalUrl: url
+							});
+						} else {
+							// 不支持 Range，回退
+							const xhr = base.xmlHttpRequest({
+								url: url, headers, method: "GET", responseType: "blob",
+								onprogress: (progress) => {
+									if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress((progress.loaded * 100 / progress.total), progress.loaded, progress.total);
+								},
+								onload: (load) => resolve(load),
+								onerror: (error) => reject(error)
+							});
+							status.requests.add(xhr);
+						}
+					} catch (e) {
+						status.aborted = true;
+						reject(e);
+					} finally {
+						this.download.taskCount--; // 无论成功失败，任务退出
 					}
-				} catch (e) {
-					status.aborted = true;
-					reject(e);
-				} finally {
-					this.download.taskCount--; // 无论成功失败，任务退出
-				}
+				})();
 			});
 
 			promise.abort = () => {
@@ -1469,10 +1476,10 @@
 		 * @returns {Promise<"success"|"fail">} 连接状态结果
 		 */
 		async testConnectToAria2(domain, port, path, token) {
-			return new Promise((resolve, reject) => {
-				let rpc = { domain, port, path, token };
-				let url = `${rpc.domain}:${rpc.port}${rpc.path}`;
-				let rpcData = {
+			return new Promise((resolve) => {
+				const rpc = { domain, port, path, token };
+				const url = `${rpc.domain}:${rpc.port}${rpc.path}`;
+				const rpcData = {
 					id: new Date().getTime(),
 					jsonrpc: "2.0",
 					method: "aria2.getVersion",
@@ -1510,9 +1517,9 @@
 		 * @returns {Promise<"success"|"fail">} 连接状态结果
 		 */
 		async testConnectToABDM(domain, port) {
-			return new Promise((resolve, reject) => {
-				let rpc = { domain, port };
-				let url = `${rpc.domain}:${rpc.port}/ping`;
+			return new Promise((resolve) => {
+				const rpc = { domain, port };
+				const url = `${rpc.domain}:${rpc.port}/ping`;
 				base.xmlHttpRequest({
 					method: "POST", url, headers: {}, data: new Date().getTime(),
 					responseType: "text",
@@ -1563,9 +1570,9 @@
 		 */
 		stringify(obj) {
 			let str = "";
-			for (let key in obj) {
+			for (const key in obj) {
 				if (obj.hasOwnProperty(key)) {
-					let value = obj[key];
+					const value = obj[key];
 					if (Array.isArray(value)) {
 						for (let i = 0; i < value.length; i++) {
 							str += encodeURIComponent(key) + "=" + encodeURIComponent(value[i]) + "&";
@@ -1591,8 +1598,8 @@
 		 */
 		addStyle(id, tag = "style", css, element = `.${mount}`, position = "append") {
 			base.waitForKeyElements(element, (element) => {
-				let $styleDom = $(`[${mount}="${id}"], #${id}`);
-				let $style = $(`<${tag}>`, {
+				const $styleDom = $(`[${mount}="${id}"], #${id}`);
+				const $style = $(`<${tag}>`, {
 					rel: "stylesheet",
 					id: id,
 					[mount]: id
@@ -1631,9 +1638,9 @@
 				hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
 			}
 			// 解析 RGB 分量
-			let r = parseInt(hex.substring(0, 2), 16);
-			let g = parseInt(hex.substring(2, 4), 16);
-			let b = parseInt(hex.substring(4, 6), 16);
+			const r = parseInt(hex.substring(0, 2), 16);
+			const g = parseInt(hex.substring(2, 4), 16);
+			const b = parseInt(hex.substring(4, 6), 16);
 			let a = "";
 			// 如果是八位十六进制颜色值，解析 alpha 通道
 			if (hex.length === 8) {
@@ -1687,9 +1694,9 @@
 				cssText = cssText.replace(/url\s*\(\s*(['"]?)(.*?)\1\s*\)/g, (match, quote, url) => {
 					if (url && !/^(data:|https?:|\/\/)/i.test(url)) {
 						try {
-							let absoluteURL = new URL(url, baseURI).href;
+							const absoluteURL = new URL(url, baseURI).href;
 							return `url(${absoluteURL})`;
-						} catch (e) {
+						} catch {
 							return match;
 						}
 					}
@@ -1698,25 +1705,25 @@
 			}
 			// 处理默认颜色列表
 			config.base.dom.themes.forEach(item => {
-				let oldColor = item.color;
+				const oldColor = item.color;
 				cssText = cssText.replace(new RegExp(base.hexToRgba(oldColor), "ig"), base.hexToRgba(temp.color));
 				cssText = cssText.replace(new RegExp(oldColor, "ig"), temp.color);
 			});
 			// 处理 colorMap
 			if (type === "other") {
 				colorMap.forEach(function (colorPair) {
-					let oldColor = colorPair[0];
-					let newColor = colorPair[1];
+					const oldColor = colorPair[0];
+					const newColor = colorPair[1];
 					// 生成旧颜色的三种形式：原样、全大写、全小写
-					var variants = [
+					const variants = [
 						oldColor,
 						oldColor.toUpperCase(),
 						oldColor.toLowerCase()
 					];
 					// 使用 Set 去重
-					var uniqueVariants = [...new Set(variants)];
+					const uniqueVariants = [...new Set(variants)];
 					uniqueVariants.forEach(variant => {
-						var regex = new RegExp(variant, "g");
+						const regex = new RegExp(variant, "g");
 						cssText = cssText.replace(regex, newColor);
 					});
 				});
@@ -1724,19 +1731,19 @@
 			}
 			if (colorMap) {
 				colorMap.forEach(function (colorPair) {
-					let oldColor = colorPair[0];
-					let newColor = colorPair[1];
+					const oldColor = colorPair[0];
+					const newColor = colorPair[1];
 					// 生成三种形式
-					var variants = [
+					const variants = [
 						oldColor,
 						oldColor.toUpperCase(),
 						oldColor.toLowerCase()
 					];
-					var uniqueVariants = [...new Set(variants)];
+					const uniqueVariants = [...new Set(variants)];
 					if (oldColor.includes("#")) {
 						// 替换带属性块的情况（添加 transition）
 						uniqueVariants.forEach(variant => {
-							var regexWithBlock = new RegExp(variant + "(.*?)}", "gi");
+							const regexWithBlock = new RegExp(variant + "(.*?)}", "gi");
 							cssText = cssText.replace(regexWithBlock, newColor + "$1; transition:all.2s}");
 						});
 						// 最后再统一替换剩下的
@@ -1764,15 +1771,15 @@
 		adaptiveThemeOverride(colorMap, type) {
 			base.waitForKeyElements(`[${mount}^="${mount}-ColorUI-"], [id^="${mount}-ColorUI-"]`, function (tag) {
 				if (tag.html() === base.adaptiveStyleOverride(tag.text(), "", type, colorMap)) return;
-				let cssText = base.adaptiveStyleOverride(tag.text(), "", type, colorMap);
+				const cssText = base.adaptiveStyleOverride(tag.text(), "", type, colorMap);
 				base.addStyle(tag.attr(mount), "style", cssText, tag[0]);
 				return true;
 			}, true)
 			base.waitForKeyElements(`[data-pl-colored]`, function (tag) {
 				if (tag.attr("data-pl-colored") === temp.color) return;
-				let originalStyle = tag.attr("style");
+				const originalStyle = tag.attr("style");
 				if (!originalStyle) return;
-				let newStyle = base.adaptiveStyleOverride(originalStyle, "", type, colorMap);
+				const newStyle = base.adaptiveStyleOverride(originalStyle, "", type, colorMap);
 				if (newStyle !== originalStyle) {
 					tag.attr("style", newStyle);
 				}
@@ -1785,41 +1792,41 @@
 					let href = tag.attr("href");
 					try {
 						href = new URL(href, location.href).href;
-					} catch (e) {
+					} catch {
 						return;
 					}
 					fetch(href)
 						.then(response => response.text())
 						.then(responseText => {
-							let id = `${mount}-ColorUI-` + href.replace(/[^\w]/g, "_");
-							let cssText = base.adaptiveStyleOverride(responseText, href, type, colorMap);
+							const id = `${mount}-ColorUI-` + href.replace(/[^\w]/g, "_");
+							const cssText = base.adaptiveStyleOverride(responseText, href, type, colorMap);
 							if (responseText === base.adaptiveStyleOverride(responseText, href, type, colorMap)) return;
 							base.addStyle(id, "style", cssText, tag[0], "after");
 						})
 				}, true);
 				base.waitForKeyElements(`style:not([${mount}^="${mount}-"],[id^="swal-pub"],[class^="darkreader"])`, function (tag) {
 					let id = tag.attr(mount);
-					let text = tag.html()
+					const text = tag.html()
 					if (tag.data("styles") === text) return;
 					tag.data("styles", text);
 					// 替换颜色并添加样式
-					let cssText = base.adaptiveStyleOverride(text, "", type, colorMap);
+					const cssText = base.adaptiveStyleOverride(text, "", type, colorMap);
 					if (text === cssText) return;
 					id = id ? id : `${mount}-ColorUI-${count++}`
 					base.addStyle(id, "style", cssText, tag[0], "after");
 				}, true)
 				base.waitForKeyElements("svg", function (element) {
 					element.find("*").each((index, element) => {
-						let fill = $(element).attr("fill");
-						let stroke = $(element).attr("stroke");
+						const fill = $(element).attr("fill");
+						const stroke = $(element).attr("stroke");
 						if (fill) {
-							let newFill = base.adaptiveStyleOverride(fill, "", type, colorMap);
+							const newFill = base.adaptiveStyleOverride(fill, "", type, colorMap);
 							if (newFill !== fill) {
 								$(element).attr("fill", newFill);
 							}
 						}
 						if (stroke) {
-							let newStroke = base.adaptiveStyleOverride(stroke, "", type, colorMap);
+							const newStroke = base.adaptiveStyleOverride(stroke, "", type, colorMap);
 							if (newStroke !== stroke) {
 								$(element).attr("stroke", newStroke);
 							}
@@ -1829,9 +1836,9 @@
 				base.waitForKeyElements(`[style]:not([${mount}^="${mount}-"],[class*="listener-"])`, function (element) {
 					if (element.parent(`[class*="pl-"]`).length) return;
 					if (element.attr("data-pl-colored") === temp.color) return;
-					let originalStyle = element.attr("style");
+					const originalStyle = element.attr("style");
 					if (!originalStyle) return;
-					let newStyle = base.adaptiveStyleOverride(originalStyle, "", type, colorMap);
+					const newStyle = base.adaptiveStyleOverride(originalStyle, "", type, colorMap);
 					if (newStyle !== originalStyle) {
 						element.attr("style", newStyle);
 						element.attr("data-pl-colored", temp.color);
@@ -1863,12 +1870,12 @@
 		 * @returns {Boolean} - 若 a 比 b 更新，返回 true；否则返回 false
 		 */
 		isNewerVersion(a, b) {
-			let partsA = a.split(".").map(Number);
-			let partsB = b.split(".").map(Number);
-			let maxLength = Math.max(partsA.length, partsB.length);
+			const partsA = a.split(".").map(Number);
+			const partsB = b.split(".").map(Number);
+			const maxLength = Math.max(partsA.length, partsB.length);
 			for (let i = 0; i < maxLength; i++) {
-				let numA = partsA[i] || 0;
-				let numB = partsB[i] || 0;
+				const numA = partsA[i] || 0;
+				const numB = partsB[i] || 0;
 				if (numA > numB) return true;
 				if (numA < numB) return false;
 			}
@@ -1882,7 +1889,7 @@
 		 * @returns {String|null} 主版本号（如 `1`）或 `null`（格式错误时）
 		 */
 		getMajorVersion(version) {
-			let [major] = (version || "").split(".");
+			const [major] = (version || "").split(".");
 			return /^\d+$/.test(major) ? major : null;
 		},
 
@@ -1895,11 +1902,11 @@
 		 * @returns {Object|null} React 组件实例或 `null`
 		 */
 		findReact(dom, traverseUp = 0) {
-			let key = Object.keys(dom).find(key => {
+			const key = Object.keys(dom).find(key => {
 				return key.startsWith("__reactFiber$")
 					|| key.startsWith("__reactInternalInstance$");
 			});
-			let domFiber = dom[key];
+			const domFiber = dom[key];
 			if (domFiber == null) return null;
 			if (domFiber._currentElement) {
 				let compFiber = domFiber._currentElement._owner;
@@ -1908,7 +1915,7 @@
 				}
 				return compFiber._instance;
 			}
-			let GetCompFiber = fiber => {
+			const GetCompFiber = fiber => {
 				let parentFiber = fiber.return;
 				while (base.isType(parentFiber.type) == "string") {
 					parentFiber = parentFiber.return;
@@ -1952,7 +1959,7 @@
 		initConfigMigration(latest) {
 			try {
 				if (latest === 1) {
-					let mapping = {
+					const mapping = {
 						"setting_rpc_domain": ["setting_aria2_rpc", 0, "domain"],
 						"setting_rpc_port": ["setting_aria2_rpc", 0, "port"],
 						"setting_rpc_path": ["setting_aria2_rpc", 0, "path"],
@@ -1973,27 +1980,27 @@
 						"setting_theme_123": ["setting_ui_theme", "custom", "$123pan"]
 					};
 					// 旧版配置执行迁移
-					for (let oldKey in mapping) {
+					for (const oldKey in mapping) {
 						let val = base.getValue(oldKey);
 						if (val === undefined || val === null) continue;
 						val = (val === "no" ? false : val === "yes" ? true : val);
-						let path = mapping[oldKey];
+						const path = mapping[oldKey];
 						if (path.length === 1) {
 							base.setValue(path[0], val);
 						} else {
-							let [root, ...keys] = path;
+							const [root, ...keys] = path;
 							let obj = base.getValue(root);
 							if (obj === undefined || obj === null) {
-								let firstKeyType = typeof keys[0];
-								let isIndex = firstKeyType === "number" || (firstKeyType === "string" && /^\d+$/.test(keys[0]));
+								const firstKeyType = typeof keys[0];
+								const isIndex = firstKeyType === "number" || (firstKeyType === "string" && /^\d+$/.test(keys[0]));
 								obj = isIndex ? [] : {};
 							}
 							let ref = obj;
 							for (let i = 0; i < keys.length - 1; i++) {
-								let key = keys[i];
+								const key = keys[i];
 								if (!ref[key]) {
-									let nextKey = keys[i + 1];
-									let hasNextIndex = nextKey !== undefined && (base.isType(nextKey === "number" || (typeof nextKey) === "string" && /^\d+$/.test(nextKey)));
+									const nextKey = keys[i + 1];
+									const hasNextIndex = nextKey !== undefined && (base.isType(nextKey === "number" || (typeof nextKey) === "string" && /^\d+$/.test(nextKey)));
 									ref[key] = hasNextIndex ? [] : {};
 								}
 								ref = ref[key];
@@ -2018,7 +2025,7 @@
 		initDefaultConfig() {
 			if (base.getValue("setting_config_version") !== "1") base.initConfigMigration(1);
 			// 设置新结构的默认值（仅当未设置时）
-			let defaults = [
+			const defaults = [
 				{
 					name: "setting_idm_rpc",
 					value: [
@@ -2116,8 +2123,8 @@
 					if (typeof target !== "object" || Array.isArray(target)) {
 						return cloneDeep(source);
 					}
-					let result = { ...target };
-					for (let key in source) {
+					const result = { ...target };
+					for (const key in source) {
 						if (!source.hasOwnProperty(key)) continue;
 						// 跳过 default 的自动合并
 						if (key === "default") continue;
@@ -2134,9 +2141,9 @@
 					if (!Array.isArray(target)) {
 						return cloneDeep(source);
 					}
-					let result = [...target];
+					const result = [...target];
 					if (source.length > 0 && base.isType(source[0]) === "object" && source[0] !== null) {
-						let template = source[0];
+						const template = source[0];
 						// 填充字段
 						for (let i = 0; i < result.length; i++) {
 							if (base.isType(result[i]) === "object" && result[i] !== null) {
@@ -2160,7 +2167,7 @@
 				return target;
 			}
 			defaults.forEach(({ name, value }) => {
-				let current = base.getValue(name);
+				const current = base.getValue(name);
 				if (
 					current === null ||
 					current === undefined ||
@@ -2181,7 +2188,7 @@
 		 * @see {@link https://www.youxiaohou.com/zh-cn/motrix.html#使用指南 RPC 配置说明}、 {@link https://www.youxiaohou.com/zh-cn/curl.html cURL 使用教程}
 		 */
 		showSetting(event) {
-			let setting = $(`<div>
+			const setting = $(`<div>
 				<div style="text-align:center;">带星号的设置项目将在网页刷新后生效</div>
 				<label class="pl-setting-item listener-tip aria2" data-title="有关 IDM 服务的配置">
 					<div>IDM 服务器</div>
@@ -2219,7 +2226,7 @@
 				showConfirmButton: false,
 				footer: `<p><a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;&#47;&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;" target="_blank" class="pl-a"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;</a>&#32;&#30001;&#32;<a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;" target="_blank" class="pl-a">&#104;&#109;&#106;&#122;&#49;&#48;&#48;</a>&#32;&#21046;&#20316;</p><p>${config.base.dom.footer}</p>`,
 				didOpen: (toast) => {
-					let element = $(toast);
+					const element = $(toast);
 					if (event && Object.keys($(event.currentTarget).data()).some(key => key.startsWith("backTo"))) element.find(".swal2-close").addClass("listener-tip").attr("data-title", "返回上页").css({ "left": "0", "right": "auto" }).text("◃");
 					if (event && $(event.currentTarget).data("back-to-downloads")) element.find(".aria2, .bitcomet, .abdm, .other").hide();
 				},
@@ -2235,12 +2242,12 @@
 		 * @description 包含 RPC 配置的交互界面
 		 */
 		showIDMSetting(event) {
-			let IDMList = base.getValue("setting_idm_rpc");
-			let IDMOptions = IDMList.map((item, index) => {
+			const IDMList = base.getValue("setting_idm_rpc");
+			const IDMOptions = IDMList.map((item, index) => {
 				return `<option value="${index}"${item.default ? " selected" : ""}>${item.id ? item.id : "0"}</option>`;
 			}).join("");
 			let IDMSelected = IDMList.find(i => i.default);
-			let IDMSetting = `<div style="text-align:center;">适用于 IDM 推送下载</div>
+			const IDMSetting = `<div style="text-align:center;">适用于 IDM 推送下载</div>
 				<label class="pl-setting-item">
 					<div>默认配置</div>
 					<div>
@@ -2278,11 +2285,11 @@
 				showConfirmButton: false,
 				footer: `<p><a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;&#47;&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;" target="_blank" class="pl-a"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;</a>&#32;&#30001;&#32;<a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;" target="_blank" class="pl-a">&#104;&#109;&#106;&#122;&#49;&#48;&#48;</a>&#32;&#21046;&#20316;</p><p>${config.base.dom.footer}</p>`,
 				didOpen: (toast) => {
-					let element = $(toast);
+					const element = $(toast);
 					if (event && Object.keys($(event.currentTarget).data()).some(key => key.startsWith("backTo"))) element.find(".swal2-close").addClass("listener-tip").attr("data-title", "返回上页").css({ "left": "0", "right": "auto" }).text("◃");
 					if (IDMSelected) {
 						element.find(".listener-rpc-input").each(function () {
-							let type = $(this).data("type").split(".")[1];
+							const type = $(this).data("type").split(".")[1];
 							$(this).val(IDMSelected[type] || "");
 						});
 					} else {
@@ -2305,12 +2312,12 @@
 		 * @see {@link https://www.youxiaohou.com/zh-cn/motrix.html#使用指南 RPC 配置说明}
 		 */
 		showAria2Setting(event) {
-			let AriaList = base.getValue("setting_aria2_rpc");
-			let AriaOptions = AriaList.map((item, index) => {
+			const AriaList = base.getValue("setting_aria2_rpc");
+			const AriaOptions = AriaList.map((item, index) => {
 				return `<option value="${index}"${item.default ? " selected" : ""}>${item.domain ? item.domain : ""}:${item.port ? item.port : ""}${item.path ? item.path : ""}</option>`;
 			}).join("");
 			let AriaSelected = AriaList.find(i => i.default);
-			let Aria2Setting = `<div style="text-align:center;"><a href="https://www.youxiaohou.com/zh-cn/motrix.html#使用指南" target="_blank" class="pl-a" data-no-instant="1"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-link"></use></svg> RPC配置说明</a>，适用于 Aria2 推送下载</div>
+			const Aria2Setting = `<div style="text-align:center;"><a href="https://www.youxiaohou.com/zh-cn/motrix.html#使用指南" target="_blank" class="pl-a" data-no-instant="1"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-link"></use></svg> RPC配置说明</a>，适用于 Aria2 推送下载</div>
 				<label class="pl-setting-item">
 					<div>默认配置</div>
 					<div>
@@ -2352,11 +2359,11 @@
 				showConfirmButton: false,
 				footer: `<p><a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;&#47;&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;" target="_blank" class="pl-a"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;</a>&#32;&#30001;&#32;<a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;" target="_blank" class="pl-a">&#104;&#109;&#106;&#122;&#49;&#48;&#48;</a>&#32;&#21046;&#20316;</p><p>${config.base.dom.footer}</p>`,
 				didOpen: (toast) => {
-					let element = $(toast);
+					const element = $(toast);
 					if (event && Object.keys($(event.currentTarget).data()).some(key => key.startsWith("backTo"))) element.find(".swal2-close").addClass("listener-tip").attr("data-title", "返回上页").css({ "left": "0", "right": "auto" }).text("◃");
 					if (AriaSelected) {
 						element.find(".listener-rpc-input").each(function () {
-							let type = $(this).data("type").split(".")[1];
+							const type = $(this).data("type").split(".")[1];
 							$(this).val(AriaSelected[type] || "");
 						});
 					} else {
@@ -2378,12 +2385,12 @@
 		 * @description 包含 RPC 配置的交互界面
 		 */
 		showBitcometSetting(event) {
-			let BCList = base.getValue("setting_bitcomet_rpc");
-			let BCOptions = BCList.map((item, index) => {
+			const BCList = base.getValue("setting_bitcomet_rpc");
+			const BCOptions = BCList.map((item, index) => {
 				return `<option value="${index}"${item.default ? " selected" : ""}>${item.domain ? item.domain : ""}:${item.port ? item.port : ""}${item.path ? item.path : ""}</option>`;
 			}).join("");
 			let BCSelected = BCList.find(i => i.default);
-			let BitcometSetting = `<div style="text-align:center;">适用于比特彗星推送下载</div>
+			const BitcometSetting = `<div style="text-align:center;">适用于比特彗星推送下载</div>
 				<label class="pl-setting-item">
 					<div>默认配置</div>
 					<div>
@@ -2428,11 +2435,11 @@
 				showConfirmButton: false,
 				footer: `<p><a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;&#47;&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;" target="_blank" class="pl-a"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;</a>&#32;&#30001;&#32;<a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;" target="_blank" class="pl-a">&#104;&#109;&#106;&#122;&#49;&#48;&#48;</a>&#32;&#21046;&#20316;</p><p>${config.base.dom.footer}</p>`,
 				didOpen: (toast) => {
-					let element = $(toast);
+					const element = $(toast);
 					if (event && Object.keys($(event.currentTarget).data()).some(key => key.startsWith("backTo"))) element.find(".swal2-close").addClass("listener-tip").attr("data-title", "返回上页").css({ "left": "0", "right": "auto" }).text("◃");
 					if (BCSelected) {
 						element.find(".listener-rpc-input").each(function () {
-							let type = $(this).data("type").split(".")[1];
+							const type = $(this).data("type").split(".")[1];
 							$(this).val(BCSelected[type] || "");
 						});
 					} else {
@@ -2454,12 +2461,12 @@
 		 * @description 包含 RPC 配置的交互界面
 		 */
 		showABDMSetting(event) {
-			let ABList = base.getValue("setting_abdm_rpc");
-			let ABOptions = ABList.map((item, index) => {
+			const ABList = base.getValue("setting_abdm_rpc");
+			const ABOptions = ABList.map((item, index) => {
 				return `<option value="${index}"${item.default ? " selected" : ""}>${item.domain}:${item.port}</option>`;
 			}).join("");
 			let ABSelected = ABList.find(i => i.default);
-			let ABSetting = `<div style="text-align:center;">适用于 AB Download Manager 推送下载</div>
+			const ABSetting = `<div style="text-align:center;">适用于 AB Download Manager 推送下载</div>
 				<label class="pl-setting-item">
 					<div>默认配置</div>
 					<div>
@@ -2493,17 +2500,17 @@
 				showConfirmButton: false,
 				footer: `<p><a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;&#47;&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;" target="_blank" class="pl-a"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>&#76;&#105;&#110;&#107;&#83;&#119;&#105;&#102;&#116;</a>&#32;&#30001;&#32;<a href="&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;&#47;&#104;&#109;&#106;&#122;&#49;&#48;&#48;" target="_blank" class="pl-a">&#104;&#109;&#106;&#122;&#49;&#48;&#48;</a>&#32;&#21046;&#20316;</p><p>${config.base.dom.footer}</p>`,
 				didOpen: (toast) => {
-					let element = $(toast);
+					const element = $(toast);
 					if (event && Object.keys($(event.currentTarget).data()).some(key => key.startsWith("backTo"))) element.find(".swal2-close").addClass("listener-tip").attr("data-title", "返回上页").css({ "left": "0", "right": "auto" }).text("◃");
 					if (ABSelected) {
 						element.find(".listener-rpc-input").each(function () {
-							let type = $(this).data("type").split(".")[1];
+							const type = $(this).data("type").split(".")[1];
 							$(this).val(ABSelected[type] || "");
 						});
 					} else {
 						ABSelected[0].default = true;
 						base.setValue("setting_abdm_rpc", ABSelected);
-						ABSelected = BCList[0];
+						ABSelected = ABList[0];
 					}
 				},
 				willClose: () => {
@@ -2533,7 +2540,7 @@
 				}).join("")
 			}
 			function changeTheme() {
-				let themeList = [
+				const themeList = [
 					{ name: "百度网盘", key: "$baidu" },
 					{ name: "阿里云盘", key: "$aliyun" },
 					{ name: "移动云盘", key: "$mcloud" },
@@ -2550,7 +2557,7 @@
 					</label>`;
 				}).join("");
 			}
-			let beautify = $(`<div>
+			const beautify = $(`<div>
 				<div style="text-align:center;">带星号的美化项目将在网页刷新后生效</div>
 				<label class="pl-setting-item" style="justify-content:center"><div class="pl-color">${changeColor()}</div></label>
 				<div class="pl-setting-item"><div>替换界面配色为主题颜色*</div><div class="pl-checkboxies">${changeTheme()}</div></div>
@@ -2625,6 +2632,11 @@
 				</div>
 				<div class="block">(ﾉ◕ヮ◕)ﾉ 遇到 Bug 要记得去 <a class="pl-a" href="https://github.com/hmjz100/LinkSwift/issues" target="_blank">Github 议题</a> 向我报告哦~</div>
 				<div class="block">(o゜▽゜)o☆ 觉得好用？来一同完善本项目吧~ 欢迎提交<a class="pl-a" href="https://github.com/hmjz100/LinkSwift/pulls" target="_blank">拉取请求</a>为本项目做贡献~</div>
+				<div class="block">
+					<name>V1.1.3.1</name>
+					<div>
+					</div>
+				</div>
 				<div class="block">
 					<name>V1.1.3</name>
 					<div>
@@ -3152,14 +3164,14 @@
 			let currentTarget = null;
 
 			// 更新位置
-			var updatePosition = (x, y) => {
+			const updatePosition = (x, y) => {
 				if (!tooltip) return;
 				let X = x + 10;
 				let Y = y + 20;
-				let clientWidth = document.documentElement.clientWidth;
-				let clientHeight = document.documentElement.clientHeight;
-				let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
-				let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				const clientWidth = document.documentElement.clientWidth;
+				const clientHeight = document.documentElement.clientHeight;
+				const scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+				const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 				if (X + tooltip.offsetWidth > clientWidth + scrollLeft) {
 					X = clientWidth + scrollLeft - tooltip.offsetWidth;
 				}
@@ -3177,17 +3189,17 @@
 			};
 
 			// 内容渲染
-			var renderContent = (target) => {
-				var { title, size } = target.dataset;
-				let html = "";
+			const renderContent = (target) => {
+				const { title, } = target.dataset;
+				let html;
 
 				if (title) {
 					html = `<span>${title}</span>`;
 				} else {
-					var nameEl = target.querySelector(".name");
-					var sizeEl = target.querySelector(".size");
-					var name = nameEl ? nameEl.textContent : "";
-					var sizeText = sizeEl ? sizeEl.textContent : "";
+					const nameEl = target.querySelector(".name");
+					const sizeEl = target.querySelector(".size");
+					const name = nameEl ? nameEl.textContent : "";
+					const sizeText = sizeEl ? sizeEl.textContent : "";
 
 					html = `<span>${name}</span>`;
 					if (sizeText) {
@@ -3209,12 +3221,12 @@
 			};
 
 			// 事件处理
-			var handleMove = (e) => {
+			const handleMove = (e) => {
 				if (!currentTarget) return;
 
 				// 获取坐标，PointerEvent 统一了 clientX/Y
-				var x = e.pageX;
-				var y = e.pageY;
+				const x = e.pageX;
+				const y = e.pageY;
 
 				if (!ticking) {
 					// 使用 requestAnimationFrame 节流，确保每帧只更新一次位置
@@ -3226,8 +3238,8 @@
 				}
 			};
 
-			var handleOver = (e) => {
-				var target = e.target.closest(".listener-tip");
+			const handleOver = (e) => {
+				const target = e.target.closest(".listener-tip");
 				if (!target) return;
 
 				currentTarget = target;
@@ -3235,9 +3247,9 @@
 				updatePosition(e.pageX, e.pageY);
 			};
 
-			var handleOut = (e) => {
+			const handleOut = (e) => {
 				// 只有离开到非 tooltip/listener-tip 区域才隐藏
-				var related = e.relatedTarget;
+				const related = e.relatedTarget;
 				if (!related || !related.closest(".listener-tip, .pl-tooltip")) {
 					currentTarget = null;
 					if (tooltip) tooltip.style.display = "none";
@@ -3266,7 +3278,7 @@
 		 * iframe 的 src 设置为 "javascript:;" 以避免加载额外资源，提升性能。
 		 */
 		createIframe() {
-			let iframe = $(`<iframe style="padding:0;margin:0;display:block;display:none" src="javascript:;" id="downloadIframe"></iframe>`);
+			const iframe = $(`<iframe style="padding:0;margin:0;display:block;display:none" src="javascript:;" id="downloadIframe"></iframe>`);
 			temp.mount.append(iframe);
 		},
 
@@ -3282,9 +3294,9 @@
 
 
 			if (base.isType(configs) !== "array" && configs.length !== 2) return message.error("提示：<br/>配置解析失败~");
-			let list = (Array.isArray(configs[0]) ? configs[0] : []);
+			const list = (Array.isArray(configs[0]) ? configs[0] : []);
 			if (!list.length) return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
-			let {
+			const {
 				isFolder,
 				getFileName,
 				getFileSize,
@@ -3293,15 +3305,15 @@
 				convert = {},
 				tooltip = {}
 			} = (base.isType(configs[1]) === "object" ? configs[1] : {});
-			let content = $(`<div><div class="pl-main"></div><div class="pl-extra"></div></div>`);
+			const content = $(`<div><div class="pl-main"></div><div class="pl-extra"></div></div>`);
 			let allLink = [];
 			list.forEach((v, i) => {
 				i = i + 1;
 				if (isFolder(v)) return;
-				let filename = getFileName(v);
-				let size = getFileSize(v);
-				let dlink = getFileLink(v);
-				let mirror = base.isType(getFileMirror) !== "undefined" ? getFileMirror(getFileLink(v)) : undefined;
+				const filename = getFileName(v);
+				const size = getFileSize(v);
+				const dlink = getFileLink(v);
+				const mirror = base.isType(getFileMirror) !== "undefined" ? getFileMirror(getFileLink(v)) : undefined;
 				if (!dlink || !dlink.includes("http")) {
 					content.find(".pl-main").append(`<div class="pl-item">
 						<div class="pl-item-name listener-tip" data-size="${size}"><div class="name">${filename}</div><div class="size">${base.sizeFormat(size)}</div></div>
@@ -3328,7 +3340,7 @@
 						</div>`);
 					}
 					if (temp.mode === "curl") {
-						let finalink = base.convertLinkToCurl(dlink, filename, convert?.curl);
+						const finalink = base.convertLinkToCurl(dlink, filename, convert?.curl);
 						allLink.push(finalink);
 						content.find(".pl-main").append(`<div class="pl-item">
 							<div class="pl-item-name listener-tip" data-size="${size}"><div class="name">${filename}</div><div class="size">${base.sizeFormat(size)}</div></div>
@@ -3336,7 +3348,7 @@
 						</div>`);
 					}
 					if (temp.mode === "aria2") {
-						let finalink = base.convertLinkToAria2(dlink, filename, convert?.aria2);
+						const finalink = base.convertLinkToAria2(dlink, filename, convert?.aria2);
 						allLink.push(finalink);
 						content.find(".pl-main").append(`<div class="pl-item">
 							<div class="pl-item-name listener-tip" data-size="${size}"><div class="name">${filename}</div><div class="size">${base.sizeFormat(size)}</div></div>
@@ -3345,7 +3357,7 @@
 						</div>`);
 					}
 					if (temp.mode === "bitcomet") {
-						let finalink = base.convertLinkToBitComet(dlink, filename, convert?.bitcomet);
+						const finalink = base.convertLinkToBitComet(dlink, filename, convert?.bitcomet);
 						allLink.push(finalink);
 						content.find(".pl-main").append(`<div class="pl-item">
 							<div class="pl-item-name listener-tip" data-size="${size}"><div class="name">${filename}</div><div class="size">${base.sizeFormat(size)}</div></div>
@@ -3364,7 +3376,7 @@
 			});
 			allLink = (allLink ? allLink.join("\r\n") : "")
 			if (temp.mode === "api") {
-				let rpc = base.getValue("setting_idm_rpc").find(i => i.default);
+				const rpc = base.getValue("setting_idm_rpc").find(i => i.default);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary api listener-download-all enhance listener-tip" data-title="通过脚本跨域请求下载文件，已支持多线程、智能多分片，显示预估剩余时间、下载速度；<br/>具体线程取决于浏览器的限制，所以非<b>必要情况（例如系统环境无法安装程序）</b>下，不建议使用此功能!"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>全部增强下载 (Beta)</button>
 				<button class="pl-btn-primary pl-btn-default idm listener-send-rpc listener-tip" data-type="idm" data-title="通过 IDM 扩展的捕获协议，将链接推送至 IDM，理论上仅适用于版本较新的 IDM。<br/>使用前请确保您的 IDM 的 “设置” > “文件类型” > “接管下载文件扩展名” 里有上述文件的扩展名，若无请添加。"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-up"/></svg>全部推送至 IDM (Beta)</button>`);
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-warning idm listener-open-idm-setting listener-tip" data-title="${rpc.id}" data-back-to-downloads="true"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-gear"/></svg>修改服务参数</button>`);
@@ -3373,19 +3385,19 @@
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-warning curl listener-open-setting listener-tip" data-title="${temp.terminalType[base.getValue("setting_curl_terminal")]}" data-back-to-downloads="true"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-gear"/></svg>修改终端类型</button>`);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary curl listener-copy listener-tip" data-copy='${allLink}' data-title="点击复制全部 curl 命令行"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-copy"/></svg>复制全部命令行</button>`);
 			} else if (temp.mode === "aria2") {
-				let rpc = base.getValue("setting_aria2_rpc").find(i => i.default);
+				const rpc = base.getValue("setting_aria2_rpc").find(i => i.default);
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-warning aria2 listener-open-aria2-setting listener-tip" data-title="${rpc.domain + ":" + rpc.port + rpc.path}" data-back-to-downloads="true"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-gear"/></svg>修改服务参数</button>`);
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-success aria2 listener-rpc-task youxiaohou listener-tip" data-title="访问原作者的 Aria2 管理页面以查看下载任务，功能较少"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-list-check"/></svg>查看任务 (油小猴)</button>`);
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-success aria2 listener-rpc-task ariang listener-tip" data-title="访问 AriaNg 的官方 Demo 以查看下载任务，功能较多"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-list-check"/></svg>查看任务 (AriaNg)</button>`);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-default aria2 listener-send-rpc" data-type="aria2"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-up"/></svg>全部推送至下载器</button>`);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-info aria2 listener-copy listener-tip" data-copy='${allLink}' data-title="Aria2 没启用 RPC？点击复制 aria2c 命令行手动下载"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-copy"/></svg>复制全部命令行</button>`);
 			} else if (temp.mode === "bitcomet") {
-				let rpc = base.getValue("setting_bitcomet_rpc").find(i => i.default);
+				const rpc = base.getValue("setting_bitcomet_rpc").find(i => i.default);
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-warning bitcomet listener-open-bitcomet-setting listener-tip" data-title="${rpc.domain + ":" + rpc.port + rpc.path}" data-back-to-downloads="true"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-gear"/></svg>修改服务参数</button>`);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-default bitcomet listener-copy listener-tip" data-copy='${allLink}' data-title="点击复制全部 BC 链接"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-copy"/></svg>复制全部 BC 链接</button>`);
 				if (list.length >= 2) content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-info bitcomet listener-send-rpc listener-tip" data-type="bitcomet" data-title="除非 BC 链接无法调起比特彗星，否则不建议使用此方式<br/><br/>由于比特彗星内置的远程下载 Web API 服务代码存在缺陷，请求可能会随机出现“发送失败 - 服务器返回空请求”错误，实际上客户端已成功开始下载<br/>由于脚本无法准确判断请求是否真正成功，即使出现错误，也会提示“成功”"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-up"/></svg>全部推送至下载器</button>`);
 			} else if (temp.mode === "abdm") {
-				let rpc = base.getValue("setting_abdm_rpc").find(i => i.default);
+				const rpc = base.getValue("setting_abdm_rpc").find(i => i.default);
 				content.find(".pl-extra").append(`<button class="pl-btn-primary pl-btn-warning abdm listener-open-abdm-setting listener-tip" data-title="${rpc.domain + ":" + rpc.port}" data-back-to-downloads="true"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-gear"/></svg>修改服务参数</button>`);
 			}
 			function updateTooltip($element, value) {
@@ -3393,8 +3405,8 @@
 				$element.addClass("listener-tip");
 				if (value.startsWith("+")) {
 					// 追加模式：去掉开头的 "+"，然后拼接到现有 data-title
-					var newValue = value.substring(1);
-					var existingTitle = $element.attr("data-title") || "";
+					const newValue = value.substring(1);
+					const existingTitle = $element.attr("data-title") || "";
 					$element.attr("data-title", existingTitle + newValue);
 				} else {
 					// 替换模式
@@ -3405,7 +3417,7 @@
 			if (tooltip?.normal) updateTooltip(content.find(".normal"), tooltip.normal);
 			if (tooltip?.copy) updateTooltip(content.find(".copy"), tooltip.copy);
 			if (tooltip?.filename) updateTooltip(content.find(".filename"), tooltip.filename);
-			let html = content.html();
+			const html = content.html();
 			content.remove();
 			return html;
 		},
@@ -3430,11 +3442,11 @@
 		 */
 		getMirrorList(link, mirror, thread = 2) {
 			try {
-				let host = new URL(link).host;
-				let mirrors = [];
+				const host = new URL(link).host;
+				const mirrors = [];
 				for (let i = 0; i < mirror.length; i++) {
 					for (let j = 0; j < thread; j++) {
-						let item = link.replace(host, mirror[i]) + "&".repeat(j);
+						const item = link.replace(host, mirror[i]) + "&".repeat(j);
 						mirrors.push(item);
 					}
 				}
@@ -3472,9 +3484,9 @@
 			$doc.on("click", ".listener-open-beautify", () => {
 				base.showBeautify();
 			});
-			$doc.on("click", ".listener-unregister", async function (e) {
+			$doc.on("click", ".listener-unregister", async function () {
 				message.warning("正在“注入”设置项目...");
-				let list = base.getValue("setting_init");
+				const list = base.getValue("setting_init");
 				list.code = "";
 				list.license = "";
 				base.setValue("setting_init", list);
@@ -3485,33 +3497,33 @@
 				base.setValue("setting_curl_terminal", e.currentTarget.value);
 			});
 			$doc.on("click", ".listener-color", async function (e) {
-				let element = $(e.currentTarget).closest(".listener-color").length > 0 ? $(e.currentTarget).closest(".listener-color") : $(e.currentTarget);
-				let parent = element.closest(".pl-color");
-				let mask = element.find(".mask");
-				let color = element.data("color");
+				const element = $(e.currentTarget).closest(".listener-color").length > 0 ? $(e.currentTarget).closest(".listener-color") : $(e.currentTarget);
+				const parent = element.closest(".pl-color");
+				const mask = element.find(".mask");
+				const color = element.data("color");
 				if (color && parent.length > 0 && mask.length > 0) {
 					parent.find(".this").remove();
 					mask.append(`<div class="this"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-check"></use></svg></div>`);
-					let list = base.getValue("setting_ui_theme")
+					const list = base.getValue("setting_ui_theme")
 					list.color = color;
 					base.setValue("setting_ui_theme", list);
 					base.addPanLinkerStyle();
 				}
 			});
 			$doc.on("change", ".listener-theme", async function (e) {
-				let list = base.getValue("setting_ui_theme");
+				const list = base.getValue("setting_ui_theme");
 				list.custom[e.currentTarget.dataset.type] = e.currentTarget.checked;
 				base.setValue("setting_ui_theme", list);
 			});
 			$doc.on("click", ".listener-api-download.normal", async function (e) {
 				e.preventDefault();
-				let dataset = e.currentTarget.dataset;
-				let link = new URL(dataset.link);
+				const dataset = e.currentTarget.dataset;
+				const link = new URL(dataset.link);
 				$("#downloadIframe").attr("src", link.href);
 			});
 			$doc.on("click", ".pl-item-downing .stop", async function (e) {
-				var status = base._EventFactory(e);
-				let index = status.item.data("index");
+				const status = base._EventFactory(e);
+				const index = status.item.data("index");
 				if (temp.request[index]) {
 					temp.request[index].abort();
 					status.down_enhance_downing.find(".pl-progress .text").text("正在取消...");
@@ -3521,7 +3533,7 @@
 				}
 			});
 			$doc.on("click", ".pl-item-downing .back", async function (e) {
-				var status = base._EventFactory(e);
+				const status = base._EventFactory(e);
 				status.down_enhance_downing.find(".pl-progress .text").text("正在加载...");
 				status.down_enhance_downing.find(".pl-progress .text").css("white-space", "");
 				status.down_enhance_downing.find(".pl-progress .head").css("background", "");
@@ -3535,8 +3547,8 @@
 				status.link_message.hide();
 			});
 			$doc.on("click", ".listener-download-all", async function (e) {
-				let target = $(e.currentTarget);
-				let originalHtml = target.html();
+				const target = $(e.currentTarget);
+				const originalHtml = target.html();
 				$(".pl-item-link.enhance").each((index, element) => {
 					if ($(element).css("display") !== "none") {
 						$(element).click();
@@ -3548,8 +3560,8 @@
 				target.html(originalHtml);
 			});
 			$doc.on("click", ".listener-send-rpc", async function (e) {
-				let target = $(e.currentTarget);
-				let originalHtml = target.html();
+				const target = $(e.currentTarget);
+				const originalHtml = target.html();
 				$(`.listener-${target.data("type")}-download`).each((index, element) => {
 					if ($(element).attr("data-processing") !== "true") {
 						$(element).click();
@@ -3562,9 +3574,9 @@
 			});
 			$doc.on("click", ".listener-copy", async function (e) {
 				e.preventDefault();
-				let target = $(e.currentTarget);
-				let originalHtml = target.html();
-				let copy = target.data("copy");
+				const target = $(e.currentTarget);
+				const originalHtml = target.html();
+				const copy = target.data("copy");
 				if (copy) {
 					base.setClipboard(copy)
 					target.html(`<svg class="pl-icon"><use xlink:href="#pl-icon-fa-check"/></svg>复制成功`).animate({ opacity: "0.5" }, "slow");
@@ -3574,26 +3586,26 @@
 				}
 			});
 			$doc.on("click", ".listener-rpc-task.youxiaohou", function () {
-				let rpc = base.getValue("setting_aria2_rpc").find(i => i.default);
-				let isHttps = rpc.domain.startsWith("https://");
-				let url = `${isHttps ? "https" : "http"}://d.youxiaohou.com/?rpc=${base.encodeBase(JSON.stringify({ domain: rpc.domain, port: rpc.port }))}#${rpc.token}`;
+				const rpc = base.getValue("setting_aria2_rpc").find(i => i.default);
+				const isHttps = rpc.domain.startsWith("https://");
+				const url = `${isHttps ? "https" : "http"}://d.youxiaohou.com/?rpc=${base.encodeBase(JSON.stringify({ domain: rpc.domain, port: rpc.port }))}#${rpc.token}`;
 				GM_openInTab(url, { active: true, insert: true, setParent: true });
 			});
 			$doc.on("click", ".listener-rpc-task.ariang", function () {
-				let rpc = base.getValue("setting_aria2_rpc").find(i => i.default);
-				let isHttps = rpc.domain.startsWith("https://");
-				let url = `${isHttps ? "https" : "http"}://ariang.mayswind.net/latest/#!/settings/rpc/set?protocol=${isHttps ? "wss" : "ws"}&host=${rpc.domain.replace(/^(https?:\/\/)/, "")}&port=${rpc.port}&interface=${rpc.path.replace(/^\//, "")}&secret=${rpc.token}`;
+				const rpc = base.getValue("setting_aria2_rpc").find(i => i.default);
+				const isHttps = rpc.domain.startsWith("https://");
+				const url = `${isHttps ? "https" : "http"}://ariang.mayswind.net/latest/#!/settings/rpc/set?protocol=${isHttps ? "wss" : "ws"}&host=${rpc.domain.replace(/^(https?:\/\/)/, "")}&port=${rpc.port}&interface=${rpc.path.replace(/^\//, "")}&secret=${rpc.token}`;
 				GM_openInTab(url, { active: true, insert: true, setParent: true });
 			});
-			$doc.on("change", ".listener-rpc-select", async function (e) {
-				let element = $(this);
-				let selectedIndex = element.val();
-				let type = element.data("type");
-				let list = base.getValue(`setting_${type}_rpc`);
+			$doc.on("change", ".listener-rpc-select", async function () {
+				const element = $(this);
+				const selectedIndex = element.val();
+				const type = element.data("type");
+				const list = base.getValue(`setting_${type}_rpc`);
 				if (selectedIndex === "new") {
 					return $(".listener-rpc-input").val("");
 				} else if (list[selectedIndex]) {
-					list.forEach((item, index) => {
+					list.forEach((item,) => {
 						if (item.default) {
 							delete item.default;
 						}
@@ -3601,20 +3613,20 @@
 					list[selectedIndex].default = true;
 					base.setValue(`setting_${type}_rpc`, list);
 					$(".listener-rpc-input").each((index, element) => {
-						let type = $(element).data("type").split(".")[1];
+						const type = $(element).data("type").split(".")[1];
 						$(element).val(list[selectedIndex][type] || "");
 					});
 				}
 			});
-			$doc.on("input", ".listener-rpc-input", async function (e) {
+			$doc.on("input", ".listener-rpc-input", async function () {
 				let type = $(this).data("type");
 				if (!type) return;
 				type = type.split(".")
-				let list = base.getValue(`setting_${type[0]}_rpc`);
-				let value = $(this).val();
+				const list = base.getValue(`setting_${type[0]}_rpc`);
+				const value = $(this).val();
 				let selectedIndex = $(".listener-rpc-select option:selected").val();
 				if (selectedIndex === "new") {
-					list.forEach((item, index) => {
+					list.forEach((item,) => {
 						if (item.default) {
 							delete item.default;
 						}
@@ -3630,8 +3642,8 @@
 				}
 				list[selectedIndex][type[1]] = value;
 				base.setValue(`setting_${type[0]}_rpc`, list)
-				let select = $(".listener-rpc-select");
-				let options = "";
+				const select = $(".listener-rpc-select");
+				let options;
 				if (type[0] === "idm") {
 					options = list.map((item, index) => {
 						return `<option value="${index}"${item.default ? " selected" : ""}>${item.id ? item.id : "0"}</option>`;
@@ -3643,48 +3655,48 @@
 				};
 				select.html(`${options}<option value="new">+ 创建新项目</option>`);
 			});
-			$doc.on("click", ".listener-rpc-delete", async function (e) {
-				let type = $(this).data("type");
+			$doc.on("click", ".listener-rpc-delete", async function () {
+				const type = $(this).data("type");
 				let list = base.getValue(`setting_${type}_rpc`);
-				let selectedIndex = parseInt($(".listener-rpc-select option:selected").val(), 10);
+				const selectedIndex = parseInt($(".listener-rpc-select option:selected").val(), 10);
 				if (selectedIndex === "new" || !confirm("您确定要删除此项目吗？")) return;
 				list = list.filter((_, i) => i !== selectedIndex);
 				if (list.length === 0) return alert("至少保留一个配置");
-				let newDefaultIndex = selectedIndex === 0 ? 0 : selectedIndex - 1;
+				const newDefaultIndex = selectedIndex === 0 ? 0 : selectedIndex - 1;
 				list[newDefaultIndex].default = true;
 				base.setValue(`setting_${type}_rpc`, list);
-				let select = $(".listener-rpc-select");
-				let options = list.map((item, index) => {
+				const select = $(".listener-rpc-select");
+				const options = list.map((item, index) => {
 					return `<option value="${index}"${item.default ? " selected" : ""}>${item.domain ? item.domain : ""}:${item.port ? item.port : ""}${item.path ? item.path : ""}</option>`;
 				}).join("");
 				select.html(`${options}<option value="new">+ 创建新项目</option>`);
 				$(".listener-rpc-input").each(function () {
-					let key = $(this).data("type").split(".")[1];
+					const key = $(this).data("type").split(".")[1];
 					$(this).val(list[newDefaultIndex][key] || "");
 				});
 			});
-			$doc.on("click", ".listener-rpc-test", async function (e) {
-				let element = $(this);
-				let type = element.data("type");
-				let selectedIndex = $(".listener-rpc-select option:selected").val();
-				let list = base.getValue(`setting_${type}_rpc`);
-				let text = element.find("span");
-				let originalHtml = text.html();
+			$doc.on("click", ".listener-rpc-test", async function () {
+				const element = $(this);
+				const type = element.data("type");
+				const selectedIndex = $(".listener-rpc-select option:selected").val();
+				const list = base.getValue(`setting_${type}_rpc`);
+				const text = element.find("span");
+				const originalHtml = text.html();
 				if (selectedIndex === "new" || element.data("testing") === "true") return;
 				if (list[selectedIndex]) {
 					element.data("testing", "true");
 					text.html("等待");
 					element.css({ "opacity": "0.9" });
-					let selected = list.find(i => i.default);
+					const selected = list.find(i => i.default);
 					let result = "fail"
 					if (type === "aria2") {
-						let domain = selected.domain,
+						const domain = selected.domain,
 							port = selected.port,
 							path = selected.path,
 							token = selected.token;
 						result = await base.testConnectToAria2(domain, port, path, token);
 					} else if (type === "abdm") {
-						let domain = selected.domain,
+						const domain = selected.domain,
 							port = selected.port;
 						result = await base.testConnectToABDM(domain, port);
 					}
@@ -4033,7 +4045,7 @@ a.pl-item-link:hover {
 	background-image: linear-gradient(45deg,hsla(0,0%,100%,.15) 25%,transparent 0,transparent 50%,hsla(0,0%,100%,.15) 0,hsla(0,0%,100%,.15) 75%,transparent 0,transparent);
 	background-size: 3vh 3vh;
 	-webkit-animation: 1s linear reverse infinite progress-bar-stripes;
-    animation: 1s linear reverse infinite progress-bar-stripes;
+	animation: 1s linear reverse infinite progress-bar-stripes;
 }
 @-webkit-keyframes progress-bar-stripes {
 	from {
@@ -4609,38 +4621,38 @@ body.swal2-height-auto {
 }
 
 ::-webkit-selection {
-    background-color: var(--pl-c);
-    color: #EBE6E3
+	background-color: var(--pl-c);
+	color: #EBE6E3
 }
 
 ::-moz-selection {
-    background-color: var(--pl-c);
-    color: #EBE6E3
+	background-color: var(--pl-c);
+	color: #EBE6E3
 }
 
 ::selection {
-    background-color: var(--pl-c);
-    color: #EBE6E3
+	background-color: var(--pl-c);
+	color: #EBE6E3
 }
 
 input::-webkit-selection,textarea::-webkit-selection {
-    background-color: rgba(100,100,100,.4);
-    color: rgba(0,0,0,.87)
+	background-color: rgba(100,100,100,.4);
+	color: rgba(0,0,0,.87)
 }
 
 input::-moz-selection,textarea::-moz-selection {
-    background-color: rgba(100,100,100,.4);
-    color: rgba(0,0,0,.87)
+	background-color: rgba(100,100,100,.4);
+	color: rgba(0,0,0,.87)
 }
 
 input::-moz-selection,textarea::-moz-selection {
-    background-color: rgba(100,100,100,.4);
-    color: rgba(0,0,0,.87)
+	background-color: rgba(100,100,100,.4);
+	color: rgba(0,0,0,.87)
 }
 
 input::selection,textarea::selection {
-    background-color: rgba(100,100,100,.4);
-    color: rgba(0,0,0,.87)
+	background-color: rgba(100,100,100,.4);
+	color: rgba(0,0,0,.87)
 }
 
 /* 适配（改）百度网盘会员青春版 */
@@ -4682,7 +4694,7 @@ button.downloadSubtitle:disabled {
 		 * @returns {Promise<void>} 弹窗关闭后返回空值，可能触发页面刷新
 		 */
 		async showInitDialog() {
-			var dialog = await Swal.fire({
+			const dialog = await Swal.fire({
 				...temp.swalDefault,
 				title: `(◍•ᴗ•◍)/ 你好呀`,
 				html: `<div class="pl-init-content">
@@ -4724,7 +4736,7 @@ button.downloadSubtitle:disabled {
 			if (dialog.isDenied) {
 				message.warning("正在“注入”设置项目...");
 				await base.sleep(2500);
-				let list = base.getValue("setting_init");
+				const list = base.getValue("setting_init");
 				list.code = config.base.num;
 				list.license = config.base.license;
 				base.setValue("setting_init", list);
@@ -4760,7 +4772,7 @@ button.downloadSubtitle:disabled {
 					allowOutsideClick: false,
 				});
 				await base.sleep(3000)
-				let list = base.getValue("setting_init");
+				const list = base.getValue("setting_init");
 				list.code = config.base.num;
 				list.license = config.base.license;
 				base.setValue("setting_init", list);
@@ -4818,34 +4830,34 @@ button.downloadSubtitle:disabled {
 		 */
 		waitForKeyElements(selectorElem, actionFunction, bWaitOnce, iframeSelector, controlKey) {
 			// 初始化管理器
-			var manager = this.waitForKeyElements.manager || (
+			const manager = this.waitForKeyElements.manager || (
 				this.waitForKeyElements.manager = {
 					observers: new WeakMap(),
 					tasks: new Map(),
 					instanceCounter: 0
 				}
 			);
-			var targetDoc = iframeSelector
+			const targetDoc = iframeSelector
 				? $(iframeSelector).get(0)?.contentDocument
 				: document;
 			if (!targetDoc) return; // 无效文档直接返回
 			// 生成唯一控制键
 			controlKey = controlKey || `wkfe_${manager.instanceCounter++}`;
 			// 清理重复任务
-			var existingTask = manager.tasks.get(controlKey);
+			const existingTask = manager.tasks.get(controlKey);
 			if (existingTask) {
 				existingTask.observer.disconnect();
 				manager.tasks.delete(controlKey);
 			}
 			// 创建MutationObserver回调
-			var processElements = () => {
-				var elements = $(selectorElem, targetDoc);
+			const processElements = () => {
+				const elements = $(selectorElem, targetDoc);
 				let foundActive = false;
 				elements.each((i, el) => {
-					var jEl = $(el);
-					var isproc = jEl.data(controlKey);
+					const jEl = $(el);
+					const isproc = jEl.data(controlKey);
 					if (isproc) return true; // 跳过已处理元素
-					var cancelAction = actionFunction(jEl);
+					const cancelAction = actionFunction(jEl);
 					if (cancelAction) {
 						foundActive = true;
 					} else if (bWaitOnce) {
@@ -4859,7 +4871,7 @@ button.downloadSubtitle:disabled {
 				}
 			};
 			// 创建Observer实例
-			var observer = new MutationObserver(processElements);
+			const observer = new MutationObserver(processElements);
 			// 配置并启动观察
 			observer.observe(targetDoc.documentElement, {
 				childList: true,
@@ -4884,8 +4896,8 @@ button.downloadSubtitle:disabled {
 		 * @param {Event} event - 元素状态
 		 */
 		_EventFactory(event) {
-			let target = $(event.target);
-			let item = target.parents(".pl-item");
+			const target = $(event.target);
+			const item = target.parents(".pl-item");
 			return {
 				target, item,
 				down_normal: item.find(".pl-item-link.normal"),
@@ -4903,24 +4915,24 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $baidu = {
+	const $baidu = {
 		async getToken() {
 			try {
 				$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取授权状态~</div>`);
 				// 获取授权状态
-				let authorize = await base.getFinal(config.$baidu.api.getAccessToken, { Origin: "", Referer: "" }, true);
+				const authorize = await base.getFinal(config.$baidu.api.getAccessToken, { Origin: "", Referer: "" }, true);
 				let accessToken = "";
 				// 判断授权情况
 				if (authorize.includes("authorize")) {
 					$doc.find(".loading-popup .loading-title").html(`授权获取中`);
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取授权页面~</div>`);
 					// 没授权，先获取授权的页面
-					let html = await base.get(config.$baidu.api.getAccessToken, {}, "text", false);
+					const html = await base.get(config.$baidu.api.getAccessToken, {}, "text", false);
 					// 提取页面的发送确认授权的参数
-					let bdstoken = html.match(/name="bdstoken"\s+value="([^"]+)"/)?.[1];
-					let client_id = html.match(/name="client_id"\s+value="([^"]+)"/)?.[1];
-					let data = {
+					const bdstoken = html.match(/name="bdstoken"\s+value="([^"]+)"/)?.[1];
+					const client_id = html.match(/name="client_id"\s+value="([^"]+)"/)?.[1];
+					const data = {
 						grant_permissions_arr: "netdisk",
 						bdstoken: bdstoken,
 						client_id: client_id,
@@ -4932,36 +4944,36 @@ button.downloadSubtitle:disabled {
 					// 发送请求达到自动进行授权
 					await base.post(config.$baidu.api.getAccessToken, base.stringify(data), { Origin: "", Referer: "", "Content-Type": "application/x-www-form-urlencoded" });
 					// 再次获取授权状态
-					let res2 = await base.getFinal(config.$baidu.api.getAccessToken, { Origin: "", Referer: "" }, true);
+					const res2 = await base.getFinal(config.$baidu.api.getAccessToken, { Origin: "", Referer: "" }, true);
 					accessToken = res2.match(/access_token=([^&]+)/)?.[1];
 				} else if (authorize.includes("access_token=")) {
 					accessToken = authorize.match(/access_token=([^&]+)/)?.[1];
 				}
 				// 统一处理令牌结果
 				$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
-				if (!!accessToken) {
+				if (accessToken) {
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>授权成功，令牌已缓存~</div>`);
 					base.setValue("baidu_access_token", accessToken);
 					return accessToken;
 				} else return "";
-			} catch (error) {
+			} catch {
 				return "";
 			}
 		},
 		async getShareData() {
 			// 前置
-			let url = new URL(location.href);
-			let locals = unsafeWindow?.locals?.dump?.();
+			const url = new URL(location.href);
+			const locals = unsafeWindow?.locals?.dump?.();
 
 			// 参数们
-			let surl = url.pathname.split('/').pop().replace(/^1(.{22})$/, '$1');
-			let pwd = localStorage.getItem(`${surl}_pwd`) || url.searchParams.get('pwd');
-			let baidu_id = document?.cookie?.split?.('BAIDUID=')?.[1]?.split?.(';')?.[0];
-			let share_uk = locals?.share_uk?.value;
-			let share_id = locals?.shareid?.value;
-			let bds_token = locals?.bdstoken?.value;
-			let js_token = unsafeWindow?.jsToken;
-			let se_key = unsafeWindow?.currentSekey || unsafeWindow?.cache?.list?.config?.params?.sekey;
+			const surl = url.pathname.split('/').pop().replace(/^1(.{22})$/, '$1');
+			const pwd = localStorage.getItem(`${surl}_pwd`) || url.searchParams.get('pwd');
+			const baidu_id = document?.cookie?.split?.('BAIDUID=')?.[1]?.split?.(';')?.[0];
+			const share_uk = locals?.share_uk?.value;
+			const share_id = locals?.shareid?.value;
+			const bds_token = locals?.bdstoken?.value;
+			const js_token = unsafeWindow?.jsToken;
+			const se_key = unsafeWindow?.currentSekey || unsafeWindow?.cache?.list?.config?.params?.sekey;
 
 			return {
 				share: {
@@ -4992,7 +5004,7 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".pl-button-save", async function (e) {
 				e.preventDefault();
-				let selections = temp.main.getSelectedList();
+				const selections = temp.main.getSelectedList();
 				if (selections.length === 0) {
 					return message.error("提示：<br/>请勾选要保存到网盘的文件哦~");
 				}
@@ -5002,8 +5014,8 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -5021,23 +5033,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, { "User-Agent": config.$baidu.api.ua.downloadLink, "Origin": "", "Referer": "" }, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -5045,14 +5057,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -5081,14 +5093,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "User-Agent": config.$baidu.api.ua.downloadLink });
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "User-Agent": config.$baidu.api.ua.downloadLink });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -5098,14 +5110,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`User-Agent:${config.$baidu.api.ua.downloadLink}`]);
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`User-Agent:${config.$baidu.api.ua.downloadLink}`]);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -5115,14 +5127,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "user_agent": config.$baidu.api.ua.downloadLink });
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "user_agent": config.$baidu.api.ua.downloadLink });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -5132,14 +5144,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), { "User-Agent": config.$baidu.api.ua.downloadLink });
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), { "User-Agent": config.$baidu.api.ua.downloadLink });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -5252,11 +5264,11 @@ button.downloadSubtitle:disabled {
 				if (tag.attr("linked")) return;
 				if (tag.attr("href")) {
 					try {
-						let url = new URL(tag.closest("a").attr("href"));
+						const url = new URL(tag.closest("a").attr("href"));
 						url.search = "";
 						url.hash = url.hash.replace(/\?(.*?)(#|$)/, "$2")
 						tag.attr("href", url.href)
-					} catch (e) { }
+					} catch { }
 				}
 				tag.attr("linked", true)
 			}, true);
@@ -5264,11 +5276,11 @@ button.downloadSubtitle:disabled {
 				if (tag.attr("linked")) return;
 				if (tag.closest("a").attr("href")) {
 					try {
-						let url = new URL(tag.closest("a").attr("href"));
+						const url = new URL(tag.closest("a").attr("href"));
 						url.search = "";
 						url.hash = url.hash.replace(/\?(.*?)(#|$)/, "$2")
 						tag.closest("a").attr("href", url.href)
-					} catch (e) { }
+					} catch { }
 				}
 				if (tag.is(`:contains("插件"), :contains("相册"), :contains("笔记")`) && tag.closest("a").attr("target") !== "_blank") {
 					tag.closest("a").fadeOut();
@@ -5279,9 +5291,9 @@ button.downloadSubtitle:disabled {
 			}, true);
 			base.waitForKeyElements(`dd[node-type="header-link"]`, function (tag) {
 				tag.children().each((index, element) => {
-					let tag = $(element);
+					const tag = $(element);
 					if (!tag.attr("node-type")) return;
-					let type = tag.attr("node-type");
+					const type = tag.attr("node-type");
 					if (
 						type !== "disk-home" &&
 						type !== "mbox-homepage" &&
@@ -5543,7 +5555,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$baidu.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="g-dropdown-button pl-button">
+				const $button = $(`<div class="g-dropdown-button pl-button">
 					<div class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#EBE6E3;"></em><span class="text" style="width:60px;">下载助手</span></span></div>
 					<div class="menu" style="color:${temp.color};border-color:${temp.color};width:auto;z-index:41;">
 						<div class="g-button-menu pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg> API 下载</div>
@@ -5561,7 +5573,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$baidu.mount.main, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "main") return;
-				let $button = $(`<div class="wp-s-agile-tool-bar__h-group pl-button">
+				const $button = $(`<div class="wp-s-agile-tool-bar__h-group pl-button">
 					<div class="wp-s-agile-tool-bar__h-action is-need-left-sep is-main color-button">
 						<button type="button" class="u-button nd-file-list-toolbar-action-item u-button--primary u-button--small is-round is-has-icon pl-button color-button">
 							<i class="u-icon u-icon-download"></i>
@@ -5584,7 +5596,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$baidu.mount.main, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "youth") return;
-				let $button = $(`<div class="wp-s-agile-tool-bar__h-group pl-button">
+				const $button = $(`<div class="wp-s-agile-tool-bar__h-group pl-button">
 					<div class="wp-s-agile-tool-bar__h-action is-need-left-sep is-main color-button">
 						<button type="button" class="u-button nd-file-list-toolbar-action-item u-button--primary u-button--small is-round is-has-icon pl-button color-button" style="font-size:14px;font-weight:700">
 							<i class="u-icon u-icon-more"></i>
@@ -5602,7 +5614,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$baidu.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<a class="g-button tools-share-V20-btn save_btn pl-button color-button" style="padding:0;">
+				const $button = $(`<a class="g-button tools-share-V20-btn save_btn pl-button color-button" style="padding:0;">
 					<span class="g-button-right" style="padding-left:10px">
 						<em class="icon icon-download" style="color:#fff;line-height:27px"></em>
 						<span class="text" style="width:auto;">下载助手</span>
@@ -5626,14 +5638,14 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$baidu.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="g-dropdown-button pl-button-init" style="opacity:0.5"><div style="color:#EBE6E3;" class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#EBE6E3;"></em><span class="text" style="width:60px;">点我点亮</span></span></div></div>`);
+				const $button = $(`<div class="g-dropdown-button pl-button-init" style="opacity:0.5"><div style="color:#EBE6E3;" class="g-button g-button-blue color-button"><span class="g-button-right"><em class="icon icon-download" style="color:#EBE6E3;"></em><span class="text" style="width:60px;">点我点亮</span></span></div></div>`);
 				$button.click(base.showInitDialog);
 				element.prepend($button);
 			})
 			base.waitForKeyElements(config.$baidu.mount.main, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || (temp.page !== "main" && temp.page !== "youth")) return;
-				let $button = $(`<div class="wp-s-agile-tool-bar__h-group pl-button-init">
+				const $button = $(`<div class="wp-s-agile-tool-bar__h-group pl-button-init">
 					<div class="wp-s-agile-tool-bar__h-action is-need-left-sep is-main color-button">
 						<button type="button" class="u-button nd-file-list-toolbar-action-item u-button--primary u-button--small is-round is-has-icon pl-button color-button" style="font-size:14px;font-weight:700">
 							<i class="u-icon u-icon-download"></i>
@@ -5647,7 +5659,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$baidu.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<a class="g-button tools-share-V20-btn save_btn pl-button-init color-button" href="javascript:;">
+				const $button = $(`<a class="g-button tools-share-V20-btn save_btn pl-button-init color-button" href="javascript:;">
 					<span class="g-button-right">
 						<em class="icon icon-download" style="color:#EBE6E3;line-height:27px"></em>
 						<span class="text" style="width:auto;">点我点亮</span>
@@ -5748,7 +5760,7 @@ button.downloadSubtitle:disabled {
 				url.searchParams.set("logid", base.encodeBase(sData.baidu.id));
 				url.searchParams.set("jsToken", sData.jsToken);
 
-				let data = new URLSearchParams({
+				const data = new URLSearchParams({
 					"encrypt": 0,
 					"product": "share",
 					"uk": sData.share.uk,
@@ -5766,7 +5778,7 @@ button.downloadSubtitle:disabled {
 						return message.error("提示：<br/>访问令牌已过期，再获取一次吧~<br/>代码：" + res.errno);
 					}
 					if (res.errno || res?.errmsg) {
-						batch.forEach(item => item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`);
+						item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`;
 					} else {
 						return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
 					}
@@ -5788,17 +5800,17 @@ button.downloadSubtitle:disabled {
 			let cnt = 0;
 			async function get(targets) {
 				let files = [];
-				for (let dir of targets) {
+				for (const dir of targets) {
 					$doc.find(".loading-popup .loading-title").html(`文件获取中`);
-					let url = `${config.$baidu.api.getFiles}&dir=${encodeURIComponent(dir.path)}&access_token=${accessToken}`;
-					let res = await base.get(url, { "User-Agent": config.$baidu.api.ua.downloadLink });
+					const url = `${config.$baidu.api.getFiles}&dir=${encodeURIComponent(dir.path)}&access_token=${accessToken}`;
+					const res = await base.get(url, { "User-Agent": config.$baidu.api.ua.downloadLink });
 					cnt++;
 					if (res?.list?.length && (res.errno === 0 || res.errmsg === "succ")) {
-						let subFiles = res.list.filter(f => !f.isdir);
+						const subFiles = res.list.filter(f => !f.isdir);
 						proc += subFiles.length;
 						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} 个文件~</div><div>${dir.path}</div>`);
 						files = files.concat(subFiles);
-						let subDirs = res.list.filter(f => f.isdir);
+						const subDirs = res.list.filter(f => f.isdir);
 						if (subDirs.length > 0) {
 							files = files.concat(await get(subDirs));
 						}
@@ -5823,8 +5835,8 @@ button.downloadSubtitle:disabled {
 				await base.sleep(3300);
 				GM_openInTab(config.$baidu.api.getAccessToken, { active: true, insert: true, setParent: true })
 				let attempts = 0;
-				let interval = setInterval(() => {
-					if (!!base.getValue("baidu_access_token")) {
+				const interval = setInterval(() => {
+					if (base.getValue("baidu_access_token")) {
 						clearInterval(interval);
 						token = base.getValue("baidu_access_token")
 					}
@@ -5838,13 +5850,14 @@ button.downloadSubtitle:disabled {
 			}
 
 			// 获取选择的文件列表
-			let selects = this.getSelectedList();
+			const selects = this.getSelectedList();
 			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 
 			$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 
-			let files = selects.filter(f => !f.isdir), dirs = selects.filter(f => f.isdir);
+			let files = selects.filter(f => !f.isdir);
+			const dirs = selects.filter(f => f.isdir);
 			if (temp.page === "home" || temp.page === "main") {
 				if (dirs.length > 0) files = files.concat(await this.getFilesList(dirs, token, files.length));
 				if (!files.length) return message.error("提示：<br/>文件夹是空的哦~");
@@ -5854,9 +5867,9 @@ button.downloadSubtitle:disabled {
 
 				files = await this.getFilesUrl(files, token);
 			} else if (temp.page === "share") {
-				let shareData = await this.getShareData();
+				const shareData = await this.getShareData();
 
-				let sign = await base.get(`${config.$baidu.api.getShareSign}&surl=1${shareData.share.url}$bdstoken=${shareData.baidu.token}&logid=${base.encodeBase(shareData.baidu.id)}`);
+				const sign = await base.get(`${config.$baidu.api.getShareSign}&surl=1${shareData.share.url}$bdstoken=${shareData.baidu.token}&logid=${base.encodeBase(shareData.baidu.id)}`);
 				if (sign?.data?.sign && sign?.data?.timestamp) {
 					shareData.sign = sign.data.sign;
 					shareData.timestamp = sign.data.timestamp;
@@ -5873,7 +5886,7 @@ button.downloadSubtitle:disabled {
 				getFileSize: v => v.size,
 				getFileLink: v => {
 					if (!v.dlink || !v.dlink.startsWith("http")) return v.dlink;
-					let url = new URL(v.dlink);
+					const url = new URL(v.dlink);
 					url.searchParams.set("access_token", token);
 					return url.href;
 				},
@@ -5890,15 +5903,15 @@ button.downloadSubtitle:disabled {
 			try {
 				let list = [];
 				// 3
-				let fileList = unsafeWindow.document.querySelector(".file-list");
+				const fileList = unsafeWindow.document.querySelector(".file-list");
 				if (fileList?.__vue__?.allFileList?.[0]) list = fileList.__vue__.allFileList.filter(function (item) { return !!item.selected; });
 
 				// 2
-				let wpCore = unsafeWindow.document.querySelector(".wp-s-core-pan");
+				const wpCore = unsafeWindow.document.querySelector(".wp-s-core-pan");
 				if (wpCore?.__vue__?.selectedList?.[0]) list = wpCore.__vue__.selectedList;
 
 				// 1
-				let context = unsafeWindow.require?.("system-core:context/context.js");
+				const context = unsafeWindow.require?.("system-core:context/context.js");
 				if (context?.instanceForSystem?.list?.getSelected?.()?.[0]) list = context.instanceForSystem.list.getSelected();
 
 				return base.clone(list);
@@ -5908,7 +5921,7 @@ button.downloadSubtitle:disabled {
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/disk\/home/.test(path)) return "home";
 			if (/^\/disk\/main/.test(path)) return "main";
 			if (/^\/youth\/pan\/main/.test(path)) return "youth";
@@ -5925,7 +5938,7 @@ button.downloadSubtitle:disabled {
 			this.addPageListener();
 		},
 	};
-	let $baiduAuthorize = {
+	const $baiduAuthorize = {
 		async initPanLinker() {
 			base.registerMenuCommand();
 			Swal.fire({
@@ -5940,9 +5953,9 @@ button.downloadSubtitle:disabled {
 				},
 			});
 			if (config.base.num === base.getValue("setting_init").code || config.base.license === base.getValue("setting_init").license) {
-				let url = new URL(location);
-				let auth = new URL(config.$baidu.api.getAccessToken);
-				let allowedClientIds = [
+				const url = new URL(location);
+				const auth = new URL(config.$baidu.api.getAccessToken);
+				const allowedClientIds = [
 					auth.searchParams.get("client_id"),
 					"L6g70tBRRIXLsY0Z3HwKqlRE", // pcstest_oauth
 					"NqOMXF6XGhGRIGemsQ9nG0Na", // ES 文件管理器，Secret：SVT6xpMdLcx6v4aCR4wT8BBOTbzFO8LM
@@ -5964,7 +5977,7 @@ button.downloadSubtitle:disabled {
 					url.searchParams.get("scope").includes("netdisk") &&
 					allowedClientIds.includes(url.searchParams.get("client_id"))
 				) {
-					var dialog = await Swal.fire({
+					const dialog = await Swal.fire({
 						...temp.swalDefault,
 						icon: "info",
 						title: `提示`,
@@ -6001,10 +6014,10 @@ button.downloadSubtitle:disabled {
 						})
 					}
 				} else if (/openapi.baidu.com\/oauth\/2.0\/login_success/.test(location.href)) {
-					let int = setInterval(async () => {
+					const int = setInterval(async () => {
 						if (location.href.includes("access_token") && (location.href.includes("basic+netdisk") || location.href.includes("basic,netdisk"))) {
 							clearInterval(int)
-							let token = location.href.match(/access_token=(.*?)&/)[1];
+							const token = location.href.match(/access_token=(.*?)&/)[1];
 							base.setValue("baidu_access_token", token);
 							await Swal.fire({
 								...temp.swalDefault,
@@ -6020,10 +6033,10 @@ button.downloadSubtitle:disabled {
 								allowEnterKey: false,
 								confirmButtonText: `<svg class="pl-icon"><use xlink:href="#pl-icon-fa-x-mark"/></svg> 关闭`,
 								willOpen: () => {
-									let secondSpan = document.getElementById("second");
-									let interval = setInterval(() => {
+									const secondSpan = document.getElementById("second");
+									const interval = setInterval(() => {
 										if (Swal.isVisible()) {
-											let timeLeft = Swal.getTimerLeft();
+											const timeLeft = Swal.getTimerLeft();
 											if (timeLeft !== null && timeLeft > 0) {
 												secondSpan.textContent = (timeLeft / 1000).toFixed(2);
 											}
@@ -6062,13 +6075,13 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $aliyun = {
+	const $aliyun = {
 		addPageListener() {
 			$doc.on("click", ".pl-button-save", async function (e) {
 				e.preventDefault();
-				let reactDomGrid = document.querySelector(config.$aliyun.mount.grid);
+				const reactDomGrid = document.querySelector(config.$aliyun.mount.grid);
 				if (reactDomGrid) {
-					var dialog = await Swal.fire({
+					const dialog = await Swal.fire({
 						...temp.swalDefault,
 						title: "提示",
 						html: `<div style="display:flex;align-items:center;justify-content:center;">请先切换到&nbsp;&nbsp;<svg class="icon" class="icon--D3kMk " viewBox="0 0 1024 1024" width="20" height="20" fill="currentColor"><use xlink:href="#PDSDrag"></use></svg>&nbsp;<b>列表视图</b>&nbsp;&nbsp;后再获取下载链接哦</div>`,
@@ -6084,7 +6097,7 @@ button.downloadSubtitle:disabled {
 					}
 					return false;
 				}
-				let selections = temp.main.getSelectedList();
+				const selections = temp.main.getSelectedList();
 				if (selections.length === 0) {
 					return message.error("提示：<br/>请勾选要保存到网盘的文件哦~");
 				}
@@ -6094,8 +6107,8 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -6113,23 +6126,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, undefined, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -6137,14 +6150,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -6173,14 +6186,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "Referer": `https://${location.host}/` });
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "Referer": `https://${location.host}/` });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6190,14 +6203,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`Referer:https://${location.host}/`]);
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`Referer:https://${location.host}/`]);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6207,14 +6220,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "referrer": `https://${location.host}/` });
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "referrer": `https://${location.host}/` });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6224,14 +6237,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6281,7 +6294,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$aliyun.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="ali-button pl-button">
+				const $button = $(`<div class="ali-button pl-button">
 					<span data-role="icon" data-render-as="svg" class="icon">${temp.main.svg}下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:30px; right:0;">
 						<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
@@ -6299,7 +6312,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$aliyun.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<div class="ali-button pl-button">
+				const $button = $(`<div class="ali-button pl-button">
 					<span data-role="icon" data-render-as="svg" class="icon">${temp.main.svg}下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:30px; right:16px;">
 						<li class="pl-button-mode pl-button-save"><use xlink:href="#pl-icon-fa-save"/></svg>保存后下载</li>
@@ -6313,7 +6326,7 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		addInitButton() {
-			let $button = $(`<div class="ali-button pl-button-init"><span data-role="icon" data-render-as="svg" class="icon">${temp.main.svg}点我点亮</span></div>`);
+			const $button = $(`<div class="ali-button pl-button-init"><span data-role="icon" data-render-as="svg" class="icon">${temp.main.svg}点我点亮</span></div>`);
 			$button.click(base.showInitDialog);
 			base.waitForKeyElements(config.$aliyun.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
@@ -6329,9 +6342,9 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		async getLink() {
-			let reactDomGrid = document.querySelector(config.$aliyun.mount.grid);
+			const reactDomGrid = document.querySelector(config.$aliyun.mount.grid);
 			if (reactDomGrid) {
-				var dialog = await Swal.fire({
+				const dialog = await Swal.fire({
 					...temp.swalDefault,
 					title: "提示",
 					html: `<div style="display:flex;align-items:center;justify-content:center;">请先切换到&nbsp;&nbsp;<svg class="icon" class="icon--D3kMk " viewBox="0 0 1024 1024" width="20" height="20" fill="currentColor"><use xlink:href="#PDSDrag"></use></svg>&nbsp;<b>列表视图</b>&nbsp;&nbsp;后再获取下载链接哦</div>`,
@@ -6432,13 +6445,13 @@ button.downloadSubtitle:disabled {
 		},
 		getSelectedList() {
 			try {
-				let list = [];
-				let reactDom = document.querySelector(config.$aliyun.mount.list);
-				let reactObj = base.findReact(reactDom, 1);
-				let props = reactObj.pendingProps;
+				const list = [];
+				const reactDom = document.querySelector(config.$aliyun.mount.list);
+				const reactObj = base.findReact(reactDom, 1);
+				const props = reactObj.pendingProps;
 				if (props) {
-					let fileList = props.dataSource || [];
-					let selectedKeys = props.selectedKeys.split(",");
+					const fileList = props.dataSource || [];
+					const selectedKeys = props.selectedKeys.split(",");
 					fileList.forEach(function (val) {
 						if (selectedKeys.includes(val.fileId)) {
 							list.push(val);
@@ -6452,7 +6465,7 @@ button.downloadSubtitle:disabled {
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/(drive)/.test(path)) return "home";
 			if (/^\/(s|share)\//.test(path)) return "share";
 			return "";
@@ -6473,11 +6486,11 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $mcloud = {
+	const $mcloud = {
 		addPageListener() {
 			$doc.on("click", ".pl-button-save", async function (e) {
 				e.preventDefault();
-				let selections = temp.main.getSelectedList();
+				const selections = temp.main.getSelectedList();
 				if (selections.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 				if (selections.every(item => !item.contentID && !item.contentName)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 				message.info("提示：<br/>因网盘限制，只能够通过页面直接下载哦~");
@@ -6486,8 +6499,8 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -6505,23 +6518,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, undefined, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -6529,14 +6542,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -6565,14 +6578,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6582,14 +6595,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6599,14 +6612,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6616,14 +6629,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -6688,7 +6701,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$mcloud.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="pl-button mcloud-button btn-top">
+				const $button = $(`<div class="pl-button mcloud-button btn-top">
 					<span class="mcloud-btn">下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:36px; left:0; letter-spacing:normal;">
 						<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
@@ -6706,7 +6719,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$mcloud.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<div class="pl-button mcloud-share-button">
+				const $button = $(`<div class="pl-button mcloud-share-button">
 					<span class="mcloud-btn">下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:36px; left:0; letter-spacing:normal;">
 						<li class="pl-button-mode pl-button-save"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>直接下载</li>
@@ -6719,7 +6732,7 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		addInitButton() {
-			let $button = $(`<div class="pl-button-init"><span class="mcloud-btn">点我点亮</span></div>`);
+			const $button = $(`<div class="pl-button-init"><span class="mcloud-btn">点我点亮</span></div>`);
 			$button.click(base.showInitDialog);
 			base.waitForKeyElements(config.$mcloud.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
@@ -6736,8 +6749,8 @@ button.downloadSubtitle:disabled {
 		},
 		getRandomString(len) {
 			len = len || 16;
-			let $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
-			let maxPos = $chars.length;
+			const $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
+			const maxPos = $chars.length;
 			let pwd = "";
 			for (let i = 0; i < len; i++) {
 				pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
@@ -6745,30 +6758,29 @@ button.downloadSubtitle:disabled {
 			return pwd;
 		},
 		utob(str) {
-			let u = String.fromCharCode;
+			const u = String.fromCharCode;
 			return str.replace(/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g, function (t) {
 				if (t.length < 2) {
-					let e = t.charCodeAt(0);
+					const e = t.charCodeAt(0);
 					return e < 128 ? t : e < 2048 ? u(192 | e >>> 6) + u(128 | 63 & e) : u(224 | e >>> 12 & 15) + u(128 | e >>> 6 & 63) + u(128 | 63 & e);
 				}
-				e = 65536 + 1024 * (t.charCodeAt(0) - 55296) + (t.charCodeAt(1) - 56320);
+				const e = 65536 + 1024 * (t.charCodeAt(0) - 55296) + (t.charCodeAt(1) - 56320);
 				return u(240 | e >>> 18 & 7) + u(128 | e >>> 12 & 63) + u(128 | e >>> 6 & 63) + u(128 | 63 & e);
 			});
 		},
 		getSign(e, t, a, n) {
-			let r = "",
-				i = "";
+			let i = "";
 			if (t) {
-				let s = Object.assign({}, t);
+				const s = Object.assign({}, t);
 				i = JSON.stringify(s),
 					i = i.replace(/\s*/g, ""),
 					i = encodeURIComponent(i);
-				let c = i.split(""),
+				const c = i.split(""),
 					u = c.sort();
 				i = u.join("");
 			}
-			let A = md5(base.encodeBase(this.utob(i)));
-			let l = md5(a + ":" + n);
+			const A = md5(base.encodeBase(this.utob(i)));
+			const l = md5(a + ":" + n);
 			return md5(A + l).toUpperCase();
 		},
 		async getFileUrl(item, index) {
@@ -6778,22 +6790,22 @@ button.downloadSubtitle:disabled {
 					downloadUrl: item.downloadUrl
 				};
 				if (this.detectPage() === "home") {
-					let body = {
+					const body = {
 						fileId: item.contentID
 					}
-					let time = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ");
-					let key = this.getRandomString(16);
-					let sign = this.getSign(undefined, body, time, key);
-					let getCookie = (name) => {
-						let cname = name + "=";
-						let ca = document.cookie.split(";");
+					const time = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ");
+					const key = this.getRandomString(16);
+					const sign = this.getSign(undefined, body, time, key);
+					const getCookie = (name) => {
+						const cname = name + "=";
+						const ca = document.cookie.split(";");
 						for (let i = 0; i < ca.length; i++) {
-							let c = ca[i].trim();
+							const c = ca[i].trim();
 							if (c.indexOf(cname) == 0) return c.substring(cname.length, c.length);
 						}
 						return "";
 					}
-					let res = await base.post(config.$mcloud.api.getLink, body, {
+					const res = await base.post(config.$mcloud.api.getLink, body, {
 						"Authorization": getCookie("authorization"),
 						"Caller": "web",
 						"Content-Type": "application/json;charset=UTF-8",
@@ -6829,8 +6841,8 @@ button.downloadSubtitle:disabled {
 					}
 				}
 				if (this.detectPage() === "share") {
-					let vueDom = document.querySelector(".main_file_list").__vue__;
-					let res = await base.post(config.$mcloud.api.getShareLink, `linkId=${vueDom.linkID}&contentIds=${item.path}&catalogIds=`, { "Content-Type": "application/x-www-form-urlencoded" });
+					const vueDom = document.querySelector(".main_file_list").__vue__;
+					const res = await base.post(config.$mcloud.api.getShareLink, `linkId=${vueDom.linkID}&contentIds=${item.path}&catalogIds=`, { "Content-Type": "application/x-www-form-urlencoded" });
 					if (res.code == 0) {
 						return {
 							index,
@@ -6843,7 +6855,7 @@ button.downloadSubtitle:disabled {
 						};
 					}
 				}
-			} catch (e) {
+			} catch {
 				return {
 					index,
 					downloadUrl: "获取下载地址失败，刷新后再试试吧~"
@@ -6859,15 +6871,15 @@ button.downloadSubtitle:disabled {
 			if (selects.every(item => !item.contentID && !item.contentName)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
 				selects = selects.filter(item => item.contentID && item.contentName && item.contentSuffix);
-				let batchSize = 15;
+				const batchSize = 15;
 				let proc = 0;
 				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 				for (let i = 0; i < selects.length; i += batchSize) {
-					let batch = selects.slice(i, i + batchSize);
-					let queue = [];
+					const batch = selects.slice(i, i + batchSize);
+					const queue = [];
 					batch.forEach((item, localIndex) => {
-						let globalIndex = i + localIndex;
+						const globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex)
 							.then(val => {
 								proc++;
@@ -6875,7 +6887,7 @@ button.downloadSubtitle:disabled {
 								return val;
 							}));
 					});
-					let res = await Promise.all(queue);
+					const res = await Promise.all(queue);
 					res.forEach(val => {
 						selects[val.index].downloadUrl = val.downloadUrl;
 					});
@@ -6896,23 +6908,23 @@ button.downloadSubtitle:disabled {
 		getSelectedList() {
 			try {
 				return document.querySelector(".main_file_list").__vue__.selects.map(val => val.item);
-			} catch (e) {
-				let vueDom = document.querySelector(".home-page").__vue__;
-				let fileList = vueDom._computedWatchers.fileList.value;
-				let dirList = vueDom._computedWatchers.dirList.value;
-				let selectedFileIndex = vueDom.selectedFile;
-				let selectedDirIndex = vueDom.selectedDir;
-				let selectFileList = fileList.filter((v, i) => {
+			} catch {
+				const vueDom = document.querySelector(".home-page").__vue__;
+				const fileList = vueDom._computedWatchers.fileList.value;
+				const dirList = vueDom._computedWatchers.dirList.value;
+				const selectedFileIndex = vueDom.selectedFile;
+				const selectedDirIndex = vueDom.selectedDir;
+				const selectFileList = fileList.filter((v, i) => {
 					return selectedFileIndex.includes(i);
 				});
-				let selectDirList = dirList.filter((v, i) => {
+				const selectDirList = dirList.filter((v, i) => {
 					return selectedDirIndex.includes(i);
 				});
 				return [...selectFileList, ...selectDirList];
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/w/.test(path)) return "home";
 			if (/^\/link|shareweb/.test(path)) return "share";
 			return "";
@@ -6933,12 +6945,12 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $tcloud = {
+	const $tcloud = {
 		addPageListener() {
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -6956,23 +6968,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, undefined, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -6980,14 +6992,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -7016,14 +7028,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7033,14 +7045,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7050,14 +7062,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7067,14 +7079,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7109,7 +7121,7 @@ button.downloadSubtitle:disabled {
 			], "other");
 		},
 		addButton() {
-			let $button = $(`<div class="pl-button tcloud-button">
+			const $button = $(`<div class="pl-button tcloud-button">
 				下载助手&nbsp;
 				<i aria-label="icon:caret-down" class="anticon anticon-caret-down">
 					<svg viewBox="0 0 1024 1024" data-icon="caret-down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false">
@@ -7143,7 +7155,7 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		addInitButton() {
-			let $button = $(`<div class="tcloud-button pl-button-init">点我点亮</div>`);
+			const $button = $(`<div class="tcloud-button pl-button-init">点我点亮</div>`);
 			$button.click(base.showInitDialog);
 			base.waitForKeyElements(config.$tcloud.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
@@ -7160,8 +7172,8 @@ button.downloadSubtitle:disabled {
 		async getToken() {
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取状态~</div>`);
-			let res = await base.getFinal(config.$tcloud.api.getAccessToken, undefined, true);
-			let accessToken = res.match(/accessToken=(\w+)/)?.[1];
+			const res = await base.getFinal(config.$tcloud.api.getAccessToken, undefined, true);
+			const accessToken = res.match(/accessToken=(\w+)/)?.[1];
 			accessToken && base.setStorage("accessToken", accessToken);
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>获取成功，令牌已缓存~</div>`);
@@ -7175,7 +7187,7 @@ button.downloadSubtitle:disabled {
 						downloadUrl: item.downloadUrl
 					}
 				};
-				let time = Date.now();
+				const time = Date.now();
 				let url = `${config.$tcloud.api.getLink}?fileId=${item.fileId}`;
 				let _sign = `AccessToken=${token}&Timestamp=${time}`;
 				if (item.shareId) {
@@ -7186,7 +7198,7 @@ button.downloadSubtitle:disabled {
 				if (item.shareId) {
 					_sign += `&shareId=${item.shareId}`;
 				}
-				let res = await base.get(url, { "Accept": "application/json;charset=UTF-8", "Sign-Type": 1, "Accesstoken": token, "Timestamp": time, "Signature": md5(_sign).toString() });
+				const res = await base.get(url, { "Accept": "application/json;charset=UTF-8", "Sign-Type": 1, "Accesstoken": token, "Timestamp": time, "Signature": md5(_sign).toString() });
 				if (res.res_code == 0) {
 					return {
 						index,
@@ -7208,7 +7220,7 @@ button.downloadSubtitle:disabled {
 						downloadUrl: "获取下载地址失败，刷新后再试试吧~" + (res.res_code ? res.res_code : "")
 					};
 				}
-			} catch (e) {
+			} catch {
 				return {
 					index,
 					downloadUrl: "获取下载地址失败，刷新后再试试吧~"
@@ -7222,21 +7234,21 @@ button.downloadSubtitle:disabled {
 			selects = selects.filter(item => !item.isFolder)
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取状态~</div>`);
-			let token = base.getStorage("accessToken") || await this.getToken();
+			const token = base.getStorage("accessToken") || await this.getToken();
 			if (!token) {
 				return message.error("提示：<br/>请先登录网盘~");
 			}
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>获取缓存成功~</div>`);
-			let batchSize = 15;
+			const batchSize = 15;
 			let proc = 0;
 			$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 			for (let i = 0; i < selects.length; i += batchSize) {
-				let batch = selects.slice(i, i + batchSize);
-				let queue = [];
+				const batch = selects.slice(i, i + batchSize);
+				const queue = [];
 				batch.forEach((item, localIndex) => {
-					let globalIndex = i + localIndex;
+					const globalIndex = i + localIndex;
 					queue.push(this.getFileUrl(item, globalIndex, token)
 						.then(val => {
 							proc++;
@@ -7244,7 +7256,7 @@ button.downloadSubtitle:disabled {
 							return val;
 						}));
 				});
-				let res = await Promise.all(queue);
+				const res = await Promise.all(queue);
 				res.forEach(val => {
 					selects[val.index].downloadUrl = val.downloadUrl;
 				});
@@ -7262,12 +7274,12 @@ button.downloadSubtitle:disabled {
 		getSelectedList() {
 			try {
 				return document.querySelector(".c-file-list").__vue__.selectedList;
-			} catch (e) {
+			} catch {
 				return [document.querySelector(".info-detail").__vue__.fileDetail];
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/web\/main/.test(path)) return "home";
 			if (/^\/web\/share/.test(path)) return "share";
 			return "";
@@ -7289,11 +7301,11 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $xunlei = {
+	const $xunlei = {
 		addPageListener() {
 			$doc.on("click", ".pl-button-save", async function (e) {
 				e.preventDefault();
-				let selections = temp.main.getSelectedList();
+				const selections = temp.main.getSelectedList();
 				if (selections.length === 0) {
 					return message.error("提示：<br/>请勾选要保存到网盘的文件哦~");
 				}
@@ -7303,8 +7315,8 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -7322,23 +7334,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, undefined, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -7346,14 +7358,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -7382,14 +7394,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7399,14 +7411,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7416,14 +7428,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "mirror_url_list": base.getMirrorList(target.data("link"), config.$xunlei.api.mirror), "checkboxCustomHeadersForMirrors": "on" });
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "mirror_url_list": base.getMirrorList(target.data("link"), config.$xunlei.api.mirror), "checkboxCustomHeadersForMirrors": "on" });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7433,14 +7445,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7470,7 +7482,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$xunlei.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="xunlei-button pl-button"><i class="xlpfont xlp-download"></i><span style="font-size:13px;margin-left:6px;">下载助手</span>
+				const $button = $(`<div class="xunlei-button pl-button"><i class="xlpfont xlp-download"></i><span style="font-size:13px;margin-left:6px;">下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:34px;">
 						<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
 						<li class="pl-button-mode" data-mode="curl"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-plug"/></svg>cURL 下载</li>
@@ -7487,7 +7499,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$xunlei.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<div class="xunlei-button pl-button">
+				const $button = $(`<div class="xunlei-button pl-button">
 					<i class="xlpfont xlp-download"></i><span style="font-size:13px;margin-left:6px;">下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:34px;">
 						<li class="pl-button-mode pl-button-save"><i class="xlpfont xlp-file-upload"></i><span style="margin-left:3px;">转存后下载</span></li>
@@ -7501,7 +7513,7 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		addInitButton() {
-			let $button = $(`<div class="xunlei-button pl-button-init"><i class="xlpfont xlp-download"></i><span style="font-size:13px;margin-left:6px;">点我点亮</span></div>`);
+			const $button = $(`<div class="xunlei-button pl-button-init"><i class="xlpfont xlp-download"></i><span style="font-size:13px;margin-left:6px;">点我点亮</span></div>`);
 			$button.click(base.showInitDialog);
 			base.waitForKeyElements(config.$xunlei.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
@@ -7528,8 +7540,8 @@ button.downloadSubtitle:disabled {
 					captcha = base.getStorage(localStorage.key(i));
 				}
 			}
-			let deviceid = /(\w{32})/.exec(base.getStorage("deviceid").split(","))[0];
-			let token = {
+			const deviceid = /(\w{32})/.exec(base.getStorage("deviceid").split(","))[0];
+			const token = {
 				credentials,
 				captcha,
 				deviceid
@@ -7542,7 +7554,7 @@ button.downloadSubtitle:disabled {
 					index,
 					downloadUrl: item.downloadUrl
 				};
-				let res = await base.get(config.$xunlei.api.getLink + item.id, { "Authorization": `${token.credentials.token_type} ${token.credentials.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
+				const res = await base.get(config.$xunlei.api.getLink + item.id, { "Authorization": `${token.credentials.token_type} ${token.credentials.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
 				if (res.web_content_link) {
 					return {
 						index,
@@ -7559,25 +7571,25 @@ button.downloadSubtitle:disabled {
 						downloadUrl: `获取下载地址失败，${res?.error_description ? "服务器说：" + res.error_description + "。" : "刷新后再试试吧~"}`
 					};
 				}
-			} catch (e) {
+			} catch {
 				return message.error("提示：<br/>请先登录网盘后再刷新页面呢~");
 			}
 		},
 		async getLink() {
-			let selects = this.getSelectedList();
+			const selects = this.getSelectedList();
 			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 			if (selects.every(item => item.kind !== "drive#file")) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
-				let token = this.getToken();
-				let batchSize = 15;
+				const token = this.getToken();
+				const batchSize = 15;
 				let proc = 0;
 				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 				for (let i = 0; i < selects.length; i += batchSize) {
-					let batch = selects.slice(i, i + batchSize);
-					let queue = [];
+					const batch = selects.slice(i, i + batchSize);
+					const queue = [];
 					batch.forEach((item, localIndex) => {
-						let globalIndex = i + localIndex;
+						const globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex, token)
 							.then(val => {
 								proc++;
@@ -7585,7 +7597,7 @@ button.downloadSubtitle:disabled {
 								return val;
 							}));
 					});
-					let res = await Promise.all(queue);
+					const res = await Promise.all(queue);
 					res.forEach(val => {
 						selects[val.index].downloadUrl = val.downloadUrl;
 					});
@@ -7606,18 +7618,18 @@ button.downloadSubtitle:disabled {
 		},
 		getSelectedList() {
 			try {
-				let doms = document.querySelectorAll(`[class*="SourceListItem__item--"]`), list = [];
-				if (doms.length) for (let dom of doms) {
-					let domVue = dom.__vue__;
+				const doms = document.querySelectorAll(`[class*="SourceListItem__item--"]`), list = [];
+				if (doms.length) for (const dom of doms) {
+					const domVue = dom.__vue__;
 					if (domVue?.selected?.includes?.(domVue.info.id)) list.push(domVue.info);
 				}
 				return base.clone(list);
-			} catch (e) {
+			} catch {
 				return [];
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/$/.test(path)) return "home";
 			if (/^\/(s|share)\//.test(path)) return "share";
 			return "";
@@ -7638,11 +7650,11 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $quark = {
+	const $quark = {
 		addPageListener() {
 			$doc.on("click", ".pl-button-save", async function (e) {
 				e.preventDefault();
-				let selections = temp.main.getSelectedList();
+				const selections = temp.main.getSelectedList();
 				if (selections.length === 0) {
 					return message.error("提示：<br/>请勾选要保存到网盘的文件哦~");
 				}
@@ -7659,8 +7671,8 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -7678,23 +7690,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, { "User-Agent": config.$quark.api.ua.downloadLink }, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -7702,14 +7714,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -7739,14 +7751,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "User-Agent": config.$quark.api.ua.downloadLink, "Referer": `https://${location.host}/`, "Cookie": document.cookie });
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "User-Agent": config.$quark.api.ua.downloadLink, "Referer": `https://${location.host}/`, "Cookie": document.cookie });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7756,14 +7768,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`User-Agent:${config.$quark.api.ua.downloadLink}`, `Referer:https://${location.host}/`, `Cookie:${document.cookie}`]);
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`User-Agent:${config.$quark.api.ua.downloadLink}`, `Referer:https://${location.host}/`, `Cookie:${document.cookie}`]);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7773,14 +7785,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "user_agent": config.$quark.api.ua.downloadLink, "referrer": `https://${location.host}/`, "cookie": document.cookie });
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "user_agent": config.$quark.api.ua.downloadLink, "referrer": `https://${location.host}/`, "cookie": document.cookie });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7790,14 +7802,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), { "User-Agent": config.$quark.api.ua.downloadLink, "Cookie": document.cookie });
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), { "User-Agent": config.$quark.api.ua.downloadLink, "Cookie": document.cookie });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -7831,13 +7843,13 @@ button.downloadSubtitle:disabled {
 			}, true);
 			base.waitForKeyElements(".pc-member-entrance span.button-text", function (tag) {
 				tag.text("会员中心");
-				let observer = new MutationObserver(function (mutations) {
-					mutations.forEach(function (mutation) {
+				const observer = new MutationObserver(function (mutations) {
+					mutations.forEach(function () {
 						if (tag.text() === "会员中心") return
 						tag.text("会员中心");
 					});
 				});
-				let config = { subtree: true, characterData: true, childList: true };
+				const config = { subtree: true, characterData: true, childList: true };
 				observer.observe(tag[0], config);
 			}, true);
 			base.waitForKeyElements(".pc-member-entrance .tips", function (tag) {
@@ -7870,7 +7882,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$quark.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="ant-dropdown-trigger pl-button" style="display: inline-block;">
+				const $button = $(`<div class="ant-dropdown-trigger pl-button" style="display: inline-block;">
 					<div class="ant-upload ant-upload-select ant-upload-select-text">
 						<ul class="pl-dropdown-menu" style="top:35px">
 							<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
@@ -7894,7 +7906,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$quark.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<button type="button" class="ant-btn btn-file ant-btn-primary pl-button quark-button">
+				const $button = $(`<button type="button" class="ant-btn btn-file ant-btn-primary pl-button quark-button">
 					<img class="btn-icon" src="${temp.main.svg}"><span>下载助手</span>
 					<ul class="pl-dropdown-menu" style="bottom:22px;left:0">
 						<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
@@ -7915,7 +7927,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$quark.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<button type="button" class="ant-btn ant-btn-primary quark-button pl-button-init"><img class="btn-icon" src="${temp.main.svg}"><span>点我点亮</span></button>`);
+				const $button = $(`<button type="button" class="ant-btn ant-btn-primary quark-button pl-button-init"><img class="btn-icon" src="${temp.main.svg}"><span>点我点亮</span></button>`);
 				$button.css({ "margin-right": "16px", "display": "inline-block" });
 				$button.click(base.showInitDialog);
 				element.prepend($button);
@@ -7923,7 +7935,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$quark.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<button type="button" class="ant-btn btn-file ant-btn-primary pl-button-init quark-button"><img class="btn-icon" src="${temp.main.svg}"><span>点我点亮</span></button>`);
+				const $button = $(`<button type="button" class="ant-btn btn-file ant-btn-primary pl-button-init quark-button"><img class="btn-icon" src="${temp.main.svg}"><span>点我点亮</span></button>`);
 				$button.css({ "height": "36px", "margin-left": "16px", "border-radius": "6px", "display": "inline-block" });
 				$button.click(base.showInitDialog);
 				element.append($button);
@@ -7934,22 +7946,22 @@ button.downloadSubtitle:disabled {
 			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 			if (selects.every(item => !item.file)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
-				let data = [];
-				let batchSize = 15;
+				const data = [];
+				const batchSize = 15;
 				let proc = 0;
 				selects = selects.filter(item => item.file === true)
 				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selects.slice(i, i + batchSize);
-					let fids = batch.map(item => item.fid);
+					const batch = selects.slice(i, i + batchSize);
+					const fids = batch.map(item => item.fid);
 					// 发起请求获取链接
-					let res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
+					const res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
 						if (res?.code == 23018) {
-							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-							let item = batch.find(item => item.fid === fid);
+							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
@@ -7986,28 +7998,28 @@ button.downloadSubtitle:disabled {
 				}];
 				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else if (temp.page === "share") {
-				let pwd_id = unsafeWindow.factStat?.ut?.baseParams?.pwd_id || // fast
+				const pwd_id = unsafeWindow.factStat?.ut?.baseParams?.pwd_id || // fast
 					unsafeWindow.factStat?.wa?.customStatParams?.pwd_id || // drive
 					location.pathname.match(/^\/(?:s|share)\/([a-zA-Z0-9]+)/)?.[1]; // 兜底
 				if (!pwd_id) return message.error("错误：<br/>无法提取分享 ID~");
 
-				let data = [];
-				let batchSize = 15;
+				const data = [];
+				const batchSize = 15;
 				let proc = 0;
 				selects = selects.filter(item => item.file === true)
 				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selects.slice(i, i + batchSize);
-					let fids = batch.map(item => item.fid);
-					let fids_token = batch.map(item => item.share_fid_token);
+					const batch = selects.slice(i, i + batchSize);
+					const fids = batch.map(item => item.fid);
+					const fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
-					let res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
+					const res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
 						if (res?.code == 23018) {
-							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-							let item = batch.find(item => item.fid === fid);
+							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
@@ -8049,14 +8061,14 @@ button.downloadSubtitle:disabled {
 		},
 		getSelectedList() {
 			try {
-				let selectedList = [];
-				let reactDom = document.getElementsByClassName("file-list")[0];
-				let reactObj = base.findReact(reactDom);
-				let props = reactObj.props;
+				const selectedList = [];
+				const reactDom = document.getElementsByClassName("file-list")[0];
+				const reactObj = base.findReact(reactDom);
+				const props = reactObj.props;
 				if (props) {
-					let stoken = props.stoken || "";
-					let fileList = props.list || [];
-					let selectedKeys = props.selectedRowKeys || [];
+					const stoken = props.stoken || "";
+					const fileList = props.list || [];
+					const selectedKeys = props.selectedRowKeys || [];
 					fileList.forEach(function (val) {
 						if (selectedKeys.includes(val.fid)) {
 							selectedList.push({ ...val, stoken });
@@ -8064,12 +8076,12 @@ button.downloadSubtitle:disabled {
 					});
 				}
 				return selectedList;
-			} catch (e) {
+			} catch {
 				return [];
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/(list)/.test(path)) return "home";
 			if (/^\/(s|share)\//.test(path)) return "share";
 			return "";
@@ -8090,11 +8102,11 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $uc = {
+	const $uc = {
 		addPageListener() {
 			$doc.on("click", ".pl-button-save", async function (e) {
 				e.preventDefault();
-				let selections = temp.main.getSelectedList();
+				const selections = temp.main.getSelectedList();
 				if (selections.length === 0) {
 					return message.error("提示：<br/>请勾选要保存到网盘的文件哦~");
 				}
@@ -8104,8 +8116,8 @@ button.downloadSubtitle:disabled {
 			});
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -8123,23 +8135,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, { "User-Agent": config.$uc.api.ua.downloadLink }, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -8147,14 +8159,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -8184,14 +8196,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "User-Agent": config.$uc.api.ua.downloadLink, "Referer": `https://${location.host}/`, "Cookie": document.cookie });
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"), { "User-Agent": config.$uc.api.ua.downloadLink, "Referer": `https://${location.host}/`, "Cookie": document.cookie });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8201,14 +8213,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`User-Agent:${config.$uc.api.ua.downloadLink}`, `Referer:https://${location.host}/`, `Cookie:${document.cookie}`]);
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"), [`User-Agent:${config.$uc.api.ua.downloadLink}`, `Referer:https://${location.host}/`, `Cookie:${document.cookie}`]);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8218,14 +8230,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "user_agent": config.$uc.api.ua.downloadLink, "referrer": `https://${location.host}/`, "cookie": document.cookie });
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "user_agent": config.$uc.api.ua.downloadLink, "referrer": `https://${location.host}/`, "cookie": document.cookie });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8235,14 +8247,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), { "User-Agent": config.$uc.api.ua.downloadLink, "Cookie": document.cookie });
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), { "User-Agent": config.$uc.api.ua.downloadLink, "Cookie": document.cookie });
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8255,7 +8267,7 @@ button.downloadSubtitle:disabled {
 		greenerPage() {
 			base.waitForKeyElements(`[class*="VideoDetail--content-footer"]`, function (tag) {
 				tag.children().each(function () {
-					let $child = $(this);
+					const $child = $(this);
 					if ($child.text().includes("手机客户端")) {
 						$child.hide();
 					}
@@ -8285,7 +8297,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$uc.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<div class="ant-dropdown-trigger pl-button">
+				const $button = $(`<div class="ant-dropdown-trigger pl-button">
 					<button type="button" class="uc-button ant-btn btn-file ant-btn-primary">
 						<img class="uc-btn-icon" src="${temp.main.svg}"><span>下载助手</span>
 					</button>
@@ -8306,7 +8318,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$uc.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<div class="ant-dropdown-trigger pl-button">
+				const $button = $(`<div class="ant-dropdown-trigger pl-button">
 					<button type="button" class="uc-button ant-btn btn-file ant-btn-primary" style="height:40px;">
 						<img class="uc-btn-icon" src="${temp.main.svg}"><span>下载助手</span>
 					</button>
@@ -8326,7 +8338,7 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		addInitButton() {
-			let $button = $(`<div class="ant-dropdown-trigger pl-button-init"><button type="button" class="uc-button ant-btn btn-file ant-btn-primary" style="height:40px;"><img class="uc-btn-icon" src="${temp.main.svg}"><span>点我点亮</span></button></div>`);
+			const $button = $(`<div class="ant-dropdown-trigger pl-button-init"><button type="button" class="uc-button ant-btn btn-file ant-btn-primary" style="height:40px;"><img class="uc-btn-icon" src="${temp.main.svg}"><span>点我点亮</span></button></div>`);
 			$button.click(base.showInitDialog);
 			base.waitForKeyElements(config.$uc.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
@@ -8346,22 +8358,22 @@ button.downloadSubtitle:disabled {
 			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 			if (selects.every(item => !item.file)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
-				let data = [];
-				let batchSize = 15;
+				const data = [];
+				const batchSize = 15;
 				let proc = 0;
 				selects = selects.filter(item => item.file === true)
 				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selects.slice(i, i + batchSize);
-					let fids = batch.map(item => item.fid);
+					const batch = selects.slice(i, i + batchSize);
+					const fids = batch.map(item => item.fid);
 					// 发起请求获取链接
-					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
+					const res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
 						if (res?.code == 23018) {
-							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-							let item = batch.find(item => item.fid === fid);
+							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
@@ -8398,28 +8410,28 @@ button.downloadSubtitle:disabled {
 				}];
 				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else if (temp.page === "share") {
-				let pwd_id = unsafeWindow.factStat?.ut?.baseParams?.pwd_id || // fast
+				const pwd_id = unsafeWindow.factStat?.ut?.baseParams?.pwd_id || // fast
 					unsafeWindow.factStat?.wa?.customStatParams?.pwd_id || // drive
 					location.pathname.match(/^\/(?:s|share)\/([a-zA-Z0-9]+)/)?.[1]; // 兜底
 				if (!pwd_id) return message.error("错误：<br/>无法提取分享 ID~");
 
-				let data = [];
-				let batchSize = 15;
+				const data = [];
+				const batchSize = 15;
 				let proc = 0;
 				selects = selects.filter(item => item.file === true)
 				for (let i = 0; i < selects.length; i += batchSize) {
 					// 获取当前批次文件
-					let batch = selects.slice(i, i + batchSize);
-					let fids = batch.map(item => item.fid);
-					let fids_token = batch.map(item => item.share_fid_token);
+					const batch = selects.slice(i, i + batchSize);
+					const fids = batch.map(item => item.fid);
+					const fids_token = batch.map(item => item.share_fid_token);
 					// 发起请求获取链接
-					let res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
+					const res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
 						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
 						if (res?.code == 23018) {
-							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-							let item = batch.find(item => item.fid === fid);
+							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
@@ -8461,14 +8473,14 @@ button.downloadSubtitle:disabled {
 		},
 		getSelectedList() {
 			try {
-				let selectedList = [];
-				let reactDom = document.getElementsByClassName("file-list")[0];
-				let reactObj = base.findReact(reactDom);
-				let props = reactObj.props;
+				const selectedList = [];
+				const reactDom = document.getElementsByClassName("file-list")[0];
+				const reactObj = base.findReact(reactDom);
+				const props = reactObj.props;
 				if (props) {
-					let stoken = props.stoken || "";
-					let fileList = props.list || [];
-					let selectedKeys = props.selectedRowKeys || [];
+					const stoken = props.stoken || "";
+					const fileList = props.list || [];
+					const selectedKeys = props.selectedRowKeys || [];
 					fileList.forEach(function (val) {
 						if (selectedKeys.includes(val.fid)) {
 							selectedList.push({ ...val, stoken });
@@ -8476,12 +8488,12 @@ button.downloadSubtitle:disabled {
 					});
 				}
 				return selectedList;
-			} catch (e) {
+			} catch {
 				return [];
 			}
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/(list)/.test(path)) return "home";
 			if (/^\/(s|share)\//.test(path)) return "share";
 			return "";
@@ -8502,12 +8514,12 @@ button.downloadSubtitle:disabled {
 	 * @author 油小猴
 	 * @author hmjz100
 	 */
-	let $123pan = {
+	const $123pan = {
 		addPageListener() {
 			$doc.on("click", ".listener-api-download.enhance", async function (e) {
 				e.preventDefault();
-				var status = base._EventFactory(e);
-				var file = {
+				const status = base._EventFactory(e);
+				const file = {
 					index: status.item.data("index"),
 					link: status.item.data("link"),
 					name: status.item.data("name"),
@@ -8525,23 +8537,23 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				let startTime = Date.now();
+				const startTime = Date.now();
 				let lastTime = startTime;
 				let lastLoaded = 0;
 
 				let emaSpeed = 0;
-				var tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
 
 				base.download(file.link, undefined, {
 					...file,
 					onProgress: (prog, loaded, total) => {
-						var time = Date.now();
-						var insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						var insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						var avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						var avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
 
-						var alpha = 1 - Math.exp(-insDiff / tau);
+						const alpha = 1 - Math.exp(-insDiff / tau);
 						if (emaSpeed === 0) {
 							emaSpeed = insSpeed; // 第一次采样，直接赋值
 						} else {
@@ -8549,14 +8561,14 @@ button.downloadSubtitle:disabled {
 							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
 						}
 
-						var rSize = total - loaded;
+						const rSize = total - loaded;
 
-						var predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						var rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
 
 						lastLoaded = loaded;
 						lastTime = time;
-						var dprog = Math.min(prog, 100);
+						const dprog = Math.min(prog, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
 						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
 					}
@@ -8585,14 +8597,14 @@ button.downloadSubtitle:disabled {
 					})
 			});
 			$doc.on("click", ".listener-idm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8602,14 +8614,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-aria2-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8619,14 +8631,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-bitcomet-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"));
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"));
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8636,14 +8648,14 @@ button.downloadSubtitle:disabled {
 				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
 			});
 			$doc.on("click", ".listener-abdm-download", async function (e) {
-				let target = $(e.currentTarget);
+				const target = $(e.currentTarget);
 				if (target.attr("data-processing") === "true") return;
 				target.attr("data-processing", "true");
-				let originalHtml = target.html();
+				const originalHtml = target.html();
 				target.find(".pl-icon").remove();
 				target.find(".pl-loading").remove();
 				target.prepend(base.createLoading());
-				let res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
 				if (res === "success") {
 					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
 				} else {
@@ -8661,9 +8673,9 @@ button.downloadSubtitle:disabled {
 				tag.removeClass("loginRight");
 				tag.find("span").text("注册");
 				if (tag.next().hasClass("log")) return;
-				let button = $(`<button type="button" class="ant-btn ant-btn-default ant-btn-two-chinese-chars log loginRight" style="width:auto!important;height:auto!important;margin-left:10px!important"><span>登录</span></button>`);
+				const button = $(`<button type="button" class="ant-btn ant-btn-default ant-btn-two-chinese-chars log loginRight" style="width:auto!important;height:auto!important;margin-left:10px!important"><span>登录</span></button>`);
 				button.on("click", () => {
-					let login = new URL(`https://login.123pan.com/centerlogin`);
+					const login = new URL(`https://login.123pan.com/centerlogin`);
 					login.searchParams.set("redirect_url", location.href);
 					location.href = login;
 				});
@@ -8696,26 +8708,26 @@ button.downloadSubtitle:disabled {
 				tag.addClass("ant-btn-two-chinese-chars").addClass("reg");
 				tag.find("span").text("注册");
 				if (tag.next().hasClass("log")) return;
-				let button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid loginRight mfy-button ant-btn-two-chinese-chars log" style="margin-left:10px!important"><span>登录</span></button>`);
+				const button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid loginRight mfy-button ant-btn-two-chinese-chars log" style="margin-left:10px!important"><span>登录</span></button>`);
 				// 加个跳转到原页面也不难吧？
 				button.on("click", () => {
-					let login = new URL(`https://login.123pan.com/centerlogin`);
+					const login = new URL(`https://login.123pan.com/centerlogin`);
 					login.searchParams.set("redirect_url", location.href);
 					location.href = login;
 				});
 				tag.after(button);
 				try {
-					let container = tag.closest(".share-header_center-not-login");
+					const container = tag.closest(".share-header_center-not-login");
 					if (container.length && !container.data("logObserverAttached")) {
 						container.data("logObserverAttached", true);
-						let observer = new MutationObserver((mutations) => {
-							for (let m of mutations) {
+						const observer = new MutationObserver((mutations) => {
+							for (const m of mutations) {
 								if (!m.removedNodes) continue;
-								for (let n of m.removedNodes) {
+								for (const n of m.removedNodes) {
 									if (!(n instanceof HTMLElement)) continue;
 									// 如果被移除的节点是注册按钮或其包含注册按钮的容器，则清理登录按钮
 									if (n.classList && (n.classList.contains("reg") || n.querySelector && n.querySelector(".reg"))) {
-										try { container.find(".log").remove(); } catch (e) { }
+										try { container.find(".log").remove(); } catch { }
 									}
 								}
 							}
@@ -8723,18 +8735,18 @@ button.downloadSubtitle:disabled {
 						observer.observe(container[0], { childList: true, subtree: true });
 						container.data("logObserver", observer);
 					}
-				} catch (e) { }
+				} catch { }
 			});
 			// 新版 分享 超限登录
 			base.waitForKeyElements(".login-footer-240828", (tag) => {
 				if (tag.find(".replaced").length) return;
 				tag.children().each(function () {
-					let $child = $(this);
+					const $child = $(this);
 					if ($child.hasClass("pointer-text")) {
-						let button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid loginRight mfy-button replaced"><span>${$child.text()}</span></button>`);
+						const button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid loginRight mfy-button replaced"><span>${$child.text()}</span></button>`);
 						button.on("click", () => {
 							if ($child.text().includes("登录")) {
-								let login = new URL(`https://login.123pan.com/centerlogin`);
+								const login = new URL(`https://login.123pan.com/centerlogin`);
 								login.searchParams.set("redirect_url", location.href);
 								location.href = login;
 							} else {
@@ -8755,7 +8767,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(`.frontend-layout-header-right > span > [alt^="buttonMall"]`, (tag) => {
 				if (tag.parent().is(":hidden")) return;
 				tag.parent().hide();
-				let button = $(`<div class="frontend-layout-header-right-button-invite-new">会员中心</div>`);
+				const button = $(`<div class="frontend-layout-header-right-button-invite-new">会员中心</div>`);
 				button.on("click", () => { tag.click() });
 				tag.parent().after(button);
 			}, true);
@@ -8772,7 +8784,7 @@ button.downloadSubtitle:disabled {
 			}, true);
 			// 为页面主动添加 notoken 参数（token 太长影响观感，故不添加），以避免被新版页面屎山代码搞得二次刷新
 			setInterval(() => {
-				let url = new URL(location);
+				const url = new URL(location);
 				if (!url.searchParams.has("notoken") && !url.searchParams.has("token")) {
 					url.searchParams.delete("token");
 					url.searchParams.set("notoken", "1");
@@ -8811,7 +8823,7 @@ button.downloadSubtitle:disabled {
 		getToken() {
 			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
 			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取令牌~</div>`);
-			let token = base.getStorage("authorToken");
+			const token = base.getStorage("authorToken");
 			return token;
 		},
 		async getLink() {
@@ -8819,17 +8831,17 @@ button.downloadSubtitle:disabled {
 			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
 			if (selects.every(item => item.Type !== 0)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
 			if (temp.page === "home") {
-				let token = this.getToken();
-				let batchSize = 15;
+				const token = this.getToken();
+				const batchSize = 15;
 				let proc = 0;
 				selects = selects.filter(item => item.Type === 0);
 				for (let i = 0; i < selects.length; i += batchSize) {
-					let batch = selects.slice(i, i + batchSize);
-					let queue = [];
+					const batch = selects.slice(i, i + batchSize);
+					const queue = [];
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 					batch.forEach((item, localIndex) => {
-						let globalIndex = i + localIndex;
+						const globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex, token)
 							.then(val => {
 								proc++;
@@ -8837,7 +8849,7 @@ button.downloadSubtitle:disabled {
 								return val;
 							}));
 					});
-					let res = await Promise.all(queue);
+					const res = await Promise.all(queue);
 					res.forEach(val => {
 						selects[val.index].DownloadUrl = val.downloadUrl;
 					});
@@ -8852,19 +8864,19 @@ button.downloadSubtitle:disabled {
 				}]
 				base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
 			} else if (temp.page === "share") {
-				let token = this.getToken();
-				let batchSize = 15;
+				const token = this.getToken();
+				const batchSize = 15;
 				let proc = 0;
 				selects = selects.filter(item => item.Type === 0);
-				let pathSplit = location.pathname.split("/").filter(Boolean);
-				let ShareKey = pathSplit[1];
+				const pathSplit = location.pathname.split("/").filter(Boolean);
+				const ShareKey = pathSplit[1];
 				for (let i = 0; i < selects.length; i += batchSize) {
-					let batch = selects.slice(i, i + batchSize);
-					let queue = [];
+					const batch = selects.slice(i, i + batchSize);
+					const queue = [];
 					$doc.find(".loading-popup .loading-title").html(`链接获取中`);
 					$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
 					batch.forEach((item, localIndex) => {
-						let globalIndex = i + localIndex;
+						const globalIndex = i + localIndex;
 						queue.push(this.getFileUrl(item, globalIndex, token, ShareKey)
 							.then(val => {
 								proc++;
@@ -8872,7 +8884,7 @@ button.downloadSubtitle:disabled {
 								return val;
 							}));
 					});
-					let res = await Promise.all(queue);
+					const res = await Promise.all(queue);
 					res.forEach(val => {
 						selects[val.index].DownloadUrl = val.downloadUrl;
 					});
@@ -8891,7 +8903,7 @@ button.downloadSubtitle:disabled {
 			}
 		},
 		async getFileUrl(item, index, token, ShareKey) {
-			let res = null;
+			let res;
 			if (ShareKey) {
 				res = await base.post(config.$123pan.api.getShareLink, { "ShareKey": ShareKey, "FileID": item.FileId, "S3keyFlag": item.S3KeyFlag, "Size": item.Size, "Etag": item.Etag }, { "Content-Type": "application/json", "Authorization": `Bearer ${token}`, "Platform": "ios" });
 			} else {
@@ -8899,7 +8911,7 @@ button.downloadSubtitle:disabled {
 			}
 			if (res.data?.DownloadUrl || res.data?.DownloadURL) {
 				let url = res.data.DownloadUrl ? res.data.DownloadUrl : res.data?.DownloadURL;
-				let surl = new URL(url).searchParams.get("params");
+				const surl = new URL(url).searchParams.get("params");
 				if (surl) url = base.decodeBase(surl);
 				// url = await base.getFinalUrl(url);
 				return {
@@ -8922,13 +8934,13 @@ button.downloadSubtitle:disabled {
 		},
 		getSelectedList() {
 			try {
-				let selectedList = [];
-				let reactDom = $(".ant-table-wrapper, .tiled-list, .file-list, .single-file-sharing-container-content")[0];
-				let reactObj = base.findReact(reactDom);
-				let props = reactObj.pendingProps;
+				const selectedList = [];
+				const reactDom = $(".ant-table-wrapper, .tiled-list, .file-list, .single-file-sharing-container-content")[0];
+				const reactObj = base.findReact(reactDom);
+				const props = reactObj.pendingProps;
 				if (props) {
-					let fileList = props?.dataSource || props?.loadedFileList || props?.files || [];
-					let selectedKey = props?.rowSelection?.selectedRowKeys || [];
+					const fileList = props?.dataSource || props?.loadedFileList || props?.files || [];
+					const selectedKey = props?.rowSelection?.selectedRowKeys || [];
 					fileList.forEach(function (val) {
 						if (val?.checked === true) {
 							selectedList.push(val);
@@ -8939,7 +8951,7 @@ button.downloadSubtitle:disabled {
 					if (props?.file?.S3KeyFlag) selectedList.push(props.file);
 				}
 				return selectedList;
-			} catch (e) {
+			} catch {
 				return [];
 			}
 		},
@@ -8947,7 +8959,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button color-button" style="user-select: text !important;">
+				const $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button color-button" style="user-select: text !important;">
 					<svg class="icon home-operator-icon-upload" aria-hidden="true"><use xlink:href="#general_download_16_1"></use></svg>
 					<span>下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:23px">
@@ -8966,7 +8978,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<div class="register pl-button color-button">
+				const $button = $(`<div class="register pl-button color-button">
 					<svg class="icon" aria-hidden="true" style="color:rgb(255, 255, 255);margin-right:5px;"><use xlink:href="#top_btn_download2"></use></svg>下载助手
 					<ul class="pl-dropdown-menu" style="top:37px">
 						<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
@@ -8985,7 +8997,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.shareNew, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid mfy-button pl-button color-button" style="user-select: text !important;">
+				const $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid mfy-button pl-button color-button" style="user-select: text !important;">
 					<svg class="icon" aria-hidden="true" style="color: rgb(255, 255, 255);"><use xlink:href="#general_download_16_1"></use></svg>
 					<span>下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:20px">
@@ -9007,7 +9019,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
-				let $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button-init color-button" style="user-select: text !important;">
+				const $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button-init color-button" style="user-select: text !important;">
 					<svg class="icon home-operator-icon-upload" aria-hidden="true"><use xlink:href="#general_download_16_1"></use></svg>
 					<span>点我点亮</span>
 				</button>`);
@@ -9017,7 +9029,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<div class="register pl-button-init color-button">
+				const $button = $(`<div class="register pl-button-init color-button">
 					<svg class="icon" aria-hidden="true" style="color:rgb(255, 255, 255);margin-right:5px;"><use xlink:href="#top_btn_download2"></use></svg>点我点亮
 				</div>`);
 				$button.click(base.showInitDialog);
@@ -9027,7 +9039,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.shareNew, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
-				let $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid mfy-button pl-button-init color-button" style="user-select: text !important;">
+				const $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid mfy-button pl-button-init color-button" style="user-select: text !important;">
 					<svg class="icon" aria-hidden="true" style="color: rgb(255, 255, 255);"><use xlink:href="#general_download_16_1"></use></svg>
 					<span>点我点亮</span>
 				</button>`);
@@ -9036,7 +9048,7 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		detectPage() {
-			let path = location.pathname;
+			const path = location.pathname;
 			if (/^\/$/.test(path)) return "home";
 			if (/^\/s\//.test(path)) return "share";
 			return "";
@@ -9053,7 +9065,7 @@ button.downloadSubtitle:disabled {
 	};
 
 	// 主代码
-	let main = {
+	const main = {
 		async init() {
 			/**
 			 * 控制台输出
@@ -9062,8 +9074,9 @@ button.downloadSubtitle:disabled {
 			 * @description 来自【网盘智能识别助手】，有改动
 			 */
 			base.console.log(`%c %c LinkSwift\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/hmjz100/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
+
 			// 创建挂载点
-			let mountElem = $(`<${mount} class="${mount}" />`);
+			const mountElem = $(`<${mount} class="${mount}" />`);
 			temp.mount = mountElem;
 
 			base.waitForKeyElements(`html:not(:has(> .${mount})) head`, (element) => {
@@ -9099,11 +9112,11 @@ button.downloadSubtitle:disabled {
 			if ("greenerPage" in temp.main) temp.main.greenerPage();
 
 			// 脚本更新后提示消息
-			let storedVersion = base.getValue("setting_init").version;
+			const storedVersion = base.getValue("setting_init").version;
 			if (!storedVersion || base.isNewerVersion(info.version, storedVersion)) {
 				base.waitForKeyElements("body:not(.swal2-shown)", async () => {
 					await base.showUpdate();
-					let list = base.getValue("setting_init");
+					const list = base.getValue("setting_init");
 					list.version = info.version;
 					base.setValue("setting_init", list);
 					return true;
@@ -9161,15 +9174,15 @@ button.downloadSubtitle:disabled {
 		}
 	};
 
-	base.console = Object.fromEntries(Object.entries(console).filter(([key, value]) => typeof value === "function").map(([key, value]) => [key, value.bind(console)]));
+	base.console = Object.fromEntries(Object.entries(console).filter(([, value]) => typeof value === "function").map(([key, value]) => [key, value.bind(console)]));
 	main.init();
 
 	// 这是啥？我不到啊
 	function idontknow(input) {
-		let charArray = input.split("");
+		const charArray = input.split("");
 		// 这是 Fisher-Yates 洗牌算法的实现
 		for (let i = charArray.length - 1; i > 0; i--) {
-			let j = Math.floor(Math.random() * (i + 1));
+			const j = Math.floor(Math.random() * (i + 1));
 			[charArray[i], charArray[j]] = [charArray[j], charArray[i]];
 		}
 		return charArray.join("");

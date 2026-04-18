@@ -875,14 +875,15 @@
 					id: new Date().getTime(),
 					jsonrpc: "2.0",
 					method: "aria2.addUri",
-					params: [`token:${rpc.token}`, [link], {
+					params: [[link], {
 						dir,
 						out: filename,
 						header: headers
 					}]
 				};
+				if (rpc.token) data.params.unshift(`token:${rpc.token}`);
 				try {
-					const res = await base.post(url, data, {}, "", false);
+					const res = await base.post(url, data, { "Accept": "application/json", "Content-Type": "application/json;charset=UTF-8" }, "json", false);
 					if (res.result) return "success";
 					return "fail";
 				} catch {
@@ -955,11 +956,7 @@
 		async sendLinkToABDM(link, filename, headers) {
 			if (!this.sendLinkToABDM.lock) this.sendLinkToABDM.lock = Promise.resolve();
 			return this.sendLinkToABDM.lock = this.sendLinkToABDM.lock.then(async () => {
-				const newHeaders = {};
-				for (const key in headers) {
-					newHeaders[key.toLowerCase().split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join("-")] = headers[key];
-				}
-				headers = { "User-Agent": navigator.userAgent, "Origin": location.origin, "Referer": `${location.origin}/`, "DNT": "1", ...newHeaders };
+				headers = this.standHeaders(headers);
 				const list = base.getValue("setting_abdm_rpc");
 				const selected = list.find(i => i.default);
 				const rpc = {
@@ -973,11 +970,11 @@
 						"name": filename,
 						"description": "LinkSwift",
 						"link": link,
-						"headers": headers,
-						"downloadPage": headers["Referer"]
+						"headers": headers
 					},
 					"name": filename
 				}
+				if (headers["Referer"]) data["downloadSource"]["downloadPage"] = headers["Referer"];
 				if (rpc.dir) data.folder = rpc.dir;
 				try {
 					const res = await base.post(url, data, { "Content-Type": "text/plain;charset=UTF-8" }, "text", false);

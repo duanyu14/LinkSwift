@@ -706,10 +706,10 @@
 		 * @author hmjz100
 		 * @description 标准化请求头、响应头的键，使用驼峰命名
 		 * @param {String|Object} headers - 请求头、响应头的字符串或对象
-		 * @param {Boolean} addDeafult - 是否不添加默认头
+		 * @param {Boolean} dontDeafult - 是否不添加默认头
 		 * @returns {Object} 标准化后的 Headers
 		 */
-		standHeaders(headers = {}, addDeafult = false) {
+		standHeaders(headers = {}, dontDeafult = false) {
 			if (!headers) return {};
 			if (typeof headers === 'string') {
 				const rawHeaders = {};
@@ -727,12 +727,10 @@
 				else value = String(headers[key]);
 				newHeaders[key.toLowerCase().split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join("-")] = value;
 			}
-			if (addDeafult) return newHeaders;
+			if (dontDeafult) return newHeaders;
 			return {
-				"Dnt": "", "Cache-Control": "no-cache", "Pragma": "no-cache", "Expires": "0",
-				"Cookie": document.cookie,
+				"Accept": "*/*",
 				"User-Agent": navigator.userAgent,
-				"Origin": location.origin,
 				"Referer": `${location.origin}/`,
 				...newHeaders
 			};
@@ -799,7 +797,7 @@
 			let rpc = base.getValue("setting_idm_rpc").find(i => i.default);
 			if (!this.sendLinkToIDM.lock) this.sendLinkToIDM.lock = Promise.resolve();
 			return this.sendLinkToIDM.lock = this.sendLinkToIDM.lock.then(async () => {
-				headers = this.standHeaders(headers);
+				headers = this.standHeaders(headers, true);
 
 				if (!this.sendLinkToIDM.seq) this.sendLinkToIDM.seq = 1;
 				let seq = this.sendLinkToIDM.seq;
@@ -1051,8 +1049,10 @@
 						base.console.log("【LinkSwift】Post(start)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers);
 					},
 					onload: (res) => {
+						// 转换 Headers 到 Object
 						const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
 						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
+
 						if (type === "blob") {
 							base.console.log("【LinkSwift】Post(load) Blob\n请求地址：" + url + "\n请求数据：", _data, "\n请求结果：", res);
 							resolve(res);
@@ -1060,13 +1060,15 @@
 						}
 
 						// 尝试解析响应
-						res.responseDecode = res.responseText;
-						try { res.responseDecode = atob(res.responseDecode) } catch { }
-						try { res.responseDecode = escape(res.responseDecode) } catch { }
-						try { res.responseDecode = decodeURIComponent(res.responseDecode) } catch { }
-						try { res.responseDecode = JSON.parse(res.responseDecode) } catch { }
-						if (res.responseDecode === res.responseText) res.responseDecode = null;
-						if (this.isType(res.response) === "object") res.responseDecode = res.response;
+						if (type === "json") {
+							res.responseDecode = res.responseText;
+							try { res.responseDecode = atob(res.responseDecode) } catch { }
+							try { res.responseDecode = escape(res.responseDecode) } catch { }
+							try { res.responseDecode = decodeURIComponent(res.responseDecode) } catch { }
+							try { res.responseDecode = JSON.parse(res.responseDecode) } catch { }
+							if (res.responseDecode === res.responseText) res.responseDecode = null;
+							if (this.isType(res.response) === "object") res.responseDecode = res.response;
+						}
 
 						base.console.log("【LinkSwift】Post(load)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers, "\n请求结果：", res);
 						resolve(res.responseDecode ?? res.response ?? res.responseText);
@@ -1107,18 +1109,23 @@
 						base.console.log("【LinkSwift】Get(start)\n请求地址：" + url + "\n请求头部：", headers);
 					},
 					onload: (res) => {
+						// 转换 Headers 到 Object
 						const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
 						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
+
 						if (type === "blob") {
 							base.console.log("【LinkSwift】Get(load) Blob\n请求地址：" + url, "\n请求结果：", res);
 							resolve(res);
 							return;
 						}
+
 						// 尝试解析响应
-						res.responseDecode = res.responseText;
-						try { res.responseDecode = JSON.parse(res.responseDecode) } catch { }
-						if (res.responseDecode === res.responseText) res.responseDecode = null;
-						if (this.isType(res.response) === "object") res.responseDecode = res.response;
+						if (type === "json") {
+							res.responseDecode = res.responseText;
+							try { res.responseDecode = JSON.parse(res.responseDecode) } catch { }
+							if (res.responseDecode === res.responseText) res.responseDecode = null;
+							if (this.isType(res.response) === "object") res.responseDecode = res.response;
+						}
 
 						base.console.log("【LinkSwift】Get(load)\n请求地址：" + url + "\n请求头部：", headers, "\n请求结果：", res);
 						resolve(res.responseDecode ?? res.response ?? res.responseText);
@@ -1140,7 +1147,7 @@
 		/**
 		 * 发送 HEAD 请求
 		 * @author hmjz100
-		 * @description 用于获取请求地址返回的请求头，支持智能降级为轻量 GET (`Range: bytes=0-0`)，返回结构化响应头
+		 * @description 用于获取请求地址返回的请求头，支持智能降级为轻量 GET (`Range: bytes=0-0`、`HEADERS_RECEIVED`)，返回结构化响应头
 		 * @param {String} url - 请求地址
 		 * @param {Object} headers - 请求头配置
 		 * @param {Boolean} usingGET - 是否使用 GET
@@ -1160,11 +1167,13 @@
 					},
 					onload: function (res) {
 						if (!_aborted) {
+							// 转换 Headers 到 Object
 							const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
 							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
 
 							base.console.log(`【LinkSwift】Head${usingGET ? " Get" : ""}(load)\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
 
+							// 如果：没用 GET & 没回 Range & 非成功返回 --> 用 HEADERS_RECEIVED 适配
 							if (!usingGET && !res.responseHeaders.hasOwnProperty("Range") && !(res?.status >= 200 && res?.status < 400)) {
 								base.head(res.finalUrl, { ...headers, Range: "bytes=0-0" }, true).then(resolve).catch(reject);
 								return;
@@ -1176,8 +1185,9 @@
 					onreadystatechange: function (res) {
 						if (res.readyState === 2) { // HEADERS_RECEIVED
 							_aborted = true;
-							if (request && request.abort) request.abort();
+							if (request && request.abort) request.abort(); // 主动停止接收数据，适配某些不给用 HEAD 请求又不肯 range 头部的后端
 
+							// 转换 Headers 到 Object
 							const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
 							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", true);
 
@@ -7929,17 +7939,23 @@ button.downloadSubtitle:disabled {
 					let batch = selects.slice(i, i + batchSize);
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
-					let res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "User-Agent": config.$quark.api.ua.downloadLink });
-					if (res?.code == 31001) {
-						return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-					} else if (res?.code == 23018) {
-						let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-						let item = batch.find(item => item.fid === fid);
-						return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+					let res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Referer": "", "User-Agent": config.$quark.api.ua.downloadLink });
+
+					if (!res || res.code !== 0 || !res.data) {
+						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res?.code == 23018) {
+							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							let item = batch.find(item => item.fid === fid);
+							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+						}
+
+						if (res?.code || res?.message) {
+							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
+						} else {
+							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
+						}
 					}
-					if (res?.code !== 0) {
-						return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
-					}
+
 					// 合并响应数据
 					if (res?.data) {
 						data.push(...res.data);
@@ -7989,7 +8005,7 @@ button.downloadSubtitle:disabled {
 						let item = batch.find(item => item.fid === fid);
 						return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 					}
-					if (res?.code !== 0) return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
+					if (res.code !== 0) return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
 					// 合并响应数据
 					if (res?.data) {
 						data.push(...res.data);
@@ -8328,16 +8344,22 @@ button.downloadSubtitle:disabled {
 					let fids = batch.map(item => item.fid);
 					// 发起请求获取链接
 					let res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "User-Agent": config.$uc.api.ua.downloadLink });
-					if (res?.code == 31001) {
-						return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-					} else if (res?.code == 23018) {
-						let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
-						let item = batch.find(item => item.fid === fid);
-						return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+
+					if (!res || res.code !== 0 || !res.data) {
+						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res?.code == 23018) {
+							let fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+							let item = batch.find(item => item.fid === fid);
+							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
+						}
+
+						if (res?.code || res?.message) {
+							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
+						} else {
+							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
+						}
 					}
-					if (res?.code !== 0) {
-						return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
-					}
+
 					// 合并响应数据
 					if (res?.data) {
 						data.push(...res.data);
@@ -8387,7 +8409,7 @@ button.downloadSubtitle:disabled {
 						let item = batch.find(item => item.fid === fid);
 						return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 					}
-					if (res?.code !== 0) return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
+					if (res.code !== 0) return message.error("提示：<br/>获取链接失败了~<br/>代码：" + res.code);
 					// 合并响应数据
 					if (res?.data) {
 						data.push(...res.data);

@@ -7840,17 +7840,19 @@ button.downloadSubtitle:disabled {
 			})
 		},
 		addInitButton() {
-			const $button = $(`<button class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' ')} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger guangya-button pl-button-init">${this.svg}<span>点我点亮</span></button>`);
+			const $button = $(`<button class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid guangya-button pl-button-init">${this.svg}<span>点我点亮</span></button>`);
 			$button.click(base.showInitDialog);
 			base.waitForKeyElements(config.$guangya.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
+				$button.addClass([...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' '));
 				$button.find(".pl-dropdown-menu").css({ "top": "34px" });
 				element.prepend($button);
 			})
 			base.waitForKeyElements(config.$guangya.mount.share, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
+				$button.addClass([...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' '));
 				$button.addClass("ant-btn-lg");
 				$button.find(".pl-dropdown-menu").css({ "bottom": "46px" });
 				element.append($button);

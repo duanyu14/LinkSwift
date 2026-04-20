@@ -54,6 +54,7 @@
 // @match             *://caiyun.139.com/*
 // @match             *://cloud.189.cn/web/*
 // @match             *://pan.xunlei.com/*
+// @match             *://www.guangyapan.com/*
 // @match             *://pan.quark.cn/*
 // @match             *://drive.uc.cn/*
 // @match             *://*.123pan.com/*
@@ -75,6 +76,8 @@
 // @connect           cmecloud.cn
 // @connect           189.cn
 // @connect           xunlei.com
+// @connect           guangyapan.com
+// @connect           guangyacdn.com
 // @connect           quark.cn
 // @connect           uc.cn
 // @connect           123pan.com
@@ -274,6 +277,7 @@
 			}
 		},
 		$baidu: {
+			// 当年大战的最后赢家，虽然限速，但哪怕抽丝剥茧，也能得到结果
 			api: {
 				ua: {
 					downloadLink: "pan.baidu.com"
@@ -297,6 +301,7 @@
 			}
 		},
 		$aliyun: {
+			// 和夸克差不多，不予置评
 			api: {
 				getLink: "https://api.aliyundrive.com/v2/file/get_download_url",
 				getShareLink: "https://api.aliyundrive.com/v2/file/get_share_link_download_url"
@@ -316,6 +321,7 @@
 			}
 		},
 		$mcloud: {
+			// 运营商中的精品，意外的不错，也没有啥限制，就是没资源
 			api: {
 				getLink: "https://personal-kd-njs.yun.139.com/hcy/file/getDownloadUrl"
 			},
@@ -329,6 +335,7 @@
 			}
 		},
 		$tcloud: {
+			// 运营商中的精品，意外的不错，也没有啥限制，就是没资源
 			api: {
 				getAccessToken: "https://api.cloud.189.cn/open/oauth2/ssoH5.action",
 				getLink: "https://api.cloud.189.cn/open/file/getFileDownloadUrl.action"
@@ -345,6 +352,7 @@
 		$xunlei: {
 			api: {
 				mirror: [
+					// 没想到这么难找，还有可能随时失效，真有你的呀
 					"vod0780-aliyun04-vip-lixian.xunlei.com", "vod0781-aliyun04-vip-lixian.xunlei.com", "vod3379-aliyun04-vip-lixian.xunlei.com", "vod3429-aliyun04-vip-lixian.xunlei.com", "vod3459-aliyun04-vip-lixian.xunlei.com", "vod3533-aliyun04-vip-lixian.xunlei.com", "vod4252-aliyun04-vip-lixian.xunlei.com", "vod4253-aliyun04-vip-lixian.xunlei.com", "vod4320-aliyun04-vip-lixian.xunlei.com", "vod4321-aliyun04-vip-lixian.xunlei.com", "vod0555-aliyun06-vip-lixian.xunlei.com", "vod0556-aliyun06-vip-lixian.xunlei.com", "vod1284-aliyun06-vip-lixian.xunlei.com", "vod1285-aliyun06-vip-lixian.xunlei.com", "vod1363-aliyun06-vip-lixian.xunlei.com", "vod1372-aliyun06-vip-lixian.xunlei.com", "vod1629-aliyun06-vip-lixian.xunlei.com", "vod1630-aliyun06-vip-lixian.xunlei.com", "vod1703-aliyun06-vip-lixian.xunlei.com", "vod1704-aliyun06-vip-lixian.xunlei.com", "vod1844-aliyun06-vip-lixian.xunlei.com", "vod0254-aliyun08-vip-lixian.xunlei.com", "vod0255-aliyun08-vip-lixian.xunlei.com", "vod0256-aliyun08-vip-lixian.xunlei.com", "vod0257-aliyun08-vip-lixian.xunlei.com", "vod0261-aliyun08-vip-lixian.xunlei.com", "vod0262-aliyun08-vip-lixian.xunlei.com", "vod0263-aliyun08-vip-lixian.xunlei.com", "vod0264-aliyun08-vip-lixian.xunlei.com", "vod0759-aliyun08-vip-lixian.xunlei.com", "vod0760-aliyun08-vip-lixian.xunlei.com", "vod9410-aliyun08-vip-lixian.xunlei.com", "vod9411-aliyun08-vip-lixian.xunlei.com", "vod9412-aliyun08-vip-lixian.xunlei.com", "vod0080-b02-vip-lixian.xunlei.com", "vod0432-b02-vip-lixian.xunlei.com", "vod0531-b02-vip-lixian.xunlei.com", "vod0532-b02-vip-lixian.xunlei.com", "vod0533-b02-vip-lixian.xunlei.com", "vod0534-b02-vip-lixian.xunlei.com", "vod0537-b02-vip-lixian.xunlei.com", "vod0563-b02-vip-lixian.xunlei.com", "vod0565-b02-vip-lixian.xunlei.com", "vod0566-b02-vip-lixian.xunlei.com", "vod0568-b02-vip-lixian.xunlei.com", "vod0571-b02-vip-lixian.xunlei.com", "vod0572-b02-vip-lixian.xunlei.com", "vod0573-b02-vip-lixian.xunlei.com", "vod0595-b02-vip-lixian.xunlei.com", "vod0596-b02-vip-lixian.xunlei.com", "vod0597-b02-vip-lixian.xunlei.com", "vod0598-b02-vip-lixian.xunlei.com", "vod0636-b02-vip-lixian.xunlei.com", "vod0637-b02-vip-lixian.xunlei.com", "vod0638-b02-vip-lixian.xunlei.com", "vod0639-b02-vip-lixian.xunlei.com", "vod0640-b02-vip-lixian.xunlei.com", "vod0641-b02-vip-lixian.xunlei.com", "vod0642-b02-vip-lixian.xunlei.com", "vod0643-b02-vip-lixian.xunlei.com", "vod0644-b02-vip-lixian.xunlei.com", "vod0645-b02-vip-lixian.xunlei.com", "vod0646-b02-vip-lixian.xunlei.com", "vod0647-b02-vip-lixian.xunlei.com", "vod0648-b02-vip-lixian.xunlei.com", "vod0649-b02-vip-lixian.xunlei.com", "vod0650-b02-vip-lixian.xunlei.com", "vod0651-b02-vip-lixian.xunlei.com", "vod0652-b02-vip-lixian.xunlei.com", "vod0653-b02-vip-lixian.xunlei.com", "vod0654-b02-vip-lixian.xunlei.com", "vod0725-b02-vip-lixian.xunlei.com", "vod0726-b02-vip-lixian.xunlei.com", "vod0727-b02-vip-lixian.xunlei.com", "vod0006-b05-vip-lixian.xunlei.com", "vod0009-b05-vip-lixian.xunlei.com", "vod0010-b05-vip-lixian.xunlei.com", "vod0011-b05-vip-lixian.xunlei.com", "vod0012-b05-vip-lixian.xunlei.com", "vod0013-b05-vip-lixian.xunlei.com", "vod0014-b05-vip-lixian.xunlei.com", "vod0043-b05-vip-lixian.xunlei.com", "vod0044-b05-vip-lixian.xunlei.com", "vod0045-b05-vip-lixian.xunlei.com", "vod0051-b05-vip-lixian.xunlei.com", "vod0053-b05-vip-lixian.xunlei.com", "vod0054-b05-vip-lixian.xunlei.com", "vod0055-b05-vip-lixian.xunlei.com", "vod0139-b05-vip-lixian.xunlei.com", "vod0140-b05-vip-lixian.xunlei.com", "vod0141-b05-vip-lixian.xunlei.com", "vod0142-b05-vip-lixian.xunlei.com", "vod0143-b05-vip-lixian.xunlei.com", "vod0349-b05-vip-lixian.xunlei.com", "vod0001-c01-vip-lixian.xunlei.com", "vod0002-c01-vip-lixian.xunlei.com", "vod0003-c01-vip-lixian.xunlei.com", "vod0004-c01-vip-lixian.xunlei.com", "vod0005-c01-vip-lixian.xunlei.com", "vod0070-h01-vip-lixian.xunlei.com", "vod0071-h01-vip-lixian.xunlei.com", "vod0074-h01-vip-lixian.xunlei.com", "vod0075-h01-vip-lixian.xunlei.com", "vod0131-h01-vip-lixian.xunlei.com", "vod0132-h01-vip-lixian.xunlei.com", "vod0153-h01-vip-lixian.xunlei.com", "vod0088-h04-vip-lixian.xunlei.com", "vod0089-h04-vip-lixian.xunlei.com", "vod0090-h04-vip-lixian.xunlei.com", "vod0091-h04-vip-lixian.xunlei.com", "vod0092-h04-vip-lixian.xunlei.com", "vod0093-h04-vip-lixian.xunlei.com", "vod0094-h04-vip-lixian.xunlei.com", "vod0097-h04-vip-lixian.xunlei.com", "vod0098-h04-vip-lixian.xunlei.com", "vod0099-h04-vip-lixian.xunlei.com", "vod0100-h04-vip-lixian.xunlei.com", "vod0101-h04-vip-lixian.xunlei.com", "vod0105-h04-vip-lixian.xunlei.com", "vod0128-h04-vip-lixian.xunlei.com", "vod0129-h04-vip-lixian.xunlei.com", "vod0143-h04-vip-lixian.xunlei.com", "vod0317-h04-vip-lixian.xunlei.com", "vod0318-h04-vip-lixian.xunlei.com", "vod0319-h04-vip-lixian.xunlei.com", "vod0320-h04-vip-lixian.xunlei.com", "vod0003-h05-vip-lixian.xunlei.com", "vod0004-h05-vip-lixian.xunlei.com", "vod0007-h05-vip-lixian.xunlei.com", "vod0008-h05-vip-lixian.xunlei.com", "vod0009-h05-vip-lixian.xunlei.com", "vod0010-h05-vip-lixian.xunlei.com", "vod0012-h05-vip-lixian.xunlei.com", "vod0013-h05-vip-lixian.xunlei.com", "vod0014-h05-vip-lixian.xunlei.com", "vod0017-h05-vip-lixian.xunlei.com", "vod0097-h05-vip-lixian.xunlei.com", "vod0098-h05-vip-lixian.xunlei.com", "vod0099-h05-vip-lixian.xunlei.com", "vod0116-h05-vip-lixian.xunlei.com", "vod0117-h05-vip-lixian.xunlei.com", "vod0121-h05-vip-lixian.xunlei.com", "vod0122-h05-vip-lixian.xunlei.com", "vod0131-h05-vip-lixian.xunlei.com", "vod0145-h05-vip-lixian.xunlei.com", "vod0146-h05-vip-lixian.xunlei.com", "vod0184-h05-vip-lixian.xunlei.com", "vod0185-h05-vip-lixian.xunlei.com", "vod0221-h05-vip-lixian.xunlei.com", "vod0222-h05-vip-lixian.xunlei.com", "vod0223-h05-vip-lixian.xunlei.com", "vod0224-h05-vip-lixian.xunlei.com", "vod0225-h05-vip-lixian.xunlei.com", "vod0227-h05-vip-lixian.xunlei.com", "vod0252-h05-vip-lixian.xunlei.com", "vod0253-h05-vip-lixian.xunlei.com", "vod0254-h05-vip-lixian.xunlei.com", "vod0001-m01-vip-lixian.xunlei.com", "vod0002-m01-vip-lixian.xunlei.com", "vod0003-m01-vip-lixian.xunlei.com", "vod0006-m01-vip-lixian.xunlei.com", "vod0007-m01-vip-lixian.xunlei.com", "vod0008-m01-vip-lixian.xunlei.com", "vod0010-m01-vip-lixian.xunlei.com", "vod0011-m01-vip-lixian.xunlei.com", "vod0012-m01-vip-lixian.xunlei.com", "vod0013-m01-vip-lixian.xunlei.com", "vod0014-m01-vip-lixian.xunlei.com", "vod0019-m01-vip-lixian.xunlei.com", "vod0020-m01-vip-lixian.xunlei.com", "vod0021-m01-vip-lixian.xunlei.com", "vod0022-m01-vip-lixian.xunlei.com", "vod0064-txyun08-vip-lixian.xunlei.com", "vod0065-txyun08-vip-lixian.xunlei.com", "vod0066-txyun08-vip-lixian.xunlei.com", "vod0067-txyun08-vip-lixian.xunlei.com", "vod0068-txyun08-vip-lixian.xunlei.com", "vod0069-txyun08-vip-lixian.xunlei.com", "vod0070-txyun08-vip-lixian.xunlei.com", "vod0340-txyun08-vip-lixian.xunlei.com", "vod0341-txyun08-vip-lixian.xunlei.com", "vod0032-z01-vip-lixian.xunlei.com", "vod0035-z01-vip-lixian.xunlei.com", "vod0036-z01-vip-lixian.xunlei.com", "vod0037-z01-vip-lixian.xunlei.com", "vod0038-z01-vip-lixian.xunlei.com", "vod0039-z01-vip-lixian.xunlei.com", "vod0040-z01-vip-lixian.xunlei.com", "vod0041-z01-vip-lixian.xunlei.com", "vod0042-z01-vip-lixian.xunlei.com", "vod0091-z01-vip-lixian.xunlei.com", "vod0093-z01-vip-lixian.xunlei.com", "vod0131-z01-vip-lixian.xunlei.com", "vod0135-z01-vip-lixian.xunlei.com", "vod0136-z01-vip-lixian.xunlei.com", "vod0146-z01-vip-lixian.xunlei.com", "vod0155-z01-vip-lixian.xunlei.com", "vod0156-z01-vip-lixian.xunlei.com", "vod0167-z01-vip-lixian.xunlei.com", "vod0195-z01-vip-lixian.xunlei.com", "vod0196-z01-vip-lixian.xunlei.com", "vod0281-z01-vip-lixian.xunlei.com"
 				],
 				getLink: "https://api-pan.xunlei.com/drive/v1/files/"
@@ -359,7 +367,24 @@
 				filename: `注：此服务不会向客户端回报文件名，下载时需要复制文件名。`
 			}
 		},
+		$guangya: {
+			// 不愧是吸血雷！现在又想学习吸二代的按流量计费方式！
+			api: {
+				getLink: "https://api.guangyapan.com/nd.bizuserres.s/v1/get_res_download_url",
+				getShareLink: "https://api.guangyapan.com/nd.bizuserres.s/v1/get_share_download_url",
+				getShareToken: "https://api.guangyapan.com/nd.bizuserres.s/v1/get_share_access_token"
+			},
+			mount: {
+				home: `#root #app div > div:has(> .ant-btn.ant-btn-primary.ant-btn-color-primary .ant-btn-icon > .swangpan-icon-upload):has(> .ant-btn.ant-btn-default.ant-btn-color-default  .ant-btn-icon > .swangpan-icon-addfolder)`,
+				share: `#root #app div > div:has(> .ant-btn.ant-btn-lg .ant-btn-icon > .swangpan-icon-download)`
+			},
+			dom: {
+				enhance: `+<br/>此方式可以自动设置文件名，然后下载。<br/>此方式的下载请求<b>不会</b>被 IDM 捕获。`,
+				normal: `+<br/>此方式的下载请求<b>可能会</b>被 IDM 捕获。`
+			}
+		},
 		$quark: {
+			// 没想到啊没想到，矮子里面挑高个，竟是还有些良心
 			api: {
 				ua: {
 					downloadLink: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) quark-cloud-drive/3.20.0 Chrome/112.0.5615.165 Electron/24.1.3.8 Safari/537.36 Channel/pckk_other_ch"
@@ -376,6 +401,7 @@
 			}
 		},
 		$uc: {
+			// 夸克团队做的，意见同上
 			api: {
 				ua: {
 					downloadLink: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) uc-cloud-drive/2.5.20 Chrome/100.0.4896.160 Electron/18.3.5.4-b478491100 Safari/537.36 Channel/pckk_other_ch"
@@ -392,6 +418,7 @@
 			}
 		},
 		$123pan: {
+			// BT吸血二代，开创性的采用了按流量计费；韭菜培养时间长达三年！
 			api: {
 				getLink: "https://www.123pan.com/api/file/download_info",
 				getShareLink: "https://www.123pan.com/api/share/download/info"
@@ -1046,7 +1073,7 @@
 					url, headers, data,
 					method: "POST", responseType: type,
 					onloadstart: () => {
-						base.console.log("【LinkSwift】Post(start)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers);
+						base.console.info("【LinkSwift】Post(start)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers);
 					},
 					onload: (res) => {
 						// 转换 Headers 到 Object
@@ -1054,7 +1081,7 @@
 						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
 						if (type === "blob") {
-							base.console.log("【LinkSwift】Post(load) Blob\n请求地址：" + url + "\n请求数据：", _data, "\n请求结果：", res);
+							base.console.info("【LinkSwift】Post(load) Blob\n请求地址：" + url + "\n请求数据：", _data, "\n请求结果：", res);
 							resolve(res);
 							return;
 						}
@@ -1070,7 +1097,7 @@
 							if (this.isType(res.response) === "object") res.responseDecode = res.response;
 						}
 
-						base.console.log("【LinkSwift】Post(load)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers, "\n请求结果：", res);
+						base.console.info("【LinkSwift】Post(load)\n请求地址：" + url + "\n请求数据：", _data, "\n请求头部：", headers, "\n请求结果：", res);
 						resolve(res.responseDecode ?? res.response ?? res.responseText);
 					},
 					onerror: (error) => {
@@ -1107,7 +1134,7 @@
 					url, headers,
 					method: "GET", responseType: type,
 					onloadstart: () => {
-						base.console.log("【LinkSwift】Get(start)\n请求地址：" + url + "\n请求头部：", headers);
+						base.console.info("【LinkSwift】Get(start)\n请求地址：" + url + "\n请求头部：", headers);
 					},
 					onload: (res) => {
 						// 转换 Headers 到 Object
@@ -1115,7 +1142,7 @@
 						res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
 						if (type === "blob") {
-							base.console.log("【LinkSwift】Get(load) Blob\n请求地址：" + url, "\n请求结果：", res);
+							base.console.info("【LinkSwift】Get(load) Blob\n请求地址：" + url, "\n请求结果：", res);
 							resolve(res);
 							return;
 						}
@@ -1128,7 +1155,7 @@
 							if (this.isType(res.response) === "object") res.responseDecode = res.response;
 						}
 
-						base.console.log("【LinkSwift】Get(load)\n请求地址：" + url + "\n请求头部：", headers, "\n请求结果：", res);
+						base.console.info("【LinkSwift】Get(load)\n请求地址：" + url + "\n请求头部：", headers, "\n请求结果：", res);
 						resolve(res.responseDecode ?? res.response ?? res.responseText);
 					},
 					onerror: (error) => {
@@ -1164,7 +1191,7 @@
 					url,
 					headers,
 					onloadstart: () => {
-						base.console.log(`【LinkSwift】Head${usingGET ? " Get" : ""}(start)\n请求地址：${url}\n请求头部：`, headers);
+						base.console.info(`【LinkSwift】Head${usingGET ? " Get" : ""}(start)\n请求地址：${url}\n请求头部：`, headers);
 					},
 					onload: function (res) {
 						if (!_aborted) {
@@ -1172,10 +1199,10 @@
 							const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
 							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
-							base.console.log(`【LinkSwift】Head${usingGET ? " Get" : ""}(load)\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
+							base.console.info(`【LinkSwift】Head${usingGET ? " Get" : ""}(load)\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
 
 							// 如果：没用 GET & 没回 Range & 非成功返回 --> 用 HEADERS_RECEIVED 适配
-							if (!usingGET && !res.responseHeaders.hasOwnProperty("Range") && !(res?.status >= 200 && res?.status < 400)) {
+							if (!usingGET && !res.responseHeaders.hasOwnProperty("Range") && !(res.status >= 200 && res.status < 400)) {
 								base.head(res.finalUrl, { ...headers, Range: "bytes=0-0" }, true).then(resolve).catch(reject);
 								return;
 							}
@@ -1192,9 +1219,9 @@
 							const rawHeaders = res.responseHeaders || (request?.getAllResponseHeaders?.() || "") || "";
 							res.responseHeaders = base.standHeaders(typeof rawHeaders === 'string' ? rawHeaders.trim() : "", false, false);
 
-							base.console.log(`【LinkSwift】Head${usingGET ? " Get" : ""}(load) RS2\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
+							base.console.info(`【LinkSwift】Head${usingGET ? " Get" : ""}(load) RS2\n请求地址：${res.finalUrl}\n响应状态：${res.status}\n响应内容：`, res);
 
-							if (!usingGET && !res.responseHeaders.hasOwnProperty("Range") && !(res?.status >= 200 && res?.status < 400)) {
+							if (!usingGET && !res.responseHeaders.hasOwnProperty("Range") && !(res.status >= 200 && res.status < 400)) {
 								base.head(res.finalUrl, { ...headers, Range: "bytes=0-0" }, true).then(resolve).catch(reject);
 								return;
 							}
@@ -1226,11 +1253,11 @@
 		getFinal(url, headers = {}, usingGET = false, returnURL = true) {
 			return this.head(url, headers, usingGET)
 				.then(res => {
-					if (!res?.finalUrl) throw res;
-					if (res?.status == 204 && res?.statusText === "IDM") throw res;
+					if (!res.finalUrl) throw res;
+					if (res.status == 204 && res.statusText === "IDM") throw res;
 
 					// 如果是重定向，递归调用
-					if (res?.status >= 300 && res?.status < 400) {
+					if (res.status >= 300 && res.status < 400) {
 						return this.getFinal(res.finalUrl, headers, usingGET, returnURL);
 					}
 
@@ -1259,7 +1286,7 @@
 			this.download.taskCount = this.download.taskCount || 0; // 当前正在运行的 download 任务数
 			const global_maxThreads = 8; // 整个允许的最大并发数
 
-			if (extra) base.console.log(`【LinkSwift】Download\n收到数据：`, extra);
+			if (extra) base.console.info(`【LinkSwift】Download\n收到数据：`, extra);
 			if (!extra || !extra.index || !extra.name || !extra.size) throw new Error("extra 缺少内容。");
 
 			const status = {
@@ -1292,7 +1319,7 @@
 						const supportRange = finalHead.status == 206 && (responseHeaders?.["Accept-Ranges"]?.includes("bytes") || responseHeaders?.["Content-Range"]?.includes("bytes"));
 
 						if (!!supportRange || size > 0) {
-							base.console.log(`【LinkSwift】Download(Start)\n文件名称：${extra.name}\n断点续传：支持`);
+							base.console.info(`【LinkSwift】Download(Start)\n文件名称：${extra.name}\n断点续传：支持`);
 
 							const maxRetry = extra.retry || 10;
 							let index = 0;
@@ -1486,10 +1513,10 @@
 					method: "POST", url, headers: {}, data: JSON.stringify(rpcData),
 					responseType: "json",
 					onloadstart() {
-						base.console.log("【LinkSwift】Post(start) Aria2Test\n请求地址：" + url + "\n请求内容：", rpcData);
+						base.console.info("【LinkSwift】Post(start) Aria2Test\n请求地址：" + url + "\n请求内容：", rpcData);
 					},
 					onload: function (res) {
-						base.console.log("【LinkSwift】Post(load) Aria2Test\n请求地址：" + url + "\n请求结果：", res);
+						base.console.info("【LinkSwift】Post(load) Aria2Test\n请求地址：" + url + "\n请求结果：", res);
 						if (!res.response) return resolve("fail");
 						if (res.response?.error) {
 							resolve("fail");
@@ -1521,10 +1548,10 @@
 					method: "POST", url, headers: {}, data: new Date().getTime(),
 					responseType: "text",
 					onloadstart() {
-						base.console.log("【LinkSwift】Post(start) ABDMTest\n请求地址：" + url + "\n请求内容：", new Date().getTime());
+						base.console.info("【LinkSwift】Post(start) ABDMTest\n请求地址：" + url + "\n请求内容：", new Date().getTime());
 					},
 					onload: function (res) {
-						base.console.log("【LinkSwift】Post(load) ABDMTest\n请求地址：" + url + "\n请求结果：", res);
+						base.console.info("【LinkSwift】Post(load) ABDMTest\n请求地址：" + url + "\n请求结果：", res);
 						if (!res.response || res.response !== "pong") return resolve("fail");
 						resolve("success");
 					},
@@ -1604,7 +1631,7 @@
 				tag === "style" ? $style.html(css.trim().replace(/\t/g, "").replace(/\r\n|\n\r|\n|\r/g, "\n").replace(/\n+/g, "\n")) : $style.attr("href", css);
 				if ($styleDom.length) {
 					$styleDom.replaceWith($style);
-					base.console.log($style[0])
+					base.console.info($style[0])
 					return true;
 				}
 				if (position === "before") {
@@ -1766,6 +1793,7 @@
 		 * @param {"default"|"other"} type - 替换模式
 		 */
 		adaptiveThemeOverride(colorMap, type) {
+			if (!colorMap || colorMap.length === 0) return;
 			base.waitForKeyElements(`[${mount}^="${mount}-ColorUI-"], [id^="${mount}-ColorUI-"]`, function (tag) {
 				if (tag.html() === base.adaptiveStyleOverride(tag.text(), "", type, colorMap)) return;
 				const cssText = base.adaptiveStyleOverride(tag.text(), "", type, colorMap);
@@ -3188,7 +3216,7 @@
 			// 内容渲染
 			const renderContent = (target) => {
 				const { title, } = target.dataset;
-				let html;
+				let html, dual = false;
 
 				if (title) {
 					html = `<span>${title}</span>`;
@@ -3200,6 +3228,7 @@
 
 					html = `<span>${name}</span>`;
 					if (sizeText) {
+						dual = true;
 						html += `<span style="background-color:${temp.color}">${sizeText}</span>`;
 					}
 				}
@@ -3211,6 +3240,12 @@
 					tooltip.style.willChange = "transform"; // 告知浏览器提前准备层合成
 					tooltip.style.pointerEvents = "none"; // 防止指示框挡住鼠标导致抖动
 					temp.mount[0].appendChild(tooltip);
+				}
+
+				if (dual) {
+					tooltip.classList.add("dual");
+				} else {
+					tooltip.classList.remove("dual");
 				}
 
 				tooltip.innerHTML = html;
@@ -3288,8 +3323,6 @@
 		 * @description 详见代码
 		 */
 		generateDOM(configs) {
-
-
 			if (base.isType(configs) !== "array" && configs.length !== 2) return message.error("提示：<br/>配置解析失败~");
 			const list = (Array.isArray(configs[0]) ? configs[0] : []);
 			if (!list.length) return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -3713,7 +3746,7 @@
 			});
 			$doc.on("click", ".pl-button-mode", async function (e) {
 				temp.mode = e.currentTarget.dataset.mode;
-				console.log(e, temp, base.isType(temp.main?.getLink));
+				console.info(e, temp, base.isType(temp.main?.getLink));
 				if (!temp.mode) return;
 				if (!base.isType(temp.main?.getLink).includes("function")) return;
 				Swal.fire({
@@ -3754,7 +3787,7 @@
 			base.addStyle("swal-pub-dark-style", "style", `@media (prefers-color-scheme:dark){${GM_getResourceText("SwalDark").replace(/#19191a/, "#222226")}}`);
 			base.addStyle("swal-pub-custom-style", "style", `
 html:has(.swal2-container), html.swal2-shown {font-size: unset!important}
-.swal2-container *{vertical-align:baseline}
+.swal2-container *{vertical-align:baseline;line-height:normal}
 .swal2-styled{transition:all.2s}
 .swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:${temp.color} transparent }
 .swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;grid-column:auto;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}
@@ -3877,6 +3910,8 @@ body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar
 }
 
 .pl-icon {
+	display: inline;
+	align-self: center;
 	width: 15px;
 	height: 15px;
 	font-size: 18px;
@@ -3898,6 +3933,7 @@ body.swal2-shown:not(.swal2-no-backdrop, .swal2-toast-shown) ::-webkit-scrollbar
 }
 
 .pl-a {
+	display: inline;
 	position: relative;
 	overflow: hidden;
 	vertical-align: baseline;
@@ -4453,6 +4489,15 @@ header[style="display:none;"]~.pl-button {
 	background: var(--pl-c-b0)
 }
 
+.guangya-button {
+	color: #fff;
+	background-color: var(--pl-c);
+}
+
+.guangya-button:hover {
+	background: var(--pl-c-b0)
+}
+
 .quark-button,
 .uc-button {
 	padding: 0 14px;
@@ -4528,13 +4573,13 @@ header[style="display:none;"]~.pl-button {
 	padding: 5px 10px
 }
 
-.pl-tooltip>*:first-child {
+.pl-tooltip.dual>*:first-child {
 	border: 1px solid;
 	border-color: #333 transparent #333 #333;
 	border-radius: 5px 0 0 5px
 }
 
-.pl-tooltip>*:last-child {
+.pl-tooltip.dual>*:last-child {
 	border: 1px solid;
 	border-color: #333 #333 #333 transparent;
 	border-radius: 0 5px 5px 0
@@ -5705,7 +5750,7 @@ button.downloadSubtitle:disabled {
 						base.delValue("baidu_access_token");
 						return message.error("提示：<br/>访问令牌已过期，再获取一次吧~<br/>代码：" + res.errno);
 					}
-					if (res.errno || res?.errmsg) {
+					if (res.errno || res.errmsg) {
 						batch.forEach(item => item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`);
 					} else {
 						return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -5774,7 +5819,7 @@ button.downloadSubtitle:disabled {
 						base.delValue("baidu_access_token");
 						return message.error("提示：<br/>访问令牌已过期，再获取一次吧~<br/>代码：" + res.errno);
 					}
-					if (res.errno || res?.errmsg) {
+					if (res.errno || res.errmsg) {
 						item.dlink = `获取下载地址失败，${(res.errno || res.errmsg) ? "服务器说：" + (res.errno && res.errmsg ? res.errno + " - " + res.errmsg : (res.errmsg || res.errno)) + "。" : "刷新后再试试吧~"}`;
 					} else {
 						return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -5802,7 +5847,7 @@ button.downloadSubtitle:disabled {
 					const url = `${config.$baidu.api.getFiles}&dir=${encodeURIComponent(dir.path)}&access_token=${accessToken}`;
 					const res = await base.get(url, { "User-Agent": config.$baidu.api.ua.downloadLink });
 					cnt++;
-					if (res?.list?.length && (res.errno === 0 || res.errmsg === "succ")) {
+					if (res.list?.length && (res.errno === 0 || res.errmsg === "succ")) {
 						const subFiles = res.list.filter(f => !f.isdir);
 						proc += subFiles.length;
 						$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} 个文件~</div><div>${dir.path}</div>`);
@@ -6416,9 +6461,9 @@ button.downloadSubtitle:disabled {
 				await Promise.all(batch.map(async (item) => {
 					const res = await base.post(config.$aliyun.api.getLink, { drive_id: item.driveId, file_id: item.fileId }, { "Authorization": token, "X-Canary": "client=windows,app=adrive,version=v6.0.0" });
 
-					if (!res || !res?.url || res?.code) {
-						if (res?.code == "AccessTokenInvalid") return message.error("提示：<br/>访问令牌过期了，请刷新后重试~<br/>代码：" + res.code);
-						if (res?.code) {
+					if (!res || !res.url || res.code) {
+						if (res.code == "AccessTokenInvalid") return message.error("提示：<br/>访问令牌过期了，请刷新后重试~<br/>代码：" + res.code);
+						if (res.code) {
 							batch.forEach(item => item.dlink = `获取下载地址失败，服务器说：${res.code}，刷新后再试试吧~`);
 						} else {
 							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -6826,37 +6871,22 @@ button.downloadSubtitle:disabled {
 						"X-Yun-Url-Type": "3"
 					});
 					if (res.success) {
-						return {
-							index,
-							downloadUrl: res.data.url
-						};
+						return { index, downloadUrl: res.data.url };
 					} else {
-						return {
-							index,
-							downloadUrl: "获取下载地址失败，刷新后再试试吧~"
-						};
+						return { index, downloadUrl: "获取下载地址失败，刷新后再试试吧~" };
 					}
 				}
 				if (this.detectPage() === "share") {
 					const vueDom = document.querySelector(".main_file_list").__vue__;
 					const res = await base.post(config.$mcloud.api.getShareLink, `linkId=${vueDom.linkID}&contentIds=${item.path}&catalogIds=`, { "Content-Type": "application/x-www-form-urlencoded" });
 					if (res.code == 0) {
-						return {
-							index,
-							downloadUrl: res.data.redrUrl
-						};
+						return { index, downloadUrl: res.data.redrUrl };
 					} else {
-						return {
-							index,
-							downloadUrl: "获取下载地址失败，刷新后再试试吧~"
-						};
+						return { index, downloadUrl: "获取下载地址失败，刷新后再试试吧~" };
 					}
 				}
 			} catch {
-				return {
-					index,
-					downloadUrl: "获取下载地址失败，刷新后再试试吧~"
-				};
+				return { index, downloadUrl: "获取下载地址失败，刷新后再试试吧~" };
 			}
 		},
 		async getFilesUrl(items, token) {
@@ -7197,31 +7227,16 @@ button.downloadSubtitle:disabled {
 				}
 				const res = await base.get(url, { "Accept": "application/json;charset=UTF-8", "Sign-Type": 1, "Accesstoken": token, "Timestamp": time, "Signature": md5(_sign).toString() });
 				if (res.res_code == 0) {
-					return {
-						index,
-						downloadUrl: res.fileDownloadUrl
-					};
+					return { index, downloadUrl: res.fileDownloadUrl };
 				} else if (res.errorcode == "InvalidSessionKey") {
-					return {
-						index,
-						downloadUrl: "提示：<br/>请先登录网盘~"
-					};
+					return { index, downloadUrl: "提示：<br/>请先登录网盘~" };
 				} else if (res.res_code == "ShareNotFoundFlatDir") {
-					return {
-						index,
-						downloadUrl: "提示：<br/>请[转存]文件，之后再👉前往[我的网盘]中下载哦~"
-					};
+					return { index, downloadUrl: "提示：<br/>请[转存]文件，之后再👉前往[我的网盘]中下载哦~" };
 				} else {
-					return {
-						index,
-						downloadUrl: "获取下载地址失败，刷新后再试试吧~" + (res.res_code ? res.res_code : "")
-					};
+					return { index, downloadUrl: "获取下载地址失败，刷新后再试试吧~" + (res.res_code ? res.res_code : "") };
 				}
 			} catch {
-				return {
-					index,
-					downloadUrl: "获取下载地址失败，刷新后再试试吧~"
-				};
+				return { index, downloadUrl: "获取下载地址失败，刷新后再试试吧~" };
 			}
 		},
 		async getLink() {
@@ -7551,22 +7566,13 @@ button.downloadSubtitle:disabled {
 					index,
 					downloadUrl: item.downloadUrl
 				};
-				const res = await base.get(config.$xunlei.api.getLink + item.id, { "Authorization": `${token.credentials.token_type} ${token.credentials.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
+				const res = await base.get(config.$xunlei.api.getLink + item.id, { "Authorization": `${token.credentials?.token_type} ${token.credentials?.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
 				if (res.web_content_link) {
-					return {
-						index,
-						downloadUrl: res.web_content_link
-					};
-				} else if (res?.error_code == 9) {
-					return {
-						index,
-						downloadUrl: "获取下载地址失败，服务器说：页面验证过期了，刷新后再获取吧~"
-					};
+					return { index, downloadUrl: res.web_content_link };
+				} else if (res.error_code == 9) {
+					return { index, downloadUrl: "获取下载地址失败，服务器说：页面验证过期了，刷新后再获取吧~" };
 				} else {
-					return {
-						index,
-						downloadUrl: `获取下载地址失败，${res?.error_description ? "服务器说：" + res.error_description + "。" : "刷新后再试试吧~"}`
-					};
+					return { index, downloadUrl: `获取下载地址失败，${res.error_description ? "服务器说：" + res.error_description + "。" : "刷新后再试试吧~"}` };
 				}
 			} catch {
 				return message.error("提示：<br/>请先登录网盘后再刷新页面呢~");
@@ -7621,6 +7627,390 @@ button.downloadSubtitle:disabled {
 					if (domVue?.selected?.includes?.(domVue.info.id)) list.push(domVue.info);
 				}
 				return base.clone(list);
+			} catch {
+				return [];
+			}
+		},
+		detectPage() {
+			const path = location.pathname;
+			if (/^\/$/.test(path)) return "home";
+			if (/^\/(s|share)\//.test(path)) return "share";
+			return "";
+		},
+		async initPanLinker() {
+			base.registerMenuCommand();
+			if (config.base.num === base.getValue("setting_init").code || config.base.license === base.getValue("setting_init").license) {
+				this.addButton();
+			} else {
+				this.addInitButton();
+			}
+			this.addPageListener();
+		},
+	};
+
+	/**
+	 * 光鸭云盘
+	 * @author hmjz100
+	 */
+	const $guangya = {
+		addPageListener() {
+			this.getShareToken(true);
+			$doc.on("click", ".listener-api-download.enhance", async function (e) {
+				e.preventDefault();
+				const status = base._EventFactory(e);
+				const file = {
+					index: status.item.data("index"),
+					link: status.item.data("link"),
+					name: status.item.data("name"),
+					size: status.item.data("size") || 0,
+				}
+				base._resetData(file.index);
+
+				// UI 初始化
+				status.down_normal.hide();
+				status.down_enhance.hide();
+				status.down_idm.hide();
+				status.link_message.hide();
+				status.link_copy.hide();
+
+				status.down_enhance_downing.find(".stop").show();
+				status.down_enhance_downing.show();
+
+				const startTime = Date.now();
+				let lastTime = startTime;
+				let lastLoaded = 0;
+
+				let emaSpeed = 0;
+				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
+
+				base.download(file.link, undefined, {
+					...file,
+					onProgress: (prog, loaded, total) => {
+						const time = Date.now();
+						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
+						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
+						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
+						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
+
+						const alpha = 1 - Math.exp(-insDiff / tau);
+						if (emaSpeed === 0) {
+							emaSpeed = insSpeed; // 第一次采样，直接赋值
+						} else {
+							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
+							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
+						}
+
+						const rSize = total - loaded;
+
+						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
+						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
+
+						lastLoaded = loaded;
+						lastTime = time;
+						const dprog = Math.min(prog, 100);
+						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+					}
+				})
+					.then(async (res) => {
+						status.down_enhance_downing.find(".pl-progress .head").css("background", "#55af28");
+						base.blobDownload(res.response, file.name);
+						await base.sleep(1000);
+
+						status.down_enhance_downing.find(".stop").hide();
+						status.down_enhance_downing.find(".back").show();
+						status.down_enhance_downing.find(".pl-progress .text").html(`下载完成~ 浏览器下载框应该弹出来了哦~`);
+					})
+					.catch(async (error) => {
+						base.console.error("【LinkSwift】Download(load)", error);
+						status.down_enhance_downing.find(".stop").hide();
+						status.down_enhance_downing.find(".back").show();
+						status.down_enhance_downing.find(".pl-progress").css("--width", "100%");
+						status.down_enhance_downing.find(".pl-progress .head").css("background", "#cc3235");
+						let estatus = `QAQ 下载出错~`;
+						if (!error?.status) estatus += ` 服务器未返回状态，若是下载一段时间后中断，可能是服务器返回文件长度不匹配，请重试；若是直接中断，请检查您的网络、脚本管理器扩展或浏览器~`;
+						if (error?.status == 403) estatus += ` 服务器说：链接已过期，关闭窗口重新获取试试吧~`;
+						if (error?.status == 204 || error?.statusText === "IDM") estatus += ` 服务说：链接已被 IDM 捕获~`;
+						status.down_enhance_downing.find(".pl-progress .text").html(estatus);
+						status.down_enhance_downing.find(".pl-progress .text").css("white-space", "break-spaces");
+					})
+			});
+			$doc.on("click", ".listener-idm-download", async function (e) {
+				const target = $(e.currentTarget);
+				if (target.attr("data-processing") === "true") return;
+				target.attr("data-processing", "true");
+				const originalHtml = target.html();
+				target.find(".pl-icon").remove();
+				target.find(".pl-loading").remove();
+				target.prepend(base.createLoading());
+				const res = await base.sendLinkToIDM(target.data("link"), target.data("filename"), target.data("filesize"));
+				if (res === "success") {
+					target.removeClass("pl-btn-danger").html("发送成功啦~").animate({ opacity: "0.5" }, "slow");
+				} else {
+					target.addClass("pl-btn-danger").text("发送失败!").animate({ opacity: "0.5" }, "slow");
+				}
+				await base.sleep(3000);
+				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
+			});
+			$doc.on("click", ".listener-aria2-download", async function (e) {
+				const target = $(e.currentTarget);
+				if (target.attr("data-processing") === "true") return;
+				target.attr("data-processing", "true");
+				const originalHtml = target.html();
+				target.find(".pl-icon").remove();
+				target.find(".pl-loading").remove();
+				target.prepend(base.createLoading());
+				const res = await base.sendLinkToAria2(target.data("link"), target.data("filename"));
+				if (res === "success") {
+					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
+				} else {
+					target.addClass("pl-btn-danger").text("发送失败，检查一下您的配置信息哦!").animate({ opacity: "0.5" }, "slow");
+				}
+				await base.sleep(3000);
+				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
+			});
+			$doc.on("click", ".listener-bitcomet-download", async function (e) {
+				const target = $(e.currentTarget);
+				if (target.attr("data-processing") === "true") return;
+				target.attr("data-processing", "true");
+				const originalHtml = target.html();
+				target.find(".pl-icon").remove();
+				target.find(".pl-loading").remove();
+				target.prepend(base.createLoading());
+				const res = await base.sendLinkToBitcomet(target.data("link"), target.data("filename"), { "checkboxCustomHeadersForMirrors": "on" });
+				if (res === "success") {
+					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
+				} else {
+					target.addClass("pl-btn-danger").text("发送失败，检查一下您的配置信息哦!").animate({ opacity: "0.5" }, "slow");
+				}
+				await base.sleep(3000);
+				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
+			});
+			$doc.on("click", ".listener-abdm-download", async function (e) {
+				const target = $(e.currentTarget);
+				if (target.attr("data-processing") === "true") return;
+				target.attr("data-processing", "true");
+				const originalHtml = target.html();
+				target.find(".pl-icon").remove();
+				target.find(".pl-loading").remove();
+				target.prepend(base.createLoading());
+				const res = await base.sendLinkToABDM(target.data("link"), target.data("filename"), undefined);
+				if (res === "success") {
+					target.removeClass("pl-btn-danger").html("发送成功啦!快去看看吧~").animate({ opacity: "0.5" }, "slow");
+				} else {
+					target.addClass("pl-btn-danger").text("发送失败，检查一下您的配置信息哦!").animate({ opacity: "0.5" }, "slow");
+				}
+				await base.sleep(3000);
+				target.removeClass("pl-btn-danger").removeAttr("data-processing").html(originalHtml).css("opacity", "");
+			});
+		},
+		beautifyPage() {
+			if (base.getValue("setting_ui_theme").custom.$guangya !== true) return;
+			base.adaptiveThemeOverride([], "other");
+			// base.addStyle(`${mount}-guangya`, "style", ``);
+		},
+		svg: `<span class="ant-btn-icon"><span role="img" aria-label="download" class="swangpan-icon swangpan-icon-download"><svg width="1em" height="1em" fill="none" viewBox="0 0 18 18"><path fill="currentColor" d="M13.134 4.25a4.25 4.25 0 0 1 4.25 4.25V12a4.75 4.75 0 0 1-4.75 4.75h-7A4.75 4.75 0 0 1 .884 12V8.5a4.25 4.25 0 0 1 4.25-4.25.75.75 0 0 1 0 1.5 2.75 2.75 0 0 0-2.75 2.75V12a3.25 3.25 0 0 0 3.25 3.25h7a3.25 3.25 0 0 0 3.25-3.25V8.5a2.75 2.75 0 0 0-2.75-2.75.75.75 0 0 1 0-1.5M9 1.25a.75.75 0 0 1 .75.75v9.19l1.72-1.72a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l1.72 1.72V2A.75.75 0 0 1 9 1.25"></path></svg></span></span>`,
+		addButton() {
+			const $button = $(`<button class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger guangya-button pl-button">${this.svg}<span>下载助手</span>
+				<ul class="pl-dropdown-menu">
+					<li class="pl-button-mode" data-mode="api"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-downward"/></svg>API 下载</li>
+					<li class="pl-button-mode" data-mode="curl"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-plug"/></svg>cURL 下载</li>
+					<li class="pl-button-mode" data-mode="aria2"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-down"/></svg>Aria2 下载</li>
+					<li class="pl-button-mode" data-mode="bitcomet"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-down"/></svg>彗星下载</li>
+					<li class="pl-button-mode" data-mode="abdm"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-cloud-arrow-down"/></svg>ABDM 下载</li>
+					<li class="pl-button-mode listener-open-setting"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-gear"/></svg>助手设置</li>
+					<li class="pl-button-mode listener-open-beautify"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-palette"/></svg>助手美化</li>
+					<li class="pl-button-mode listener-open-updatelog"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-newspaper"/></svg>更新日志</li>
+				</ul>
+			</button>`);
+			base.waitForKeyElements(config.$guangya.mount.home, (element) => {
+				temp.page = temp.main.detectPage();
+				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
+				$button.addClass([...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' '));
+				$button.find(".pl-dropdown-menu").css({ "top": "34px" });
+				element.prepend($button);
+			})
+			base.waitForKeyElements(config.$guangya.mount.share, (element) => {
+				temp.page = temp.main.detectPage();
+				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "share") return;
+				$button.addClass([...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' '));
+				$button.addClass("ant-btn-lg");
+				$button.find(".pl-dropdown-menu").css({ "bottom": "46px" });
+				element.append($button);
+			})
+		},
+		addInitButton() {
+			const $button = $(`<button class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' ')} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger guangya-button pl-button-init">${this.svg}<span>点我点亮</span></button>`);
+			$button.click(base.showInitDialog);
+			base.waitForKeyElements(config.$guangya.mount.home, (element) => {
+				temp.page = temp.main.detectPage();
+				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
+				$button.find(".pl-dropdown-menu").css({ "top": "34px" });
+				element.prepend($button);
+			})
+			base.waitForKeyElements(config.$guangya.mount.share, (element) => {
+				temp.page = temp.main.detectPage();
+				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "share") return;
+				$button.addClass("ant-btn-lg");
+				$button.find(".pl-dropdown-menu").css({ "bottom": "46px" });
+				element.append($button);
+			})
+		},
+		getToken() {
+			$doc.find(".loading-popup .loading-title").html(`令牌获取中`);
+			$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取状态~</div>`);
+			let credentials = {}, captcha = {};
+			for (let i = 0; i < localStorage.length; i++) {
+				if (/^credentials_/.test(localStorage.key(i))) {
+					credentials = base.getStorage(localStorage.key(i));
+					base.setStorage("");
+				}
+				if (/^captcha_[\w]{16}/.test(localStorage.key(i))) {
+					captcha = base.getStorage(localStorage.key(i));
+				}
+			}
+			const deviceid = /(\w{32})/.exec(base.getStorage("deviceid").split(","))[0];
+			const token = {
+				credentials,
+				captcha,
+				deviceid
+			};
+			return token;
+		},
+		async getShareToken(isWaitForType, token) {
+			const url = new URL(window.location.href);
+
+			const shareId = url.pathname.match?.(/\/s\/([^/?#]+)/)?.[1] || null;
+			const urlCode = url.searchParams.get('code');
+
+			let code = urlCode;
+
+			if (!urlCode) {
+				if (!code && this.getShareToken.code) {
+					code = this.getShareToken.code;
+				}
+				if (!code && isWaitForType) {
+					base.waitForKeyElements(`input.ant-input[type=text]`, (element) => {
+						if (element.data('code-listener-bound')) return;
+						element.data('code-listener-bound', true);
+						element.on('input', (e) => {
+							const val = e.target.value.trim();
+							if (val) this.getShareToken.code = val;
+						});
+					});
+					return;
+				}
+			}
+
+			const res = await base.post(config.$guangya.api.getShareToken, { "shareId": shareId, "code": code }, { "Authorization": `${token.credentials?.token_type} ${token.credentials?.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
+
+			if (res.data?.accessToken) return res.data.accessToken;
+			else return message.error(`提示：<br/>获取分享令牌失败，${res.msg ? "服务器说：" + res.msg + "。" : "刷新后再试试吧~"}`);
+		},
+		async getFileUrl(item, index, token, shareToken) {
+			try {
+				let res;
+				if (item.downloadUrl) return { index, downloadUrl: item.downloadUrl };
+				if (shareToken) {
+					res = await base.post(config.$guangya.api.getShareLink, { "fileId": item.fileId, "accessToken": shareToken }, { "Authorization": `${token.credentials?.token_type} ${token.credentials?.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
+				} else {
+					res = await base.post(config.$guangya.api.getLink, { "fileId": item.fileId }, { "Authorization": `${token.credentials?.token_type} ${token.credentials?.access_token}`, "Content-Type": "application/json", "X-Captcha-Token": token.captcha.token, "X-Device-Id": token.deviceid });
+				}
+
+				if (res.data?.signedURL || res.data?.downloadUrl) {
+					return { index, downloadUrl: res.data?.signedURL ?? res.data?.downloadUrl };
+				} else if (res.code) {
+					if (res.code == 9) return { index, downloadUrl: "获取下载地址失败，服务器说：页面验证过期了，刷新后再获取吧~" };
+					if (res.code == 103) return { index, downloadUrl: "获取下载地址失败，服务器说：后端 RPC 响应超时。脚本建议：再重新获取一次~" };
+					if (res.code == 207) return { index, downloadUrl: "获取下载地址失败，服务器说：分享者未打开免登录下载。请登录后下载~" };
+				} else {
+					return { index, downloadUrl: `获取下载地址失败，${res.msg ? "服务器说：" + res.msg + "。" : "刷新后再试试吧~"}` };
+				}
+			} catch {
+				return message.error("提示：<br/>请先登录网盘后再刷新页面呢~");
+			}
+		},
+		async getLink() {
+			const selects = this.getSelectedList();
+			if (selects.length === 0) return message.error("提示：<br/>请勾选要下载的文件哦~");
+			if (selects.every(item => item.resType == 2)) return message.error("提示：<br/>请打开文件夹后再勾选文件~");
+			if (temp.page === "home") {
+				const token = this.getToken();
+				const batchSize = 15;
+				let proc = 0;
+				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
+				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
+				for (let i = 0; i < selects.length; i += batchSize) {
+					const batch = selects.slice(i, i + batchSize);
+					const queue = [];
+					batch.forEach((item, localIndex) => {
+						const globalIndex = i + localIndex;
+						queue.push(this.getFileUrl(item, globalIndex, token)
+							.then(val => {
+								proc++;
+								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
+								return val;
+							}));
+					});
+					const res = await Promise.all(queue);
+					res.forEach(val => {
+						selects[val.index].downloadUrl = val.downloadUrl;
+					});
+					await base.sleep(1000);
+				}
+			} else if (temp.page === "share") {
+				const token = this.getToken();
+				const shareToken = await this.getShareToken(false, token);
+				const batchSize = 15;
+				let proc = 0;
+				$doc.find(".loading-popup .loading-title").html(`链接获取中`);
+				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取文件对应的下载链接~</div>`);
+				for (let i = 0; i < selects.length; i += batchSize) {
+					const batch = selects.slice(i, i + batchSize);
+					const queue = [];
+					batch.forEach((item, localIndex) => {
+						const globalIndex = i + localIndex;
+						queue.push(this.getFileUrl(item, globalIndex, token, shareToken)
+							.then(val => {
+								proc++;
+								$doc.find(".loading-popup .swal2-html-container").html(`<div>已获取 ${proc} / ${selects.length} 个链接~</div>`);
+								return val;
+							}));
+					});
+					const res = await Promise.all(queue);
+					res.forEach(val => {
+						selects[val.index].downloadUrl = val.downloadUrl;
+					});
+					await base.sleep(1000);
+				}
+			} else {
+				return message.error("提示：<br/>页面错误~");
+			}
+			temp.links = [selects, {
+				isFolder: v => v.resType == 2,
+				getFileName: v => v.fileName,
+				getFileSize: v => v.fileSize,
+				getFileLink: v => v.downloadUrl,
+				tooltip: config.$guangya.dom
+			}];
+			base.showMainDialog(config.base.dom.button[temp.mode].title, base.generateDOM(temp.links), config.base.dom.button[temp.mode].footer);
+		},
+		getSelectedList() {
+			try {
+				const selectedList = [];
+				const reactDom = document.querySelector(`.ant-table-wrapper:has(.ant-table-column-sort.ant-table-column-has-sorters)`);
+				const reactObj = base.findReact(reactDom);
+				const props = reactObj.pendingProps;
+				if (props) {
+					const fileList = props.dataSource || [];
+					const selectedKeys = props.rowSelection?.selectedRowKeys || [];
+					fileList.forEach(function (val) {
+						if (selectedKeys.includes(val.fileId)) {
+							selectedList.push({ ...val });
+						}
+					});
+				}
+				return selectedList;
 			} catch {
 				return [];
 			}
@@ -7955,14 +8345,14 @@ button.downloadSubtitle:disabled {
 					const res = await base.post(config.$quark.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
-						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-						if (res?.code == 23018) {
-							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+						if (res.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res.code == 23018) {
+							const fid = res.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
 							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
-						if (res?.code || res?.message) {
+						if (res.code || res.message) {
 							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
 						} else {
 							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -7970,7 +8360,7 @@ button.downloadSubtitle:disabled {
 					}
 
 					// 合并响应数据
-					if (res?.data) {
+					if (res.data) {
 						data.push(...res.data);
 					}
 					// 更新处理进度
@@ -8013,14 +8403,14 @@ button.downloadSubtitle:disabled {
 					const res = await base.post(config.$quark.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$quark.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
-						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-						if (res?.code == 23018) {
-							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+						if (res.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res.code == 23018) {
+							const fid = res.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
 							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
-						if (res?.code || res?.message) {
+						if (res.code || res.message) {
 							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
 						} else {
 							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -8028,7 +8418,7 @@ button.downloadSubtitle:disabled {
 					}
 
 					// 合并响应数据
-					if (res?.data) {
+					if (res.data) {
 						data.push(...res.data);
 					}
 					// 更新处理进度
@@ -8367,14 +8757,14 @@ button.downloadSubtitle:disabled {
 					const res = await base.post(config.$uc.api.getLink, { "fids": fids }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
-						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-						if (res?.code == 23018) {
-							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+						if (res.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res.code == 23018) {
+							const fid = res.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
 							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
-						if (res?.code || res?.message) {
+						if (res.code || res.message) {
 							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
 						} else {
 							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -8382,7 +8772,7 @@ button.downloadSubtitle:disabled {
 					}
 
 					// 合并响应数据
-					if (res?.data) {
+					if (res.data) {
 						data.push(...res.data);
 					}
 					// 更新处理进度
@@ -8425,14 +8815,14 @@ button.downloadSubtitle:disabled {
 					const res = await base.post(config.$uc.api.getLink, { "fids": fids, "fids_token": fids_token, pwd_id, "stoken": batch[0].stoken }, { "Content-Type": "application/json", "Cookie": document.cookie, "User-Agent": config.$uc.api.ua.downloadLink });
 
 					if (!res || res.code !== 0 || !res.data) {
-						if (res?.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
-						if (res?.code == 23018) {
-							const fid = res?.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
+						if (res.code == 31001) return message.error("提示：<br/>请先登录网盘~<br/>代码：" + res.code);
+						if (res.code == 23018) {
+							const fid = res.message?.match(/\[([a-f0-9]{32})\]/)?.[1];
 							const item = batch.find(item => item.fid === fid);
 							return message.error(`提示：<br/>超出游客可获取大小限制<br/>请登录后获取哦~${item?.file_name ? `<br/>文件：${item.file_name}` : ""}`);
 						}
 
-						if (res?.code || res?.message) {
+						if (res.code || res.message) {
 							return message.error(`提示：<br/>获取链接失败了~<br/>${res.code ? res.code : ""} ${res.message ? res.message : ""}`);
 						} else {
 							return message.error("提示：<br/>获取下载链接失败，刷新网页后再试试吧~");
@@ -8440,7 +8830,7 @@ button.downloadSubtitle:disabled {
 					}
 
 					// 合并响应数据
-					if (res?.data) {
+					if (res.data) {
 						data.push(...res.data);
 					}
 					// 更新处理进度
@@ -8911,22 +9301,12 @@ button.downloadSubtitle:disabled {
 				const surl = new URL(url).searchParams.get("params");
 				if (surl) url = base.decodeBase(surl);
 				// url = await base.getFinalUrl(url);
-				return {
-					index,
-					downloadUrl: url
-				};
-			} else if (res?.code == 5112) {
-				return message.error("提示：<br/>请先登录网盘后再获取链接呢~");
-			} else if (res?.code == 5113) {
-				return {
-					index,
-					downloadUrl: "获取下载地址失败，服务器说：本月免费流量不足，请开通网盘会员~"
-				};
+				return { index, downloadUrl: url };
+			} else if (res.code) {
+				if (res.code == 5112) return message.error("提示：<br/>请先登录网盘后再获取链接呢~");
+				if (res.code == 5113) return { index, downloadUrl: "获取下载地址失败，服务器说：本月免费流量不足，请开通网盘会员~" };
 			} else {
-				return {
-					index,
-					downloadUrl: `获取下载地址失败，${res?.message ? "服务器说：" + res.message + "。" : "刷新后再试试吧~"}`
-				};
+				return { index, downloadUrl: `获取下载地址失败，${res.message ? "服务器说：" + res.message + "。" : "刷新后再试试吧~"}` };
 			}
 		},
 		getSelectedList() {
@@ -9070,11 +9450,14 @@ button.downloadSubtitle:disabled {
 			 * @author hmjz100
 			 * @description 来自【网盘智能识别助手】，有改动
 			 */
-			base.console.log(`%c %c LinkSwift\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/hmjz100/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
+			base.console.info(`%c %c LinkSwift\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/hmjz100/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
 
 			// 创建挂载点
 			const mountElem = $(`<${mount} class="${mount}" />`);
 			temp.mount = mountElem;
+
+			unsafeWindow.temp = temp;
+			unsafeWindow.base = base;
 
 			base.waitForKeyElements(`html:not(:has(> .${mount})) head`, (element) => {
 				if ($(`.${mount}`).length > 0) return;
@@ -9088,6 +9471,7 @@ button.downloadSubtitle:disabled {
 			else if (/(yun|caiyun).139.com/.test(location.host)) temp.main = $mcloud;
 			else if (/cloud.189.cn/.test(location.host)) temp.main = $tcloud;
 			else if (/pan.xunlei.com/.test(location.host)) temp.main = $xunlei;
+			else if (/www.guangyapan.com/.test(location.host)) temp.main = $guangya;
 			else if (/pan.quark.cn/.test(location.host)) temp.main = $quark;
 			else if (/drive.uc.cn/.test(location.host)) temp.main = $uc;
 			else if (/(www|login).(123(pan|684|865|952|912).com|123pan.cn)/.test(location.host)) temp.main = $123pan;

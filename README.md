@@ -29,6 +29,11 @@
    <img alt="Starchart" src="https://starchart.cc/hmjz100/LinkSwift.svg?variant=adaptive&line=%23574ab8">
 </p>
 
+## 介绍
+
+支持 百度网盘 / 阿里云盘 / 中国移动云盘 / 天翼云盘 / 迅雷云盘 / 光鸭云盘 / 夸克网盘 / UC网盘 / 123云盘 九大网盘  
+相比较原脚本，增加了更多功能~
+
 ## 安装
 
 根据需要选择合适的源，点击链接即可安装
@@ -69,10 +74,6 @@
 - 本脚本发布至脚本猫: [https://scriptcat.org/script-show-page/1604](https://scriptcat.org/script-show-page/1604)
   - 还有 OpenUserJS: [https://openuserjs.org/scripts/hmjz100/LinkSwift](https://openuserjs.org/scripts/hmjz100/LinkSwift)
 
-## 简介
-
-支持 百度网盘/阿里云盘/中国移动云盘/天翼云盘/迅雷云盘/夸克网盘/UC网盘/123云盘 八大网盘，相比较原脚本，增加了更多功能~
-
 #### 卑微的小标题
 
 ~~这个脚本只有一个人在修改\~~~ 如果喜欢的话还请留个 Star 哦\~   
@@ -87,6 +88,7 @@
 </a>
 
 ## 版本号
+
 正式版：v1.1.3  
 测试版：v1.1.3.1-Preview  
 本脚本目前仅在 Github、Gitee、脚本猫脚本站 与 OpenUserJS 发布；  

@@ -86,9 +86,9 @@
   <img src="https://contrib.rocks/image?repo=hmjz100/LinkSwift" />
 </a>
 
-
 ## 版本号
-v1.1.3（基于原版 v6.2.7）  
+正式版：v1.1.3  
+测试版：v1.1.3.1-Preview  
 本脚本目前仅在 Github、Gitee、脚本猫脚本站 与 OpenUserJS 发布；  
 如果您是在其他渠道获取到本脚本的，安装后所带来的问题开发者概不负责。
 

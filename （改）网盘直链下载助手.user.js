@@ -111,7 +111,7 @@
  * @author hmjz100
  * @namespace github.com/hmjz100
  * @description  一个基于 JavaScript 盘的文件下载地址获取工具  支持 百度网盘/阿里云盘/中国移动云盘/天翼云盘/迅雷云盘/夸克网盘/UC网盘/123云盘 八大网盘  代码改自 “网盘直链下载助手”，作者油小猴
- * @version 1.1.3.1
+ * @version 1.1.3.1-Preview
  * @license AGPL-3.0-or-later
  * @see {@link https://github.com/hmjz100/LinkSwift/ Github 仓库}
  */
@@ -2660,6 +2660,11 @@
 				<div class="block">
 					<name>V1.1.3.1</name>
 					<div>
+					<div>1、新增 - 支持光鸭云盘；（好拗口的产品名……）</div>
+					<div>2、优化 - 使用 eslint 处理脚本代码；</div>
+					<div>3、优化 - 请求头的格式化与来源声明；</div>
+					<div>4、修复 - 因迅雷云盘更新导致脚本弹窗异常变大；</div>
+					<div>5、修复 - 推送到 ABDM 下载器实际成功却显示失败。</div>
 					</div>
 				</div>
 				<div class="block">

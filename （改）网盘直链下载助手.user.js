@@ -1284,7 +1284,7 @@
 			// 初始化全局共享状态
 			this.download.active = this.download.active || 0; // 全局活跃线程数
 			this.download.taskCount = this.download.taskCount || 0; // 当前正在运行的 download 任务数
-			const global_maxThreads = 8; // 整个允许的最大并发数
+			const global_maxThreads = 10; // 整个允许的最大并发数
 
 			if (extra) base.console.info(`【LinkSwift】Download\n收到数据：`, extra);
 			if (!extra || !extra.index || !extra.name || !extra.size) throw new Error("extra 缺少内容。");
@@ -1294,7 +1294,11 @@
 				requests: new Set(),
 				results: [],
 				active: 0,
-				maxSpeed: 0
+				maxSpeed: 0,
+				lastSampleTime: Date.now(),
+				lastSampleLoaded: 0,
+				currentSpeed: 0,
+				totalLoaded: 0
 			};
 
 			const promise = new Promise((resolve, reject) => {
@@ -1312,7 +1316,15 @@
 							size = parseInt((responseHeaders["Content-Range"]?.match(/\/(\d+)$/)?.[1] || size), 10);
 						}
 
-						if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(0, 0, size);
+						if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress({
+							progress: 0,
+							loaded: 0,
+							total: size,
+							speed: 0,
+							speedText: `${base.sizeFormat(0)}/s`,
+							etaText: base.rtimeFormat(NaN)
+						});
+
 						if (!(finalHead.status >= 200 && finalHead.status < 400)) return reject(finalHead);
 						if (finalHead.status == 204 && finalHead.statusText === "IDM") return reject(finalHead);
 
@@ -1324,18 +1336,19 @@
 							const maxRetry = extra.retry || 10;
 							let index = 0;
 							let offset = 0;
-							let totalLoaded = 0;
 
 							const worker = async () => {
-								const minChunk = extra.minChunk || 50 * 1024; // 最小 50KB
-								const maxChunk = extra.maxChunk || 1 * 1024 * 1024; // 最大 1MB
-								let chunk = Math.floor(minChunk + (maxChunk - minChunk) * 0.37);
+								const minChunk = extra.minChunk || 128 * 1024; // 最小 128KB，避免过度碎片化
+								const absoluteMaxChunk = extra.maxChunk || 30 * 1024 * 1024; // 放宽最大限制到 30MB
+
+								// 初始探测块大小：从较小的基准开始（例如 256KB）
+								let chunk = Math.min(256 * 1024, absoluteMaxChunk);
 
 								while (offset < size && !status.aborted) {
 									// 如果全局线程满了，且当前任务已经抢到了 1 条以上的线程，则 “让路” 给后来的任务
 									const fairShare = Math.max(1, Math.floor(global_maxThreads / this.download.taskCount));
 									while (!status.aborted && this.download.active >= global_maxThreads && status.active >= fairShare) {
-										await new Promise(r => setTimeout(r, 200)); // 等待，直到其他任务释放或有空位
+										await new Promise(r => setTimeout(r, 200));
 									}
 
 									if (status.aborted || offset >= size) break;
@@ -1347,8 +1360,11 @@
 									offset += _size;
 
 									let attempt = 0;
-									while (attempt <= maxRetry && !status.aborted) {
-										// 占用线程计数
+									let success = false;
+									let duration = 0.1; // 默认防除 0
+									let resData;
+
+									while (attempt <= maxRetry && !status.aborted && !success) {
 										status.active++;
 										this.download.active++;
 
@@ -1356,18 +1372,48 @@
 											let startTime = Date.now();
 											let lastLoaded = 0;
 
-											let res = await new Promise((s, j) => {
+											resData = await new Promise((s, j) => {
 												const xhr = base.xmlHttpRequest({
 													url, method: "GET", responseType: "arraybuffer",
 													headers: { ...headers, "Range": `bytes=${start}-${end}` },
 													onloadstart() {
-														startTime = Date.now();
+														startTime = Date.now(); // 拿到首字节开始为当前块计时
 													},
 													onprogress: (progress) => {
-														totalLoaded += (progress.loaded - lastLoaded);
+														const delta = progress.loaded - lastLoaded;
+														status.totalLoaded += delta; // 累加到全局已存载
 														lastLoaded = progress.loaded;
-														const prog = (totalLoaded * 100 / size);
-														if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(prog, totalLoaded, size);
+
+														const now = Date.now();
+														const sampleDuration = (now - status.lastSampleTime) / 1000;
+
+														// 采样频率控制
+														if (sampleDuration >= 0.5) {
+															const instantSpeed = (status.totalLoaded - status.lastSampleLoaded) / sampleDuration;
+
+															// 平滑处理速度 (EMA)
+															status.currentSpeed = status.currentSpeed === 0
+																? instantSpeed
+																: status.currentSpeed * 0.4 + instantSpeed * 0.6;
+
+															// 计算剩余时间 (ETA)
+															const remainSize = size - status.totalLoaded;
+															const etaSeconds = status.currentSpeed > 0 ? remainSize / status.currentSpeed : 0;
+
+															// 更新采样锚点
+															status.lastSampleTime = now;
+															status.lastSampleLoaded = status.totalLoaded;
+
+															// 回传给业务层
+															if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress({
+																progress: (status.totalLoaded * 100 / size),
+																loaded: status.totalLoaded,
+																total: size,
+																speed: status.currentSpeed,
+																speedText: `${base.sizeFormat(status.currentSpeed)}/s`,
+																etaText: base.rtimeFormat(etaSeconds)
+															});
+														}
 													},
 													onload: (load) => {
 														status.requests.delete(xhr);
@@ -1383,53 +1429,61 @@
 												status.requests.add(xhr);
 											});
 
-											// 智能分块调整
-											const _duration = extra.duration || 1.5; // 目标
-											const duration = (Date.now() - startTime) / 1000 || 0.1;
-											const speed = _size / duration;
+											duration = (Date.now() - startTime) / 1000 || 0.05;
+											status.results.push({ index: _index, data: resData });
+											success = true;
 
-											let nextChunk;
-											if (speed > status.maxSpeed * 0.9) {
-												// 如果速度在提升或维持高位，说明大块是有效的，即便超时也要大胆增加
-												// 目标是找到能让 speed 最大化的 chunk 大小
-												nextChunk = chunk * 1.5;
-												status.maxSpeed = Math.max(status.maxSpeed, speed);
-											} else if (duration < _duration * 0.5) {
-												// 跑得太快了，可以尝试再加一点
-												nextChunk = chunk * 1.2;
-											} else if (duration > _duration * 2) {
-												// 只有当耗时严重超过目标（比如超过 2 倍）且速度下降时，才收缩
-												nextChunk = chunk * 0.8;
-											} else {
-												// 稳定期
-												nextChunk = chunk;
-											}
-
-											chunk = Math.max(minChunk, Math.min(maxChunk, chunk * 0.7 + nextChunk * 0.3));
-											chunk = Math.floor(chunk);
-
-											status.results.push({ index: _index, data: res });
-											res = null;
-											break;
 										} catch (e) {
+											// 发生错误通常是断流，强制将下一次计算的 chunk 缩小一半，避免死磕
+											chunk = Math.max(minChunk, Math.floor(chunk * 0.5));
+
 											await new Promise(r => setTimeout(r, 1000 * attempt));
 											attempt++;
 											if (attempt > maxRetry) throw e;
 										} finally {
-											// 释放线程计数
 											status.active--;
 											this.download.active--;
 										}
+									}
+
+									if (success) {
+										// 动态比例探测
+										const speed = _size / duration; // 当前块测算速度 (Bytes/s)
+										const targetDuration = extra.duration || 2.0; // 目标：希望每个块耗时 2 秒钟下载完
+
+										// 根据当前真实速度，推算如果要恰好耗时 2 秒，下一个块应该多大
+										let nextOptimalChunk = speed * targetDuration;
+
+										// 涨跌幅限制，防止网络突发波动导致 chunk 暴增或暴跌
+										// 一次最多涨 2 倍，最多跌至 1/3
+										nextOptimalChunk = Math.min(nextOptimalChunk, chunk * 2.0);
+										nextOptimalChunk = Math.max(nextOptimalChunk, chunk * 0.33);
+
+										// 平滑滤波：历史值占 40%，新预测占 60% (倾向于较快响应网络变化)
+										chunk = Math.floor(chunk * 0.4 + nextOptimalChunk * 0.6);
+
+										// 最终安全边界钳制
+										chunk = Math.max(minChunk, Math.min(absoluteMaxChunk, chunk));
+
+										// 记录最高速度
+										status.maxSpeed = Math.max(status.maxSpeed, speed);
 									}
 								}
 							};
 
 							// 启动当前任务的并发线程，单任务最高 3 个
-							const maxThreads = Math.min(extra.thread || 3, 3);
+							const maxThreads = Math.min(extra.thread || 3, global_maxThreads);
 							await Promise.all(Array(maxThreads).fill(0).map(worker));
 
 							if (status.aborted) return;
-							if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress(100, size, size);
+							if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress({
+								progress: 100,
+								loaded: size,
+								total: size,
+								speed: 0,
+								speedText: `${base.sizeFormat(0)}/s`,
+								etaText: base.rtimeFormat(0)
+							});
 
 							await new Promise(resolve => setTimeout(resolve, 0));
 							status.results.sort((a, b) => a.index - b.index);
@@ -1462,9 +1516,58 @@
 							const xhr = base.xmlHttpRequest({
 								url: url, headers, method: "GET", responseType: "blob",
 								onprogress: (progress) => {
-									if (!status.aborted && typeof extra?.onProgress === "function") extra.onProgress((progress.loaded * 100 / progress.total), progress.loaded, progress.total);
+									if (status.aborted) return;
+
+									// 同步全局已存载量，单线程模式下 progress.loaded 就是已存载的总量
+									status.totalLoaded = progress.loaded;
+
+									// 频率控制
+									const now = Date.now();
+									const sampleDuration = (now - (status.lastSampleTime || now)) / 1000;
+
+									if (sampleDuration >= 0.5 || !status.lastSampleTime) {
+										// 计算瞬时速度
+										const instantSpeed = (status.totalLoaded - (status.lastSampleLoaded || 0)) / (sampleDuration || 1);
+
+										// 平滑处理速度 (EMA)
+										status.currentSpeed = !status.currentSpeed
+											? instantSpeed
+											: status.currentSpeed * 0.4 + instantSpeed * 0.6;
+
+										// 计算剩余时间 (ETA)
+										const total = progress.total || size; // 优先用服务器返回的 total
+										const remainSize = total - status.totalLoaded;
+										const etaSeconds = status.currentSpeed > 0 ? remainSize / status.currentSpeed : 0;
+
+										// 更新采样锚点
+										status.lastSampleTime = now;
+										status.lastSampleLoaded = status.totalLoaded;
+
+										// 回传给业务层
+										if (typeof extra?.onProgress === "function") {
+											extra.onProgress({
+												progress: (status.totalLoaded * 100 / total),
+												loaded: status.totalLoaded,
+												total: total,
+												speed: status.currentSpeed,
+												speedText: `${base.sizeFormat(status.currentSpeed)}/s`,
+												etaText: base.rtimeFormat(etaSeconds)
+											});
+										}
+									}
 								},
-								onload: (load) => resolve(load),
+								onload: (load) => {
+									if (status.aborted) return;
+									if (typeof extra?.onProgress === "function") extra.onProgress({
+										progress: 100,
+										loaded: size,
+										total: size,
+										speed: 0,
+										speedText: `${base.sizeFormat(0)}/s`,
+										etaText: base.rtimeFormat(0)
+									});
+									resolve(load);
+								},
 								onerror: (error) => reject(error)
 							});
 							status.requests.add(xhr);
@@ -5080,40 +5183,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, { "User-Agent": config.$baidu.api.ua.downloadLink, "Origin": "", "Referer": "" }, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -6173,40 +6248,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, undefined, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -6565,40 +6612,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, undefined, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -7000,40 +7019,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, undefined, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -7351,40 +7342,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, undefined, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -7681,40 +7644,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, undefined, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -8084,40 +8019,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, { "User-Agent": config.$quark.api.ua.downloadLink }, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -8529,40 +8436,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, { "User-Agent": config.$uc.api.ua.downloadLink }, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {
@@ -8931,40 +8810,12 @@ button.downloadSubtitle:disabled {
 				status.down_enhance_downing.find(".stop").show();
 				status.down_enhance_downing.show();
 
-				const startTime = Date.now();
-				let lastTime = startTime;
-				let lastLoaded = 0;
-
-				let emaSpeed = 0;
-				const tau = 2; // 时间常数（秒），数值越大速度显示越平稳，越小越灵敏。建议 1.5 - 3 之间。
-
 				base.download(file.link, undefined, {
 					...file,
-					onProgress: (prog, loaded, total) => {
-						const time = Date.now();
-						const insDiff = (time - lastTime) / 1000 || 0.001; // 瞬时耗时（秒）
-						const insSpeed = (loaded - lastLoaded) / insDiff; // 瞬时速度（B/s）
-						const avgDiff = (time - startTime) / 1000 || 0.1; // 总耗时（秒）
-						const avgSpeed = loaded / avgDiff; // 全局平均速度（B/s）
-
-						const alpha = 1 - Math.exp(-insDiff / tau);
-						if (emaSpeed === 0) {
-							emaSpeed = insSpeed; // 第一次采样，直接赋值
-						} else {
-							// EMA 公式：当前平滑值 = (1 - alpha) * 旧值 + alpha * 当前瞬时值
-							emaSpeed = (1 - alpha) * emaSpeed + alpha * insSpeed;
-						}
-
-						const rSize = total - loaded;
-
-						const predictionSpeed = (emaSpeed > 1024) ? emaSpeed : avgSpeed; // 兜底 - 如果 EMA 速度异常，则参考全局平均速度
-						const rTime = predictionSpeed > 0 ? rSize / predictionSpeed : 0;
-
-						lastLoaded = loaded;
-						lastTime = time;
-						const dprog = Math.min(prog, 100);
+					onProgress: (data) => {
+						const dprog = Math.min(data.progress, 100);
 						status.down_enhance_downing.find(".pl-progress").css("--width", `${dprog}%`);
-						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% - ${base.sizeFormat(loaded)} | ${base.sizeFormat(emaSpeed)}/块 | ${base.rtimeFormat(rTime)}`);
+						status.down_enhance_downing.find(".pl-progress .text").text(`${dprog.toFixed(2)}% | 已存:${base.sizeFormat(data.loaded)} | 速度:${data.speedText} | 剩余:${data.etaText}`);
 					}
 				})
 					.then(async (res) => {

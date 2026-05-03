@@ -9030,22 +9030,6 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(".rightInfo .qrcode_btn", function (tag) {
 				tag.hide();
 			}, true);
-			base.waitForKeyElements(`#iqiyi-ad-overlay`, function (tag) {
-				tag.remove();
-				base.setStorage("iqiyi_ad_closed", {
-					date: '2099-12-31T23:59:59.999Z',
-					timestamp: Date.now()
-				});
-			}, true);
-			// 为页面主动添加 notoken 参数（token 太长影响观感，故不添加），以避免被新版页面屎山代码搞得二次刷新
-			setInterval(() => {
-				const url = new URL(location);
-				if (!url.searchParams.has("notoken") && !url.searchParams.has("token")) {
-					url.searchParams.delete("token");
-					url.searchParams.set("notoken", "1");
-					history.replaceState({}, "", url);
-				}
-			}, 500)
 		},
 		beautifyPage() {
 			if (base.getValue("setting_ui_theme").custom.$123pan !== true) return;

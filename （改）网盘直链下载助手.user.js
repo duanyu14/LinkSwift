@@ -2764,10 +2764,11 @@
 					<name>V1.1.3.1</name>
 					<div>
 					<div>1、新增 - 支持光鸭云盘；（好拗口的产品名……）</div>
-					<div>2、优化 - 使用 eslint 处理脚本代码；</div>
-					<div>3、优化 - 请求头的格式化与来源声明；</div>
-					<div>4、修复 - 因迅雷云盘更新导致脚本弹窗异常变大；</div>
-					<div>5、修复 - 推送到 ABDM 下载器实际成功却显示失败。</div>
+					<div>2、适配 - 123 云盘 260427 升级；</div>
+					<div>3、优化 - 使用 eslint 处理脚本代码；</div>
+					<div>4、优化 - 请求头的格式化与来源声明；</div>
+					<div>5、修复 - 因迅雷云盘更新导致脚本弹窗异常变大；</div>
+					<div>6、修复 - 推送到 ABDM 下载器实际成功却显示失败。</div>
 					</div>
 				</div>
 				<div class="block">
@@ -8920,7 +8921,7 @@ button.downloadSubtitle:disabled {
 				if (tag.next().hasClass("log")) return;
 				const button = $(`<button type="button" class="ant-btn ant-btn-default ant-btn-two-chinese-chars log loginRight" style="width:auto!important;height:auto!important;margin-left:10px!important"><span>登录</span></button>`);
 				button.on("click", () => {
-					const login = new URL(`https://login.123pan.com/centerlogin`);
+					const login = new URL(`https://user.123pan.cn/centerlogin`);
 					login.searchParams.set("redirect_url", location.href);
 					location.href = login;
 				});
@@ -8956,7 +8957,7 @@ button.downloadSubtitle:disabled {
 				const button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid loginRight mfy-button ant-btn-two-chinese-chars log" style="margin-left:10px!important"><span>登录</span></button>`);
 				// 加个跳转到原页面也不难吧？
 				button.on("click", () => {
-					const login = new URL(`https://login.123pan.com/centerlogin`);
+					const login = new URL(`https://user.123pan.cn/centerlogin`);
 					login.searchParams.set("redirect_url", location.href);
 					location.href = login;
 				});
@@ -8991,7 +8992,7 @@ button.downloadSubtitle:disabled {
 						const button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid loginRight mfy-button replaced"><span>${$child.text()}</span></button>`);
 						button.on("click", () => {
 							if ($child.text().includes("登录")) {
-								const login = new URL(`https://login.123pan.com/centerlogin`);
+								const login = new URL(`https://user.123pan.cn/centerlogin`);
 								login.searchParams.set("redirect_url", location.href);
 								location.href = login;
 							} else {
@@ -9008,13 +9009,22 @@ button.downloadSubtitle:disabled {
 				if (tag.is(":hidden")) return;
 				tag.hide();
 			}, true);
-			// 新版 主页 顶栏会员广告
+			// 新版 主页 顶栏会员中心按钮广告
 			base.waitForKeyElements(`.frontend-layout-header-right > span > [alt^="buttonMall"]`, (tag) => {
 				if (tag.parent().is(":hidden")) return;
 				tag.parent().hide();
 				const button = $(`<div class="frontend-layout-header-right-button-invite-new">会员中心</div>`);
 				button.on("click", () => { tag.click() });
 				tag.parent().after(button);
+			}, true);
+			// 新版 主页 顶栏会员中心按钮广告
+			base.waitForKeyElements(`.frontend-layout-header-right > div[class*="button-invite-new"]`, (tag) => {
+				if (tag.find(`[class*="button-invite-new-image"]`).is(":hidden")) return;
+				tag.find(`[class*="button-invite-new-image"]`).hide();
+			}, true);
+			// 新版 主页 顶部会员广告
+			base.waitForKeyElements(`.mfy-main-layout__head > .ant-carousel:has(.VipBanner)`, (tag) => {
+				tag.hide();
 			}, true);
 			// 分享 手机二维码
 			base.waitForKeyElements(".rightInfo .qrcode_btn", function (tag) {
@@ -9194,7 +9204,7 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button").length > 0 || !temp.page || temp.page !== "home") return;
-				const $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button color-button" style="user-select: text !important;">
+				const $button = $(`<button type="button" class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button color-button" style="user-select: text !important;">
 					<svg class="icon home-operator-icon-upload" aria-hidden="true"><use xlink:href="#general_download_16_1"></use></svg>
 					<span>下载助手</span>
 					<ul class="pl-dropdown-menu" style="top:23px">
@@ -9208,6 +9218,7 @@ button.downloadSubtitle:disabled {
 						<li class="pl-button-mode listener-open-updatelog"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-newspaper"/></svg>更新日志</li>
 					</ul>
 				</button>`);
+				$button.addClass([...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' '));
 				element.prepend($button);
 			})
 			base.waitForKeyElements(config.$123pan.mount.share, (element) => {
@@ -9254,10 +9265,11 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(config.$123pan.mount.home, (element) => {
 				temp.page = temp.main.detectPage();
 				if ($(".pl-button-init").length > 0 || !temp.page || temp.page !== "home") return;
-				const $button = $(`<button type="button" class="ant-btn ${[...document.querySelector(`[class*="ant-btn css-"]`).classList].find(c => /^css-[a-z0-9]+$/.test(c))} ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button-init color-button" style="user-select: text !important;">
+				const $button = $(`<button type="button" class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-dropdown-trigger mfy-button upload-button pl-button-init color-button" style="user-select: text !important;">
 					<svg class="icon home-operator-icon-upload" aria-hidden="true"><use xlink:href="#general_download_16_1"></use></svg>
 					<span>点我点亮</span>
 				</button>`);
+				$button.addClass([...document.querySelector(`[class*="ant-btn css-"]`).className.match(/css-[a-z0-9]+ css-var-[a-z0-9_]+/g) || []].join(' '));
 				$button.click(base.showInitDialog);
 				element.prepend($button);
 			})
@@ -9285,7 +9297,7 @@ button.downloadSubtitle:disabled {
 		detectPage() {
 			const path = location.pathname;
 			if (/^\/$/.test(path)) return "home";
-			if (/^\/s\//.test(path)) return "share";
+			if (/^\/(s|123pan)\//.test(path)) return "share";
 			return "";
 		},
 		async initPanLinker() {
@@ -9332,7 +9344,7 @@ button.downloadSubtitle:disabled {
 			else if (/www.guangyapan.com/.test(location.host)) temp.main = $guangya;
 			else if (/pan.quark.cn/.test(location.host)) temp.main = $quark;
 			else if (/drive.uc.cn/.test(location.host)) temp.main = $uc;
-			else if (/(www|login).(123(pan|684|865|952|912).com|123pan.cn)/.test(location.host)) temp.main = $123pan;
+			else if (/(www|login|yun|user).(123(pan|684|865|952|912).com|123pan.cn)/.test(location.host)) temp.main = $123pan;
 
 			// 智能默认设置
 			base.initDefaultConfig();

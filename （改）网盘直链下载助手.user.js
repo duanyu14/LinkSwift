@@ -916,7 +916,7 @@
 				// MSG# {请求指示} #13#1# {10241/20xx}(是/否 使用扩展提供的文件信息) : {?}(可能是距离扩展启动的时间?) :0: {当前时间戳} :0:1: {2/1}(是/否 优先弹窗，再获取文件信息) : {文件大小} :0,{表单}(格式如上);
 				const data = `MSG#${seq}#13#1#10241:${seq + 1000}:0:${time}:0:1:2:${filesize}:0,${fields.join(",")};`;
 
-				const request = base.post(url, data, {}, "text").catch(() => false);
+				const request = base.post(url, data, {}, "text", false).catch(() => false);
 				const timeout = new Promise((_, reject) => {
 					setTimeout(() => {
 						if (request.abort) request.abort();

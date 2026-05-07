@@ -566,8 +566,64 @@
 		 * @author 油小猴
 		 * @param {String} text - 要复制的文本内容
 		 */
-		setClipboard(text) {
-			GM_setClipboard(text, "text");
+		async setClipboard(text) {
+			if (typeof text !== 'string') text = String(text);
+
+			// 尝试 GreaseMonkey-Compatible-Manager API，这种方式权限最高，通常能绕过浏览器对“必须由用户手势触发”的限制
+			if (typeof GM_setClipboard === 'function') {
+				try {
+					GM_setClipboard(text, "text");
+					return true;
+				} catch (err) {
+					console.error('无法复制内容到剪贴板:', err);
+				}
+			}
+
+			// 尝试异步的 GreaseMonkey-Compatible-Manager API
+			if (typeof GM !== 'undefined' && GM.setClipboard) {
+				try {
+					await GM.setClipboard(text, "text");
+					return true;
+				} catch (err) {
+					console.error('无法复制内容到剪贴板:', err);
+				}
+			}
+
+			// 尝试现代原生 Clipboard API
+			// 注意：此 API 通常要求在安全上下文 (HTTPS) 下运行
+			if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+				try {
+					await navigator.clipboard.writeText(text);
+					return true;
+				} catch (err) {
+					console.error('无法复制内容到剪贴板:', err);
+				}
+			}
+
+			// 传统 execCommand('copy')
+			// 虽然被标记为废弃，但在旧浏览器或非 HTTPS 环境下依然是最稳妥的垫片
+			try {
+				const textArea = document.createElement("textarea");
+				textArea.value = text;
+
+				// 防止页面跳动
+				textArea.style.position = "fixed";
+				textArea.style.left = "-9999px";
+				textArea.style.top = "0";
+
+				document.body.appendChild(textArea);
+				textArea.focus();
+				textArea.select();
+
+				const successful = document.execCommand('copy');
+				document.body.removeChild(textArea);
+
+				if (successful) return true;
+			} catch (err) {
+				console.error('无法复制内容到剪贴板:', err);
+			}
+
+			return false;
 		},
 
 		/**
@@ -3767,7 +3823,7 @@
 				const originalHtml = target.html();
 				const copy = target.data("copy");
 				if (copy) {
-					base.setClipboard(copy)
+					await base.setClipboard(copy);
 					target.html(`<svg class="pl-icon"><use xlink:href="#pl-icon-fa-check"/></svg>复制成功`).animate({ opacity: "0.5" }, "slow");
 					await base.sleep(2000);
 					target.css("opacity", "");

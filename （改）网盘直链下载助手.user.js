@@ -249,30 +249,34 @@
 				},
 				themes: [
 					{ color: "#09AAFF", name: "度盘|经典蓝" },
-					{ color: "#cc3235", name: "度盘|平安红" },
-					{ color: "#518c17", name: "度盘|盎然绿" },
-					{ color: "#ed944b", name: "度盘|周年橙" },
-					{ color: "#f969a5", name: "度盘|幸会粉" },
-					{ color: "#bca280", name: "度盘|午后棕" },
-					{ color: "#b673ab", name: "度盘|物语紫" },
-					{ color: "#574AB8", name: "度盘|星空紫" },
-					{ color: "#1d2327", name: "OpenAI|默认黑" },
-					{ color: "#18a497", name: "OpenAI|默认青" },
-					{ color: "#637dff", name: "度里叁|霞光紫" },
-					{ color: "#0d53ff", name: "夸克|极简蓝" },
+					{ color: "#2594ed", name: "哔哩|宝石蓝" },
 					{ color: "#3181f9", name: "移动|彩云蓝" },
+					{ color: "#0d53ff", name: "夸克|极简蓝" },
+					{ color: "#637dff", name: "度里叁|霞光紫" },
+
+					{ color: "#18a497", name: "OpenAI|经典青" },
+					{ color: "#32ccbc", name: "果核|碧波绿" },
+					{ color: "#8bc24a", name: "哔哩|早苗绿" },
+					{ color: "#518c17", name: "度盘|盎然绿" },
+					{ color: "#2271b1", name: "文派|默认蓝" },
+
+					{ color: "#ff679a", name: "哔哩|少女粉" },
+					{ color: "#f969a5", name: "度盘|幸会粉" },
+					{ color: "#574AB8", name: "度盘|星空紫" },
+					{ color: "#9c28b1", name: "哔哩|罗兰紫" },
+					{ color: "#b673ab", name: "度盘|物语紫" },
+
+					{ color: "#f44236", name: "哔哩|高能红" },
+					{ color: "#cc3235", name: "度盘|平安红" },
+					{ color: "#ff6800", name: "光鸭|默认橙" },
+					{ color: "#ed944b", name: "度盘|周年橙" },
+					{ color: "#fec107", name: "哔哩|咸蛋黄" },
+
 					{ color: "#f8d800", name: "果核|柠檬黄" },
 					{ color: "#0396ff", name: "果核|默认蓝" },
-					{ color: "#32ccbc", name: "果核|碧波绿" },
 					{ color: "#f6416c", name: "果核|玫瑰红" },
-					{ color: "#2271b1", name: "文派|默认蓝" },
-					{ color: "#59524c", name: "文派|咖啡灰" },
-					{ color: "#ff679a", name: "哔哩|少女粉" },
-					{ color: "#f44236", name: "哔哩|高能红" },
-					{ color: "#fec107", name: "哔哩|咸蛋黄" },
-					{ color: "#8bc24a", name: "哔哩|早苗绿" },
-					{ color: "#2594ed", name: "哔哩|宝石蓝" },
-					{ color: "#9c28b1", name: "哔哩|罗兰紫" }
+					{ color: "#bca280", name: "度盘|午后棕" },
+					{ color: "#59524c", name: "文派|咖啡灰" }
 				]
 			}
 		},
@@ -502,7 +506,7 @@
 			let current = obj;
 			for (let i = 1; i < path.length - 1; i++) {
 				const keyPart = path[i];
-				if (!current[keyPart]) current[keyPart] = "";
+				if (!current[keyPart]) current[keyPart];
 				current = current[keyPart];
 			}
 			current[path[path.length - 1]] = value;
@@ -1696,7 +1700,7 @@
 		 * @returns {String} URL 编码格式字符串（如`key1=value1&key2=value2`）
 		 */
 		stringify(obj) {
-			let str = "";
+			let str;
 			for (const key in obj) {
 				if (obj.hasOwnProperty(key)) {
 					const value = obj[key];
@@ -1768,7 +1772,7 @@
 			const r = parseInt(hex.substring(0, 2), 16);
 			const g = parseInt(hex.substring(2, 4), 16);
 			const b = parseInt(hex.substring(4, 6), 16);
-			let a = "";
+			let a;
 			// 如果是八位十六进制颜色值，解析 alpha 通道
 			if (hex.length === 8) {
 				a = parseInt(hex.substring(6, 8), 16) / 255; // 将 alpha 值转换为 0 到 1 之间的小数
@@ -1897,81 +1901,137 @@
 		 */
 		adaptiveThemeOverride(colorMap, type) {
 			if (!colorMap || colorMap.length === 0) return;
+
+			// 安全编解码
+			const safeAtob = (str) => decodeURIComponent(escape(atob(str)));
+			const safeBtoa = (str) => btoa(unescape(encodeURIComponent(str)));
+
+			// 正则处理 SVG 字符串颜色
+			const processSvgString = (svgContent) => {
+				return svgContent.replace(/(fill|stroke|stop-color)\s*=\s*["']([^"']+)["']/g, (match, attr, val) => {
+					if (!val || val === "none" || val === "transparent" || val.startsWith("url")) return match;
+					const newVal = base.adaptiveStyleOverride(val, "", type, colorMap);
+					return `${attr}="${newVal}"`;
+				});
+			};
+
+			// 处理之前生成的特定 ID 样式表
 			base.waitForKeyElements(`[${mount}^="${mount}-ColorUI-"], [id^="${mount}-ColorUI-"]`, function (tag) {
-				if (tag.html() === base.adaptiveStyleOverride(tag.text(), "", type, colorMap)) return;
-				const cssText = base.adaptiveStyleOverride(tag.text(), "", type, colorMap);
-				base.addStyle(tag.attr(mount), "style", cssText, tag[0]);
-				return true;
-			}, true)
-			base.waitForKeyElements(`[data-pl-colored]`, function (tag) {
-				if (tag.attr("data-pl-colored") === temp.color) return;
-				const originalStyle = tag.attr("style");
-				if (!originalStyle) return;
-				const newStyle = base.adaptiveStyleOverride(originalStyle, "", type, colorMap);
-				if (newStyle !== originalStyle) {
-					tag.attr("style", newStyle);
+				const text = tag.text();
+				const newCss = base.adaptiveStyleOverride(text, "", type, colorMap);
+				if (text !== newCss) {
+					base.addStyle(tag.attr(mount) || tag.attr("id"), "style", newCss, tag[0]);
 				}
-				return true;
-			}, true);
-			let count = 0;
+				return false; // bWaitOnce为false，手动控制
+			}, false, null, "wkfe_generated_css");
+
+			// 处理原生 SVG 标签
+			base.waitForKeyElements("svg", function ($svg) {
+				const elSvg = $svg[0];
+				// 性能拦截：如果当前颜色已应用，跳过整个内部循环
+				if (elSvg.getAttribute("data-pl-colored") === temp.color) return false;
+
+				const attrNames = ["fill", "stroke", "stop-color"];
+				$svg.find("path, circle, rect, ellipse, line, polyline, polygon, stop, use").each((i, el) => {
+					for (const name of attrNames) {
+						const val = el.getAttribute(name);
+						if (val && val !== "none" && !val.startsWith("url")) {
+							const newVal = base.adaptiveStyleOverride(val, "", type, colorMap);
+							if (newVal !== val) el.setAttribute(name, newVal);
+						}
+					}
+				});
+
+				elSvg.setAttribute("data-pl-colored", temp.color);
+				return false;
+			}, false, null, "wkfe_svg_dom");
+
+			// 处理 Data URL SVG
+			base.waitForKeyElements("img[src*='data:image/svg+xml'], [style*='data:image/svg+xml']", function ($el) {
+				const el = $el[0];
+				if (el.getAttribute("data-pl-colored") === temp.color) return false;
+
+				try {
+					if (el.tagName === "IMG") {
+						const src = el.getAttribute("src");
+						if (src && src.includes("data:image/svg+xml")) {
+							const isBase64 = src.includes(";base64,");
+							const parts = src.split(isBase64 ? ";base64," : ",");
+							const raw = isBase64 ? safeAtob(parts[1]) : decodeURIComponent(parts[1]);
+							const newSvg = processSvgString(raw);
+							const newSrc = isBase64 ? `${parts[0]};base64,${safeBtoa(newSvg)}` : `${parts[0]},${encodeURIComponent(newSvg)}`;
+							if (src !== newSrc) el.setAttribute("src", newSrc);
+						}
+					} else {
+						const bgImg = $el.css("background-image");
+						const match = bgImg.match(/url\((['"]?)(data:image\/svg\+xml[^"']+)['"]?\)/);
+						if (match) {
+							const fullData = match[2];
+							const isBase64 = fullData.includes(";base64,");
+							const parts = fullData.split(isBase64 ? ";base64," : ",");
+							const raw = isBase64 ? safeAtob(parts[1]) : decodeURIComponent(parts[1].replace(/\\/g, ""));
+							const newSvg = processSvgString(raw);
+							const newFullData = isBase64 ? `${parts[0]};base64,${safeBtoa(newSvg)}` : `${parts[0]},${encodeURIComponent(newSvg)}`;
+							if (fullData !== newFullData) $el.css("background-image", bgImg.replace(fullData, newFullData));
+						}
+					}
+					el.setAttribute("data-pl-colored", temp.color);
+				} catch (e) { console.warn("DataSVG Error", e); }
+				return false;
+			}, false, null, "wkfe_svg_data");
+
+			// 处理普通元素的行内样式
+			base.waitForKeyElements(`[style]:not([${mount}^="${mount}-"],[class*="listener-"])`, function ($el) {
+				const el = $el[0];
+				// 排除插件自身 UI
+				if ($el.parent(`[class*="pl-"]`).length) return false;
+				if (el.getAttribute("data-pl-colored") === temp.color) return false;
+
+				const style = el.getAttribute("style");
+				if (style) {
+					const newStyle = base.adaptiveStyleOverride(style, "", type, colorMap);
+					if (style !== newStyle) {
+						el.setAttribute("style", newStyle);
+					}
+					el.setAttribute("data-pl-colored", temp.color);
+				}
+				return false;
+			}, false, null, "wkfe_inline_style");
+
+			/**
+			 * 初始化的外部样式处理 (仅注册一次观察者)
+			 * 内部生成的样式会由任务 1 负责后续切换
+			 */
 			if (!temp.colored) {
-				base.waitForKeyElements(`link[rel="stylesheet"]`, function (tag) {
-					if (!tag.parent().length || !tag.attr("href")) return;
-					let href = tag.attr("href");
-					try {
-						href = new URL(href, location.href).href;
-					} catch {
-						return;
-					}
-					fetch(href)
-						.then(response => response.text())
-						.then(responseText => {
-							const id = `${mount}-ColorUI-` + href.replace(/[^\w]/g, "_");
-							const cssText = base.adaptiveStyleOverride(responseText, href, type, colorMap);
-							if (responseText === base.adaptiveStyleOverride(responseText, href, type, colorMap)) return;
-							base.addStyle(id, "style", cssText, tag[0], "after");
-						})
-				}, true);
-				base.waitForKeyElements(`style:not([${mount}^="${mount}-"],[id^="swal-pub"],[class^="darkreader"])`, function (tag) {
-					let id = tag.attr(mount);
-					const text = tag.html()
-					if (tag.data("styles") === text) return;
-					tag.data("styles", text);
-					// 替换颜色并添加样式
-					const cssText = base.adaptiveStyleOverride(text, "", type, colorMap);
-					if (text === cssText) return;
-					id = id ? id : `${mount}-ColorUI-${count++}`
-					base.addStyle(id, "style", cssText, tag[0], "after");
-				}, true)
-				base.waitForKeyElements("svg", function (element) {
-					element.find("*").each((index, element) => {
-						const fill = $(element).attr("fill");
-						const stroke = $(element).attr("stroke");
-						if (fill) {
-							const newFill = base.adaptiveStyleOverride(fill, "", type, colorMap);
-							if (newFill !== fill) {
-								$(element).attr("fill", newFill);
-							}
-						}
-						if (stroke) {
-							const newStroke = base.adaptiveStyleOverride(stroke, "", type, colorMap);
-							if (newStroke !== stroke) {
-								$(element).attr("stroke", newStroke);
-							}
-						}
+				let styleCount = 0;
+
+				// 监控外部 Link
+				base.waitForKeyElements(`link[rel="stylesheet"]`, function ($tag) {
+					let href = $tag.attr("href");
+					if (!href) return;
+					try { href = new URL(href, location.href).href; } catch { return; }
+
+					fetch(href).then(r => r.text()).then(text => {
+						const id = `${mount}-ColorUI-` + href.replace(/[^\w]/g, "_");
+						const css = base.adaptiveStyleOverride(text, href, type, colorMap);
+						base.addStyle(id, "style", css, $tag[0], "after");
 					});
-				}, true);
-				base.waitForKeyElements(`[style]:not([${mount}^="${mount}-"],[class*="listener-"])`, function (element) {
-					if (element.parent(`[class*="pl-"]`).length) return;
-					if (element.attr("data-pl-colored") === temp.color) return;
-					const originalStyle = element.attr("style");
-					if (!originalStyle) return;
-					const newStyle = base.adaptiveStyleOverride(originalStyle, "", type, colorMap);
-					if (newStyle !== originalStyle) {
-						element.attr("style", newStyle);
-						element.attr("data-pl-colored", temp.color);
-					}
-				}, true);
+				}, true, null, "wkfe_link_once");
+
+				// 监控普通 Style 标签
+				base.waitForKeyElements(`style:not([${mount}^="${mount}-"],[id^="swal-pub"],[class^="darkreader"])`, function ($tag) {
+					const text = $tag.html();
+					// 使用 jQuery.data 缓存原始文本，避免重复处理
+					if ($tag.data("raw-css") === text) return;
+					$tag.data("raw-css", text);
+
+					const css = base.adaptiveStyleOverride(text, "", type, colorMap);
+					if (css === text) return;
+
+					const id = $tag.attr(mount) || `${mount}-ColorUI-${styleCount++}`;
+					base.addStyle(id, "style", css, $tag[0], "after");
+				}, false, null, "wkfe_style_persistent");
+
 				temp.colored = true;
 			}
 		},
@@ -2082,10 +2142,24 @@
 		/**
 		 * 迁移旧版本配置
 		 * @author hmjz100
-		 * @description 将旧版配置项目迁移到新版配置
+		 * @description 将项目的旧版配置迁移到新版配置
 		 */
 		initConfigMigration(latest) {
 			try {
+				const setDeep = (obj, path, value) => {
+					let current = obj;
+					for (let i = 0; i < path.length - 1; i++) {
+						const key = path[i];
+						const nextKey = path[i + 1];
+						if (!(key in current) || current[key] === null || typeof current[key] !== 'object') {
+							// 根据下一个键是否为数字或数字字符串决定创建数组还是对象
+							const isNextArrayIndex = typeof nextKey === "number" || /^\d+$/.test(nextKey);
+							current[key] = isNextArrayIndex ? [] : {};
+						}
+						current = current[key];
+					}
+					current[path[path.length - 1]] = value;
+				}
 				if (latest === 1) {
 					const mapping = {
 						"setting_rpc_domain": ["setting_aria2_rpc", 0, "domain"],
@@ -2107,40 +2181,42 @@
 						"setting_theme_uc": ["setting_ui_theme", "custom", "$uc"],
 						"setting_theme_123": ["setting_ui_theme", "custom", "$123pan"]
 					};
-					// 旧版配置执行迁移
+
+					// 用于缓存顶层对象的修改，减少 base.setValue 调用频率
+					const cache = {};
 					for (const oldKey in mapping) {
 						let val = base.getValue(oldKey);
 						if (val === undefined || val === null) continue;
-						val = (val === "no" ? false : val === "yes" ? true : val);
+
+						// 规范化布尔值
+						if (val === "no") val = false;
+						else if (val === "yes") val = true;
+
 						const path = mapping[oldKey];
-						if (path.length === 1) {
-							base.setValue(path[0], val);
-						} else {
-							const [root, ...keys] = path;
-							let obj = base.getValue(root);
-							if (obj === undefined || obj === null) {
-								const firstKeyType = typeof keys[0];
-								const isIndex = firstKeyType === "number" || (firstKeyType === "string" && /^\d+$/.test(keys[0]));
-								obj = isIndex ? [] : {};
-							}
-							let ref = obj;
-							for (let i = 0; i < keys.length - 1; i++) {
-								const key = keys[i];
-								if (!ref[key]) {
-									const nextKey = keys[i + 1];
-									const hasNextIndex = nextKey !== undefined && (base.isType(nextKey === "number" || (typeof nextKey) === "string" && /^\d+$/.test(nextKey)));
-									ref[key] = hasNextIndex ? [] : {};
-								}
-								ref = ref[key];
-							}
-							ref[keys.slice(-1)[0]] = val;
-							base.setValue(root, obj);
+						const rootKey = path[0];
+
+						// 初始化缓存中的根对象
+						if (!cache[rootKey]) {
+							cache[rootKey] = base.getValue(rootKey) || (typeof path[1] === 'number' || /^\d+$/.test(path[1]) ? [] : {});
 						}
+
+						if (path.length === 1) {
+							cache[rootKey] = val;
+						} else {
+							// 使用优化后的路径设置工具
+							setDeep(cache, path, val);
+						}
+
 						base.delValue(oldKey);
+					}
+
+					// 批量保存修改后的新配置项
+					for (const rootKey in cache) {
+						base.setValue(rootKey, cache[rootKey]);
 					}
 				}
 			} catch (e) {
-				base.console.error("【LinkSwift】迁移旧版本配置到新配置时出错", e);
+				base.console.error("【LinkSwift】配置迁移失败:", e);
 			}
 		},
 
@@ -2151,17 +2227,13 @@
 		 * @description 创建基础配置、主题设置等存储项（仅当不存在时）
 		 */
 		initDefaultConfig() {
-			if (base.getValue("setting_config_version") !== "1") base.initConfigMigration(1);
-			// 设置新结构的默认值（仅当未设置时）
+			if (base.getValue("setting_config_version") !== "1") this.initConfigMigration(1);
+
+			// 默认值
 			const defaults = [
 				{
 					name: "setting_idm_rpc",
-					value: [
-						{
-							id: "1",
-							default: true
-						}
-					]
+					value: [{ id: "1", default: true }]
 				},
 				{
 					name: "setting_aria2_rpc",
@@ -2207,25 +2279,22 @@
 				},
 				{
 					name: "setting_init",
-					value: {
-						code: "",
-						license: "",
-						version: ""
-					}
+					value: { code: "", license: "", version: "" }
 				},
 				{
 					name: "setting_ui_theme",
 					value: {
 						color: "#574AB8",
 						custom: {
-							$baidu: false,
-							$aliyun: false,
-							$mcloud: false,
-							$tcloud: false,
-							$xunlei: false,
-							$quark: false,
-							$uc: false,
-							$123pan: false
+							$baidu: true,
+							$aliyun: true,
+							$mcloud: true,
+							$tcloud: true,
+							$xunlei: true,
+							$guangya: true,
+							$quark: true,
+							$uc: true,
+							$123pan: true
 						}
 					}
 				},
@@ -2234,77 +2303,57 @@
 					value: "1"
 				}
 			];
-			function cloneDeep(item) {
-				return JSON.parse(JSON.stringify(item));
-			}
-			function fillMissingFields(target, source) {
-				// 如果 target 不存在，直接返回 source 的深拷贝
-				if (target === null || target === undefined) {
-					return cloneDeep(source);
+
+			/**
+			 * 递归补充缺失字段
+			 * @param {any} target 当前用户配置
+			 * @param {any} source 默认配置模板
+			 */
+			const mergeDefaults = (target, source) => {
+				// 类型不一致或 target 不存在，直接取默认值
+				if (target === null || target === undefined || typeof target !== typeof source) {
+					return this.clone(source);
 				}
-				// 如果类型不同，直接替换为 source
-				if (typeof source !== typeof target) {
-					return cloneDeep(source);
-				}
-				// 如果 source 是对象
-				if (base.isType(source) === "object" && !Array.isArray(source)) {
-					if (typeof target !== "object" || Array.isArray(target)) {
-						return cloneDeep(source);
+
+				// 处理数组：LinkSwift 的 RPC 配置多为对象数组
+				if (Array.isArray(source)) {
+					if (!Array.isArray(target)) return this.clone(source);
+
+					const template = source[0];
+					const result = target.map(item => mergeDefaults(item, template));
+
+					// 补齐数组至少有一个默认激活项的逻辑
+					if (template && 'default' in template && !result.some(i => i.default === true) && result.length > 0) {
+						result[0].default = true;
 					}
+					return result;
+				}
+
+				// 处理对象
+				if (typeof source === 'object' && source !== null) {
 					const result = { ...target };
 					for (const key in source) {
-						if (!source.hasOwnProperty(key)) continue;
-						// 跳过 default 的自动合并
-						if (key === "default") continue;
-						if (key === "dir" && target[key] !== undefined) continue;
-						if (key === "token" && target[key] !== undefined) continue;
-						if (key === "authName" && target[key] !== undefined) continue;
-						if (key === "authPass" && target[key] !== undefined) continue;
-						result[key] = fillMissingFields(target[key], source[key]);
+						// 跳过业务上不需要自动覆盖的敏感/私有字段
+						const skipKeys = ["token", "dir", "authName", "authPass"];
+						if (skipKeys.includes(key) && target[key] !== undefined) continue;
+
+						// 特殊逻辑：不强制覆盖 default 字段（除非 target 没有）
+						if (key === "default" && target[key] !== undefined) continue;
+
+						result[key] = mergeDefaults(target[key], source[key]);
 					}
 					return result;
 				}
-				// 如果 source 是数组
-				if (Array.isArray(source)) {
-					if (!Array.isArray(target)) {
-						return cloneDeep(source);
-					}
-					const result = [...target];
-					if (source.length > 0 && base.isType(source[0]) === "object" && source[0] !== null) {
-						const template = source[0];
-						// 填充字段
-						for (let i = 0; i < result.length; i++) {
-							if (base.isType(result[i]) === "object" && result[i] !== null) {
-								result[i] = fillMissingFields(result[i], template);
-							} else {
-								result[i] = cloneDeep(template);
-							}
-						}
-						// 自动补充 default: true
-						if (
-							template.default === true &&
-							!result.some(item => item && item.default === true) &&
-							result.length > 0
-						) {
-							result[0].default = true;
-						}
-					}
-					return result;
-				}
-				// 基本类型，保留原始值
-				return target;
-			}
+
+				return target; // 基本类型直接返回原值
+			};
+
 			defaults.forEach(({ name, value }) => {
 				const current = base.getValue(name);
-				if (
-					current === null ||
-					current === undefined ||
-					(Array.isArray(current) && current.length === 0)
-				) {
-					base.setValue(name, cloneDeep(value));
-				} else {
-					base.setValue(name, fillMissingFields(current, value));
-				}
+				const isInvalid = current === null || current === undefined || (Array.isArray(current) && current.length === 0);
+
+				const finalConfig = isInvalid ? this.clone(value) : mergeDefaults(current, value);
+				base.setValue(name, finalConfig);
 			});
 		},
 
@@ -2659,7 +2708,7 @@
 			function changeColor() {
 				temp.color = base.getValue("setting_ui_theme").color;
 				return config.base.dom.themes.map(item => {
-					return `<div style="--color:${item.color}" class="listener-color" data-color="${item.color}">
+					return `<div class="listener-color" style="--color:${item.color}" data-color="${item.color}">
 						<div class="mask">
 							${item.name.split("|").map(part => `<div>${part}</div>`).join("")}
 							${item.color === temp.color ? `<div class="this"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-check"></use></svg></div>` : ""}
@@ -2674,6 +2723,7 @@
 					{ name: "移动云盘", key: "$mcloud" },
 					{ name: "天翼云盘", key: "$tcloud" },
 					{ name: "迅雷云盘", key: "$xunlei" },
+					{ name: "光鸭云盘", key: "$guangya" },
 					{ name: "夸克网盘", key: "$quark" },
 					{ name: "UC 网盘", key: "$uc" },
 					{ name: "123 云盘", key: "$123pan" }
@@ -2719,7 +2769,7 @@
 		 * @property{String} manageVersion - 外部管理器版本
 		 */
 		showDebug() {
-			let debugInfo = "";
+			let debugInfo;
 			debugInfo += `<span>以下内容均为脚本自检信息<br/>本页面仅作为调试使用<span>`;
 			debugInfo += `<label class="pl-setting-item"><div>[外] 管理器名称</div>${info.mhandler ? info.mhandler : "无法获取"}</label>`;
 			debugInfo += `<label class="pl-setting-item"><div>[外] 管理器版本</div>${info.mversion ? info.mversion : "无法获取"}</label>`;
@@ -3626,8 +3676,8 @@
 			$doc.on("click", ".listener-unregister", async function () {
 				message.warning("正在“注入”设置项目...");
 				const list = base.getValue("setting_init");
-				list.code = "";
-				list.license = "";
+				list.code;
+				list.license;
 				base.setValue("setting_init", list);
 				base.delValue("baidu_access_token");
 				location.reload();
@@ -4604,7 +4654,8 @@ header[style="display:none;"]~.pl-button {
 }
 
 .guangya-button:hover {
-	background: var(--pl-c-b0)
+	color: #fff !important;
+	background-color: var(--pl-c-b0) !important
 }
 
 .quark-button,
@@ -4869,7 +4920,7 @@ button.downloadSubtitle:disabled {
 					input: "center-input"
 				},
 				showLoaderOnConfirm: true,
-				preConfirm: async (code = "") => {
+				preConfirm: async (code) => {
 					try {
 						if (!code?.trim?.()) return Swal.showValidationMessage("错误：提取码不能为空");
 						code = code.trim();
@@ -5073,7 +5124,7 @@ button.downloadSubtitle:disabled {
 				$doc.find(".loading-popup .swal2-html-container").html(`<div>正在获取授权状态~</div>`);
 				// 获取授权状态
 				const authorize = await base.getFinal(config.$baidu.api.getAccessToken, { Origin: "", Referer: "" }, true);
-				let accessToken = "";
+				let accessToken;
 				// 判断授权情况
 				if (authorize.includes("authorize")) {
 					$doc.find(".loading-popup .loading-title").html(`授权获取中`);
@@ -5382,13 +5433,22 @@ button.downloadSubtitle:disabled {
 			base.waitForKeyElements(".wp-s-aside-nav__sub-bottom > a.wp-aside-nav__pc-client-button", function (tag) {
 				tag.remove();
 			}, true)
+			base.waitForKeyElements(".open-pc-menu-wrap, .menu-open-pc-wrap", function (tag) {
+				tag.remove();
+			}, true)
+			base.waitForKeyElements(`.nd-invoke-app-btn > .nd-custom-btn-wrapper:has(img.BdPc[src*="Bdpc.png"])`, function (tag) {
+				tag.remove();
+			}, true)
+			base.waitForKeyElements(`.wp-s-aside-nav__main-item.wp-s-aside-nav__nav-tooltip:has(img[src*="wAIUtHEN+698AAAAABJRU5ErkJggg=="])`, function (tag) {
+				tag.remove();
+			}, true)
 
 			base.waitForKeyElements("a.tools__item", function (tag) {
 				if (tag.attr("linked")) return;
 				if (tag.attr("href")) {
 					try {
 						const url = new URL(tag.closest("a").attr("href"));
-						url.search = "";
+						url.search;
 						url.hash = url.hash.replace(/\?(.*?)(#|$)/, "$2")
 						tag.attr("href", url.href)
 					} catch { }
@@ -5400,7 +5460,7 @@ button.downloadSubtitle:disabled {
 				if (tag.closest("a").attr("href")) {
 					try {
 						const url = new URL(tag.closest("a").attr("href"));
-						url.search = "";
+						url.search;
 						url.hash = url.hash.replace(/\?(.*?)(#|$)/, "$2")
 						tag.closest("a").attr("href", url.href)
 					} catch { }
@@ -5443,6 +5503,7 @@ button.downloadSubtitle:disabled {
 				base.waitForKeyElements(`iframe[src^="/buy/ad"]`, function (tag) {
 					tag.fadeOut();
 				}, true)
+				// 一朵可爱捏
 				base.addStyle(`${mount}-baiduShare`, "style", `
 					body, .theme-white.init-new, #layoutApp{
 						background-color:#DCEFFE!important;
@@ -6818,7 +6879,7 @@ button.downloadSubtitle:disabled {
 			len = len || 16;
 			const $chars = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678";
 			const maxPos = $chars.length;
-			let pwd = "";
+			let pwd;
 			for (let i = 0; i < len; i++) {
 				pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
 			}
@@ -6836,7 +6897,7 @@ button.downloadSubtitle:disabled {
 			});
 		},
 		getSign(e, t, a, n) {
-			let i = "";
+			let i;
 			if (t) {
 				const s = Object.assign({}, t);
 				i = JSON.stringify(s),
@@ -7747,7 +7808,12 @@ button.downloadSubtitle:disabled {
 		},
 		beautifyPage() {
 			if (base.getValue("setting_ui_theme").custom.$guangya !== true) return;
-			base.adaptiveThemeOverride([], "other");
+			base.adaptiveThemeOverride([
+				["#ff6800", temp.color],
+				["#F06200", `${temp.color}D0`],
+				["#FFA70E", `${temp.color}20`],
+				["#FFC30E", `${temp.color}10`],
+			], "other");
 			// base.addStyle(`${mount}-guangya`, "style", ``);
 		},
 		svg: `<span class="ant-btn-icon"><span role="img" aria-label="download" class="swangpan-icon swangpan-icon-download"><svg width="1em" height="1em" fill="none" viewBox="0 0 18 18"><path fill="currentColor" d="M13.134 4.25a4.25 4.25 0 0 1 4.25 4.25V12a4.75 4.75 0 0 1-4.75 4.75h-7A4.75 4.75 0 0 1 .884 12V8.5a4.25 4.25 0 0 1 4.25-4.25.75.75 0 0 1 0 1.5 2.75 2.75 0 0 0-2.75 2.75V12a3.25 3.25 0 0 0 3.25 3.25h7a3.25 3.25 0 0 0 3.25-3.25V8.5a2.75 2.75 0 0 0-2.75-2.75.75.75 0 0 1 0-1.5M9 1.25a.75.75 0 0 1 .75.75v9.19l1.72-1.72a.75.75 0 1 1 1.06 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l1.72 1.72V2A.75.75 0 0 1 9 1.25"></path></svg></span></span>`,

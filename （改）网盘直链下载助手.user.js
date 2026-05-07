@@ -7941,12 +7941,12 @@ button.downloadSubtitle:disabled {
 		getSelectedList() {
 			try {
 				const selectedList = [];
-				const reactDom = document.querySelector(`.ant-table-wrapper:has(.ant-table-column-sort.ant-table-column-has-sorters)`);
+				const reactDom = document.querySelector(`.swangpan-file-list__root[data-ui="file-list"]`);
 				const reactObj = base.findReact(reactDom);
 				const props = reactObj.pendingProps;
 				if (props) {
 					const fileList = props.dataSource || [];
-					const selectedKeys = props.rowSelection?.selectedRowKeys || [];
+					const selectedKeys = props.selectedItems || [];
 					fileList.forEach(function (val) {
 						if (selectedKeys.includes(val.fileId)) {
 							selectedList.push({ ...val });

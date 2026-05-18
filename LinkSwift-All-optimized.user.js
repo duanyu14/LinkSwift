@@ -222,7 +222,7 @@
 				account: "https://pic.rmb.bdstatic.com/bjh/8b9e14345b3cdf96aedac2f3971adcb02681.png"
 			},
 			dom: {
-				footer: `o(≧▽≦)o 十分感谢您的支持！来给此项目一个 <a href="https://github.com/hmjz100/LinkSwift" target="_blank" class="pl-a" data-no-instant="1"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>Star</a> 吧~`,
+				footer: `o(≧▽≦)o 十分感谢您的支持！来给此项目一个 <a href="https://github.com/duanyu14/LinkSwift" target="_blank" class="pl-a" data-no-instant="1"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg>Star</a> 吧~`,
 				button: {
 					api: {
 						title: "API 下载",
@@ -4043,7 +4043,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					<p>
 						如果您喜欢这个脚本的话<br/>
 						请支持原版作者 <a class="listener-tip pl-a" target="_blank" href="https://www.youxiaohou.com" data-title='${config.base.service.account ? `的微信公众号……<br/><img style="width:250px" src="${config.base.service.account}">` : ""}'><svg class="pl-icon"><use xlink:href="#pl-icon-si-tampermonkey"></use></svg> 油小猴</a><br/>
-						并给此改版点个 <a class="listener-tip pl-a" target="_blank" href="https://github.com/hmjz100/LinkSwift/" data-title="来看看此项目的 Github 页面吧~"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg> Star</a>？
+						并给此改版点个 <a class="listener-tip pl-a" target="_blank" href="https://github.com/duanyu14/LinkSwift" data-title="来看看此项目的 Github 页面吧~"><svg class="pl-icon"><use xlink:href="#pl-icon-fa-star"></use></svg> Star</a>？
 					</p>
 					<p>脚本不仅能精简网盘界面<br/>点亮后还能修改多个网盘的主题色哦！</p>
 				</div><style>.pl-init-content p{margin:10px 0!important}</style>`,
@@ -4649,7 +4649,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 					<div class="__yunguanjiaTips radio-tips" style="display:block;">
 						用电脑下载并登录最新百度网盘客户端，即自动完成添加。
 						<a href="//pan.baidu.com/download" target="_blank">下载百度网盘客户端</a>
-						<br/>由 <a href="https://github.com/hmjz100/LinkSwift/" target="_blank">LinkSwift</a> 修复该选项
+						<br/>由 <a href="https://github.com/duanyu14/LinkSwift" target="_blank">LinkSwift</a> 修复该选项
 					</div>
 				</div>`);
 			}, true)
@@ -8478,7 +8478,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			 * @author hmjz100
 			 * @description 来自【网盘智能识别助手】，有改动
 			 */
-			base.console.log(`%c %c LinkSwift\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/duanyu14/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
+			base.console.log(`%c %c LinkSwift-All-optimized.user\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/duanyu14/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
 			// 创建挂载点
 			let mountElem = $(`<${mount} class="${mount}" />`);
 			temp.mount = mountElem;

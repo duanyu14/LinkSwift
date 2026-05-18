@@ -2668,8 +2668,8 @@
 						<div>俏也不争春，只把春来报。待到山花烂漫时，她在丛中笑。</div>
 					</blockquote>
 				</div>
-				<div class="block">(ﾉ◕ヮ◕)ﾉ 遇到 Bug 要记得去 <a class="pl-a" href="https://github.com/hmjz100/LinkSwift/issues" target="_blank">Github 议题</a> 向我报告哦~</div>
-				<div class="block">(o゜▽゜)o☆ 觉得好用？来一同完善本项目吧~ 欢迎提交<a class="pl-a" href="https://github.com/hmjz100/LinkSwift/pulls" target="_blank">拉取请求</a>为本项目做贡献~</div>
+				<div class="block">(ﾉ◕ヮ◕)ﾉ 遇到 Bug 要记得去 <a class="pl-a" href="https://github.com/duanyu14/LinkSwift/issues?reload=1" target="_blank">Github 议题</a> 向我报告哦~</div>
+				<div class="block">(o゜▽゜)o☆ 觉得好用？来一同完善本项目吧~ 欢迎提交<a class="pl-a" href="https://github.com/duanyu14/LinkSwift/pulls" target="_blank">拉取请求</a>为本项目做贡献~</div>
 				<div class="block">
 					<name>V1.2.0</name>
 					<div>

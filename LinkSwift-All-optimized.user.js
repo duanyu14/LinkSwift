@@ -8478,7 +8478,7 @@ a.downloadSubtitle:disabled, button.downloadSubtitle:disabled{background-color:$
 			 * @author hmjz100
 			 * @description 来自【网盘智能识别助手】，有改动
 			 */
-			base.console.log(`%c %c LinkSwift\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/hmjz100/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
+			base.console.log(`%c %c LinkSwift\n一个基于 JavaScript 的网盘文件下载地址获取工具\n仓库：https://github.com/duanyu14/LinkSwift\n版本：${info.version}\n领域：${(window.self !== window.top ? "[iframe] " : "") + (document.title ? (document.title + " (" + location.origin + location.pathname + ")") : location.href)}`, `background:url(${info.icon}) center center no-repeat;background-size:12px;padding:3px`, `padding:2px`);
 			// 创建挂载点
 			let mountElem = $(`<${mount} class="${mount}" />`);
 			temp.mount = mountElem;

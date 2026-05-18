@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name              LinkSwift
+// @name              LinkSwift-All-optimized.user
 // @namespace         github.com/hmjz100
 // @version           1.2.0
 // @author            Hmjz100、油小猴、烟雨烟中客
@@ -10,12 +10,12 @@
 // @description:zh-HK (｡>ᴗ•)✧《也許同類型中最好用？》系列 - 一個基於 JavaScript 的網盤檔案下載地址獲取工具✨，基於【網盤直鏈下載助手】改編 | 支援 百度網盤 / 阿里雲盤 / 中國移動雲盤 / 天翼雲盤 / 迅雷雲盤 / 夸克網盤 / UC網盤 / 123雲盤 八大平台 | 開源・自用・除廣 | 改介面・擴功能・修Bug | 既超越原版，亦是同類中最好用版本！👋
 // @copyright         © 2022 hmjz100
 // @license           AGPL-3.0-or-later
-// @source            https://github.com/hmjz100/LinkSwift/
-// @website           https://github.com/hmjz100/LinkSwift/
-// @homepageURL       https://github.com/hmjz100/LinkSwift/
-// @homepage          https://github.com/hmjz100/LinkSwift/
-// @support           https://github.com/hmjz100/LinkSwift/issues
-// @supportURL        https://github.com/hmjz100/LinkSwift/issues
+// @source            https://github.com/duanyu14/LinkSwift
+// @website           https://github.com/duanyu14/LinkSwift
+// @homepageURL       https://github.com/duanyu14/LinkSwift
+// @homepage          https://github.com/duanyu14/LinkSwift
+// @support           https://github.com/duanyu14/LinkSwift/issues
+// @supportURL        https://github.com/duanyu14/LinkSwift/issues
 // @require           https://unpkg.com/jquery@3.6.0/dist/jquery.min.js
 // @require           https://unpkg.com/sweetalert2@11.4.8/dist/sweetalert2.min.js
 // @resource SwalLigt https://unpkg.com/sweetalert2@11.4.8/dist/sweetalert2.min.css

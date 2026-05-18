@@ -1,7 +1,6 @@
 > [!IMPORTANT]
 > 如果您是从 GreasyFork 找到这的，建议前往下方的 [安装](#安装) 选择一个合适的源覆盖安装，避免因脚本失效或 GF 黑产刷子导致无法及时更新。
 
-![LinkSwift](https://socialify.git.ci/hmjz100/LinkSwift/image?description=1&descriptionEditable=%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8E%20JavaScript%20%E7%9A%84%E7%BD%91%E7%9B%98%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80%E8%8E%B7%E5%8F%96%E5%B7%A5%E5%85%B7&language=1&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cGF0aCBkPSJNMTAzLjYgMTA3LjRjMy41LTIuMiA4LjktNi4xIDEzLjgtMTIuNXM3LjMtMTIuNSA4LjUtMTYuNWMuNS0xLjcgMi4yLTcuNSAyLjItMTQuNyAwLTEwLjEtMy4zLTI1LjEtMTUuNC0zNi44LTE0LjUtMTQtMzIuMS0xNC4zLTM1LjctMTQuMy04IDAtMTUuNyAxLjktMjIuNiA1LjJDNDQgMjMgMzUuNyAzMS40IDMwLjggNDEuN2MtMS4zIDIuOC00IDQuNy03LjEgNS00IC4zLTcuNSA0LjQtOC45IDkuNi0uNSAxLjktMS42IDMuNS0zLjEgNC43QzQuNCA2Ni44IDAgNzUuNyAwIDg1YzAgNi44IDIuMyAxMy4xIDYuMSAxOC4yIDUuNSA3LjQgMTQuMiAxMi4yIDI0IDEyLjJoNDcuMWM0LjQgMCAxMS0uNSAxOC4zLTMuNSAzLjItMS40IDUuOS0zIDguMS00LjV6IiBmaWxsPSIjQTA5OUYwIi8%2BPHBhdGggZD0iTTExOS44IDY0LjNjLjEtMTcuMS0xMC40LTI4LTEyLjUtMzAuMUM5NSAyMi4xIDc5LjkgMjEuOCA3Ni45IDIxLjhjLTE3LjYgMC0zMy4zIDEwLjUtMzkuOSAyNi43LS42IDEuMy0xLjggMi4zLTMuNCAyLjNoLS40Yy01LjggMC0xMC42IDQuOC0xMC42IDEwLjd2LjVjMCAxLjQtLjggMi42LTEuOSAzLjNDMTMuNCA2OSA4LjggNzYuOCA4LjggODVjMCAxMi4yIDkuOSAyMi4zIDIyLjIgMjIuM2g0NS4yYzMuNi0uMSAxNy42LS45IDI5LjYtMTIgMi45LTIuOCAxMy45LTEzLjcgMTQtMzF6IiBmaWxsPSIjNTc0QUI4Ii8%2BPHBhdGggZD0iTTExMC44IDU3LjRsLjIgMy4zYzAgMS4zLTEuMSAyLjQtMi4zIDIuNC0xLjMgMC0yLjMtMS4xLTIuMy0yLjRsLS4xLTIuOHYtLjNjMC0xLjIuOS0yLjIgMi4xLTIuM2guM2MuNyAwIDEuMy4zIDEuNy43LS4yLjEuMy41LjQgMS40em0tMy4zLTEwLjNjMCAxLjItMSAyLjMtMi4yIDIuM2gtLjFjLS44IDAtMS42LS41LTItMS4yLTQuNi04LjMtMTMuMy0xMy41LTIyLjgtMTMuNS0xLjIgMC0yLjMtMS0yLjMtMi4ydi0uMWMwLTEuMiAxLTIuMyAyLjItMi4zaC4xYTMwLjM3IDMwLjM3IDAgMCAxIDE1LjggNC40YzQuNiAyLjggOC40IDYuOCAxMS4xIDExLjUuMS4zLjIuNy4yIDEuMXpNODguMyA3My44TDczLjUgOTMuMmMtMS41IDEuOS0zLjUgMy4xLTUuNyAzLjVoLS4yYy0uNC4xLS44LjEtMS4yLjEtLjYgMC0xLjEtLjEtMS42LS4yLTIuMi0uNC00LjItMS43LTUuNi0zLjVMNDQuMyA3My45Yy0yLTIuNi0yLjUtNS40LTEuNC03LjcuMS0uMS4xLS4yLjItLjIgMS4yLTIgMy41LTMuMiA2LjQtMy4yaDYuNnYtNS43YzAtNi44IDQuNy0xMiAxMC45LTEyIDQuOCAwIDguNSAyLjYgMTAuMyA3LjIuNSAxLjMtLjIgMi43LTEuNSAzLjJzLTIuOC0uMS0zLjMtMS40Yy0xLjEtMi43LTIuOS00LTUuNS00LTMuNSAwLTYgMy02IDd2OC4xYzAgLjUtLjIgMS0uNiAxLjQtLjYuNy0xLjcgMS4xLTIuNiAxLjFoLTguNGMtMS4zIDAtMiAuNC0yLjEuNy0uMi40IDAgMS4zLjkgMi40TDYzLjEgOTBjLjkgMS4yIDIuMSAxLjggMy4zIDEuOHMyLjMtLjYgMy4xLTEuN2wxNC44LTE5LjNjLjktMS4xIDEuMS0yIC45LTIuNC0uMi0uMy0uOS0uNy0yLjEtLjdoLTcuNmMtLjkgMC0xLjctLjUtMi4xLTEuMi0uMy0uNC0uNC0uOC0uNC0xLjMgMC0xLjQgMS4xLTIuNSAyLjUtMi41aDcuNmMzLjEgMCA1LjUgMS4zIDYuNiAzLjVsLjMuN2MuNyAyLjEuMSA0LjYtMS43IDYuOXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4%3D&name=1&owner=1&pattern=Charlie%20Brown&theme=Auto)
 
 <p align="center">“出淤泥而不染，濯清涟而不妖”</p>
 <hr>
@@ -13,12 +12,6 @@
    ↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓
 </p>
 <p align="center">
-   <img alt="Github Stargazers" src="https://img.shields.io/github/stars/hmjz100/LinkSwift.svg?label=%e6%98%9f%e6%a0%87&logo=github&logoColor=white&labelColor=black&color=gold&style=for-the-badge&cacheSeconds=10">
-   <img alt="Github Forks" src="https://img.shields.io/github/forks/hmjz100/LinkSwift?label=%e5%a4%8d%e5%88%bb&logo=github&logoColor=white&labelColor=black&color=grey&style=for-the-badge&cacheSeconds=10">
-   <img alt="Github Licence" src="https://img.shields.io/github/license/hmjz100/LinkSwift?label=%e8%ae%b8%e5%8f%af&logo=github&logoColor=white&labelColor=black&color=grey&style=for-the-badge&cacheSeconds=10">
-   <br/>
-   <a href="https://trendshift.io/repositories/13630" target="_blank"><img src="https://trendshift.io/api/badge/repositories/13630" alt="hmjz100%2FLinkSwift | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-   <br/>
    <img src="https://img.shields.io/chrome-web-store/v/gcalenpjmijncebpfijmoaglllgpjagf.svg?label=Tampermonkey%20BETA%20%E7%AF%A1%E6%94%B9%E7%8C%B4%E6%B5%8B%E8%AF%95%E7%89%88&logo=tampermonkey&logoColor=red&color=red&style=for-the-badge" alt="Tampermonkey BETA 篡改猴测试版">
    <img src="https://img.shields.io/chrome-web-store/v/dhdgffkkebhmkfjojejmpbldmpobfkfo.svg?label=Tampermonkey%20%E7%AF%A1%E6%94%B9%E7%8C%B4&logo=tampermonkey&logoColor=white&color=brightgreen&style=for-the-badge" alt="TamperMonkey 篡改猴">
    <br/>
@@ -26,12 +19,11 @@
    <img src="https://img.shields.io/badge/Microsoft_Edge-≥88.0-blue.svg?style=for-the-badge" alt="Microsoft Edge-≥88.0">
    <img src="https://img.shields.io/badge/支持平台-Windows_|_Mac_|_Linux_|_Android-blueviolet.svg?style=for-the-badge" alt="支持平台">
    <br/>
-   <img alt="Starchart" src="https://starchart.cc/hmjz100/LinkSwift.svg?variant=adaptive&line=%23574ab8">
 </p>
 
 ## 介绍
 
-支持 百度网盘 / 阿里云盘 / 中国移动云盘 / 天翼云盘 / 迅雷云盘 / 光鸭云盘 / 夸克网盘 / UC网盘 / 123云盘 九大网盘  
+从Hmjz100和油小猴的LinkSwift更新，修改而来。支持 百度网盘 / 阿里云盘 / 中国移动云盘 / 天翼云盘 / 迅雷云盘 / 光鸭云盘 / 夸克网盘 / UC网盘 / 123云盘 九大网盘  
 相比较原脚本，增加了更多功能~
 
 ## 安装
@@ -41,16 +33,7 @@
 ### LinkSwift
 直链获取、UI 美化、支持多种下载器
 
-#### 正式版
-- Github 国际: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://github.com/hmjz100/LinkSwift/raw/main/（改）网盘直链下载助手.user.js)
-- OpenUserJS 国际（更新不及时）: [hmjz100/LinkSwift.user.js](https://openuserjs.org/install/hmjz100/LinkSwift.user.js)
-- 脚本猫 国内: [hmjz100/1604/LinkSwift.user.js](https://scriptcat.org/scripts/code/1604/LinkSwift.user.js)
-
-#### 金丝雀版
-此版本可能不稳定，但有着最新的功能、修复等。
-
-- Github 国际: [hmjz100/LinkSwift/（改）网盘直链下载助手.user.js](https://github.com/hmjz100/LinkSwift/raw/dev/（改）网盘直链下载助手.user.js)
-
+#### 正式版脚本猫 国内: [6306/LinkSwift.user.js](https://www.tampermonkey.net/script_installation.php#url=https://scriptcat.org/scripts/code/6306/LinkSwift.user.js)
 ## 说明
 
 > [!IMPORTANT]
@@ -89,15 +72,14 @@
 
 ## 版本号
 
-正式版：v1.1.3  
-测试版：v1.1.3.1-Preview  
-本脚本目前仅在 Github、Gitee、脚本猫脚本站 与 OpenUserJS 发布；  
+正式版：v1.2.0  
 如果您是在其他渠道获取到本脚本的，安装后所带来的问题开发者概不负责。
 
 ## 更新日志
 
 | 版本号 | 创建日期 | 更新日志 |
 | -------- | -------- | -------- |
+| 1.2.0 | 2026年5月17日 | 1. 新增 - 「默认下载」按钮，一键使用预设下载方式获取链接；<br/>2. 新增 - 「默认下载方式」设置，可在助手设置中选择；<br/>3. 新增 - 「网盘开关」功能，可单独控制各网盘是否启用脚本；<br/>4. 优化 - 助手设置界面新增 iOS 风格滑动开关；<br/>5. 更新 - 版本号至 V1.2.0。 |
 | 1.1.3   | 2026年02月16日 | LinkSwift 开发者在此祝您新春快乐！<br/>爆竹声中一岁除，春风送暖入屠苏。LinkSwift 迎来功能更新：<br/>1、新增 - IDM 客户端设置；<br/>2、优化 - 链接缓存、浮动提示框；<br/>3、适配 - 百度网盘分享页。 |
 | 1.1.2.1 | 2025年12月28日 | 1、新增 - API 下载的推送到 IDM 功能；<br/>（感谢 <a href="https://github.com/Night-stars-1" target="_blank">Night Stars</a> 的帮助）<br/>2、修复 - 复制 Aria2、cURL 命令行错误。 |
 | 1.1.2   | 2025年12月26日 | 1、适配 - 123 云盘新策略；<br/>2、适配 - 夸克、UC 网盘分享页；<br/>3、新增 - 增强下载的多块多线程支持；<br/>4、优化 - 页面绿化的部分匹配规则；<br/>5、优化 - 增强下载进度条样式。 |
@@ -166,4 +148,3 @@
 ---
 
 <p align="center">这是给认真阅读完README文件的人的赞美</p>
-<p align="center">个人博客: <a target="_blank" href="https://hmjz100blog.rf.gd">https://hmjz100blog.rf.gd</a></p>

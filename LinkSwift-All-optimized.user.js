@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name              LinkSwift-All-optimized.user
 // @namespace         github.com/hmjz100
-// @version           1.2.0
+// @version           1.2.1
 // @author            Hmjz100、油小猴、烟雨烟中客
 // @icon              data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRHcmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkY1OUQ7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRDcwMDtzdG9wLW9wYWNpdHk6MSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZCQzAyRDtzdG9wLW9wYWNpdHk6MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuNCwgLTIpIHNjYWxlKDAuOSkiPjxwYXRoIGQ9Ik0xMDMuNiAxMDcuNGMzLjUtMi4yIDguOS02LjEgMTMuOC0xMi41czcuMy0xMi41IDguNS0xNi41Yy41LTEuNyAyLjItNy41IDIuMi0xNC43IDAtMTAuMS0zLjMtMjUuMS0xNS40LTM2LjgtMTQuNS0xNC0zMi4xLTE0LjMtMzUuNy0xNC4zLTggMC0xNS43IDEuOS0yMi42IDUuMkM0NCAyMyAzNS43IDMxLjQgMzAuOCA0MS43Yy0xLjMgMi44LTQgNC43LTcuMSA1LTQgLjMtNy41IDQuNC04LjkgOS42LS41IDEuOS0xLjYgMy41LTMuMSA0LjdDNC40IDY2LjggMCA3NS43IDAgODVjMCA2LjggMi4zIDEzLjEgNi4xIDE4LjIgNS41IDcuNCAxNC4yIDEyLjIgMjQgMTIuMmg0Ny4xYzQuNCAwIDExLS41IDE4LjMtMy41IDMuMi0xLjQgNS45LTMgOC4xLTQuNXoiIGZpbGw9IiNBMDk5RjAiLz48cGF0aCBkPSJNMTE5LjggNjQuM2MuMS0xNy4xLTEwLjQtMjgtMTIuNS0zMC4xQzk1IDIyLjEgNzkuOSAyMS44IDc2LjkgMjEuOGMtMTcuNiAwLTMzLjMgMTAuNS0zOS45IDI2LjctLjYgMS4zLTEuOCAyLjMtMy40IDIuM2gtLjRjLTUuOCAwLTEwLjYgNC44LTEwLjYgMTAuN3YuNWMwIDEuNC0uOCAyLjYtMS45IDMuM0MxMy40IDY5IDguOCA3Ni44IDguOCA4NWMwIDEyLjIgOS45IDIyLjMgMjIuMiAyMi4zaDQ1LjJjMy42LS4xIDE3LjYtLjkgMjkuNi0xMiAyLjktMi44IDEzLjktMTMuNyAxNC0zMXoiIGZpbGw9IiM1NzRBQjgiLz48cGF0aCBkPSJNMTEwLjggNTcuNGwuMiAzLjNjMCAxLjMtMS4xIDIuNC0yLjMgMi40LTEuMyAwLTIuMy0xLjEtMi4zLTIuNGwtLjEtMi44di0uM2MwLTEuMi45LTIuMiAyLjEtMi4zaC4zYy43IDAgMS4zLjMgMS43LjctLjIuMS4zLjUuNCAxLjR6bS0zLjMtMTAuM2MwIDEuMi0xIDIuMy0yLjIgMi4zaC0uMWMtLjggMC0xLjYtLjUtMi0xLjItNC42LTguMy0xMy4zLTEzLjUtMjIuOC0xMy41LTEuMiAwLTIuMy0xLTIuMy0yLjJ2LS4xYzAtMS4yIDEtMi4zIDIuMi0yLjNoLjFhMzAuMzcgMzAuMzcgMCAwIDEgMTUuOCA0LjRjNC42IDIuOCA4LjQgNi44IDExLjEgMTEuNS4xLjMuMi43LjIgMS4xek04OC4zIDczLjhMNzMuNSA5My4yYy0xLjUgMS45LTMuNSAzLjEtNS43IDMuNWgtLjJjLS40LjEtLjguMS0xLjIuMS0uNiAwLTEuMS0uMS0xLjYtLjItMi4yLS40LTQuMi0xLjctNS42LTMuNUw0NC4zIDczLjljLTItMi42LTIuNS01LjQtMS40LTcuNy4xLS4xLjEtLjIuMi0uMiAxLjItMiAzLjUtMy4yIDYuNC0zLjJoNi42di01LjdjMC02LjggNC43LTEyIDEwLjktMTIgNC44IDAgOC41IDIuNiAxMC4zIDcuMi41IDEuMy0uMiAyLjctMS41IDMuMnMtMi44LS4xLTMuMy0xLjRjLTEuMS0yLjctMi45LTQtNS41LTQtMy41IDAtNiAzLTYgN3Y4LjFjMCAuNS0uMiAxLS42IDEuNC0uNi43LTEuNyAxLjEtMi42IDEuMWgtOC40Yy0xLjMgMC0yIC40LTIuMS43LS4yLjQgMCAxLjMuOSAyLjRMNjMuMSA5MGMuOSAxLjIgMi4xIDEuOCAzLjMgMS44czIuMy0uNiAzLjEtMS43bDE0LjgtMTkuM2MuOS0xLjEgMS4xLTIgLjktMi40LS4yLS4zLS45LS43LTIuMS0uN2gtNy42Yy0uOSAwLTEuNy0uNS0yLjEtMS4yLS4zLS40LS40LS44LS40LTEuMyAwLTEuNCAxLjEtMi41IDIuNS0yLjVoNy42YzMuMSAwIDUuNSAxLjMgNi42IDMuNWwuMy43Yy43IDIuMS4xIDQuNi0xLjcgNi45eiIgZmlsbD0iI2ZmZiIvPjwvZz48Zz48cGF0aCBkPSJNMCAxMDAgUTY0IDExNSAxMjggMTAwIEwxMjggMTI4IEwwIDEyOCBaIiBmaWxsPSIjRDMyRjJGIi8+PHBhdGggZD0iTTAgMTAwIFE2NCAxMTUgMTI4IDEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGRHcmFkaWVudCkiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjY0IiB5PSIxMjEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9InVybCgjZ29sZEdyYWRpZW50KSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgc3R5bGU9InRleHQtc2hhZG93OiAwcHggMXB4IDJweCByZ2JhKDAsMCwwLDAuMyk7Ij7liIYg5LiNIOi1t+OAgOe6ryDpnaAg54ixPC90ZXh0PjwvZz48L3N2Zz4=
 // @description       (｡>ᴗ•)✧《也许同类型中最好用？》系列 - 一个基于 JavaScript 的网盘文件下载地址获取工具✨，基于【网盘直链下载助手】修改 | 支持 百度网盘 / 阿里云盘 / 中国移动云盘 / 天翼云盘 / 迅雷云盘 / 夸克网盘 / UC网盘 / 123云盘 八大网盘 | 开源・自用・去广 | 改界面・添功能・修Bug | 既超越原版，亦是同类中最好用版本！👋
@@ -110,7 +110,7 @@
  * @author 烟雨烟中客
  * @namespace github.com/hmjz100
  * @description  一个基于 JavaScript 盘的文件下载地址获取工具  支持 百度网盘/阿里云盘/中国移动云盘/天翼云盘/迅雷云盘/夸克网盘/UC网盘/123云盘 八大网盘  代码改自 “网盘直链下载助手”，作者油小猴
- * @version 1.2.0
+ * @version 1.2.1
  * @license AGPL-3.0-or-later
  * @see {@link https://github.com/hmjz100/LinkSwift/ Github 仓库}
  */
@@ -127,7 +127,7 @@
 	let info = {
 		author: GM_info.script?.author,
 		name: GM_info.script?.name,
-		version: (GM_info.script?.version || "1.2.0"),
+		version: (GM_info.script?.version || "1.2.1"),
 		icon: (GM_info.script?.icon || "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRHcmFkaWVudCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNGRkY1OUQ7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZGRDcwMDtzdG9wLW9wYWNpdHk6MSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I0ZCQzAyRDtzdG9wLW9wYWNpdHk6MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYuNCwgLTIpIHNjYWxlKDAuOSkiPjxwYXRoIGQ9Ik0xMDMuNiAxMDcuNGMzLjUtMi4yIDguOS02LjEgMTMuOC0xMi41czcuMy0xMi41IDguNS0xNi41Yy41LTEuNyAyLjItNy41IDIuMi0xNC43IDAtMTAuMS0zLjMtMjUuMS0xNS40LTM2LjgtMTQuNS0xNC0zMi4xLTE0LjMtMzUuNy0xNC4zLTggMC0xNS43IDEuOS0yMi42IDUuMkM0NCAyMyAzNS43IDMxLjQgMzAuOCA0MS43Yy0xLjMgMi44LTQgNC43LTcuMSA1LTQgLjMtNy41IDQuNC04LjkgOS42LS41IDEuOS0xLjYgMy41LTMuMSA0LjdDNC40IDY2LjggMCA3NS43IDAgODVjMCA2LjggMi4zIDEzLjEgNi4xIDE4LjIgNS41IDcuNCAxNC4yIDEyLjIgMjQgMTIuMmg0Ny4xYzQuNCAwIDExLS41IDE4LjMtMy41IDMuMi0xLjQgNS45LTMgOC4xLTQuNXoiIGZpbGw9IiNBMDk5RjAiLz48cGF0aCBkPSJNMTE5LjggNjQuM2MuMS0xNy4xLTEwLjQtMjgtMTIuNS0zMC4xQzk1IDIyLjEgNzkuOSAyMS44IDc2LjkgMjEuOGMtMTcuNiAwLTMzLjMgMTAuNS0zOS45IDI2LjctLjYgMS4zLTEuOCAyLjMtMy40IDIuM2gtLjRjLTUuOCAwLTEwLjYgNC44LTEwLjYgMTAuN3YuNWMwIDEuNC0uOCAyLjYtMS45IDMuM0MxMy40IDY5IDguOCA3Ni44IDguOCA4NWMwIDEyLjIgOS45IDIyLjMgMjIuMiAyMi4zaDQ1LjJjMy42LS4xIDE3LjYtLjkgMjkuNi0xMiAyLjktMi44IDEzLjktMTMuNyAxNC0zMXoiIGZpbGw9IiM1NzRBQjgiLz48cGF0aCBkPSJNMTEwLjggNTcuNGwuMiAzLjNjMCAxLjMtMS4xIDIuNC0yLjMgMi40LTEuMyAwLTIuMy0xLjEtMi4zLTIuNGwtLjEtMi44di0uM2MwLTEuMi45LTIuMiAyLjEtMi4zaC4zYy43IDAgMS4zLjMgMS43LjctLjIuMS4zLjUuNCAxLjR6bS0zLjMtMTAuM2MwIDEuMi0xIDIuMy0yLjIgMi4zaC0uMWMtLjggMC0xLjYtLjUtMi0xLjItNC42LTguMy0xMy4zLTEzLjUtMjIuOC0xMy41LTEuMiAwLTIuMy0xLTIuMy0yLjJ2LS4xYzAtMS4yIDEtMi4zIDIuMi0yLjNoLjFhMzAuMzcgMzAuMzcgMCAwIDEgMTUuOCA0LjRjNC42IDIuOCA4LjQgNi44IDExLjEgMTEuNS4xLjMuMi43LjIgMS4xek04OC4zIDczLjhMNzMuNSA5My4yYy0xLjUgMS45LTMuNSAzLjEtNS43IDMuNWgtLjJjLS40LjEtLjguMS0xLjIuMS0uNiAwLTEuMS0uMS0xLjYtLjItMi4yLS40LTQuMi0xLjctNS42LTMuNUw0NC4zIDczLjljLTItMi42LTIuNS01LjQtMS40LTcuNy4xLS4xLjEtLjIuMi0uMiAxLjItMiAzLjUtMy4yIDYuNC0zLjJoNi42di01LjdjMC02LjggNC43LTEyIDEwLjktMTIgNC44IDAgOC41IDIuNiAxMC4zIDcuMi41IDEuMy0uMiAyLjctMS41IDMuMnMtMi44LS4xLTMuMy0xLjRjLTEuMS0yLjctMi45LTQtNS41LTQtMy41IDAtNiAzLTYgN3Y4LjFjMCAuNS0uMiAxLS42IDEuNC0uNi43LTEuNyAxLjEtMi42IDEuMWgtOC40Yy0xLjMgMC0yIC40LTIuMS43LS4yLjQgMCAxLjMuOSAyLjRMNjMuMSA5MGMuOSAxLjIgMi4xIDEuOCAzLjMgMS44czIuMy0uNiAzLjEtMS43bDE0LjgtMTkuM2MuOS0xLjEgMS4xLTIgLjktMi40LS4yLS4zLS45LS43LTIuMS0uN2gtNy42Yy0uOSAwLTEuNy0uNS0yLjEtMS4yLS4zLS40LS40LS44LS40LTEuMyAwLTEuNCAxLjEtMi41IDIuNS0yLjVoNy42YzMuMSAwIDUuNSAxLjMgNi42IDMuNWwuMy43Yy43IDIuMS4xIDQuNi0xLjcgNi45eiIgZmlsbD0iI2ZmZiIvPjwvZz48Zz48cGF0aCBkPSJNMCAxMDAgUTY0IDExNSAxMjggMTAwIEwxMjggMTI4IEwwIDEyOCBaIiBmaWxsPSIjRDMyRjJGIi8+PHBhdGggZD0iTTAgMTAwIFE2NCAxMTUgMTI4IDEwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGRHcmFkaWVudCkiIHN0cm9rZS13aWR0aD0iMiIvPjx0ZXh0IHg9IjY0IiB5PSIxMjEiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9InVybCgjZ29sZEdyYWRpZW50KSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgc3R5bGU9InRleHQtc2hhZG93OiAwcHggMXB4IDJweCByZ2JhKDAsMCwwLDAuMyk7Ij7liIYg5LiNIOi1t+OAgOe6ryDpnaAg54ixPC90ZXh0PjwvZz48L3N2Zz4="),
 		mhandler: GM_info.scriptHandler,
 		mversion: GM_info.version,
@@ -2654,9 +2654,82 @@
 		/**
 		 * 显示版本更新日志
 		 * @author hmjz100
-		 * @description 按时间倒序展示所有历史版本更新内容
+		 * @description 通过下拉框选择查看不同版本更新内容，默认显示最新版本
 		 */
 		async showUpdate() {
+			const versions = [
+{ version: "V1.2.1", content: `<div>1、优化 - 更新日志界面改为下拉框选择形式，默认显示最新版本；</div><div>2、修复 - 修复已知问题；</div><div>3、新增 - 新增若干功能。</div>` },
+{ version: "V1.2.0", content: `<div>1、新增 - 「默认下载」按钮，一键使用预设下载方式获取链接；</div><div>2、新增 - 「默认下载方式」设置，可在助手设置中选择；</div><div>3、新增 - 「网盘开关」功能，可单独控制各网盘是否启用脚本；</div><div>4、优化 - 助手设置界面新增 iOS 风格滑动开关；</div><div>5、更新 - 版本号至 V1.2.0。</div>` },
+{ version: "V1.1.3", content: `<div>LinkSwift 开发者在此祝您新春快乐！</div><div>爆竹声中一岁除，春风送暖入屠苏。LinkSwift 迎来功能更新：</div><div>1、新增 - IDM 客户端设置；</div><div>2、优化 - 链接缓存、浮动提示框；</div><div>3、适配 - 百度网盘分享页。</div>` },
+{ version: "V1.1.2.1", content: `<div>1、新增 - API 下载的推送到 IDM 功能；</div><div style="margin-left:10px">（感谢 <a href="https://github.com/Night-stars-1" target="_blank">Night Stars</a> 的帮助）</div><div>2、修复 - 复制 Aria2、cURL 命令行错误。</div>` },
+{ version: "V1.1.2", content: `<div>1、适配 - 123 云盘新策略；</div><div>2、适配 - 夸克、UC 网盘分享页；</div><div>3、新增 - 增强下载的多块多线程支持；</div><div>4、优化 - 页面绿化的部分匹配规则；</div><div>5、优化 - 增强下载进度条样式。</div>` },
+{ version: "V1.1.1.9", content: `<div>1、修复 - 123 云盘下载视频变为缩略图。</div>` },
+{ version: "V1.1.1.8", content: `<div>1、修复 - 适配新版 123 云盘分享页。</div>` },
+{ version: "V1.1.1.7", content: `<div>1、修复 - 缺失声明 @connect 导致的问题。</div>` },
+{ version: "V1.1.1.6", content: `<div>1、<span style="color:#fff;background:${temp.color}">废弃 - 百度网盘 BDUSS Cookie 相关代码，转向使用更安全的 AccessToken</span>；</div><div>2、废弃 - 百度网盘分享页面下载相关代码；</div><div>3、优化 - 下载窗口可在设置改变后动态修改界面。</div>` },
+{ version: "V1.1.1.5", content: `<div>1、新增 - AB Download Manager 下载方式；</div><div>2、优化 - 支持从设置页面一键返回下载窗口，无需重复获取链接。</div>` },
+{ version: "V1.1.1.4", content: `<div>1、适配 123 云盘新版页面。</div>` },
+{ version: "V1.1.1.3", content: `<div>1、修复夸克网盘无法获取下载链接的 Bug；</div><div>2、修复 API 下载无法复制全部链接。</div>` },
+{ version: "V1.1.1.2", content: `<div>1、修复无法删除第一项远程配置的 Bug。</div>` },
+{ version: "V1.1.1.1", content: `<div>1、修复推送至 Aria2 时推送成功但报错的 Bug。</div>` },
+{ version: "V1.1.1", content: `<div>1、配置文件格式更新，<span style="color:#fff;background:${temp.color}">支持添加、删除、切换多个服务配置</span>；</div><div>2、支持比特彗星推送下载，<span style="color:#fff;background:${temp.color}">原 RPC 已并入 Aria2 下载</span>；</div><div>3、界面<span style="color:#fff;background:${temp.color}">增加 Font Awesome 图标！</span>更好看啦；</div><div>4、优化脚本代码、界面，运行更轻快；</div><div>5、修复上个版本遗存的问题。</div>` },
+{ version: "V1.1.0.1", content: `<div>1、修复查看 RPC 下载任务的 Bug。</div>` },
+{ version: "V1.1.0", content: `<div>1、支持 UC 网盘、123 云盘；</div><div>2、改进了网盘主题的注入方式；</div><div>3、聚合并重构了部分重复函数，对整体脚本逻辑进行了梳理和精简；</div><div>4、将脚本执行阶段从 document-body 适配为 document-start。</div>` },
+{ version: "V1.0.9.7", content: `<div>1、修复移动云盘下载错误；</div><div>2、优化代码，更好的错误识别；</div><div>3、去除了油小猴云服务。</div>` },
+{ version: "V1.0.9.6", content: `<div>1、支持在百度网盘中选择文件夹下载；</div><div>2、优化部分提示。</div>` },
+{ version: "V1.0.9.5", content: `<div>1、修复因代码逻辑错误而无法获取链接的 Bug。</div>` },
+{ version: "V1.0.9.4", content: `<div>1、修复因百度网盘 AccessToken 过期导致无法获取链接的 Bug。</div>` },
+{ version: "V1.0.9.3", content: `<div>1、若网盘不支持在分享中下载，将仅显示保存网盘按钮；</div><div>2、优化下载界面，支持选择 Iframe 或 Blob 的方式来下载文件，增加按钮的提示文本；</div><div>3、优化 CSS 样式，统一了 SweetAlert2 按钮样式，同时适配了 Dark Reader 插件，界面更协调；</div><div>4、支持修改油小猴网站主题色；</div><div>5、原有主题相关设置现已移动至助手美化页面中。</div>` },
+{ version: "V1.0.9.2", content: `<div>1、修复使用API 下载时有可能会导致IDM无限弹窗的Bug。</div>` },
+{ version: "V1.0.9.1", content: `<div>1、修复在百度网盘旧版下脚本无法删除元素的Bug。</div>` },
+{ version: "V1.0.9", content: `<div>1、跟进官方V6.2.7，修复因无法进行百度授权而导致获取直链报错 9019 的 Bug。</div>` },
+{ version: "V1.0.8.9", content: `<div>1、跟进官方V6.2.3，优化保存到网盘提示，修复阿里云盘、移动云盘失效的问题；</div><div>2、优化修改网盘主题的代码，减少对页面的破坏。</div>` },
+{ version: "V1.0.8.8", content: `<div>1、修复下载菜单字体过小的Bug。</div>` },
+{ version: "V1.0.8.7", content: `<div>1、修复在阿里云盘分享页面下点击"未点亮"按钮时没有任何反应的Bug；</div><div>2、更新并优化网盘界面精简规则；</div><div>3、支持更换 百度网盘、阿里云盘、迅雷云盘、夸克网盘、移动云盘 界面的主题颜色。</div>` },
+{ version: "V1.0.8.6", content: `<div>1、新增移动云盘会员中心页面，可在网盘中点击"会员中心"按钮查看(但无法使用第三方支付)。</div>` },
+{ version: "V1.0.8.5", content: `<div>1、跟进官方V6.1.6，修复迅雷网盘分享页面无法选中文件，修复移动云盘无法判断页面。</div>` },
+{ version: "V1.0.8.4", content: `<div>1、修复因重复绑定按钮而导致命令重复执行的Bug；</div><div>2、优化调试信息界面排版；</div><div>3、移除对百度网盘手机网页版的支持。</div>` },
+{ version: "V1.0.8.3", content: `<div>1、适配阿里云盘新域名alipan.com。</div>` },
+{ version: "V1.0.8.2", content: `<div>1、更换新图标。</div>` },
+{ version: "V1.0.8.1", content: `<div>1、修复因重复绑定按钮而导致 RPC 下载会发送多条下载请求的Bug；</div><div>2、选择不使用油小猴服务器时，"用ghproxy连接Github仓库"更换为"用jsdelivr连接Github仓库"；</div><div>3、跟进官方V6.1.4版本，修复移动网盘无法获取链接，支持阿里云盘新域名alipan.com。</div>` },
+{ version: "V1.0.8", content: `<div>1、修复迅雷网盘无法勾选文件。</div>` },
+{ version: "V1.0.7.9", content: `<div>1、更新精简网盘元素匹配规则，防止因通知横条而导致不能点到"API 下载"以下的按钮。</div>` },
+{ version: "V1.0.7.8", content: `<div>1、跟进官方V6.1.2，加入V2接口。</div><div>2、修复百度网盘下载时因为获取不到accessToken而一直转圈。</div>` },
+{ version: "V1.0.7.7", content: `<div>1、修复百度网盘的按钮会因为主题不同而被改变颜色的Bug；</div><div>2、更新夸克网盘按钮与界面。</div>` },
+{ version: "V1.0.7.6", content: `<div>1、修复"注入"功能；</div><div>2、黑暗模式支持随设置热切换。</div>` },
+{ version: "V1.0.7.5", content: `<div>1、修复阿里云盘下载逻辑；</div><div>2、精简代码；</div><div>3、支持深色模式；</div><div>4、修改部分提示文本；</div><div>5、修改部分CSS；</div><div>6、设置可测试RPC连接。</div>` },
+{ version: "V1.0.7.4", content: `<div>1、优化下载逻辑；</div><div>2、修复阿里云盘无法使用API 下载。</div>` },
+{ version: "V1.0.7.3", content: `<div>1、如果出现网络请求错误时支持自动重新请求；</div><div>2、可选择是否使用油小猴服务器。</div>` },
+{ version: "V1.0.7.2", content: `<div>1、修复使用 RPC 下载时会重复发送链接的Bug。</div>` },
+{ version: "V1.0.7.1", content: `<div>[实验功能，不影响正常使用]支持百度网盘手机网页版，勾选文件后可在顶栏找到"下载助手"按钮。</div>` },
+{ version: "V1.0.7", content: `<div>1、重构夸克网盘、阿里云盘按钮。</div>` },
+{ version: "V1.0.6.9", content: `<div>1、下载窗口加入关闭按钮。</div>` },
+{ version: "V1.0.6.8", content: `<div>1、修复夸克网盘按钮错位。</div>` },
+{ version: "V1.0.6.7", content: `<div>1、将百度网盘界面修改为主题色，可在设置选择是否修改；</div><div>2、增加主题色名称，更改部分内容颜色；</div><div>3、移动云盘API 下载支持批量复制；</div><div>4、优化控制台输出结果；</div><div>5、百度网盘API 下载不使用IDM时可以显示剩余时间；</div><div>6、"取消点亮按钮"按钮的位置现已移动到设置页面。</div><div>7、homo特有的彩蛋又回来力(喜)。</div>` },
+{ version: "V1.0.6.6", content: `<div>1、修复暗号错误。</div>` },
+{ version: "V1.0.6.5", content: `<div>1、修复即使输入正确暗号也不能成功点亮按钮的服务器错误。</div>` },
+{ version: "V1.0.6.4", content: `<div>1、跟进官方V6.1.1版本，修复阿里云盘获取下载链接时的问题。</div>` },
+{ version: "V1.0.6.3", content: `<div>1、照顾小屏幕用户，将始终显示复制全部链接的按钮；</div><div>2、增加取消下载时的动画。</div>` },
+{ version: "V1.0.6.2", content: `<div>1、修复部分界面错位，实现CSS内置；</div><div>2、百度网盘界面将变得更加简洁。</div>` },
+{ version: "V1.0.6.1", content: `<div>1、新增百度云盘API 下载支持复制链接；</div><div>2、为了照顾手机浏览器用户，增大项目之间间隙，新增隐藏IDM提示选项，可在助手设置中启用；</div><div>3、修改CSS，界面会出现更多的主题色；</div><div>4、支持在油小猴官网查看暗号；</div><div>5、修复部分语法错误。</div>` },
+{ version: "V1.0.6", content: `<div>1、修复了打开阿里云盘分享连接时因下载移动端广告导致只能点击 API 下载；</div><div>2、跟进官方6.0.4版本，修复夸克网盘获取下载链接失效、支持移动云盘。</div>` },
+{ version: "V1.0.5.5", content: `<div>1、感谢<a href="https://github.com/Night-stars-1" target="_blank">Night Stars</a>的帮助，修复因为原作者服务器导致的初始化暗号识别错误；</div><div>2、修改一些文本以及提供给服务器的信息。</div>` },
+{ version: "V1.0.5.4", content: `<div>1、小修小改css，让主题色出现在更多地方；</div><div>2、修改下载链接获取失败的提示；</div><div>3、增加更多的主题色，可在助手设置查看；</div><div>4、homo彩蛋被删去力（悲）。</div>` },
+{ version: "V1.0.5.3", content: `<div>1、修啦修啦，阿里云盘可以摸到下载菜单了。</div>` },
+{ version: "V1.0.5.2", content: `<div>1、增加脚本信息菜单（没有用）；</div><div>2、优化阿里云盘显示svg图片；</div><div>3、修改弹窗按钮颜色。</div>` },
+{ version: "V1.0.5.1", content: `<div>1、修复在切换按钮主题后夸克网盘不能正常显示按钮。</div>` },
+{ version: "V1.0.5", content: `<div>1、跟进官方V5.0.4版本；</div><div>2、小改动，照着官方版本更正文件名称检测；</div><div>3、保留彩蛋，但必须舍弃官方暗号。</div>` },
+{ version: "V1.0.4", content: `<div>大改！</div><div>1、修复了原作者留下的夸克网盘切换文件夹就多一个"下载助手"按钮的大BUG；</div><div>2、终于来了，在下载菜单增加"助手设置""更新日志"按钮；</div><div>【再也不用点进油猴管理再进设置了(保留油猴管理内设置)】</div><div>3、修改阿里云盘和夸克网盘下载助手按钮样式；</div><div>4、增加"取消点亮按钮"油猴菜单；</div><div>5、修改部分css，使其与选择的主题更贴切。</div>` },
+{ version: "V1.0.3", content: `<div>1、增加一个小彩蛋； 提示：</div><div>homo（需在未点亮按钮状态触发）</div><div>【需要重新恢复按钮为未点亮状态请进入 已安装脚本->编辑->开发者->重置到出厂->确定】</div><div>2、修改/增加默认主题色。</div>` },
+{ version: "V1.0.2", content: `<div>1、修改并加宽界面，调整部分css，使Sweetalert2界面更美观，更与原版相近；</div><div>2、修改部分提示文字，使文字更容易复制。</div>` },
+{ version: "V1.0.1", content: `<div>1、去除更新提示；</div><div>2、更新Sweetalert2至11版本；</div><div>3、部分CDN节点更换为jsdelivr。</div>` },
+{ version: "V1.0.0", content: `<div>1、增加"注入"功能（bushi）；</div><div>2、去除广告。</div>` }
+];
+			
+			let selectedVersion = versions[0].version;
+			
+			const generateOptions = () => versions.map(v => `<option value="${v.version}"${v.version === selectedVersion ? ' selected' : ''}>${v.version}</option>`).join('');
+			
 			await Swal.fire({
 				...temp.swalDefault,
 				icon: "info",
@@ -2668,487 +2741,16 @@
 						<div>俏也不争春，只把春来报。待到山花烂漫时，她在丛中笑。</div>
 					</blockquote>
 				</div>
-				<div class="block">(ﾉ◕ヮ◕)ﾉ 遇到 Bug 要记得去 <a class="pl-a" href="https://github.com/duanyu14/LinkSwift/issues?reload=1" target="_blank">Github 议题</a> 向我报告哦~</div>
+				<div class="block">(o゜▽゜)o☆ 遇到 Bug 要记得去 <a class="pl-a" href="https://github.com/duanyu14/LinkSwift/issues?reload=1" target="_blank">Github 议题</a> 向我报告哦~</div>
 				<div class="block">(o゜▽゜)o☆ 觉得好用？来一同完善本项目吧~ 欢迎提交<a class="pl-a" href="https://github.com/duanyu14/LinkSwift/pulls" target="_blank">拉取请求</a>为本项目做贡献~</div>
 				<div class="block">
-					<name>V1.2.0</name>
-					<div>
-					<div>1、新增 - 「默认下载」按钮，一键使用预设下载方式获取链接；</div>
-					<div>2、新增 - 「默认下载方式」设置，可在助手设置中选择；</div>
-					<div>3、新增 - 「网盘开关」功能，可单独控制各网盘是否启用脚本；</div>
-					<div>4、优化 - 助手设置界面新增 iOS 风格滑动开关；</div>
-					<div>5、更新 - 版本号至 V1.2.0。</div>
-					</div>
+					<select id="version-select" class="version-select" onchange="document.getElementById('version-content').innerHTML = versions.find(v => v.version === this.value).content; document.getElementById('version-title').textContent = this.value;">
+						${generateOptions()}
+					</select>
 				</div>
 				<div class="block">
-					<name>V1.1.3</name>
-					<div>
-					<div>LinkSwift 开发者在此祝您新春快乐！</div>
-					<div>爆竹声中一岁除，春风送暖入屠苏。LinkSwift 迎来功能更新：</div>
-					<div>1、新增 - IDM 客户端设置；</div>
-					<div>2、优化 - 链接缓存、浮动提示框；</div>
-					<div>3、适配 - 百度网盘分享页。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.2.1</name>
-					<div>
-					<div>1、新增 - API 下载的推送到 IDM 功能；</div>
-					<div style="margin-left:10px">（感谢 <a href="https://github.com/Night-stars-1" target="_blank">Night Stars</a> 的帮助）</div>
-					<div>2、修复 - 复制 Aria2、cURL 命令行错误。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.2</name>
-					<div>
-					<div>1、适配 - 123 云盘新策略；</div>
-					<div>2、适配 - 夸克、UC 网盘分享页；</div>
-					<div>3、新增 - 增强下载的多块多线程支持；</div>
-					<div>4、优化 - 页面绿化的部分匹配规则；</div>
-					<div>5、优化 - 增强下载进度条样式。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.9</name>
-					<div>
-					<div>1、修复 - 123 云盘下载视频变为缩略图。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.8</name>
-					<div>
-					<div>1、修复 - 适配新版 123 云盘分享页。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.7</name>
-					<div>
-					<div>1、修复 - 缺失声明 @connect 导致的问题。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.6</name>
-					<div>
-					<div>1、<span style="color:#fff;background:${temp.color}">废弃 - 百度网盘 BDUSS Cookie 相关代码，转向使用更安全的 AccessToken</span>；</div>
-					<div>2、废弃 - 百度网盘分享页面下载相关代码；</div>
-					<div>3、优化 - 下载窗口可在设置改变后动态修改界面。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.5</name>
-					<div>
-					<div>1、新增 - AB Download Manager 下载方式；</div>
-					<div>2、优化 - 支持从设置页面一键返回下载窗口，无需重复获取链接。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.4</name>
-					<div>
-					<div>1、适配 123 云盘新版页面。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.3</name>
-					<div>
-					<div>1、修复夸克网盘无法获取下载链接的 Bug；</div>
-					<div>2、修复 API 下载无法复制全部链接。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.2</name>
-					<div>
-					<div>1、修复无法删除第一项远程配置的 Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1.1</name>
-					<div>
-					<div>1、修复推送至 Aria2 时推送成功但报错的 Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.1</name>
-					<div>
-					<div>1、配置文件格式更新，<span style="color:#fff;background:${temp.color}">支持添加、删除、切换多个服务配置</span>；</div>
-					<div>2、支持比特彗星推送下载，<span style="color:#fff;background:${temp.color}">原 RPC 已并入 Aria2 下载</span>；</div>
-					<div>3、界面<span style="color:#fff;background:${temp.color}">增加 Font Awesome 图标！</span>更好看啦；</div>
-					<div>4、优化脚本代码、界面，运行更轻快；</div>
-					<div>5、修复上个版本遗存的问题。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.1.0.1</name>
-					<div>
-					<div>1、修复查看 RPC 下载任务的 Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.1.0</name>
-					<div>
-					<div>1、支持 UC 网盘、123 云盘；</div>
-					<div>2、改进了网盘主题的注入方式；</div>
-					<div>3、聚合并重构了部分重复函数，对整体脚本逻辑进行了梳理和精简；</div>
-					<div>4、将脚本执行阶段从 document-body 适配为 document-start。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.0.9.7</name>
-					<div>
-					<div>1、修复移动云盘下载错误；</div>
-					<div>2、优化代码，更好的错误识别；</div>
-					<div>3、去除了油小猴云服务。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9.6</name>
-					<div>
-					<div>1、支持在百度网盘中选择文件夹下载；</div>
-					<div>2、优化部分提示。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9.5</name>
-					<div>
-					<div>1、修复因代码逻辑错误而无法获取链接的 Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9.4</name>
-					<div>
-					<div>1、修复因百度网盘 AccessToken 过期导致无法获取链接的 Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9.3</name>
-					<div>
-					<div>1、若网盘不支持在分享中下载，将仅显示保存网盘按钮；</div>
-					<div>2、优化下载界面，支持选择 Iframe 或 Blob 的方式来下载文件，增加按钮的提示文本；</div>
-					<div>3、优化 CSS 样式，统一了 SweetAlert2 按钮样式，同时适配了 Dark Reader 插件，界面更协调；</div>
-					<div>4、支持修改油小猴网站主题色；</div>
-					<div>5、原有主题相关设置现已移动至助手美化页面中。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9.2</name>
-					<div>
-					<div>1、修复使用API 下载时有可能会导致IDM无限弹窗的Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9.1</name>
-					<div>
-					<div>1、修复在百度网盘旧版下脚本无法删除元素的Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.9</name>
-					<div>
-					<div>1、跟进官方V6.2.7，修复因无法进行百度授权而导致获取直链报错 9019 的 Bug。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.0.8.9</name>
-					<div>
-					<div>1、跟进官方V6.2.3，优化保存到网盘提示，修复阿里云盘、移动云盘失效的问题；</div>
-					<div>2、优化修改网盘主题的代码，减少对页面的破坏。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.8</name>
-					<div>
-					<div>1、修复下载菜单字体过小的Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.7</name>
-					<div>
-					<div>1、修复在阿里云盘分享页面下点击“未点亮”按钮时没有任何反应的Bug；</div>
-					<div>2、更新并优化网盘界面精简规则；</div>
-					<div>3、支持更换 百度网盘、阿里云盘、迅雷云盘、夸克网盘、移动云盘 界面的主题颜色。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.6</name>
-					<div>
-					<div>1、新增移动云盘会员中心页面，可在网盘中点击“会员中心”按钮查看(但无法使用第三方支付)。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.5</name>
-					<div>
-					<div>1、跟进官方V6.1.6，修复迅雷网盘分享页面无法选中文件，修复移动云盘无法判断页面。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.4</name>
-					<div>
-					<div>1、修复因重复绑定按钮而导致命令重复执行的Bug；</div>
-					<div>2、优化调试信息界面排版；</div>
-					<div>3、移除对百度网盘手机网页版的支持。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.3</name>
-					<div>
-					<div>1、适配阿里云盘新域名alipan.com。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.2</name>
-					<div>
-					<div>1、更换新图标。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.8.1</name>
-					<div>
-					<div>1、修复因重复绑定按钮而导致 RPC 下载会发送多条下载请求的Bug；</div>
-					<div>2、选择不使用油小猴服务器时，“用ghproxy连接Github仓库”更换为“用jsdelivr连接Github仓库”；</div>
-					<div>3、跟进官方V6.1.4版本，修复移动网盘无法获取链接，支持阿里云盘新域名alipan.com。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.0.8</name>
-					<div>
-					<div>1、修复迅雷网盘无法勾选文件。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.9</name>
-					<div>
-					<div>1、更新精简网盘元素匹配规则，防止因通知横条而导致不能点到“API 下载”以下的按钮。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.8</name>
-					<div>
-					<div>1、跟进官方V6.1.2，加入V2接口。</div>
-					<div>2、修复百度网盘下载时因为获取不到accessToken而一直转圈。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.7</name>
-					<div>
-					<div>1、修复百度网盘的按钮会因为主题不同而被改变颜色的Bug；</div>
-					<div>2、更新夸克网盘按钮与界面。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.6</name>
-					<div>
-					<div>1、修复“注入”功能；</div>
-					<div>2、黑暗模式支持随设置热切换。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.5</name>
-					<div>
-					<div>1、修复阿里云盘下载逻辑；</div>
-					<div>2、精简代码；</div>
-					<div>3、支持深色模式；</div>
-					<div>4、修改部分提示文本；</div>
-					<div>5、修改部分CSS；</div>
-					<div>6、设置可测试RPC连接。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.4</name>
-					<div>
-					<div>1、优化下载逻辑；</div>
-					<div>2、修复阿里云盘无法使用API 下载。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.3</name>
-					<div>
-					<div>1、如果出现网络请求错误时支持自动重新请求；</div>
-					<div>2、可选择是否使用油小猴服务器。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.2</name>
-					<div>
-					<div>1、修复使用 RPC 下载时会重复发送链接的Bug。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7.1</name>
-					<div>
-					<div>[实验功能，不影响正常使用]支持百度网盘手机网页版，勾选文件后可在顶栏找到“下载助手”按钮。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.7</name>
-					<div>
-					<div>1、重构夸克网盘、阿里云盘按钮。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.0.6.9</name>
-					<div>
-					<div>1、下载窗口加入关闭按钮。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.8</name>
-					<div>
-					<div>1、修复夸克网盘按钮错位。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.7</name>
-					<div>
-					<div>1、将百度网盘界面修改为主题色，可在设置选择是否修改；</div>
-					<div>2、增加主题色名称，更改部分内容颜色；</div>
-					<div>3、移动云盘API 下载支持批量复制；</div>
-					<div>4、优化控制台输出结果；</div>
-					<div>5、百度网盘API 下载不使用IDM时可以显示剩余时间；</div>
-					<div>6、“取消点亮按钮”按钮的位置现已移动到设置页面。</div>
-					<div>7、homo特有的彩蛋又回来力(喜)。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.6</name>
-					<div>
-					<div>1、修复暗号错误。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.5</name>
-					<div>
-					<div>1、修复即使输入正确暗号也不能成功点亮按钮的服务器错误。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.4</name>
-					<div>
-					<div>1、跟进官方V6.1.1版本，修复阿里云盘获取下载链接时的问题。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.3</name>
-					<div>
-					<div>1、照顾小屏幕用户，将始终显示复制全部链接的按钮；</div>
-					<div>2、增加取消下载时的动画。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.2</name>
-					<div>
-					<div>1、修复部分界面错位，实现CSS内置；</div>
-					<div>2、百度网盘界面将变得更加简洁。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6.1</name>
-					<div>
-					<div>1、新增百度云盘API 下载支持复制链接；</div>
-					<div>2、为了照顾手机浏览器用户，增大项目之间间隙，新增隐藏IDM提示选项，可在助手设置中启用；</div>
-					<div>3、修改CSS，界面会出现更多的主题色；</div>
-					<div>4、支持在油小猴官网查看暗号；</div>
-					<div>5、修复部分语法错误。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.6</name>
-					<div>
-					<div>1、修复了打开阿里云盘分享连接时因下载移动端广告导致只能点击 API 下载；</div>
-					<div>2、跟进官方6.0.4版本，修复夸克网盘获取下载链接失效、支持移动云盘。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.0.5.5</name>
-					<div>
-					<div>1、感谢<a href="https://github.com/Night-stars-1" target="_blank">Night Stars</a>的帮助，修复因为原作者服务器导致的初始化暗号识别错误；</div>
-					<div>2、修改一些文本以及提供给服务器的信息。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.5.4</name>
-					<div>
-					<div>1、小修小改css，让主题色出现在更多地方；</div>
-					<div>2、修改下载链接获取失败的提示；</div>
-					<div>3、增加更多的主题色，可在助手设置查看；</div>
-					<div>4、homo彩蛋被删去力（悲）。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.5.3</name>
-					<div>
-					<div>1、修啦修啦，阿里云盘可以摸到下载菜单了。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.5.2</name>
-					<div>
-					<div>1、增加脚本信息菜单（没有用）；</div>
-					<div>2、优化阿里云盘显示svg图片；</div>
-					<div>3、修改弹窗按钮颜色。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.5.1</name>
-					<div>
-					<div>1、修复在切换按钮主题后夸克网盘不能正常显示按钮。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.5</name>
-					<div>
-					<div>1、跟进官方V5.0.4版本；</div>
-					<div>2、小改动，照着官方版本更正文件名称检测；</div>
-					<div>3、保留彩蛋，但必须舍弃官方暗号。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.4</name>
-					<div>
-					<div>大改！</div>
-					<div>1、修复了原作者留下的夸克网盘切换文件夹就多一个“下载助手”按钮的大BUG；</div>
-					<div>2、终于来了，在下载菜单增加“助手设置”“更新日志”按钮；</div>
-					<div>【再也不用点进油猴管理再进设置了(保留油猴管理内设置)】</div>
-					<div>3、修改阿里云盘和夸克网盘下载助手按钮样式；</div>
-					<div>4、增加“取消点亮按钮”油猴菜单；</div>
-					<div>5、修改部分css，使其与选择的主题更贴切。</div>
-					</div>
-				</div>
-				<hr/>
-				<div class="block">
-					<name>V1.0.3</name>
-					<div>
-					<div>1、增加一个小彩蛋； 提示：</div>
-					<div>homo（需在未点亮按钮状态触发）</div>
-					<div>【需要重新恢复按钮为未点亮状态请进入 已安装脚本->编辑->开发者->重置到出厂->确定】</div>
-					<div>2、修改/增加默认主题色。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.2</name>
-					<div>
-					<div>1、修改并加宽界面，调整部分css，使Sweetalert2界面更美观，更与原版相近；</div>
-					<div>2、修改部分提示文字，使文字更容易复制。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.1</name>
-					<div>
-					<div>1、去除更新提示；</div>
-					<div>2、更新Sweetalert2至11版本；</div>
-					<div>3、部分CDN节点更换为jsdelivr。</div>
-					</div>
-				</div>
-				<div class="block">
-					<name>V1.0.0</name>
-					<div>
-					<div>1、增加“注入”功能（bushi）；</div>
-					<div>2、去除广告。</div>
-				</div>
+					<name id="version-title">${selectedVersion}</name>
+					<div id="version-content">${versions[0].content}</div>
 				</div>
 				</div>
 				<style>
@@ -3180,10 +2782,29 @@
 					background-color:#f9f9f9;
 					margin:0;
 				}
+				.version-log .version-select{
+					width:100%;
+					padding:8px 12px;
+					font-size:14px;
+					border:1px solid #ccc;
+					border-radius:4px;
+					background-color:#fff;
+					cursor:pointer;
+					margin-bottom:15px;
+				}
+				.version-log .version-select:focus{
+					outline:none;
+					border-color:${temp.color};
+				}
 				@media (prefers-color-scheme:dark){
 					.version-log .block blockquote{
 						border-left:5px solid #7A7C84;
 						background-color:#464851;
+					}
+					.version-log .version-select{
+						background-color:#2d2d2d;
+						border-color:#555;
+						color:#fff;
 					}
 				}
 				</style>`,
